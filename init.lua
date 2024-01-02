@@ -45,7 +45,34 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Set scrolloff
-vim.opt.scrolloff = 20
+vim.opt.scrolloff = 15
+
+-- Disable netrw for nvim-tree and autoclose
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+-- auto close
+local function is_modified_buffer_open(buffers)
+  for _, v in pairs(buffers) do
+    if v.name:match 'NvimTree_' == nil then
+      return true
+    end
+  end
+  return false
+end
+
+vim.api.nvim_create_autocmd('BufEnter', {
+  nested = true,
+  callback = function()
+    if
+        #vim.api.nvim_list_wins() == 1
+        and vim.api.nvim_buf_get_name(0):match 'NvimTree_' ~= nil
+        and is_modified_buffer_open(vim.fn.getbufinfo { bufmodified = 1 }) == false
+    then
+      vim.cmd 'quit'
+    end
+  end,
+})
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    https://github.com/folke/lazy.nvim
@@ -75,6 +102,14 @@ require('lazy').setup({
   -- Git related plugins
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
+  {
+    'rbong/vim-flog',
+    lazy = true,
+    cmd = { 'Flog', 'Flogsplit', 'Floggit' },
+    dependencies = {
+      'tpope/vim-fugitive',
+    },
+  },
 
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
@@ -91,7 +126,7 @@ require('lazy').setup({
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', opts = {} },
+      { 'j-hui/fidget.nvim',       opts = {} },
 
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
@@ -198,10 +233,10 @@ require('lazy').setup({
     priority = 1000,
     opts = {},
     config = function()
-      vim.cmd.colorscheme 'tokyonight'
+      vim.cmd.colorscheme 'tokyonight-night'
     end,
   },
-
+  { 'catppuccin/nvim',      name = 'catppuccin', priority = 1000 },
   {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
@@ -209,9 +244,10 @@ require('lazy').setup({
     opts = {
       options = {
         icons_enabled = false,
-        theme = 'tokyonight',
+        theme = 'auto',
         component_separators = '|',
         section_separators = '',
+        disabled_filetypes = { 'NvimTree' },
       },
     },
   },
@@ -226,7 +262,7 @@ require('lazy').setup({
   },
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
+  { 'numToStr/Comment.nvim',  opts = {} },
 
   -- Fuzzy Finder (files, lsp, etc)
   {
@@ -330,7 +366,7 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
+vim.keymap.set('n', '<leader>E', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 -- Custom keymaps
@@ -342,10 +378,58 @@ vim.keymap.set('n', 'ü', '}', { silent = true })
 vim.keymap.set('i', 'jj', '<Esc>', { silent = true })
 
 -- Sets d to delete and X to cut whole line
-vim.keymap.set('n', 'd', '"_d',{ silent = true })
-vim.keymap.set('n', 'D', '"_D',{ silent = true })
-vim.keymap.set('v', 'd', '"_d',{ silent = true })
-vim.keymap.set('n', 'X', 'Vx',{ silent = true })
+vim.keymap.set('n', 'd', '"_d', { silent = true })
+vim.keymap.set('n', 'D', '"_D', { silent = true })
+vim.keymap.set('v', 'd', '"_d', { silent = true })
+vim.keymap.set('n', 'X', 'Vx', { silent = true })
+
+-- [[  Plugin Keymaps ]]
+-- [ barbar ]
+local map = vim.api.nvim_set_keymap
+local opts = { noremap = true, silent = true }
+
+-- Move to previous/next
+map('n', '<A-,>', '<Cmd>BufferPrevious<CR>', opts)
+map('n', '<A-.>', '<Cmd>BufferNext<CR>', opts)
+-- Re-order to previous/next
+map('n', '<A-<>', '<Cmd>BufferMovePrevious<CR>', opts)
+map('n', '<A->>', '<Cmd>BufferMoveNext<CR>', opts)
+-- Goto buffer in position...
+map('n', '<A-1>', '<Cmd>BufferGoto 1<CR>', opts)
+map('n', '<A-2>', '<Cmd>BufferGoto 2<CR>', opts)
+map('n', '<A-3>', '<Cmd>BufferGoto 3<CR>', opts)
+map('n', '<A-4>', '<Cmd>BufferGoto 4<CR>', opts)
+map('n', '<A-5>', '<Cmd>BufferGoto 5<CR>', opts)
+map('n', '<A-6>', '<Cmd>BufferGoto 6<CR>', opts)
+map('n', '<A-7>', '<Cmd>BufferGoto 7<CR>', opts)
+map('n', '<A-8>', '<Cmd>BufferGoto 8<CR>', opts)
+map('n', '<A-9>', '<Cmd>BufferGoto 9<CR>', opts)
+map('n', '<A-0>', '<Cmd>BufferLast<CR>', opts)
+-- Pin/unpin buffer
+map('n', '<A-p>', '<Cmd>BufferPin<CR>', opts)
+-- Close buffer
+map('n', '<A-c>', '<Cmd>BufferClose<CR>', opts)
+-- Wipeout buffer
+--                 :BufferWipeout
+-- Close commands
+--                 :BufferCloseAllButCurrent
+--                 :BufferCloseAllButPinned
+--                 :BufferCloseAllButCurrentOrPinned
+--                 :BufferCloseBuffersLeft
+--                 :BufferCloseBuffersRight
+-- Magic buffer-picking mode
+map('n', '<C-p>', '<Cmd>BufferPick<CR>', opts)
+-- Sort automatically by...
+map('n', '<Space>bb', '<Cmd>BufferOrderByBufferNumber<CR>', opts)
+map('n', '<Space>bd', '<Cmd>BufferOrderByDirectory<CR>', opts)
+map('n', '<Space>bl', '<Cmd>BufferOrderByLanguage<CR>', opts)
+map('n', '<Space>bw', '<Cmd>BufferOrderByWindowNumber<CR>', opts)
+-- Other:
+-- :BarbarEnable - enables barbar (enabled by default)
+-- :BarbarDisable - very bad command, should never be used
+
+-- [Nvim-tree]
+map('n', '<leader>e', '<Cmd>NvimTreeToggle<CR>', { silent = true, desc = 'Toggle NvimTree' })
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
