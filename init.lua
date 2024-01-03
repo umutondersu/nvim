@@ -47,6 +47,11 @@ vim.g.maplocalleader = ' '
 -- Set scrolloff
 vim.opt.scrolloff = 15
 
+-- Disable virtual lines for lsp-lines
+vim.diagnostic.config({
+  virtual_text = false,
+})
+
 -- Disable netrw for nvim-tree and autoclose
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
