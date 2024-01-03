@@ -370,12 +370,14 @@ vim.keymap.set('n', '<leader>E', vim.diagnostic.open_float, { desc = 'Open float
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 -- Custom keymaps
-vim.keymap.set('n', 'ş', '^', { silent = true })
+vim.keymap.set('n', 'ş', '^', { silent = true }) -- move to first non-blank character
 vim.keymap.set('n', 'ç', '>', { silent = true })
 vim.keymap.set('n', 'ö', '<', { silent = true })
 vim.keymap.set('n', 'ğ', '{', { silent = true })
 vim.keymap.set('n', 'ü', '}', { silent = true })
 vim.keymap.set('i', 'jj', '<Esc>', { silent = true })
+vim.keymap.set('n', 'r', '<C-r>', { silent = true })
+vim.keymap.set('n', '+', '$', { silent = true }) -- move to end of line
 
 -- Sets d to delete and X to cut whole line
 vim.keymap.set('n', 'd', '"_d', { silent = true })
