@@ -5,6 +5,9 @@ return {
     dependencies = {
         'nvim-tree/nvim-web-devicons',
     },
+    keys = {
+        { '<leader><Tab>', function() require('nvim-tree.api').tree.change_root_to_node() end, desc = "Swap root to selected directory" }
+    },
     config = function()
         require('nvim-tree').setup {
             disable_netrw = true,
