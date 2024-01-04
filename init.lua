@@ -152,6 +152,9 @@ require('lazy').setup({
 
       -- Adds a number of user-friendly snippets
       'rafamadriz/friendly-snippets',
+
+      -- Additional snippets
+      'solidjs-community/solid-snippets',
     },
   },
 
@@ -381,7 +384,7 @@ vim.keymap.set('n', 'ç', '>', { silent = true })
 vim.keymap.set('n', 'ö', '<', { silent = true })
 vim.keymap.set('n', 'ğ', '{', { silent = true })
 vim.keymap.set('n', 'ü', '}', { silent = true })
-vim.keymap.set('i', 'jj', '<Esc>', { silent = true })
+vim.keymap.set('i', 'ii', '<Esc>', { silent = true })
 vim.keymap.set('n', 'r', '<C-r>', { silent = true })
 vim.keymap.set('n', '+', '$', { silent = true }) -- move to end of line
 
