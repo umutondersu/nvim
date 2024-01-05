@@ -14,6 +14,10 @@ return {
         -- …etc.
         clickable = true,
         auto_hide = true,
+        sidebar_filetypes = {
+            -- Use the default values: {event = 'BufWinLeave', text = nil}
+            NvimTree = true,
+        },
     },
     version = '^1.0.0', -- optional: only update when a new 1.x version is released
 }
