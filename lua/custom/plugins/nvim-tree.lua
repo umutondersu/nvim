@@ -50,6 +50,9 @@ return {
                     -- Return the last segment (folder)
                     return '/' .. segments[#segments]
                 end,
+                indent_markers = {
+                    enable = true,
+                },
             },
         }
         -- [[ Configure nvim-tree ]]
