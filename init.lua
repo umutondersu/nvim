@@ -99,7 +99,7 @@ require('lazy').setup({
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim',       opts = {} },
+      { 'j-hui/fidget.nvim', opts = {} },
 
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
@@ -213,7 +213,7 @@ require('lazy').setup({
       vim.cmd.colorscheme 'tokyonight-night'
     end,
   },
-  { 'catppuccin/nvim',      name = 'catppuccin', priority = 1000 },
+  { 'catppuccin/nvim', name = 'catppuccin', priority = 1000 },
   {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
@@ -239,7 +239,7 @@ require('lazy').setup({
   },
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim',  opts = {} },
+  { 'numToStr/Comment.nvim', opts = {} },
 
   -- Fuzzy Finder (files, lsp, etc)
   {
@@ -358,7 +358,7 @@ vim.keymap.set('v', 'ğ', '{', { silent = true })
 vim.keymap.set('v', 'ü', '}', { silent = true })
 vim.keymap.set('i', 'jj', '<Esc>', { silent = true })
 vim.keymap.set('n', 'r', '<C-r>', { silent = true })
-vim.keymap.set('n', '+', '$', { silent = true })                       -- move to end of line
+vim.keymap.set('n', '+', '$', { silent = true }) -- move to end of line
 vim.keymap.set('v', '+', '$', { silent = true, desc = 'End of Line' }) -- move to end of line
 vim.keymap.set('n', '<leader>o', 'o<Esc>0"_D', { desc = 'New Line Down' })
 vim.keymap.set('n', '<leader>O', 'O<Esc>0"_D', { desc = 'New Line Up' })
@@ -416,6 +416,15 @@ map('n', '<Space>bw', '<Cmd>BufferOrderByWindowNumber<CR>', opts)
 
 -- [Nvim-tree]
 map('n', '<leader>e', '<Cmd>NvimTreeToggle<CR>', { silent = true, desc = 'Toggle NvimTree' })
+
+-- [[ Custom Commands ]]
+vim.api.nvim_create_user_command('Gc', function(args)
+  local vimCmd = 'Git commit -m'
+  if args['args'] then
+    vimCmd = vimCmd .. ' ' .. args['args']
+  end
+  vim.cmd(vimCmd)
+end, { desc = 'Commit with a message', nargs = '*' })
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
