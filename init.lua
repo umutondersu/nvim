@@ -47,11 +47,6 @@ vim.g.maplocalleader = ' '
 -- Set scrolloff
 vim.opt.scrolloff = 15
 
--- Disable virtual lines for lsp-lines
-vim.diagnostic.config {
-  virtual_text = false,
-}
-
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
