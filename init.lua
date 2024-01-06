@@ -349,13 +349,19 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 
 -- Custom keymaps
 vim.keymap.set('n', 'ş', '^', { silent = true }) -- move to first non-blank character
+vim.keymap.set('v', 'ş', '^', { silent = true, desc = 'Start of line (non-blank)' }) -- move to first non-blank character
 vim.keymap.set('n', 'ç', '>', { silent = true })
 vim.keymap.set('n', 'ö', '<', { silent = true })
 vim.keymap.set('n', 'ğ', '{', { silent = true })
 vim.keymap.set('n', 'ü', '}', { silent = true })
-vim.keymap.set('i', 'ii', '<Esc>', { silent = true })
+vim.keymap.set('v', 'ğ', '{', { silent = true })
+vim.keymap.set('v', 'ü', '}', { silent = true })
+vim.keymap.set('i', 'jj', '<Esc>', { silent = true })
 vim.keymap.set('n', 'r', '<C-r>', { silent = true })
-vim.keymap.set('n', '+', '$', { silent = true }) -- move to end of line
+vim.keymap.set('n', '+', '$', { silent = true })                       -- move to end of line
+vim.keymap.set('v', '+', '$', { silent = true, desc = 'End of Line' }) -- move to end of line
+vim.keymap.set('n', '<leader>o', 'o<Esc>0"_D', { desc = 'New Line Down' })
+vim.keymap.set('n', '<leader>O', 'O<Esc>0"_D', { desc = 'New Line Up' })
 
 -- Sets d to delete and X to cut whole line
 vim.keymap.set('n', 'd', '"_d', { silent = true })
