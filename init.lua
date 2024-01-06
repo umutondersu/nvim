@@ -426,6 +426,8 @@ vim.api.nvim_create_user_command('Gc', function(args)
   vim.cmd(vimCmd)
 end, { desc = 'Commit with a message', nargs = '*' })
 
+vim.api.nvim_create_user_command('Gp', 'Git push', { desc = 'git push' })
+
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
