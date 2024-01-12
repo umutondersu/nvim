@@ -13,6 +13,11 @@ return {
             end,
             desc = 'Swap root to selected directory',
         },
+        {
+            '<leader>e',
+            '<Cmd>NvimTreeToggle<CR>',
+            desc = 'Toggle NvimTree',
+        },
     },
     config = function()
         require('nvim-tree').setup {
@@ -70,3 +75,4 @@ return {
         })
     end,
 }
+
