@@ -4,6 +4,7 @@ return {
         cmd = 'Copilot',
         event = 'InsertEnter',
         lazy = true,
+        auto_refresh = true,
         config = function()
             require('copilot').setup {
                 panel = {
@@ -35,3 +36,4 @@ return {
         end,
     },
 }
+
