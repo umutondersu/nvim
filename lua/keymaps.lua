@@ -44,3 +44,8 @@ map({ 'n', 'v' }, 'd', '"_d', { silent = true })
 map({ 'n', 'v' }, 'D', '"_D', { silent = true })
 map('n', 'X', 'Vx', { silent = true })
 
+-- Toggle inlay hints for line
+map('n', '<leader>i', function()
+  require('lsp-inlayhints').toggle()
+end, { desc = 'Toggle [I]nlay hints' })
+
