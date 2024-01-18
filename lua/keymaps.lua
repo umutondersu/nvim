@@ -50,6 +50,18 @@ map('n', '<leader>i', function()
 end, { desc = 'Toggle [I]nlay hints' })
 
 -- Buffer Management
-map('n', '<M-c>', ':bd<CR>', { desc = 'Close buffer' })
-map('n', '<M-.>', ':bn<CR>', { desc = 'Next buffer' })
-map('n', '<M-,>', ':bp<CR>', { desc = 'Previous buffer' })
+map('n', '<M-c>', function()
+  vim.cmd(':bd')
+  vim.cmd(':clear')
+end, { desc = 'Close buffer' })
+
+map('n', '<M-.>', function()
+  vim.cmd(':bn')
+  vim.cmd(':clear')
+end, { desc = 'Next buffer' })
+
+map('n', '<M-,>', function()
+  vim.cmd(':bp')
+  vim.cmd(':clear')
+end, { desc = 'Previous buffer' })
+
