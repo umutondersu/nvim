@@ -5,6 +5,7 @@ return {
             -- inlay_hints = {
             --     only_current_line = true,
             -- }
+            enabled_at_startup = false,
         })
         vim.api.nvim_create_augroup("LspAttach_inlayhints", {})
         vim.api.nvim_create_autocmd("LspAttach", {
