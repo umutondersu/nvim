@@ -49,3 +49,7 @@ map('n', '<leader>i', function()
   require('lsp-inlayhints').toggle()
 end, { desc = 'Toggle [I]nlay hints' })
 
+-- Buffer Management
+map('n', '<M-c>', ':bd<CR>', { desc = 'Close buffer' })
+map('n', '<M-.>', ':bn<CR>', { desc = 'Next buffer' })
+map('n', '<M-,>', ':bp<CR>', { desc = 'Previous buffer' })
