@@ -210,6 +210,14 @@ require('lazy').setup({
     priority = 1000,
     opts = {},
     config = function()
+      -- Transparent background
+      -- require("tokyonight").setup({
+      --   transparent = true,
+      --   styles = {
+      --     sidebars = "transparent",
+      --     floats = "transparent",
+      --   },
+      -- })
       vim.cmd.colorscheme 'tokyonight-night'
     end,
   },
@@ -588,6 +596,7 @@ local servers = {
         includeInlayEnumMemberValueHints = true,
       }
     },
+    -- diagnostics = { ignoredCodes = { 6133 } },
   },
 
   lua_ls = {
