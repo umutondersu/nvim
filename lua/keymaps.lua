@@ -23,8 +23,8 @@ map('i', 'jj', '<Esc>', { silent = true })
 map({ 'n', 'v' }, '+', '$', { silent = true }) -- move to end of line
 
 -- New line without insert mode
-map('n', '<leader>o', 'o<Esc>', { desc = 'New Line Down' })
-map('n', '<leader>O', 'O<Esc>', { desc = 'New Line Up' })
+map('n', 'no', 'o<Esc>', { desc = 'New Line Down' })
+map('n', 'nO', 'O<Esc>', { desc = 'New Line Up' })
 
 -- Swap r and ctrl+r
 map('n', '<C-r>', 'r', { silent = true }) -- replace a single character
