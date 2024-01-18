@@ -44,3 +44,7 @@ vim.wo.relativenumber = true
 
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
+
+-- Disable Statusline
+vim.opt.laststatus = 0
+vim.opt.ruler = false
