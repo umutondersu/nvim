@@ -8,6 +8,12 @@ end, { desc = 'Commit with a message', nargs = '*' })
 
 vim.api.nvim_create_user_command('Gp', 'Git push', { desc = 'git push' })
 
+vim.api.nvim_create_user_command("Cppath", function()
+  local path = vim.fn.expand("%:p")
+  vim.fn.setreg("+", path)
+  vim.notify('Copied "' .. path .. '" to the clipboard!')
+end, {})
+
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
@@ -18,3 +24,4 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   group = highlight_group,
   pattern = '*',
 })
+
