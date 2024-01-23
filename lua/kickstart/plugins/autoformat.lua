@@ -8,18 +8,6 @@ return {
     "neovim/nvim-lspconfig",
     keys = {
       {
-        "<leader>f",
-        function() end,
-        mode = "",
-        desc = "[F]ormatter options",
-      },
-      {
-        "<leader>fl",
-        function() end,
-        mode = "",
-        desc = "LSP Formatting",
-      },
-      {
         "<leader>flf",
         function()
           vim.lsp.buf.format {
@@ -39,6 +27,12 @@ return {
       },
     },
     config = function()
+      require('which-key').register {
+        ['<leader>f'] = { name = '[F]ormatting Options', _ = 'which_key_ignore' },
+      }
+      require('which-key').register {
+        ['<leader>fl'] = { name = '[L]sp formatting', _ = 'which_key_ignore' },
+      }
       -- Switch for controlling whether you want autoformatting.
       --  Use :KickstartFormatToggle to toggle autoformatting on or off
       local format_is_enabled = false
@@ -89,7 +83,8 @@ return {
             group = get_augroup(client),
             buffer = bufnr,
             callback = function()
-              if not format_is_enabled then
+              -- NOTE: With this LSP Formatting will not work if conform.nvim has autformat enabled to prevent double formatting
+              if not format_is_enabled and not vim.g.disable_autoformat then
                 return
               end
 
@@ -110,12 +105,6 @@ return {
     event = { "BufWritePre", "BufReadPre", "BufNewFile" },
     cmd = { "ConformInfo" },
     keys = {
-      {
-        "<leader>f",
-        function() end,
-        mode = "",
-        desc = "[F]ormatter options",
-      },
       {
         "<leader>ff",
         function()
@@ -166,11 +155,15 @@ return {
         --     },
         -- },
       }
+      require('which-key').register {
+        ['<leader>f'] = { name = '[F]ormatting Options', _ = 'which_key_ignore' },
+      }
       vim.api.nvim_create_user_command("Ftoggle", function()
-        vim.b.disable_autoformat = not vim.b.disable_autoformat
         vim.g.disable_autoformat = not vim.g.disable_autoformat
+        vim.b.disable_autoformat = vim.g.disable_autoformat
         print("Setting autoformatting to: " .. tostring(not vim.g.disable_autoformat))
       end, { desc = "Toggle autoformatting" })
     end,
   },
 }
+
