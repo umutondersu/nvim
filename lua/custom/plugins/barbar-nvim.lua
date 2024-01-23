@@ -1,13 +1,14 @@
+-- NOTE: don't use it with harpoon. disable one or the other
 return {
     'romgrk/barbar.nvim',
-    enabled = false,
+    enabled = true,
     dependencies = {
         'lewis6991/gitsigns.nvim',     -- OPTIONAL: for git status
         'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
     },
     opts = {
         -- lazy.nvim will automatically call setup for you. put your options here, anything missing will use the default:
-        -- animation = true,
+        animation = true,
         -- insert_at_start = true,
         -- …etc.
         clickable = true,
@@ -15,6 +16,10 @@ return {
         sidebar_filetypes = {
             -- Use the default values: {event = 'BufWinLeave', text = nil}
             NvimTree = true,
+        },
+        icons = {
+            button = ' ',
+            separator_at_end = false,
         },
     },
     version = '^1.0.0', -- optional: only update when a new 1.x version is released
@@ -41,7 +46,7 @@ return {
         map('n', '<A-9>', '<Cmd>BufferGoto 9<CR>', opts)
         map('n', '<A-0>', '<Cmd>BufferLast<CR>', opts)
         -- Pin/unpin buffer
-        map('n', '<A-p>', '<Cmd>BufferPin<CR>', opts)
+        map('n', '<A-P>', '<Cmd>BufferPin<CR>', opts)
         -- Close buffer
         map('n', '<A-c>', '<Cmd>BufferClose<CR>', opts)
         -- Wipeout buffer
@@ -53,7 +58,7 @@ return {
         --                 :BufferCloseBuffersLeft
         --                 :BufferCloseBuffersRight
         -- Magic buffer-picking mode
-        map('n', '<C-p>', '<Cmd>BufferPick<CR>', opts)
+        map('n', '<A-x>', '<Cmd>BufferPick<CR>', opts)
         -- Sort automatically by...
         -- map('n', '<Space>bb', '<Cmd>BufferOrderByBufferNumber<CR>', opts)
         -- map('n', '<Space>bd', '<Cmd>BufferOrderByDirectory<CR>', opts)

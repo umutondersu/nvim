@@ -11,12 +11,14 @@ return {
             function()
                 require('nvim-tree.api').tree.change_root_to_node()
             end,
-            desc = 'Swap root to selected directory',
+            mode = "",
+            ft = { 'NvimTree' },
+            desc = '[Tab] Swap root with directory',
         },
         {
             '<leader>e',
             '<Cmd>NvimTreeToggle<CR>',
-            desc = 'Toggle NvimTree',
+            desc = 'Toggle [E]xplorer',
         },
     },
     config = function()
@@ -42,6 +44,15 @@ return {
                 end,
                 indent_markers = {
                     enable = true,
+                },
+            },
+            diagnostics = {
+                enable = true,
+                icons = {
+                    hint = 'H',
+                    info = 'I',
+                    warning = 'W',
+                    error = 'E',
                 },
             },
         }

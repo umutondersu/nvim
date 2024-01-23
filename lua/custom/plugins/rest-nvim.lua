@@ -1,15 +1,16 @@
 return {
     "rest-nvim/rest.nvim",
+    event = "VeryLazy",
     dependencies = { "nvim-lua/plenary.nvim" },
-    keys = {
-        {
-            '<leader>R',
-            '<Plug>RestNvim',
-            mode = '',
-            desc = 'Run the HTTP request under the cursor'
-        },
-
-    },
+    -- keys = {
+    --     {
+    --         '<leader>R',
+    --         '<Plug>RestNvim',
+    --         mode = '',
+    --         desc = 'Run the HTTP request under the cursor'
+    --     },
+    --
+    -- },
     opts = {
         -- Open request results in a horizontal split
         result_split_horizontal = false,
