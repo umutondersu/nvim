@@ -48,3 +48,6 @@ vim.opt.ruler = false
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
+-- Hide command  line when It's not in use NOTE: Experimental
+vim.opt.cmdheight = 0
+

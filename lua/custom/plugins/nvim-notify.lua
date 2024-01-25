@@ -1,8 +1,10 @@
 return {
     'rcarriga/nvim-notify',
     config = function()
-        require('notify').setup({})
-        vim.notify = require("notify")
+        require('notify').setup({
+            render = 'compact'
+        })
+        vim.notify = require("notify") --NOTE: comment with noice
     end
 }
 

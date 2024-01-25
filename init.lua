@@ -216,8 +216,15 @@ require('lazy').setup({
       --   styles = {
       --     sidebars = "transparent",
       --     floats = "transparent",
+      --
       --   },
       -- })
+      vim.api.nvim_create_autocmd('ColorScheme', {
+        callback = vim.schedule_wrap(function()
+          vim.cmd('hi BufferTabpageFill guibg=none')
+        end),
+        group = vim.api.nvim_create_augroup('foo', {}),
+      })
       vim.cmd.colorscheme 'tokyonight-night'
     end,
   },
@@ -419,7 +426,7 @@ vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { des
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
-vim.keymap.set('n', '<leader>sG', ':LiveGrepGitRoot<cr>', { desc = '[S]earch by [G]rep on Git Root' })
+vim.keymap.set('n', '<leader>sG', '<cmd>LiveGrepGitRoot<cr>', { desc = '[S]earch by [G]rep on Git Root' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
 vim.keymap.set('n', '<leader>st', '<cmd>TodoTelescope<cr>', { desc = '[S]earch [T]odo Comments' })
@@ -706,6 +713,10 @@ cmp.setup {
       border = 'rounded',
       scrollbar = true,
     },
+    documentation = { -- rounded border; thin-style scrollbar
+      border = 'rounded',
+      scrollbar = true,
+    },
   },
   sources = {
     { name = 'copilot' },
@@ -713,8 +724,23 @@ cmp.setup {
     { name = 'luasnip' },
     { name = 'path' },
   },
+  sorting = {
+    priority_weight = 2,
+    comparators = {
+      require("copilot_cmp.comparators").prioritize,
+      -- Below is the default comparitor list and order for nvim-cmp
+      cmp.config.compare.offset,
+      -- cmp.config.compare.scopes, --this is commented in nvim-cmp too
+      cmp.config.compare.exact,
+      cmp.config.compare.score,
+      cmp.config.compare.recently_used,
+      cmp.config.compare.locality,
+      cmp.config.compare.kind,
+      cmp.config.compare.sort_text,
+      cmp.config.compare.length,
+      cmp.config.compare.order,
+    }, },
 }
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
-
