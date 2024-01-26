@@ -325,6 +325,17 @@ require('lazy').setup({
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
       'windwp/nvim-ts-autotag',
+      {
+        'nvim-treesitter/nvim-treesitter-context',
+        keys = { {
+          '[C',
+          function()
+            require("treesitter-context").go_to_context(vim.v.count1)
+          end,
+          mode = 'n',
+          desc = 'Go to context',
+        }, }
+      }
     },
     build = ':TSUpdate',
   },
