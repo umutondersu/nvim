@@ -1,12 +1,7 @@
 return {
     "lvimuser/lsp-inlayhints.nvim",
     config = function()
-        require("lsp-inlayhints").setup({
-            -- inlay_hints = {
-            --     only_current_line = true,
-            -- }
-            enabled_at_startup = false,
-        })
+        require('lsp-inlayhints').setup()
         vim.api.nvim_create_augroup("LspAttach_inlayhints", {})
         vim.api.nvim_create_autocmd("LspAttach", {
             group = "LspAttach_inlayhints",
@@ -22,4 +17,3 @@ return {
         })
     end,
 }
-
