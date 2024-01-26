@@ -51,3 +51,7 @@ vim.opt.splitbelow = true
 -- Hide command  line when It's not in use NOTE: Experimental
 vim.opt.cmdheight = 0
 
+-- Disable Node Provider for windows
+if vim.fn.has('win32') == 1 then
+  vim.g.loaded_node_provider = 0
+end
