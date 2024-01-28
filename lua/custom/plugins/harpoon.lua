@@ -51,4 +51,3 @@ return {
         end, { desc = 'Close buffer' })
     end,
 }
-
