@@ -18,10 +18,10 @@ map('i', 'jj', '<Esc>', { silent = true })
 
 -- Custom keymaps for turkish qwerty
 map({ 'n', 'v' }, 'ş', '^', { silent = true }) -- move to first non-blank character
-map('n', 'ç', '>', { silent = true })
-map('n', 'ö', '<', { silent = true })
-map({ 'n', 'v' }, 'ğ', '{', { silent = true })
-map({ 'n', 'v' }, 'ü', '}', { silent = true })
+map('n', 'Ç', '>', { silent = true })
+map('n', 'Ö', '<', { silent = true })
+map({ 'n', 'v' }, 'Ğ', '{', { silent = true })
+map({ 'n', 'v' }, 'Ü', '}', { silent = true })
 map({ 'n', 'v' }, '+', '$', { silent = true }) -- move to end of line
 
 -- New line without insert mode
@@ -41,6 +41,21 @@ map({ 'n', 'v' }, 'p', '"+p', { silent = true })
 map({ 'n', 'v' }, 'P', '"+P', { silent = true })
 map({ 'n', 'v' }, 'x', '"+d', { silent = true })
 map({ 'n', 'v' }, 'X', '"+D', { silent = true })
+
+-- Move selected line / block of text in visual mode
+map("v", "J", ":m '>+1<CR>gv=gv")
+map("v", "K", ":m '<-2<CR>gv=gv")
+
+-- Append line to bottom line while keeping cursor position
+map("n", "J", "mzJ`z")
+
+-- keep cursor centered while jumping around
+map("n", "<C-d>", "<C-d>zz")
+map("n", "<C-u>", "<C-u>zz")
+
+map("n", "<leader>rs", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = 'Replace the word under cursor' })
+
+map("n", "<M-u>", ":e!<CR>", { desc = 'Undo all unsaved writes' })
 
 -- Buffer Management
 -- map('n', '<M-c>', function()
