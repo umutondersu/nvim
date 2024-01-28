@@ -9,7 +9,7 @@ return {
         function()
           require("conform").format { async = true, lsp_fallback = true }
         end,
-        mode = "",
+        mode = "n",
         desc = "Format buffer or range",
       },
       {
@@ -17,9 +17,16 @@ return {
         function()
           vim.cmd "Ftoggle"
         end,
-        mode = "",
+        mode = "n",
         desc = "Toggle autoformatting",
-      },
+      }, {
+      "<leader>fi",
+      function()
+        vim.cmd "ConformInfo"
+      end,
+      mode = "n",
+      desc = "Conform Info",
+    },
     },
     opts = {
       format_on_save = function(bufnr)
@@ -55,9 +62,6 @@ return {
     },
     config = function(_, opts)
       require("conform").setup(opts)
-      require('which-key').register {
-        ['<leader>f'] = { name = '[F]ormatting Options', _ = 'which_key_ignore' },
-      }
       vim.api.nvim_create_user_command("Ftoggle", function()
         vim.g.disable_autoformat = not vim.g.disable_autoformat
         vim.b.disable_autoformat = vim.g.disable_autoformat
