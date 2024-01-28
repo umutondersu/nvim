@@ -452,7 +452,7 @@ vim.keymap.set('n', '<leader>gB', require('telescope.builtin').git_branches, { d
 vim.defer_fn(function()
   require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash', 'http', 'json', 'regex', 'markdown_inline' },
+    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash', 'http', 'json', 'markdown' },
     -- 'regex', 'markdown_inline' for noice.nvim
 
     -- nvim-ts-autotag
@@ -575,7 +575,10 @@ require('which-key').register {
   ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
   ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
   ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
+  ['<leader>f'] = { name = '[F]ormat', _ = 'which_key_ignore' },
+  ['<leader>C'] = { name = '[C]opilot Chat', _ = 'which_key_ignore' },
 }
+
 -- register which-key VISUAL mode
 -- required for visual <leader>hs (hunk stage) to work
 require('which-key').register({
@@ -738,11 +741,10 @@ cmp.setup {
   sorting = {
     priority_weight = 2,
     comparators = {
+      cmp.config.compare.exact,
       require("copilot_cmp.comparators").prioritize,
-      -- Below is the default comparitor list and order for nvim-cmp
       cmp.config.compare.offset,
       -- cmp.config.compare.scopes, --this is commented in nvim-cmp too
-      cmp.config.compare.exact,
       cmp.config.compare.score,
       cmp.config.compare.recently_used,
       cmp.config.compare.locality,
