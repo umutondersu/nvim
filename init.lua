@@ -452,7 +452,7 @@ vim.keymap.set('n', '<leader>gB', require('telescope.builtin').git_branches, { d
 vim.defer_fn(function()
   require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash', 'http', 'json', 'markdown' },
+    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash', 'http', 'json', 'markdown', 'sql' },
     -- 'regex', 'markdown_inline' for noice.nvim
 
     -- nvim-ts-autotag
