@@ -51,6 +51,15 @@ vim.opt.splitbelow = true
 -- Hide command  line when It's not in use NOTE: Experimental
 vim.opt.cmdheight = 0
 
+-- Custom diagnostic config
+vim.diagnostic.config(
+  {
+    float = {
+      source = true,
+    },
+  }
+)
+
 -- Disable Node Provider for windows
 if vim.fn.has('win32') == 1 then
   vim.g.loaded_node_provider = 0
