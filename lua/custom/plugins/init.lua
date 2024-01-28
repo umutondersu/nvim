@@ -24,5 +24,11 @@ return { { 'ThePrimeagen/vim-be-good', event = "VeryLazy" }, 'famiu/bufdelete.nv
     event = "VeryLazy",
     dependencies = { "nvim-lua/plenary.nvim" },
     opts = {}
-}, { 'ibhagwan/smartyank.nvim', opts = {}, } }
-
+}, {
+    'ibhagwan/smartyank.nvim',
+    opts = {},
+}, {
+    'stevearc/dressing.nvim',
+    event = 'VeryLazy',
+    opts = {},
+}, }
