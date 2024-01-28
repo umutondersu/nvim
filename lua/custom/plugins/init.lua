@@ -2,15 +2,16 @@
 --  I promise not to create any merge conflicts in this directory :)
 --
 -- See the kickstart.nvim README for more information
-return { { 'ThePrimeagen/vim-be-good', event = "VeryLazy" }, 'famiu/bufdelete.nvim', {
-    'anuvyklack/help-vsplit.nvim',
-    opts = {}
-}, {
-    'yorickpeterse/nvim-pqf',
-    opts = {},
-    event = "VeryLazy",
-    enable = false,
-}, {
+return {
+    {
+        'ThePrimeagen/vim-be-good',
+        event = "VeryLazy"
+    },
+    'famiu/bufdelete.nvim',
+    {
+        'anuvyklack/help-vsplit.nvim',
+        opts = {}
+    }, {
     "kylechui/nvim-surround",
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
     event = "VeryLazy",
