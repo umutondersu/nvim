@@ -32,4 +32,8 @@ return {
     'stevearc/dressing.nvim',
     event = 'VeryLazy',
     opts = {},
+}, {
+    "folke/trouble.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    opts = {},
 }, }

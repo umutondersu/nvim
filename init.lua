@@ -74,7 +74,6 @@ require('lazy').setup({
   'tpope/vim-rhubarb',
   {
     'rbong/vim-flog',
-    lazy = true,
     cmd = { 'Flog', 'Flogsplit', 'Floggit' },
     dependencies = {
       'tpope/vim-fugitive',
