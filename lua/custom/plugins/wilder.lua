@@ -1,6 +1,7 @@
 return {
     'gelguy/wilder.nvim',
     dependencies = { "romgrk/fzy-lua-native" },
+    enabled = false,
     config = function()
         local wilder = require('wilder')
         wilder.setup({ modes = { ':', '/', '?' } })
@@ -35,4 +36,3 @@ return {
         }))
     end,
 }
-

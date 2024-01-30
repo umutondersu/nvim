@@ -1,7 +1,7 @@
 return {
     "folke/noice.nvim",
     event = "VeryLazy",
-    enabled = false,
+    enabled = true,
     opts = {
         cmdline = { view = "cmdline" },
         popupmenu = { enabled = false },
@@ -38,4 +38,3 @@ return {
         "rcarriga/nvim-notify",
     }
 }
-

@@ -113,6 +113,8 @@ require('lazy').setup({
       -- Adds LSP completion capabilities
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
+      'hrsh7th/cmp-cmdline',
+      'hrsh7th/cmp-buffer',
 
       -- vscode like pictograms
       'onsails/lspkind.nvim',
@@ -753,6 +755,36 @@ cmp.setup {
       cmp.config.compare.order,
     }, },
 }
-
+cmp.setup.cmdline('/', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = {
+    { name = 'buffer' }
+  }
+})
+cmp.setup.cmdline(':', {
+  mapping = cmp.mapping.preset.cmdline({
+    ['<Space>'] = {
+      c = function(fallback)
+        local keys = vim.api.nvim_replace_termcodes('<Space>', true, false, true)
+        if cmp.visible() then
+          cmp.confirm({ select = true })
+          vim.api.nvim_feedkeys(keys, 'm', false)
+        else
+          fallback()
+        end
+      end,
+    },
+  }),
+  sources = cmp.config.sources({
+    { name = 'path' }
+  }, {
+    {
+      name = 'cmdline',
+      option = {
+        ignore_cmds = { 'Man', '!' }
+      }
+    }
+  })
+})
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
