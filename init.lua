@@ -220,6 +220,7 @@ require('lazy').setup({
       --
       --   },
       -- })
+      require("tokyonight").setup {}
       vim.api.nvim_create_autocmd('ColorScheme', {
         callback = vim.schedule_wrap(function()
           vim.cmd('hi BufferTabpageFill guibg=none')
@@ -773,6 +774,9 @@ cmp.setup.cmdline(':', {
           fallback()
         end
       end,
+    },
+    ['<C-x>'] = {
+      c = function() cmp.close() end,
     },
   }),
   sources = cmp.config.sources({

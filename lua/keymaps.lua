@@ -11,7 +11,7 @@ map('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 map('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
 map('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
 map('n', '<leader>Q', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
-map('n', '<leader>q', '<cmd>TroubleToggle<cr>', { desc = 'Open diagnostics list' })
+map('n', '<leader>q', '<cmd>TroubleToggle<cr>', { desc = 'Toggle diagnostics list' })
 
 -- jj for escaping insert mode
 map('i', 'jj', '<Esc>', { silent = true })
@@ -57,6 +57,7 @@ map("n", "<leader>rs", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], {
 
 map("n", "<M-u>", ":e!<CR>", { desc = 'Undo all unsaved writes' })
 
+map('n', '<leader>gw', '<cmd>G<cr>', { desc = '[G]it Summary [W]indow' })
 -- Buffer Management
 -- map('n', '<M-c>', function()
 --   vim.cmd(':Bdelete')
