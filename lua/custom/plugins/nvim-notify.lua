@@ -4,6 +4,6 @@ return {
         require('notify').setup({
             render = 'compact'
         })
-        -- vim.notify = require("notify") --NOTE: comment with noice
+        vim.notify = require("notify") --NOTE: comment with noice
     end
 }
