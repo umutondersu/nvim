@@ -5,6 +5,9 @@
 -- Set scrolloff
 vim.opt.scrolloff = 15
 
+-- Set tab width
+vim.opt.tabstop = 4
+
 -- Set highlight on search
 vim.o.hlsearch = false
 
