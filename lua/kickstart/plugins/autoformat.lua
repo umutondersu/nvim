@@ -48,6 +48,7 @@ return {
         css = { { "prettierd", "prettier" } },
         -- lua = { "stylua" },
         python = { "isort", "black" },
+        go = { 'gofumpt', 'goimports' },
       },
       init = function()
         -- If you want the formatexpr, here is the place to set it

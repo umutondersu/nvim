@@ -23,6 +23,7 @@ return {
 
     -- Add your own debuggers here
     'mfussenegger/nvim-dap-python',
+    'leoluz/nvim-dap-go',
   },
   config = function()
     local dap = require 'dap'
@@ -43,6 +44,7 @@ return {
       ensure_installed = {
         -- Update this to ensure that you have the debuggers for the langs you want
         'debugpy',
+        'delve',
       },
     }
 
@@ -87,10 +89,13 @@ return {
     dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
     -- Install language specific configs
+    -- Python
     local python_path = '%LOCALAPPDATA%/nvim-data'
     if vim.fn.has('unix') then
       python_path = '~/.local/share/nvim'
     end
     require('dap-python').setup(python_path .. '/mason/packages/debugpy/venv/bin/python')
+    -- Go
+    require('dap-go').setup()
   end,
 }
