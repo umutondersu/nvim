@@ -9,13 +9,17 @@ return {
                 color = '#326da8',
                 name = 'json',
             },
+            ["go.mod"] = {
+                icon = "󰟓",
+                color = "#519bba",
+                name = "go.mod",
+            },
         },
         override_by_extension = {
             ["toml"] = {
                 icon = "",
                 name = "Gear"
-            }
+            },
         },
     },
 }
-
