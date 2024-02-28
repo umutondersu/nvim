@@ -580,6 +580,7 @@ require('which-key').register {
   ['<leader>f'] = { name = '[F]ormat', _ = 'which_key_ignore' },
   ['<leader>C'] = { name = '[C]opilot Chat', _ = 'which_key_ignore' },
   ['<leader>n'] = { name = '[N]o Neck Pain', _ = 'which_key_ignore' },
+  ['<leader>t'] = { name = '[T]est', _ = 'which_key_ignore' },
 }
 
 -- register which-key VISUAL mode
