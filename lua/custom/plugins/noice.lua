@@ -46,9 +46,7 @@ return {
             },
             {
                 filter = {
-                    event = "msg_show",
-                    kind = "",
-                    find = "change",
+                    find = "changed",
                 },
                 skip = true,
             },
