@@ -1,9 +1,7 @@
 return {
     'rcarriga/nvim-notify',
-    config = function()
-        require('notify').setup({
-            render = 'compact'
-        })
-        vim.notify = require("notify") --NOTE: comment with noice
-    end
+    opts = {
+        render = 'compact',
+        background_colour = "#000000"
+    }
 }
