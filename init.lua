@@ -329,14 +329,20 @@ require('lazy').setup({
       'windwp/nvim-ts-autotag',
       {
         'nvim-treesitter/nvim-treesitter-context',
-        keys = { {
-          '[C',
-          function()
-            require("treesitter-context").go_to_context(vim.v.count1)
-          end,
-          mode = 'n',
-          desc = 'Go to context',
-        }, }
+        keys = {
+          {
+            'gC',
+            function()
+              require("treesitter-context").go_to_context(vim.v.count1)
+            end,
+            mode = 'n',
+            desc = 'Jump to context',
+          },
+        },
+        config = function()
+          vim.cmd(
+            'hi TreesitterContext guibg=none | hi TreesitterContextLineNumber guisp=Red')
+        end,
       }
     },
     build = ':TSUpdate',
@@ -640,10 +646,11 @@ local servers = {
     hints = {
       assignVariableTypes = true,
       compositeLiteralFields = true,
+      compositeLiteralTypes = true,
       constantValues = true,
       functionTypeParameters = true,
       parameterNames = true,
-      rangeVariableTypes = true
+      rangeVariableTypes = true,
     },
   },
 
