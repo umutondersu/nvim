@@ -65,6 +65,7 @@ return {
                 },
                 skip = true,
             },
+            { filter = { find = "No signature help" }, view = "mini" },
         },
     },
     dependencies = {
