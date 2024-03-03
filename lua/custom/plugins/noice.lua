@@ -46,7 +46,8 @@ return {
             },
             {
                 filter = {
-                    find = "changed",
+                    event = "msg_show",
+                    find = "change",
                 },
                 skip = true,
             },
@@ -59,6 +60,7 @@ return {
             },
             {
                 filter = {
+                    event = "msg_show",
                     find = "line",
                 },
                 skip = true,
