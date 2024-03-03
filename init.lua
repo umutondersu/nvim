@@ -60,6 +60,9 @@ require('lazy').setup({
 
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
+
+      --For Tsserver
+      'dmmulroy/ts-error-translator.nvim',
     },
   },
 
