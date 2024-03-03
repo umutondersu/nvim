@@ -32,10 +32,6 @@ map('n', '<M-O>', 'O<Esc>', { desc = 'New Line Up' })
 map('n', '<C-r>', 'r', { silent = true }) -- replace a single character
 map('n', 'r', '<C-r>', { silent = true }) -- redo
 
-map('n', '<leader>i', function()
-  require('lsp-inlayhints').toggle()
-end, { desc = 'Toggle [I]nlay hints' })
-
 -- Sync only puts and x cuts with system clipboard (smartyank required)
 map({ 'n', 'v' }, 'p', '"+p', { silent = true })
 map({ 'n', 'v' }, 'P', '"+P', { silent = true })
