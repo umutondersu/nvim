@@ -520,6 +520,9 @@ local servers = {
       telemetry = { enable = false },
       diagnostics = { disable = { 'missing-fields' } },
       hint = { enable = true },
+      completion = {
+        callSnippet = 'Replace',
+      },
     },
   },
 
