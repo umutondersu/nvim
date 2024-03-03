@@ -512,21 +512,7 @@ local servers = {
 
   pyright = {},
 
-  tsserver = {
-    typescript = {
-      inlayHints = {
-        includeInlayParameterNameHints = 'all',
-        includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-        includeInlayFunctionParameterTypeHints = true,
-        includeInlayVariableTypeHints = true,
-        includeInlayVariableTypeHintsWhenTypeMatchesName = false,
-        includeInlayPropertyDeclarationTypeHints = true,
-        includeInlayFunctionLikeReturnTypeHints = true,
-        includeInlayEnumMemberValueHints = true,
-      }
-    },
-    -- diagnostics = { ignoredCodes = { 6133 } },
-  },
+  tsserver = {},
 
   lua_ls = {
     Lua = {
