@@ -627,6 +627,59 @@ require('lazy').setup({
   {
     -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
+    build = ':TSUpdate',
+    opts = {
+      -- Add languages to be installed here that you want installed for treesitter
+      ensure_installed = {
+        'c',
+        'cpp',
+        'go',
+        'lua',
+        'python',
+        'rust',
+        'tsx',
+        'javascript',
+        'typescript',
+        'vimdoc',
+        'vim',
+        'bash',
+        'http',
+        'json',
+        'sql',
+        'markdown',
+        'markdown_inline',
+        'regex',
+      },
+      -- 'regex', 'markdown_inline' for noice.nvim
+
+      -- nvim-ts-autotag
+      autotag = {
+        enable = true,
+      },
+
+      -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
+      auto_install = true,
+
+      highlight = { enable = true },
+      indent = { enable = true },
+      textobjects = {
+        select = {
+          enable = true,
+          lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+          keymaps = {
+            -- You can use the capture groups defined in textobjects.scm
+            ['af'] = '@function.outer',
+            ['if'] = '@function.inner',
+            ['ac'] = '@class.outer',
+            ['ic'] = '@class.inner',
+          },
+        },
+      },
+
+    },
+    config = function(_, opts)
+      require('nvim-treesitter.configs').setup(opts)
+    end,
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
       'windwp/nvim-ts-autotag',
@@ -643,60 +696,10 @@ require('lazy').setup({
           },
         },
         config = function()
-          require('nvim-treesitter.configs').setup {
-            -- Add languages to be installed here that you want installed for treesitter
-            ensure_installed = {
-              'c',
-              'cpp',
-              'go',
-              'lua',
-              'python',
-              'rust',
-              'tsx',
-              'javascript',
-              'typescript',
-              'vimdoc',
-              'vim',
-              'bash',
-              'http',
-              'json',
-              'markdown',
-              'sql',
-            },
-            -- 'regex', 'markdown_inline' for noice.nvim
-
-            -- nvim-ts-autotag
-            autotag = {
-              enable = true,
-            },
-
-            -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
-            auto_install = true,
-
-            highlight = { enable = true },
-            indent = { enable = true },
-            textobjects = {
-              select = {
-                enable = true,
-                lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
-                keymaps = {
-                  -- You can use the capture groups defined in textobjects.scm
-                  ['aa'] = '@parameter.outer',
-                  ['ia'] = '@parameter.inner',
-                  ['af'] = '@function.outer',
-                  ['if'] = '@function.inner',
-                  ['ac'] = '@class.outer',
-                  ['ic'] = '@class.inner',
-                },
-              },
-            },
-          }
-          vim.cmd(
-            'hi TreesitterContext guibg=none | hi TreesitterContextLineNumber guisp=Red')
+          vim.cmd('hi TreesitterContext guibg=none | hi TreesitterContextLineNumber guisp=Red')
         end,
       }
     },
-    build = ':TSUpdate',
   },
 
   require 'kickstart.plugins.autoformat',
