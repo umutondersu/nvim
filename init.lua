@@ -223,6 +223,132 @@ require('lazy').setup({
       -- Additional snippets
       'solidjs-community/solid-snippets',
     },
+    config = function()
+      local cmp = require 'cmp'
+      local luasnip = require 'luasnip'
+      local lspkind = require 'lspkind'
+      require('luasnip.loaders.from_vscode').lazy_load()
+      luasnip.config.setup {}
+
+      local has_words_before = function()
+        if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
+        local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+        return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
+      end
+
+      cmp.setup {
+        snippet = {
+          expand = function(args)
+            luasnip.lsp_expand(args.body)
+          end,
+        },
+        completion = {
+          completeopt = 'menu,menuone,noinsert',
+        },
+        mapping = cmp.mapping.preset.insert {
+          ['<C-n>'] = cmp.mapping.select_next_item(),
+          ['<C-p>'] = cmp.mapping.select_prev_item(),
+          ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+          ['<C-f>'] = cmp.mapping.scroll_docs(4),
+          ['<C-x>'] = cmp.mapping.close(),
+          ['<C-c>'] = cmp.mapping.complete {}, -- Manually trigger completion
+          ['<C-a>'] = cmp.mapping.confirm { select = true },
+          ['<Tab>'] = cmp.mapping(function(fallback)
+            if cmp.visible() and has_words_before() then
+              cmp.select_next_item()
+            elseif luasnip.expand_or_locally_jumpable() then
+              luasnip.expand_or_jump()
+            else
+              fallback()
+            end
+          end, { 'i', 's' }),
+          ['<S-Tab>'] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_prev_item()
+            elseif luasnip.locally_jumpable(-1) then
+              luasnip.jump(-1)
+            else
+              fallback()
+            end
+          end, { 'i', 's' }),
+        },
+        formatting = {
+          format = lspkind.cmp_format({
+            -- mode = 'symbol', -- show only symbol annotations
+            maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+            -- can also be a function to dynamically calculate max width such as
+            -- maxwidth = function() return math.floor(0.45 * vim.o.columns) end,
+            ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
+            symbol_map = { Copilot = "" },
+          })
+        },
+        window = {
+          completion = { -- rounded border; thin-style scrollbar
+            border = 'rounded',
+            scrollbar = true,
+          },
+          documentation = { -- rounded border; thin-style scrollbar
+            border = 'rounded',
+            scrollbar = true,
+          },
+        },
+        sources = {
+          { name = 'copilot' },
+          { name = 'nvim_lsp' },
+          { name = 'luasnip' },
+          { name = 'path' },
+        },
+        sorting = {
+          priority_weight = 2,
+          comparators = {
+            cmp.config.compare.exact,
+            require("copilot_cmp.comparators").prioritize,
+            cmp.config.compare.offset,
+            -- cmp.config.compare.scopes, --this is commented in nvim-cmp too
+            cmp.config.compare.score,
+            cmp.config.compare.recently_used,
+            cmp.config.compare.locality,
+            cmp.config.compare.kind,
+            cmp.config.compare.sort_text,
+            cmp.config.compare.length,
+            cmp.config.compare.order,
+          }, },
+      }
+      cmp.setup.cmdline('/', {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = {
+          { name = 'buffer' }
+        }
+      })
+      cmp.setup.cmdline(':', {
+        mapping = cmp.mapping.preset.cmdline({
+          ['<Space>'] = {
+            c = function(fallback)
+              local keys = vim.api.nvim_replace_termcodes('<Space>', true, false, true)
+              if cmp.visible() then
+                cmp.confirm({ select = true })
+                vim.api.nvim_feedkeys(keys, 'm', false)
+              else
+                fallback()
+              end
+            end,
+          },
+          ['<C-x>'] = {
+            c = function() cmp.close() end,
+          },
+        }),
+        sources = cmp.config.sources({
+          { name = 'path' }
+        }, {
+          {
+            name = 'cmdline',
+            option = {
+              ignore_cmds = { 'Man', '!' }
+            }
+          }
+        })
+      })
+    end,
   },
 
   -- Useful plugin to show you pending keybinds.
@@ -585,135 +711,5 @@ require 'keymaps'
 require 'commands'
 require 'snippets'
 
--- [[ Configure nvim-cmp ]]
--- See `:help cmp`
-local cmp = require 'cmp'
-local luasnip = require 'luasnip'
-local lspkind = require 'lspkind'
-require('luasnip.loaders.from_vscode').lazy_load()
-luasnip.config.setup {}
-
-local has_words_before = function()
-  if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
-  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
-end
-
-cmp.setup {
-  snippet = {
-    expand = function(args)
-      luasnip.lsp_expand(args.body)
-    end,
-  },
-  completion = {
-    completeopt = 'menu,menuone,noinsert',
-  },
-  mapping = cmp.mapping.preset.insert {
-    ['<C-n>'] = cmp.mapping.select_next_item(),
-    ['<C-p>'] = cmp.mapping.select_prev_item(),
-    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-x>'] = cmp.mapping.close(),
-    -- Manually trigger completion
-    ['<C-c>'] = cmp.mapping.complete {},
-    ['<C-a>'] = cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
-    },
-    ['<Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() and has_words_before() then
-        cmp.select_next_item()
-      elseif luasnip.expand_or_locally_jumpable() then
-        luasnip.expand_or_jump()
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
-    ['<S-Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.locally_jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
-  },
-  formatting = {
-    format = lspkind.cmp_format({
-      -- mode = 'symbol', -- show only symbol annotations
-      maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
-      -- can also be a function to dynamically calculate max width such as
-      -- maxwidth = function() return math.floor(0.45 * vim.o.columns) end,
-      ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
-      symbol_map = { Copilot = "" },
-    })
-  },
-  window = {
-    completion = { -- rounded border; thin-style scrollbar
-      border = 'rounded',
-      scrollbar = true,
-    },
-    documentation = { -- rounded border; thin-style scrollbar
-      border = 'rounded',
-      scrollbar = true,
-    },
-  },
-  sources = {
-    { name = 'copilot' },
-    { name = 'nvim_lsp' },
-    { name = 'luasnip' },
-    { name = 'path' },
-  },
-  sorting = {
-    priority_weight = 2,
-    comparators = {
-      cmp.config.compare.exact,
-      require("copilot_cmp.comparators").prioritize,
-      cmp.config.compare.offset,
-      -- cmp.config.compare.scopes, --this is commented in nvim-cmp too
-      cmp.config.compare.score,
-      cmp.config.compare.recently_used,
-      cmp.config.compare.locality,
-      cmp.config.compare.kind,
-      cmp.config.compare.sort_text,
-      cmp.config.compare.length,
-      cmp.config.compare.order,
-    }, },
-}
-cmp.setup.cmdline('/', {
-  mapping = cmp.mapping.preset.cmdline(),
-  sources = {
-    { name = 'buffer' }
-  }
-})
-cmp.setup.cmdline(':', {
-  mapping = cmp.mapping.preset.cmdline({
-    ['<Space>'] = {
-      c = function(fallback)
-        local keys = vim.api.nvim_replace_termcodes('<Space>', true, false, true)
-        if cmp.visible() then
-          cmp.confirm({ select = true })
-          vim.api.nvim_feedkeys(keys, 'm', false)
-        else
-          fallback()
-        end
-      end,
-    },
-    ['<C-x>'] = {
-      c = function() cmp.close() end,
-    },
-  }),
-  sources = cmp.config.sources({
-    { name = 'path' }
-  }, {
-    {
-      name = 'cmdline',
-      option = {
-        ignore_cmds = { 'Man', '!' }
-      }
-    }
-  })
-})
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
