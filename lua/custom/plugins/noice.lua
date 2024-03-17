@@ -65,7 +65,8 @@ return {
                 },
                 skip = true,
             },
-            { filter = { find = "No signature help" }, view = "mini" },
+            { filter = { find = "No signature help" },         view = "mini" },
+            { filter = { find = "No code actions available" }, view = "mini" },
         },
     },
     dependencies = {
