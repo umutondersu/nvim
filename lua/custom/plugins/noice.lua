@@ -4,14 +4,14 @@ return {
     enabled = true,
     opts = {
         cmdline = { view = "cmdline" },
-        messages = { view = "mini" },
+        messages = { view = "mini", view_error = "mini", view_warn = "mini", },
         popupmenu = { enabled = false },
         lsp = {
             -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
             override = {
                 ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
                 ["vim.lsp.util.stylize_markdown"] = true,
-                ["cmp.entry.get_documentation"] = false, -- requires hrsh7th/nvim-cmp
+                ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
             },
             progress = { enabled = false },
         },
