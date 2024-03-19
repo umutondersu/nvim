@@ -12,7 +12,7 @@ return {
         -- …etc.
         animation = true,
         clickable = true,
-        auto_hide = true,
+        auto_hide = false,
         sidebar_filetypes = {
             -- Use the default values: {event = 'BufWinLeave', text = nil}
             NvimTree = true,
