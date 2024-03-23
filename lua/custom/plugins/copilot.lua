@@ -37,31 +37,32 @@ return {
         enabled = vim.fn.has("win32") == 0,
         event = "VeryLazy",
         keys = {
-            { "<leader>cb", ":CopilotChatBuffer ",               desc = "CopilotChat - Chat with current buffer" },
-            { "<leader>ce", "<cmd>CopilotChatExplain<cr>",       desc = "CopilotChat - Explain code [Prompt]" },
-            { "<leader>ct", "<cmd>CopilotChatTests<cr>",         desc = "CopilotChat - Generate tests [Prompt]" },
-            { "<leader>cv", "<cmd>CopilotChatVsplitToggle<cr>",  desc = "CopilotChat - Toggle Chat Window",      mode = "n" },
-            { "<leader>cv", ":CopilotChatVisual ",               desc = "CopilotChat - Open in vertical split",  mode = "x" },
-            { "<leader>cx", ":CopilotChatInPlace<cr>",           desc = "CopilotChat - Run in-place code",       mode = "x" },
-            { "<leader>cf", "<cmd>CopilotChatFixDiagnostic<cr>", desc = "CopilotChat - Fix diagnostic" },
-            { "<leader>cR", "<cmd>CopilotChatReset<cr>",         desc = "CopilotChat - Reset Chat Buffer" },
-            { "<leader>cr", "<cmd>CopilotChatReview<cr>",        desc = "CopilotChat - Review code [Prompt]" },
-            { "<leader>cE", "<cmd>CopilotChatRefactor<cr>",      desc = "CopilotChat - Refactor code [Prompt]" },
+            { "<leader>cb", ":CopilotChatBuffer ",               desc = "Chat with current buffer" },
+            { "<leader>cc", ":CopilotChat ",                     desc = "Chat with Copilot" },
+            { "<leader>ce", "<cmd>CopilotChatExplain<cr>",       desc = "Explain code [Prompt]" },
+            { "<leader>ct", "<cmd>CopilotChatTests<cr>",         desc = "Generate tests [Prompt]" },
+            { "<leader>cv", "<cmd>CopilotChatVsplitToggle<cr>",  desc = "Toggle Chat Window",      mode = "n" },
+            { "<leader>cv", ":CopilotChatVisual ",               desc = "Open in vertical split",  mode = "x" },
+            { "<leader>cx", ":CopilotChatInPlace<cr>",           desc = "Run in-place code",       mode = "x" },
+            { "<leader>cf", "<cmd>CopilotChatFixDiagnostic<cr>", desc = "Fix diagnostic" },
+            { "<leader>cR", "<cmd>CopilotChatReset<cr>",         desc = "Reset Chat Buffer" },
+            { "<leader>cr", "<cmd>CopilotChatReview<cr>",        desc = "Review code [Prompt]" },
+            { "<leader>cE", "<cmd>CopilotChatRefactor<cr>",      desc = "Refactor code [Prompt]" },
             {
                 "<leader>ch",
                 function() require("CopilotChat.code_actions").show_help_actions() end,
-                desc = "CopilotChat - Help actions",
+                desc = "Help actions",
             },
             -- {
             --     "<leader>cp",
             --     function() require("CopilotChat.code_actions").show_prompt_actions() end,
-            --     desc = "CopilotChat - Prompt actions",
+            --     desc = "Prompt actions",
             -- },
         },
         opts = {
-            show_help = "yes",         -- Show help text for CopilotChatInPlace, default: yes
-            debug = false,             -- Enable or disable debug mode, the log file will be in ~/.local/state/nvim/CopilotChat.nvim.log
-            disable_extra_info = 'no', -- Disable extra information (e.g: system prompt) in the response.
+            show_help = "yes",          -- Show help text for CopilotChatInPlace, default: yes
+            debug = false,              -- Enable or disable debug mode, the log file will be in ~/.local/state/nvim/CopilotChat.nvim.log
+            disable_extra_info = 'yes', -- Disable extra information (e.g: system prompt) in the response.
             language = "English",
             prompts = {
                 Explain = "Explain how it works.",
