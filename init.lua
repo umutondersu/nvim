@@ -21,6 +21,8 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+local lib = require('lib')
+
 -- [[ Configure plugins ]]
 require('lazy').setup({
   -- NOTE: First, some plugins that don't require any configuration
@@ -220,6 +222,7 @@ require('lazy').setup({
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-cmdline',
       'hrsh7th/cmp-buffer',
+      { 'mtoohey31/cmp-fish', ft = { "fish" }, enabled = lib.command_exists('fish'), },
 
       -- vscode like pictograms
       'onsails/lspkind.nvim',
@@ -294,16 +297,14 @@ require('lazy').setup({
             border = 'rounded',
             scrollbar = true,
           },
-          documentation = { -- rounded border; thin-style scrollbar
-            border = 'rounded',
-            scrollbar = true,
-          },
+          documentation = cmp.config.window.bordered(),
         },
         sources = {
           { name = 'copilot' },
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
           { name = 'path' },
+          { name = 'fish' },
         },
         sorting = {
           priority_weight = 2,
