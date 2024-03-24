@@ -1,3 +1,5 @@
+local general = vim.api.nvim_create_augroup("General Settings", { clear = true })
+
 vim.api.nvim_create_user_command('Gc', function(args)
   local vimCmd = 'Git commit -m'
   if args['args'] then
@@ -25,3 +27,11 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
+-- [[ Disable new line comment ]]
+vim.api.nvim_create_autocmd("BufEnter", {
+  callback = function()
+    vim.opt.formatoptions:remove { "c", "r", "o" }
+  end,
+  group = general,
+  desc = "Disable New Line Comment",
+})
