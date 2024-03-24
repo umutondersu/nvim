@@ -55,6 +55,12 @@ require('lazy').setup({
       --For Tsserver
       'dmmulroy/ts-error-translator.nvim',
 
+      -- For LSP actions preview
+      'aznhe21/actions-preview.nvim',
+
+      -- Preview for go to methods
+      { 'rmagatti/goto-preview', opts = {}, event = 'VeryLazy', },
+
     },
     config = function()
       vim.api.nvim_create_autocmd('LspAttach', {
@@ -96,7 +102,8 @@ require('lazy').setup({
 
           -- Execute a code action, usually your cursor needs to be on top of an error
           -- or a suggestion from your LSP for this to activate.
-          map('<leader>a', vim.lsp.buf.code_action, 'Code [A]ction')
+          map('<leader>a', require("actions-preview").code_actions, 'Code [A]ction')
+          -- map('<leader>a', vim.lsp.buf.code_action, 'Code [A]ction')
 
           -- Opens a popup that displays documentation about the word under your cursor
           --  See `:help K` for why this keymap
@@ -106,6 +113,13 @@ require('lazy').setup({
           --This is not Goto Definition, this is Goto Declaration.
           --  For example, in C this would take you to the header
           map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+
+          -- Peek Keymaps
+          map('gpd', function() require("goto-preview").goto_preview_definition({}) end, '[P]review [D]efinition')
+          map('gpy', function() require("goto-preview").goto_preview_type_definition({}) end,
+            '[P]review t[Y]pe [D]efinition')
+          map('gpi', function() require("goto-preview").goto_preview_implementation({}) end, '[P]review [I]mplementation')
+          map('gpD', function() require("goto-preview").goto_preview_declaration({}) end, '[P]review [D]eclaration')
         end,
       })
 
@@ -360,6 +374,7 @@ require('lazy').setup({
         ['<leader>c'] = { name = '[C]opilot Chat', _ = 'which_key_ignore' },
         ['<leader>n'] = { name = '[N]o Neck Pain', _ = 'which_key_ignore' },
         ['<leader>t'] = { name = '[T]est', _ = 'which_key_ignore' },
+        ['gp'] = { name = '[P]review', _ = 'which_key_ignore' },
       }
     end,
   },
