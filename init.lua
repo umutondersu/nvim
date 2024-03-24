@@ -54,7 +54,7 @@ require('lazy').setup({
       -- used for completion, annotations and signatures of Neovim apis
       { 'folke/neodev.nvim', opts = {} },
 
-      --For Tsserver
+      -- For Tsserver
       'dmmulroy/ts-error-translator.nvim',
 
       -- For LSP actions preview
@@ -466,7 +466,7 @@ require('lazy').setup({
   },
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
+  { 'numToStr/Comment.nvim',  opts = {} },
 
   -- Fuzzy Finder (files, lsp, etc)
   {
