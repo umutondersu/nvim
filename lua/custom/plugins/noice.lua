@@ -14,6 +14,7 @@ return {
                 ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
             },
             progress = { enabled = false },
+            signature = { enabled = false },
         },
         -- you can enable a preset for easier configuration
         presets = {
@@ -65,8 +66,6 @@ return {
                 },
                 skip = true,
             },
-            { filter = { find = "No signature help" },         view = "mini" },
-            { filter = { find = "No code actions available" }, view = "mini" },
         },
     },
     dependencies = {
