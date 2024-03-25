@@ -16,6 +16,9 @@ map('n', '<leader>q', '<cmd>TroubleToggle<cr>', { desc = 'Toggle diagnostics lis
 -- jj for escaping insert mode
 map('i', 'jj', '<Esc>', { silent = true })
 
+-- ww for saving in insert mode
+map('i', 'ww', '<Esc>:w<CR>', { silent = true })
+
 -- Custom keymaps for turkish qwerty
 map({ 'n', 'v' }, 'ş', '^', { silent = true }) -- move to first non-blank character
 map('n', 'Ç', '>', { silent = true })
