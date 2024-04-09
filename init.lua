@@ -240,12 +240,6 @@ require('lazy').setup({
       require('luasnip.loaders.from_vscode').lazy_load()
       luasnip.config.setup {}
 
-      local has_words_before = function()
-        if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
-        local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-        return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
-      end
-
       cmp.setup {
         snippet = {
           expand = function(args)
@@ -264,7 +258,7 @@ require('lazy').setup({
           ['<C-c>'] = cmp.mapping.complete {}, -- Manually trigger completion
           ['<C-a>'] = cmp.mapping.confirm { select = true },
           ['<Tab>'] = cmp.mapping(function(fallback)
-            if cmp.visible() and has_words_before() then
+            if cmp.visible() then
               cmp.select_next_item()
             elseif luasnip.expand_or_locally_jumpable() then
               luasnip.expand_or_jump()
@@ -289,7 +283,6 @@ require('lazy').setup({
             -- can also be a function to dynamically calculate max width such as
             -- maxwidth = function() return math.floor(0.45 * vim.o.columns) end,
             ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
-            symbol_map = { Copilot = "" },
           })
         },
         window = {
@@ -300,27 +293,11 @@ require('lazy').setup({
           documentation = cmp.config.window.bordered(),
         },
         sources = {
-          { name = 'copilot' },
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
           { name = 'path' },
           { name = 'fish' },
         },
-        sorting = {
-          priority_weight = 2,
-          comparators = {
-            cmp.config.compare.exact,
-            require("copilot_cmp.comparators").prioritize,
-            cmp.config.compare.offset,
-            -- cmp.config.compare.scopes, --this is commented in nvim-cmp too
-            cmp.config.compare.score,
-            cmp.config.compare.recently_used,
-            cmp.config.compare.locality,
-            cmp.config.compare.kind,
-            cmp.config.compare.sort_text,
-            cmp.config.compare.length,
-            cmp.config.compare.order,
-          }, },
       }
       cmp.setup.cmdline('/', {
         mapping = cmp.mapping.preset.cmdline(),
