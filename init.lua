@@ -595,10 +595,10 @@ require('lazy').setup({
           lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
           keymaps = {
             -- You can use the capture groups defined in textobjects.scm
-            ['af'] = '@function.outer',
-            ['if'] = '@function.inner',
-            ['ac'] = '@class.outer',
-            ['ic'] = '@class.inner',
+            ['af'] = { query = '@function.outer', desc = "a function", },
+            ['if'] = { query = '@function.inner', desc = "inner function", },
+            ['ac'] = { query = '@class.outer', desc = "a class", },
+            ['ic'] = { query = '@class.inner', desc = "inner class", },
           },
         },
       },
@@ -615,9 +615,7 @@ require('lazy').setup({
         keys = {
           {
             'gC',
-            function()
-              require("treesitter-context").go_to_context(vim.v.count1)
-            end,
+            function() require("treesitter-context").go_to_context(vim.v.count1) end,
             mode = 'n',
             desc = 'Jump to context',
           },
