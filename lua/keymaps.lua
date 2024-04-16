@@ -16,9 +16,6 @@ map('n', '<leader>q', '<cmd>TroubleToggle<cr>', { desc = 'Toggle diagnostics lis
 -- jj for escaping insert mode
 map('i', 'jj', '<Esc>', { silent = true })
 
--- ww for saving in insert mode
-map('i', 'ww', '<Esc>:w<CR>', { silent = true })
-
 -- Custom keymaps for turkish qwerty
 map({ 'n', 'v' }, 'ş', '^', { silent = true }) -- move to first non-blank character
 map('n', 'Ç', '>', { silent = true })
@@ -57,6 +54,10 @@ map("n", "<leader>rs", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], {
 map("n", "<M-u>", ":e!<CR>", { desc = 'Undo all unsaved writes' })
 
 map('n', '<leader>gw', '<cmd>G<cr>', { desc = '[G]it Summary [W]indow' })
+
+-- Shortcuts for save and exit
+map('n', '<leader>w', '<cmd>w<CR>', { desc = 'Save Buffer' })
+map('n', '<leader>x', '<cmd>wq<CR>', { desc = 'Save and Exit Buffer' })
 
 -- Buffer Management
 -- map('n', '<M-c>', function()
