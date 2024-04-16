@@ -9,7 +9,6 @@ return {
 
         -- optional
         'nvim-treesitter/nvim-treesitter',
-        'rcarriga/nvim-notify',
         'nvim-tree/nvim-web-devicons',
     },
     lazy = leet_arg ~= vim.fn.argv()[1],
