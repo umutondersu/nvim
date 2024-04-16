@@ -50,9 +50,9 @@ return {
             { "<leader>cr", "<cmd>CopilotChatReview<cr>",        desc = "Review code [Prompt]" },
             { "<leader>cE", "<cmd>CopilotChatRefactor<cr>",      desc = "Refactor code [Prompt]" },
             {
-                "<leader>ch",
+                "<leader>ca",
                 function() require("CopilotChat.code_actions").show_help_actions() end,
-                desc = "Help actions",
+                desc = "Actions Help",
             },
             -- {
             --     "<leader>cp",
