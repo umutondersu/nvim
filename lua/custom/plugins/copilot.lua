@@ -34,46 +34,58 @@ return {
     },
     {
         "CopilotC-Nvim/CopilotChat.nvim",
-        dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
-        enabled = vim.fn.has("win32") == 0,
-        event = "VeryLazy",
-        keys = {
-            { "<leader>cb", ":CopilotChatBuffer ",               desc = "Chat with current buffer" },
-            { "<leader>cc", ":CopilotChat ",                     desc = "Chat with Copilot" },
-            { "<leader>ce", "<cmd>CopilotChatExplain<cr>",       desc = "Explain code [Prompt]" },
-            { "<leader>ct", "<cmd>CopilotChatTests<cr>",         desc = "Generate tests [Prompt]" },
-            { "<leader>cv", "<cmd>CopilotChatVsplitToggle<cr>",  desc = "Toggle Chat Window",      mode = "n" },
-            { "<leader>cv", ":CopilotChatVisual ",               desc = "Open in vertical split",  mode = "x" },
-            { "<leader>cx", ":CopilotChatInPlace<cr>",           desc = "Run in-place code",       mode = "x" },
-            { "<leader>cf", "<cmd>CopilotChatFixDiagnostic<cr>", desc = "Fix diagnostic" },
-            { "<leader>cR", "<cmd>CopilotChatReset<cr>",         desc = "Reset Chat Buffer" },
-            { "<leader>cr", "<cmd>CopilotChatReview<cr>",        desc = "Review code [Prompt]" },
-            { "<leader>cE", "<cmd>CopilotChatRefactor<cr>",      desc = "Refactor code [Prompt]" },
-            {
-                "<leader>ca",
-                function() require("CopilotChat.code_actions").show_help_actions() end,
-                desc = "Actions Help",
-            },
-            -- {
-            --     "<leader>cp",
-            --     function() require("CopilotChat.code_actions").show_prompt_actions() end,
-            --     desc = "Prompt actions",
-            -- },
+        branch = "canary",
+        dependencies = {
+            { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
+            { "nvim-lua/plenary.nvim" },  -- for curl, log wrapper
         },
         opts = {
-            show_help = "yes",          -- Show help text for CopilotChatInPlace, default: yes
-            debug = false,              -- Enable or disable debug mode, the log file will be in ~/.local/state/nvim/CopilotChat.nvim.log
-            disable_extra_info = 'yes', -- Disable extra information (e.g: system prompt) in the response.
-            language = "English",
-            prompts = {
-                Explain = "Explain how it works.",
-                Review = "Review the following code and provide concise suggestions.",
-                Tests = "Briefly explain how the selected code works, then generate unit tests.",
-                Refactor = "Refactor the code to improve clarity and readability.",
-            }
+            debug = true,
+            window = { width = 0.45 },
         },
-        build = function()
-            vim.notify("Please update the remote plugins by running ':UpdateRemotePlugins', then restart Neovim.")
-        end,
+        config = function(_, opts)
+            local chat = require("CopilotChat")
+            local map = vim.keymap.set
+            local actions = require("CopilotChat.actions")
+            chat.setup(opts)
+            map('n', '<leader>cw', function() chat.toggle() end, { desc = 'Toggle Chat [W]indow' })
+            map('n', '<leader>cr', function() chat.reset() end, { desc = '[R]eset Chat Buffer' })
+            map('n', "<leader>cc",
+                function()
+                    local input = vim.fn.input("Quick Chat: ")
+                    if input ~= "" then require("CopilotChat").ask(input) end
+                end,
+                { desc = "Quick [C]hat" })
+            map('v', "<leader>cv",
+                function()
+                    local input = vim.fn.input("Chat with visual: ")
+                    if input ~= "" then
+                        require("CopilotChat").ask(input,
+                            { selection = require("CopilotChat.select").visual })
+                    end
+                end,
+                { desc = "Chat with [V]isual" })
+            map('n', "<leader>cb",
+                function()
+                    local input = vim.fn.input("Chat with buffer: ")
+                    if input ~= "" then
+                        require("CopilotChat").ask(input,
+                            { selection = require("CopilotChat.select").buffer })
+                    end
+                end,
+                { desc = "Chat with [B]uffer" })
+            map({ 'x', 'n' }, '<leader>cp',
+                function()
+                    require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
+                end,
+                { desc = 'Select [P]rompt Action' })
+            map({ 'n' }, '<leader>cP',
+                function()
+                    require("CopilotChat.integrations.telescope").pick(actions.prompt_actions({
+                        selection = require("CopilotChat.select").buffer,
+                    }))
+                end,
+                { desc = 'Select [P]rompt Action on buffer' })
+        end
     },
 }
