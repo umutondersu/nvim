@@ -27,6 +27,7 @@ return {
             sync_root_with_cwd = true,
             hijack_cursor = true,
             view = {
+                number = true,
                 relativenumber = true,
             },
             renderer = {

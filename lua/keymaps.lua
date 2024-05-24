@@ -11,7 +11,7 @@ map('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 map('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
 map('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
 map('n', 'gq', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
-map('n', '<leader>q', '<cmd>TroubleToggle<cr>', { desc = 'Toggle diagnostics list' })
+map('n', '<leader>Q', '<cmd>TroubleToggle<cr>', { desc = 'Toggle diagnostics list' })
 
 -- jj for escaping insert mode
 map('i', 'jj', '<Esc>', { silent = true })
@@ -58,6 +58,7 @@ map('n', '<leader>gw', '<cmd>G<cr>', { desc = '[G]it Summary [W]indow' })
 -- Shortcuts for save and exit
 map('n', '<leader>w', '<cmd>w<CR>', { desc = 'Save Buffer' })
 map('n', '<leader>x', '<cmd>wq<CR>', { desc = 'Save and Exit Buffer' })
+map('n', '<leader>q', '<cmd>wq<CR>', { desc = 'Exit Buffer' })
 
 -- Buffer Management
 -- map('n', '<M-c>', function()
