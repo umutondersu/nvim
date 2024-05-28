@@ -1,8 +1,7 @@
 return {
     'kevinhwang91/nvim-ufo',
-    event = 'VeryLazy',
-    dependencies = { 'kevinhwang91/promise-async' },
-    enabled = true,
+    dependencies = 'kevinhwang91/promise-async',
+    enabled = false, -- Causes SegFault in v0.10.0 because of the promise-async dependency
     config = function()
         vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
         vim.o.foldlevelstart = 99
