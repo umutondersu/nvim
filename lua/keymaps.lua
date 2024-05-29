@@ -58,7 +58,7 @@ map('n', '<leader>gw', '<cmd>G<cr>', { desc = '[G]it Summary [W]indow' })
 -- Shortcuts for save and exit
 map('n', '<leader>w', '<cmd>w<CR>', { desc = 'Save Buffer' })
 map('n', '<leader>x', '<cmd>wq<CR>', { desc = 'Save and Exit Buffer' })
-map('n', '<leader>q', '<cmd>wq<CR>', { desc = 'Exit Buffer' })
+map('n', '<leader>q', '<cmd>q<CR>', { desc = 'Exit Buffer' })
 
 -- Inlay Hints
 map('n', '<leader>i', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end,
