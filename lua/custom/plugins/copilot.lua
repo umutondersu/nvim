@@ -40,14 +40,20 @@ return {
             { "nvim-lua/plenary.nvim" },  -- for curl, log wrapper
         },
         opts = {
-            debug = true,
+            debug = false,
             window = { width = 0.45 },
+            mappings = {
+                complete = {
+                    insert = '',
+                },
+            },
         },
         config = function(_, opts)
             local chat = require("CopilotChat")
             local map = vim.keymap.set
             local actions = require("CopilotChat.actions")
             chat.setup(opts)
+            require("CopilotChat.integrations.cmp").setup()
             map('n', '<leader>cw', function() chat.toggle() end, { desc = 'Toggle Chat [W]indow' })
             map('n', '<leader>cr', function() chat.reset() end, { desc = '[R]eset Chat Buffer' })
             map('n', "<leader>cc",
