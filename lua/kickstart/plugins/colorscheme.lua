@@ -13,6 +13,18 @@ return {
       --     floats = "transparent",
       --
       --   },
+      --   on_highlights = function(hl)
+      --     local color = "#898da0"
+      --     hl.LineNr = {
+      --       fg = color,
+      --     }
+      --     hl.LineNrAbove = {
+      --       fg = color,
+      --     }
+      --     hl.LineNrBelow = {
+      --       fg = color,
+      --     }
+      --   end,
       -- })
       require("tokyonight").setup {}
       vim.api.nvim_create_autocmd('ColorScheme', {
