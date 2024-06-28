@@ -230,6 +230,12 @@ require('lazy').setup({
         'eslint_d',
         'flake8',
         'golangci-lint',
+        -- Gopher.nvim
+        'gomodifytags',
+        'gotests',
+        'iferr',
+        'impl',
+
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -576,7 +582,7 @@ require('lazy').setup({
         'go',
         'lua',
         'python',
-        'rust',
+        'fish',
         'tsx',
         'javascript',
         'typescript',
@@ -589,6 +595,7 @@ require('lazy').setup({
         'markdown',
         'markdown_inline',
         'regex',
+        'diff',
       },
       -- 'regex', 'markdown_inline' for noice.nvim
 
