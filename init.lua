@@ -384,20 +384,21 @@ require('lazy').setup({
   -- Useful plugin to show you pending keybinds.
   {
     'folke/which-key.nvim',
-    event = 'Vimenter',
+    event = 'VeryLazy',
+    dependencies = { 'echasnovski/mini.icons', 'nvim-tree/nvim-web-devicons', },
     config = function()
-      require("which-key").setup()
-      require('which-key').register {
-        ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
-        ['<leader>h'] = { name = 'Git [H]unk', _ = 'which_key_ignore' },
-        ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
-        ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
-        ['<leader>sn'] = { name = '[S]earch [N]eovim', _ = 'which_key_ignore' },
-        ['<leader>f'] = { name = '[F]ormat', _ = 'which_key_ignore' },
-        ['<leader>c'] = { name = '[C]opilot Chat', _ = 'which_key_ignore' },
-        ['<leader>n'] = { name = '[N]o Neck Pain', _ = 'which_key_ignore' },
-        ['<leader>t'] = { name = '[T]est', _ = 'which_key_ignore' },
-        ['gp'] = { name = '[P]review', _ = 'which_key_ignore' },
+      require("which-key").setup({ preset = "modern" })
+      require('which-key').add {
+        { "<leader>c",  group = "[C]opilot Chat" },
+        { "<leader>f",  group = "[F]ormat" },
+        { "<leader>g",  group = "[G]it" },
+        { "<leader>h",  group = "Git [H]unk" },
+        { "<leader>n",  group = "[N]o Neck Pain" },
+        { "<leader>r",  group = "[R]ename" },
+        { "<leader>s",  group = "[S]earch" },
+        { "<leader>sn", group = "[S]earch [N]eovim" },
+        { "<leader>t",  group = "[T]est" },
+        { "gp",         group = "[P]review" },
       }
     end,
   },
