@@ -61,6 +61,9 @@ map('n', '<leader>w', '<cmd>w<CR>', { desc = 'Save Buffer' })
 map('n', '<leader>x', '<cmd>wq<CR>', { desc = 'Save and Exit Buffer' })
 map('n', '<leader>q', '<cmd>q<CR>', { desc = 'Exit Buffer' })
 
+-- Close Window with Ctrl + x
+map('n', '<C-x>', '<cmd>close<CR>')
+
 -- Buffer Management
 -- map('n', '<M-c>', function()
 --   vim.cmd(':Bdelete')
