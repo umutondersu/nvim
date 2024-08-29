@@ -97,6 +97,12 @@ return {
     end
     require('dap-python').setup(python_path .. '/mason/packages/debugpy/venv/bin/python')
     -- Go
-    require('dap-go').setup()
+    require('dap-go').setup {
+      delve = {
+        -- On Windows delve must be run attached or it crashes.
+        -- See https://github.com/leoluz/nvim-dap-go/blob/main/README.md#configuring
+        detached = vim.fn.has 'win32' == 0,
+      },
+    }
   end,
 }
