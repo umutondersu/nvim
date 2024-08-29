@@ -432,21 +432,21 @@ require('lazy').setup({
     'folke/which-key.nvim',
     event = 'VeryLazy',
     dependencies = { 'echasnovski/mini.icons', 'nvim-tree/nvim-web-devicons', },
-    config = function()
-      require("which-key").setup({ preset = "modern" })
-      require('which-key').add {
+    opts = {
+      preset = "modern",
+      spec = {
         { "<leader>c",  group = "[C]opilot Chat" },
         { "<leader>f",  group = "[F]ormat" },
         { "<leader>g",  group = "[G]it" },
-        { "<leader>h",  group = "Git [H]unk" },
+        { "<leader>h",  group = "Git [H]unk",       mode = { 'n', 'v' } },
         { "<leader>n",  group = "[N]o Neck Pain" },
         { "<leader>r",  group = "[R]ename" },
         { "<leader>s",  group = "[S]earch" },
         { "<leader>sn", group = "[S]earch [N]eovim" },
         { "<leader>t",  group = "[T]est" },
         { "gp",         group = "[P]review" },
-      }
-    end,
+      },
+    },
   },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
