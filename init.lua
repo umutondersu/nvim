@@ -461,7 +461,7 @@ require('lazy').setup({
         changedelete = { text = '~' },
       },
       on_attach = function(bufnr)
-        local gs = package.loaded.gitsigns
+        local gs = require 'gitsigns'
 
         local function map(mode, l, r, opts)
           opts = opts or {}
@@ -621,6 +621,7 @@ require('lazy').setup({
     -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
+    main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     opts = {
       -- Add languages to be installed here that you want installed for treesitter
       ensure_installed = {
@@ -640,11 +641,10 @@ require('lazy').setup({
         'json',
         'sql',
         'markdown',
-        'markdown_inline',
-        'regex',
+        'markdown_inline', -- noice.nvim
+        'regex',           -- noice.nvim
         'diff',
       },
-      -- 'regex', 'markdown_inline' for noice.nvim
 
       -- nvim-ts-autotag
       autotag = {
@@ -662,10 +662,10 @@ require('lazy').setup({
           lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
           keymaps = {
             -- You can use the capture groups defined in textobjects.scm
-            ['af'] = { query = '@function.outer', desc = "a function", },
-            ['if'] = { query = '@function.inner', desc = "inner function", },
-            ['ac'] = { query = '@class.outer', desc = "a class", },
-            ['ic'] = { query = '@class.inner', desc = "inner class", },
+            ['af'] = { query = '@function.outer', desc = "around function", },
+            ['if'] = { query = '@function.inner', desc = "inside function", },
+            ['ac'] = { query = '@class.outer', desc = "around class", },
+            ['ic'] = { query = '@class.inner', desc = "inside class", },
           },
         },
       },
