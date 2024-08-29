@@ -699,7 +699,26 @@ require('lazy').setup({
   require 'kickstart.plugins.debug',
 
   { import = 'custom.plugins' },
-}, {})
+}, {
+  ui = {
+    -- define a unicode icons table
+    icons = {
+      cmd = '⌘',
+      config = '🛠',
+      event = '📅',
+      ft = '📂',
+      init = '⚙',
+      keys = '🗝',
+      plugin = '🔌',
+      runtime = '💻',
+      require = '🌙',
+      source = '📄',
+      start = '🚀',
+      task = '📌',
+      lazy = '💤 ',
+    },
+  },
+})
 
 -- [[ Custom Modules ]]
 require 'options'
