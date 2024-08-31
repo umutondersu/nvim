@@ -706,6 +706,7 @@ require('lazy').setup({
 
   { import = 'custom.plugins' },
 }, {
+  rocks = { enabled = false },
   ui = {
     -- define a unicode icons table
     icons = {
