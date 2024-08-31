@@ -369,6 +369,7 @@ require('lazy').setup({
             -- can also be a function to dynamically calculate max width such as
             -- maxwidth = function() return math.floor(0.45 * vim.o.columns) end,
             ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
+            symbol_map = { Copilot = "" },
           })
         },
         window = {
@@ -384,6 +385,7 @@ require('lazy').setup({
             -- set group index to 0 to skip loading LuaLS completions as lazydev recommends it
             group_index = 0,
           },
+          { name = 'copilot' },
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
           { name = 'path' },
