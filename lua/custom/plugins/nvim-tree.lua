@@ -56,6 +56,7 @@ return {
                     error = 'E',
                 },
             },
+            filters = { git_ignored = false, },
         }
         -- [[ Configure nvim-tree ]]
         -- Disable netrw for nvim-tree and autoclose
