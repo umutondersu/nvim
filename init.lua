@@ -87,7 +87,7 @@ require('lazy').setup({
           if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
             map('<leader>i', function()
               vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
-            end, '[T]oggle Inlay [H]ints')
+            end, 'Toggle [I]nlay Hints')
           end
 
           -- Jump to the definition of the word under your cursor.
@@ -619,8 +619,9 @@ require('lazy').setup({
       end
       vim.keymap.set('n', '<leader>s/', telescope_live_grep_open_files, { desc = '[S]earch [/] in Open Files' })
       vim.keymap.set('n', '<leader>ss', require('telescope.builtin').builtin, { desc = '[S]earch [S]elect Telescope' })
-      vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
-      vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
+      vim.keymap.set('n', '<leader>sG', require('telescope.builtin').git_files, { desc = '[S]earch [F]iles [G]it' })
+      vim.keymap.set('n', '<leader>sf', function() require('telescope.builtin').find_files({ no_ignore = true }) end,
+        { desc = '[S]earch [F]iles' })
       vim.keymap.set('n', '<leader>snh', require('telescope.builtin').help_tags, { desc = '[S]earch [N]eovim [H]elp' })
       vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
       vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
