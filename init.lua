@@ -373,10 +373,7 @@ require('lazy').setup({
           })
         },
         window = {
-          completion = { -- rounded border; thin-style scrollbar
-            border = 'rounded',
-            scrollbar = true,
-          },
+          completion = cmp.config.window.bordered(),
           documentation = cmp.config.window.bordered(),
         },
         sources = {
