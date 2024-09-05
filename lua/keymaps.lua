@@ -11,7 +11,6 @@ map('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 map('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
 map('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
 map('n', 'gq', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
-map('n', '<leader>Q', '<cmd>TroubleToggle<cr>', { desc = 'Toggle diagnostics list' })
 
 -- jj for escaping insert mode
 map('i', 'jj', '<Esc>', { silent = true })

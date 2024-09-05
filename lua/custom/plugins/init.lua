@@ -29,10 +29,6 @@ return
     event = 'VeryLazy',
     opts = {},
 }, {
-    "folke/trouble.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    opts = {},
-}, {
     "shortcuts/no-neck-pain.nvim",
     version = "*",
     opts = { width = 115, mappings = { enabled = true } },
