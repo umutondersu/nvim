@@ -244,7 +244,6 @@ require('lazy').setup({
         'eslint_d',
         'flake8',
         'golangci-lint',
-        'markdownlint',
         -- Gopher.nvim
         'gomodifytags',
         'gotests',
