@@ -46,6 +46,13 @@ return {
                     insert = '',
                 },
             },
+            prompts = {
+                Review = {
+                    prompt = '/COPILOT_REVIEW Review the selected code.',
+                    callback = function() end
+                },
+            },
+
         },
         config = function(_, opts)
             local chat = require("CopilotChat")
