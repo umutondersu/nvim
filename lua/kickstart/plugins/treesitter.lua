@@ -2,7 +2,7 @@ return {
   -- Highlight, edit, and navigate code
   'nvim-treesitter/nvim-treesitter',
   build = ':TSUpdate',
-  main = 'nvim-treesitter.configs',   -- Sets main module to use for opts
+  main = 'nvim-treesitter.configs', -- Sets main module to use for opts
   opts = {
     -- Add languages to be installed here that you want installed for treesitter
     ensure_installed = {
@@ -22,8 +22,8 @@ return {
       'json',
       'sql',
       'markdown',
-      'markdown_inline',   -- noice.nvim
-      'regex',             -- noice.nvim
+      'markdown_inline', -- noice.nvim
+      'regex',           -- noice.nvim
       'diff',
     },
 
@@ -40,7 +40,7 @@ return {
     textobjects = {
       select = {
         enable = true,
-        lookahead = true,   -- Automatically jump forward to textobj, similar to targets.vim
+        lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
         keymaps = {
           -- You can use the capture groups defined in textobjects.scm
           ['af'] = { query = '@function.outer', desc = "around function", },
