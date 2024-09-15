@@ -5,7 +5,7 @@ return {
     priority = 1000,
     opts = {},
     config = function()
-      local Transparent = false
+      local Transparent = true
       if Transparent then
         require("tokyonight").setup({
           transparent = true,
