@@ -32,5 +32,8 @@ return
     "shortcuts/no-neck-pain.nvim",
     version = "*",
     opts = { width = 115, mappings = { enabled = true } },
+}, {
+    -- <a-n> and <a-p> as keymaps to move between references and <a-i> as a textobject for the reference illuminated under the cursor
+    'RRethy/vim-illuminate',
 },
 }

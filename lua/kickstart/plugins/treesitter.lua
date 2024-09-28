@@ -27,11 +27,6 @@ return {
       'diff',
     },
 
-    -- nvim-ts-autotag
-    autotag = {
-      enable = true,
-    },
-
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
     auto_install = true,
 
@@ -61,7 +56,7 @@ return {
   end,
   dependencies = {
     'nvim-treesitter/nvim-treesitter-textobjects',
-    'windwp/nvim-ts-autotag',
+    { 'windwp/nvim-ts-autotag', opts = {} },
     {
       'nvim-treesitter/nvim-treesitter-context',
       keys = {
