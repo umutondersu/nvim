@@ -2,7 +2,7 @@ return {
     "CRAG666/code_runner.nvim",
     config = function()
         local function jsruntime()
-            if require("lib").command_exists('bun')
+            if vim.fn.executable 'bun' == 1
             then
                 return "bun run"
             else

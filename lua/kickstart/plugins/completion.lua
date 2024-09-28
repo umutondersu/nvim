@@ -23,7 +23,7 @@ return {
     'hrsh7th/cmp-path',
     'hrsh7th/cmp-cmdline',
     'hrsh7th/cmp-buffer',
-    { 'mtoohey31/cmp-fish', ft = { "fish" }, enabled = require('lib').command_exists('fish'), },
+    { 'mtoohey31/cmp-fish', ft = { "fish" }, enabled = vim.fn.executable 'fish' == 1, },
 
     -- vscode like pictograms
     'onsails/lspkind.nvim',
