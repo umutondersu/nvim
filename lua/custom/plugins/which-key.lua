@@ -22,6 +22,7 @@
 return {
     'folke/which-key.nvim',
     event = 'Vimenter',
+    commit = '4433e5e',
     config = function()
         require("which-key").setup()
         require('which-key').register {
