@@ -7,7 +7,7 @@ return {
         {
             "<leader>Q",
             "<cmd>Trouble diagnostics toggle<cr>",
-            desc = "Toggle diagnostics [Q]icklist",
+            desc = "Toggle diagnostics [Q]uicklist",
         },
     }
 }
