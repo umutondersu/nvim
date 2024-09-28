@@ -32,6 +32,9 @@ return {
       -- Preview for go to methods
       { 'rmagatti/goto-preview', opts = {}, event = 'VeryLazy', },
 
+      -- Populates project-wide lsp diagnostcs
+      'artemave/workspace-diagnostics.nvim',
+
     },
     config = function()
       vim.api.nvim_create_autocmd('LspAttach', {
@@ -221,6 +224,9 @@ return {
             -- by the server configuration above. Useful when disabling
             -- certain features of an LSP (for example, turning off formatting for tsserver)
             server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+            server.on_attach = function(client, bufnr)
+              require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
+            end
             require('lspconfig')[server_name].setup(server)
           end,
         },
