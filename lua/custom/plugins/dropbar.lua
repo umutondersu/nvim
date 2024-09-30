@@ -7,7 +7,7 @@ return {
         'nvim-web-devicons'
     },
     config = function()
-        vim.keymap.set('n', '<leader>p', "<cmd>lua require('dropbar.api').pick()<cr>",
+        vim.keymap.set('n', '<m-p>', "<cmd>lua require('dropbar.api').pick()<cr>",
             { desc = '[P]ick mode for dropbar' })
     end
 }
