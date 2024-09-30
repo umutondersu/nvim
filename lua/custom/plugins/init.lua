@@ -35,5 +35,8 @@ return
 }, {
     -- <a-n> and <a-p> as keymaps to move between references and <a-i> as a textobject for the reference illuminated under the cursor
     'RRethy/vim-illuminate',
+}, {
+    "rest-nvim/rest.nvim",
+    ft = "http",
 },
 }
