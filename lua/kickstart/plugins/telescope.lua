@@ -24,12 +24,14 @@ return {
       -- You can put your default mappings / updates / etc. in here
       --  All the info you're looking for is in `:help telescope.setup()`
       --
-      -- defaults = {
-      --   mappings = {
-      --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-      --   },
-      -- },
-      -- pickers = {}
+      defaults = {
+        mappings = {
+          n = {
+            ['q'] = require('telescope.actions').close,
+            ['d'] = require('telescope.actions').delete_buffer,
+          },
+        },
+      },
       extensions = {
         ['ui-select'] = {
           require('telescope.themes').get_dropdown(),
@@ -40,10 +42,18 @@ return {
     -- Enable telescope extensions, if they are installed
     pcall(require('telescope').load_extension, 'fzf')
     pcall(require('telescope').load_extension, 'ui-select')
-    pcall(require("telescope").load_extension, 'aerial')
+    pcall(require('telescope').load_extension, 'aerial')
 
     -- See `:help telescope.builtin`
-    vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
+    vim.keymap.set('n', '<leader><space>',
+      function()
+        require('telescope.builtin').buffers {
+          initial_mode = 'normal',
+          sort_mru = true,
+          sort_lastused = true,
+        }
+      end,
+      { desc = '[ ] Find existing buffers' })
     vim.keymap.set('n', '<leader>/', function()
       -- You can pass additional configuration to telescope to change theme, layout, etc.
       require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
