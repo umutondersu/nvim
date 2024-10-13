@@ -68,7 +68,7 @@ return {
                     if input ~= "" then require("CopilotChat").ask(input) end
                 end,
                 { desc = "Quick [C]hat" })
-            map('v', "<leader>cv",
+            map('v', "<leader>cc",
                 function()
                     local input = vim.fn.input("Chat with visual: ")
                     if input ~= "" then
@@ -76,7 +76,7 @@ return {
                             { selection = require("CopilotChat.select").visual })
                     end
                 end,
-                { desc = "Chat with [V]isual" })
+                { desc = "[C]hat with Visual" })
             map('n', "<leader>cb",
                 function()
                     local input = vim.fn.input("Chat with buffer: ")
