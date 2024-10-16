@@ -1,7 +1,7 @@
--- NOTE: don't use it with harpoon. disable one or the other
 return {
     'romgrk/barbar.nvim',
-    enabled = true,
+    -- NOTE: Disabled for snipe.nvim
+    enabled = false,
     dependencies = {
         'lewis6991/gitsigns.nvim',     -- OPTIONAL: for git status
         'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
