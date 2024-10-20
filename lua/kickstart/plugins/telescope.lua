@@ -73,20 +73,23 @@ return {
     vim.keymap.set('n', '<leader>sG', require('telescope.builtin').git_files, { desc = '[S]earch [F]iles [G]it' })
     vim.keymap.set('n', '<leader>sf', function() require('telescope.builtin').find_files({ no_ignore = true }) end,
       { desc = '[S]earch [F]iles' })
-    vim.keymap.set('n', '<leader>snh', require('telescope.builtin').help_tags, { desc = '[S]earch [N]eovim [H]elp' })
     vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
     vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
     vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
     vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
     vim.keymap.set('n', '<leader>st', '<cmd>TodoTelescope<cr>', { desc = '[S]earch [T]odo Comments' })
+
+    -- Telescope Shortcuts for Neovim Help
+    vim.keymap.set('n', '<leader>snh', require('telescope.builtin').help_tags, { desc = '[S]earch [N]eovim [H]elp' })
     vim.keymap.set('n', '<leader>snk', require('telescope.builtin').keymaps, { desc = '[S]earch [N]eovim [K]eymaps' })
     vim.keymap.set('n', '<leader>snf', function()
       require('telescope.builtin').find_files { cwd = vim.fn.stdpath 'config' }
     end, { desc = '[S]earch [N]eovim [F]iles' })
 
-    -- Additional Telescope Shortcuts
+    -- Telescope Shortcuts for Git commands
     vim.keymap.set('n', '<leader>gs', require('telescope.builtin').git_status, { desc = '[G]it [S]tatus' })
     vim.keymap.set('n', '<leader>gc', require('telescope.builtin').git_commits, { desc = '[G]it [C]ommits' })
     vim.keymap.set('n', '<leader>gB', require('telescope.builtin').git_branches, { desc = '[G]it [B]ranches' })
+    vim.keymap.set('n', '<leader>gS', require('telescope.builtin').git_stash, { desc = '[G]it [S]tash' })
   end,
 }

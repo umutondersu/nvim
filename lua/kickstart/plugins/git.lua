@@ -80,7 +80,7 @@ return {
 
         -- Toggles
         map('n', '<leader>gb', gs.toggle_current_line_blame, { desc = 'toggle [G]it [B]lame line' })
-        map('n', '<leader>ht', gs.toggle_deleted, { desc = '[T]oggle show deleted' })
+        map('n', '<leader>ht', gs.toggle_deleted, { desc = 'toggle show deleted hunks' })
 
         -- Text object
         map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>', { desc = 'select git hunk' })
