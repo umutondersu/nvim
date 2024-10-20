@@ -1,7 +1,5 @@
 return {
     'romgrk/barbar.nvim',
-    -- NOTE: Disabled for snipe.nvim
-    enabled = false,
     dependencies = {
         'lewis6991/gitsigns.nvim',     -- OPTIONAL: for git status
         'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
@@ -27,7 +25,7 @@ return {
     config = function(_, opts)
         require('barbar').setup(opts)
         local map = vim.keymap.set
-        local options = { noremap = true, silent = true }
+        local options = { silent = true }
 
         -- Move to previous/next
         map('n', '<A-,>', '<Cmd>BufferPrevious<CR>', options)
@@ -70,3 +68,4 @@ return {
         -- :BarbarDisable - very bad command, should never be used
     end,
 }
+

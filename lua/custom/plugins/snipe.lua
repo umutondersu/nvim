@@ -2,7 +2,7 @@ return {
     "leath-dub/snipe.nvim",
     keys = {
         {
-            "<M-x>",
+            "<M-z>",
             function() require("snipe").open_buffer_menu({ max_path_width = 2 }) end,
             desc = "Open Snipe [B]uffer Menu",
         },
