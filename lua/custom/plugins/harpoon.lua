@@ -1,7 +1,7 @@
 return {
-    "umutondersu/harpoon",
+    "ThePrimeagen/harpoon",
     branch = "harpoon2",
-    enabled = false,
+    enabled = false, -- currently using barbar.nvim
     dependencies = { "nvim-lua/plenary.nvim", 'nvim-telescope/telescope.nvim', },
     config = function()
         local harpoon = require('harpoon')
@@ -27,7 +27,7 @@ return {
         vim.keymap.set("n", "<leader>.", function() toggle_telescope(harpoon:list()) end,
             { desc = "[.] Harpoon Buffers" })
 
-        vim.keymap.set("n", "<M-x>", function() harpoon:list():append() end, { desc = "Harpoon Mark" })
+        vim.keymap.set("n", "<M-x>", function() harpoon:list():add() end, { desc = "Harpoon Mark" })
         vim.keymap.set("n", "<M-X>", function() harpoon:list():remove() end, { desc = "Harpoon Unmark" })
         -- vim.keymap.set("n", "<leader>t", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end,
         --     { desc = "Open harpoon window" })
