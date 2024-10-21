@@ -83,7 +83,7 @@ return {
                             { selection = require("CopilotChat.select").buffer })
                     end
                 end,
-                { desc = "Chat with [B]uffer" })
+                { desc = "Chat with Buffer" })
             map({ 'x', 'n' }, '<leader>cp',
                 function()
                     require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
