@@ -23,6 +23,7 @@ return {
                     "rustc $fileName &&",
                     "$dir/$fileNameWithoutExt"
                 },
+                ---@diagnostic disable-next-line: unused-vararg
                 c = function(...)
                     local c_base = {
                         "cd $dir &&",
