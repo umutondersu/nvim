@@ -87,6 +87,8 @@ return {
     end, { desc = '[S]earch [N]eovim [F]iles' })
 
     -- Telescope Shortcuts for Git commands
+    --     - `<Tab>`: stages or unstages the currently selected file
+    -- - `<cr>`: opens the currently selected file
     vim.keymap.set('n', '<leader>gs', require('telescope.builtin').git_status, { desc = '[G]it [S]tatus' })
     vim.keymap.set('n', '<leader>gc', require('telescope.builtin').git_commits, { desc = '[G]it [C]ommits' })
     vim.keymap.set('n', '<leader>gB', require('telescope.builtin').git_branches, { desc = '[G]it [B]ranches' })
