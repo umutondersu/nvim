@@ -138,7 +138,20 @@ return {
       },
     }
     cmp.setup.cmdline('/', {
-      mapping = cmp.mapping.preset.cmdline(),
+      mapping = cmp.mapping.preset.cmdline({
+        ['<Space>'] = {
+          c = function(fallback)
+            if cmp.visible() then
+              cmp.confirm({ select = true })
+            else
+              fallback()
+            end
+          end,
+        },
+        ['<C-x>'] = {
+          c = function() cmp.close() end,
+        },
+      }),
       sources = {
         { name = 'buffer' }
       }
@@ -156,6 +169,16 @@ return {
             end
           end,
         },
+        ['<Right>'] = {
+          c = function(fallback)
+            if cmp.visible() then
+              cmp.confirm({ select = true })
+            else
+              fallback()
+            end
+          end,
+        },
+
         ['<C-x>'] = {
           c = function() cmp.close() end,
         },
