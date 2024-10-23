@@ -20,9 +20,6 @@ return {
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
 
-      -- Useful status updates for LSP.
-      { 'j-hui/fidget.nvim',     opts = {} },
-
       -- For Tsserver
       'dmmulroy/ts-error-translator.nvim',
 
