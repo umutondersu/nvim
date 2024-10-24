@@ -37,6 +37,7 @@ return
     'RRethy/vim-illuminate',
 }, {
     "rest-nvim/rest.nvim",
+    dependencies = { { "j-hui/fidget.nvim", opts = {} } },
     ft = "http",
 },
 }
