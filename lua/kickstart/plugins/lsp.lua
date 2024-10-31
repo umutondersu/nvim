@@ -196,21 +196,24 @@ return {
         'black',
         'isort',
         'prettier',
-        'gofumpt',
-        'goimports',
-        'prettier',
         'prettierd',
         -- Linters
         'eslint_d',
         'flake8',
-        'golangci-lint',
-        -- Gopher.nvim
-        'gomodifytags',
-        'gotests',
-        'iferr',
-        'impl',
-
       })
+      if vim.fn.executable('go') == 1 then
+        vim.list_extend(ensure_installed, {
+          'golangci-lint',
+          'gofumpt',
+          'goimports',
+          -- Gopher.nvim
+          'gomodifytags',
+          'gotests',
+          'iferr',
+          'impl',
+        })
+      end
+
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
       require('mason-lspconfig').setup {
