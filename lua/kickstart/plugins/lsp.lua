@@ -148,22 +148,6 @@ return {
           },
         },
 
-        gopls = {
-          settings = {
-            gopls = {
-              hints = {
-                assignVariableTypes = true,
-                compositeLiteralFields = true,
-                compositeLiteralTypes = true,
-                constantValues = true,
-                functionTypeParameters = true,
-                parameterNames = true,
-                rangeVariableTypes = true,
-              },
-            },
-          },
-        },
-
         lua_ls = {
           settings = {
             Lua = {
@@ -201,6 +185,7 @@ return {
         'eslint_d',
         'flake8',
       })
+
       if vim.fn.executable('go') == 1 then
         vim.list_extend(ensure_installed, {
           'golangci-lint',
@@ -211,6 +196,23 @@ return {
           'gotests',
           'iferr',
           'impl',
+        })
+        vim.list_extend(servers, {
+          gopls = {
+            settings = {
+              gopls = {
+                hints = {
+                  assignVariableTypes = true,
+                  compositeLiteralFields = true,
+                  compositeLiteralTypes = true,
+                  constantValues = true,
+                  functionTypeParameters = true,
+                  parameterNames = true,
+                  rangeVariableTypes = true,
+                },
+              },
+            },
+          },
         })
       end
 
