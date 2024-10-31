@@ -60,12 +60,6 @@ map('n', '<leader>w', '<cmd>w<CR>', { desc = 'Save Buffer' })
 map('n', '<leader>x', '<cmd>wqa<CR>', { desc = 'Save and Exit Buffer' })
 map('n', '<leader>q', '<cmd>q<CR>', { desc = 'Exit Buffer' })
 
--- Close Window with Ctrl + x
-map('n', '<C-x>', '<cmd>close<CR>')
-
--- Close all other windows with Ctrl + X
-map('n', '<C-X>', '<cmd>only<CR>')
-
 -- Buffer Management NOTE: Should not be used barbar.nvim
 -- map('n', '<M-c>', function()
 --   vim.cmd(':Bdelete')
