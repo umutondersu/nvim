@@ -164,6 +164,24 @@ return {
       }
 
 
+      if vim.fn.executable('go') == 1 then
+        servers.gopls = {
+          settings = {
+            gopls = {
+              hints = {
+                assignVariableTypes = true,
+                compositeLiteralFields = true,
+                compositeLiteralTypes = true,
+                constantValues = true,
+                functionTypeParameters = true,
+                parameterNames = true,
+                rangeVariableTypes = true,
+              },
+            },
+          },
+        }
+      end
+
       -- Ensure the servers and tools above are installed
       --  To check the current status of installed tools and/or manually install
       --  other tools, you can run
@@ -196,23 +214,6 @@ return {
           'gotests',
           'iferr',
           'impl',
-        })
-        vim.list_extend(servers, {
-          gopls = {
-            settings = {
-              gopls = {
-                hints = {
-                  assignVariableTypes = true,
-                  compositeLiteralFields = true,
-                  compositeLiteralTypes = true,
-                  constantValues = true,
-                  functionTypeParameters = true,
-                  parameterNames = true,
-                  rangeVariableTypes = true,
-                },
-              },
-            },
-          },
         })
       end
 
