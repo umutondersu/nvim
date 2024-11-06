@@ -60,6 +60,7 @@ return {
         -- lua = { "stylua" },
         python = { "isort", "black" },
         go = { 'gofumpt', 'goimports' },
+        cshart = { 'csharpier' },
       },
       -- Customize formatters
       -- formatters = {

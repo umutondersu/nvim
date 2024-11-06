@@ -121,6 +121,8 @@ return {
 
         pyright = {},
 
+        omnisharp = {},
+
         ts_ls = {
           settings = {
             javascript = {
@@ -203,6 +205,12 @@ return {
         'eslint_d',
         'flake8',
       })
+
+      if vim.fn.executable('dotnet') == 1 then
+        vim.list_extend(ensure_installed, {
+          'csharpier'
+        })
+      end
 
       if vim.fn.executable('go') == 1 then
         vim.list_extend(ensure_installed, {
