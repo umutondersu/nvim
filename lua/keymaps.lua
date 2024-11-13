@@ -48,7 +48,7 @@ map("n", "J", "mzJ`z")
 map("n", "<C-d>", "<C-d>zz")
 map("n", "<C-u>", "<C-u>zz")
 
-map("n", "<leader>rw", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
+map("n", "<leader>rw", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gcI<Left><Left><Left><Left>]],
   { desc = '[R]eplace the [W]ord under cursor' })
 
 map("n", "<M-u>", ":e!<CR>", { desc = 'Undo all unsaved writes' })

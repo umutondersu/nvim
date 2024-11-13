@@ -38,10 +38,11 @@ return {
         },
         opts = {
             debug = false,
-            window = { width = 0.45 },
+            window = { width = 0.3 },
             mappings = {
-                complete = {
-                    insert = '',
+                reset = {
+                    normal = '<C-r>',
+                    insert = '<C-r>',
                 },
             },
             prompts = {

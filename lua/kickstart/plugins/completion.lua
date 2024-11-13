@@ -24,6 +24,7 @@ return {
     'hrsh7th/cmp-cmdline',
     'hrsh7th/cmp-buffer',
     { 'mtoohey31/cmp-fish', ft = { "fish" }, enabled = vim.fn.executable 'fish' == 1, },
+    'kristijanhusak/vim-dadbod-completion',
 
     -- vscode like pictograms
     'onsails/lspkind.nvim',
@@ -117,6 +118,7 @@ return {
         { name = 'luasnip' },
         { name = 'path' },
         { name = 'fish' },
+        { name = 'vim-dadbod-completion' },
       },
       sorting = {
         priority_weight = 2,
