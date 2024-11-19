@@ -39,5 +39,10 @@ return
     "rest-nvim/rest.nvim",
     dependencies = { { "j-hui/fidget.nvim", opts = {} } },
     ft = "http",
+}, {
+    'dhruvasagar/vim-zoom',
+    config = function()
+        vim.api.nvim_set_keymap('n', '<C-W>z', '<Plug>(zoom-toggle)', { noremap = true, silent = true })
+    end
 },
 }
