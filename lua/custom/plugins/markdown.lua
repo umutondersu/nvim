@@ -1,11 +1,9 @@
 return {
     {
-        "OXY2DEV/markview.nvim",
-        ft = "markdown",
-        dependencies = {
-            "nvim-treesitter/nvim-treesitter",
-            "nvim-tree/nvim-web-devicons"
-        }
+        'MeanderingProgrammer/render-markdown.nvim',
+        ft = { 'markdown', 'avante' },
+        dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' },
+        opts = { file_types = { 'markdown', 'avante' } },
     },
     {
         "toppair/peek.nvim",

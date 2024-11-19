@@ -85,7 +85,7 @@ return {
 
           -- Execute a code action, usually your cursor needs to be on top of an error
           -- or a suggestion from your LSP for this to activate.
-          map('<leader>a', require("actions-preview").code_actions, 'Code [A]ction', { 'n', 'x' })
+          map('<leader>o', require("actions-preview").code_actions, 'Code action', { 'n', 'x' })
           -- map('<leader>a', vim.lsp.buf.code_action, 'Code [A]ction')
 
           --This is not Goto Definition, this is Goto Declaration.

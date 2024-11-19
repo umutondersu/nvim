@@ -15,6 +15,7 @@ return {
             { "<leader>sn", group = "Search [N]eovim" },
             { "<leader>t",  group = "Test" },
             { "gp",         group = "[P]review" },
+            { "<leader>a",  group = "Avante",         mode = { 'n', 'v' } },
         },
     },
     config = function(_, opts)
