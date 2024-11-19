@@ -32,6 +32,9 @@ return {
       -- Populates project-wide lsp diagnostcs
       'artemave/workspace-diagnostics.nvim',
 
+      --Omnisharp Extensions
+      'Hoffs/omnisharp-extended-lsp.nvim',
+
     },
     config = function()
       vim.api.nvim_create_autocmd('LspAttach', {
@@ -95,6 +98,14 @@ return {
             '[P]review t[Y]pe [D]efinition')
           map('gpi', function() require("goto-preview").goto_preview_implementation({}) end, '[P]review [I]mplementation')
           map('gpD', function() require("goto-preview").goto_preview_declaration({}) end, '[P]review [D]eclaration')
+
+          -- Omnisharp Extended LSP
+          if client and client.name == "omnisharp" then
+            map('gd', function() require('omnisharp_extended').lsp_definition() end, '[G]oto [D]efinition')
+            map('gy', function() require('omnisharp_extended').lsp_type_definition() end, '[G]oto T[Y]pe [D]efinition')
+            map('gr', function() require('omnisharp_extended').telescope_lsp_references() end, '[G]oto [R]eferences')
+            map('gI', function() require('omnisharp_extended').lsp_implementation() end, '[G]oto [I]mplementation')
+          end
         end,
       })
 
