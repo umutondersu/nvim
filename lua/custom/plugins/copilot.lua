@@ -51,6 +51,7 @@ return {
             "MunifTanjim/nui.nvim",
             "zbirenbaum/copilot.lua",      -- for providers='copilot'
             --- The below dependencies are optional,
+            "hrsh7th/nvim-cmp",            -- autocompletion for avante commands and mentions
             "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
             "MeanderingProgrammer/render-markdown.nvim",
             {
