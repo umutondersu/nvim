@@ -91,7 +91,6 @@ return {
     -- - `<cr>`: opens the currently selected file
     vim.keymap.set('n', '<leader>gs', require('telescope.builtin').git_status, { desc = '[G]it [S]tatus' })
     vim.keymap.set('n', '<leader>gc', require('telescope.builtin').git_commits, { desc = '[G]it [C]ommits' })
-    vim.keymap.set('n', '<leader>gB', require('telescope.builtin').git_branches, { desc = '[G]it [B]ranches' })
     vim.keymap.set('n', '<leader>gS', require('telescope.builtin').git_stash, { desc = '[G]it [S]tash' })
   end,
 }

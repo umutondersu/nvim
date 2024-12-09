@@ -4,9 +4,8 @@ return {
     enabled = true,
     opts = {
         cmdline = { view = "cmdline" },
-        messages = { view = "mini", view_error = "mini", view_warn = "mini", },
         popupmenu = { enabled = false },
-        notify = { view = "mini" },
+        notify = { view = "notify" },
         lsp = {
             -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
             override = {

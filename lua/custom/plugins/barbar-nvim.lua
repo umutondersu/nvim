@@ -46,8 +46,6 @@ return {
         map('n', '<A-0>', '<Cmd>BufferLast<CR>', options)
         -- Pin/unpin buffer
         map('n', '<A-P>', '<Cmd>BufferPin<CR>', options)
-        -- Close buffer
-        map('n', '<A-c>', '<Cmd>BufferClose<CR>', options)
         -- Wipeout buffer
         --                 :BufferWipeout
         -- Close commands
