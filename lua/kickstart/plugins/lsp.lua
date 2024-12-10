@@ -92,6 +92,7 @@ return {
           map('gpD', function() require("goto-preview").goto_preview_declaration({}) end, '[P]review [D]eclaration')
 
           -- Omnisharp Extended LSP
+          local client = vim.lsp.get_client_by_id(event.data.client_id)
           if client and client.name == "omnisharp" then
             map('gd', function() require('omnisharp_extended').lsp_definition() end, '[G]oto [D]efinition')
             map('gy', function() require('omnisharp_extended').lsp_type_definition() end, '[G]oto T[Y]pe [D]efinition')
