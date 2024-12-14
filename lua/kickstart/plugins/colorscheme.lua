@@ -52,20 +52,9 @@ return {
     -- See `:help lualine.txt`
     enabled = false,
     config = function()
-      -- Custom Lualine theme
-      local lualine_tokyonight = require('lualine.themes.tokyonight')
-      --change the color of section a background for all modes
-      local bgcolor = '#222638'
-      lualine_tokyonight.normal.b.bg = bgcolor
-      lualine_tokyonight.insert.b.bg = bgcolor
-      lualine_tokyonight.visual.b.bg = bgcolor
-      lualine_tokyonight.replace.b.bg = bgcolor
-      lualine_tokyonight.command.b.bg = bgcolor
-      lualine_tokyonight.inactive.b.bg = bgcolor
       require 'lualine'.setup {
         options = {
           icons_enabled = true,
-          theme = lualine_tokyonight,
           component_separators = { left = '', right = '|' },
           section_separators = { left = '', right = '' },
           disabled_filetypes = { 'NvimTree' },
