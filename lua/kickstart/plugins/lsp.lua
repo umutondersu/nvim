@@ -32,7 +32,7 @@ return {
       -- Populates project-wide lsp diagnostcs
       'artemave/workspace-diagnostics.nvim',
 
-      --Omnisharp Extensions
+      -- Omnisharp Extensions
       'Hoffs/omnisharp-extended-lsp.nvim',
 
     },
@@ -126,6 +126,8 @@ return {
         pyright = {},
 
         omnisharp = {},
+
+        tailwindcss = {},
 
         ts_ls = {
           settings = {
