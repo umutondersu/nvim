@@ -23,7 +23,17 @@ return {
         draw = {
           columns = { { "label", "label_description" }, { "kind_icon", "kind", gap = 1 } },
         },
+        border = 'rounded',
+        winhighlight =
+        "Normal:None,BlinkCmpMenu:None,BlinkCmpMenuBorder:None,BlinkCmpMenuSelection:PmenuSel,BlinkCmpScrollBarThumb:PmenuThumb,BlinkCmpScrollBarGutter:PmenuSbar,BlinkCmpLabel:None,BlinkCmpLabelDeprecated:NonText,BlinkCmpLabelMatch:None,BlinkCmpLabelDetail:NonText,BlinkCmpLabelDescription:NonText,BlinkCmpKind:Special,BlinkCmpSource:NonText,BlinkCmpGhostText:NonText,BlinkCmpDoc:NormalFloat,BlinkCmpDocBorder:NormalFloat,BlinkCmpDocSeparator:NormalFloat,BlinkCmpDocCursorLine:Visual,BlinkCmpSignatureHelp:NormalFloat,BlinkCmpSignatureHelpBorder:NormalFloat,BlinkCmpSignatureHelpActiveParameter:LspSignatureActiveParameter",
       },
+      documentation = {
+        auto_show = true,
+        auto_show_delay_ms = 500,
+        window = {
+          border = 'rounded'
+        }
+      }
     },
     keymap = {
       preset = 'default',
@@ -31,6 +41,7 @@ return {
       ['<C-k>'] = { 'show', 'show_documentation', 'hide_documentation' },
       ['<C-space>'] = {},
       ['<C-x>'] = { 'hide' },
+      ['<C-t>'] = { 'show' },
     },
     snippets = {
       expand = function(snippet) require('luasnip').lsp_expand(snippet) end,
