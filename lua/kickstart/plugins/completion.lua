@@ -37,11 +37,25 @@ return {
     },
     keymap = {
       preset = 'default',
-      ['<C-a>'] = { 'select_and_accept' },
-      ['<C-k>'] = { 'show', 'show_documentation', 'hide_documentation' },
       ['<C-space>'] = {},
-      ['<C-x>'] = { 'hide' },
-      ['<C-t>'] = { 'show' },
+      ['<C-k>'] = { 'show_documentation', 'hide_documentation' },
+      ['<C-a>'] = { 'select_and_accept' },
+      ['<C-x>'] = { 'show', 'hide' },
+      cmdline = {
+        preset = 'none',
+        ['<Tab>'] = { 'select_next', },
+        ['<S-Tab>'] = { 'select_prev', },
+        ['<C-a>'] = { 'select_and_accept' },
+        ['<C-x>'] = { 'show', 'hide' },
+        ['<Space>'] = { function(cmp)
+          cmp.accept({
+            callback = function()
+              local keys = vim.api.nvim_replace_termcodes('<Space>', true, true, true)
+              vim.api.nvim_feedkeys(keys, 'n', true)
+            end
+          })
+        end, 'fallback' },
+      }
     },
     snippets = {
       expand = function(snippet) require('luasnip').lsp_expand(snippet) end,
