@@ -1,34 +1,12 @@
 return {
-  -- Autocompletion
-  'hrsh7th/nvim-cmp',
-  event = 'InsertEnter',
+  'saghen/blink.cmp',
   dependencies = {
-    -- Snippet Engine & its associated nvim-cmp source
-    {
-      'L3MON4D3/LuaSnip',
-      build = (function()
-        -- Build Step is needed for regex support in snippets.
-        -- This step is not supported in many windows environments.
-        -- Remove the below condition to re-enable on windows.
-        if vim.fn.has 'win32' == 1 or vim.fn.executable 'make' == 0 then
-          return
-        end
-        return 'make install_jsregexp'
-      end)(),
-    },
-    'saadparwaiz1/cmp_luasnip',
+    -- Snippet Engine
+    { 'L3MON4D3/LuaSnip', version = 'v2.*' },
 
-    -- Adds LSP completion capabilities
-    'hrsh7th/cmp-nvim-lsp',
-    'hrsh7th/cmp-path',
-    'hrsh7th/cmp-cmdline',
-    'hrsh7th/cmp-buffer',
-    { 'mtoohey31/cmp-fish',     ft = { "fish" }, enabled = vim.fn.executable 'fish' == 1, },
+    -- Sources
     'kristijanhusak/vim-dadbod-completion',
-    { 'zbirenbaum/copilot-cmp', opts = {} },
-
-    -- vscode like pictograms
-    'onsails/lspkind.nvim',
+    'giuxtaposition/blink-cmp-copilot',
 
     -- Adds a number of user-friendly snippets
     'rafamadriz/friendly-snippets',
@@ -36,166 +14,122 @@ return {
     -- Additional snippets
     'solidjs-community/solid-snippets',
   },
-  config = function()
-    local cmp = require 'cmp'
-    local luasnip = require 'luasnip'
-    local lspkind = require 'lspkind'
-    require('luasnip.loaders.from_vscode').lazy_load()
-    luasnip.config.setup {}
-
-    cmp.setup {
-      snippet = {
-        expand = function(args)
-          luasnip.lsp_expand(args.body)
-        end,
-      },
-      completion = {
-        completeopt = 'menu,menuone,noinsert',
-      },
-      mapping = cmp.mapping.preset.insert {
-        -- Select the [n]ext item
-        ['<C-n>'] = cmp.mapping.select_next_item(),
-        -- Select the [p]revious item
-        ['<C-p>'] = cmp.mapping.select_prev_item(),
-        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<C-x>'] = cmp.mapping.close(),
-        ['<C-t>'] = cmp.mapping.complete {}, -- Manually trigger completion
-        ['<C-a>'] = cmp.mapping.confirm { select = true },
-        ['<Tab>'] = cmp.mapping(function(fallback)
-          if luasnip.expand_or_locally_jumpable() then
-            luasnip.expand_or_jump()
-          elseif cmp.visible() then
-            cmp.select_next_item()
-          else
-            fallback()
-          end
-        end, { 'i', 's' }),
-        ['<S-Tab>'] = cmp.mapping(function(fallback)
-          if luasnip.locally_jumpable(-1) then
-            luasnip.jump(-1)
-          elseif cmp.visible() then
-            cmp.select_prev_item()
-          else
-            fallback()
-          end
-        end, { 'i', 's' }),
-        -- <c-l> will move you to the right of each of the expansion locations.
-        -- <c-h> is similar, except moving you backwards.
-        ['<C-l>'] = cmp.mapping(function()
-          if luasnip.expand_or_locally_jumpable() then
-            luasnip.expand_or_jump()
-          end
-        end, { 'i', 's' }),
-        ['<C-h>'] = cmp.mapping(function()
-          if luasnip.locally_jumpable(-1) then
-            luasnip.jump(-1)
-          end
-        end, { 'i', 's' }),
-      },
-      formatting = {
-        format = lspkind.cmp_format({
-          -- mode = 'symbol', -- show only symbol annotations
-          maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
-          -- can also be a function to dynamically calculate max width such as
-          -- maxwidth = function() return math.floor(0.45 * vim.o.columns) end,
-          ellipsis_char = '...',    -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
-          symbol_map = { Copilot = "" },
-          show_labelDetails = true, -- show labelDetails in menu. Disabled by default
-        })
-      },
-      window = {
-        completion = cmp.config.window.bordered(),
-        documentation = cmp.config.window.bordered(),
-      },
-      sources = {
-        {
-          name = 'lazydev',
-          -- set group index to 0 to skip loading LuaLS completions as lazydev recommends it
-          group_index = 0,
+  version = 'v0.*',
+  ---@module 'blink.cmp'
+  ---@type blink.cmp.Config
+  opts = {
+    completion = {
+      menu = {
+        draw = {
+          columns = { { "label", "label_description" }, { "kind_icon", "kind", gap = 1 } },
         },
-        { name = 'copilot' },
-        { name = 'nvim_lsp' },
-        { name = 'luasnip' },
-        { name = 'path' },
-        { name = 'fish' },
-        { name = 'vim-dadbod-completion' },
+        border = 'rounded',
+        winhighlight =
+        "Normal:None,BlinkCmpMenu:None,BlinkCmpMenuBorder:None,BlinkCmpMenuSelection:PmenuSel,BlinkCmpScrollBarThumb:PmenuThumb,BlinkCmpScrollBarGutter:PmenuSbar,BlinkCmpLabel:None,BlinkCmpLabelDeprecated:NonText,BlinkCmpLabelMatch:None,BlinkCmpLabelDetail:NonText,BlinkCmpLabelDescription:NonText,BlinkCmpKind:Special,BlinkCmpSource:NonText,BlinkCmpGhostText:NonText,BlinkCmpDoc:NormalFloat,BlinkCmpDocBorder:NormalFloat,BlinkCmpDocSeparator:NormalFloat,BlinkCmpDocCursorLine:Visual,BlinkCmpSignatureHelp:NormalFloat,BlinkCmpSignatureHelpBorder:NormalFloat,BlinkCmpSignatureHelpActiveParameter:LspSignatureActiveParameter",
       },
-      sorting = {
-        priority_weight = 2,
-        comparators = {
-          require("copilot_cmp.comparators").prioritize,
-
-          -- Below is the default comparitor list and order for nvim-cmp
-          cmp.config.compare.offset,
-          -- cmp.config.compare.scopes, --this is commented in nvim-cmp too
-          cmp.config.compare.exact,
-          cmp.config.compare.score,
-          cmp.config.compare.recently_used,
-          cmp.config.compare.locality,
-          cmp.config.compare.kind,
-          cmp.config.compare.sort_text,
-          cmp.config.compare.length,
-          cmp.config.compare.order,
-        },
-      },
-    }
-    cmp.setup.cmdline('/', {
-      mapping = cmp.mapping.preset.cmdline({
-        ['<Space>'] = {
-          c = function(fallback)
-            if cmp.visible() then
-              cmp.confirm({ select = true })
-            else
-              fallback()
-            end
-          end,
-        },
-        ['<C-x>'] = {
-          c = function() cmp.close() end,
-        },
-      }),
-      sources = {
-        { name = 'buffer' }
-      }
-    })
-    cmp.setup.cmdline(':', {
-      mapping = cmp.mapping.preset.cmdline({
-        ['<Space>'] = {
-          c = function(fallback)
-            local keys = vim.api.nvim_replace_termcodes('<Space>', true, false, true)
-            if cmp.visible() then
-              cmp.confirm({ select = true })
-              vim.api.nvim_feedkeys(keys, 'm', false)
-            else
-              fallback()
-            end
-          end,
-        },
-        ['<Right>'] = {
-          c = function(fallback)
-            if cmp.visible() then
-              cmp.confirm({ select = true })
-            else
-              fallback()
-            end
-          end,
-        },
-
-        ['<C-x>'] = {
-          c = function() cmp.close() end,
-        },
-      }),
-      sources = cmp.config.sources({
-        { name = 'path' }
-      }, {
-        {
-          name = 'cmdline',
-          option = {
-            ignore_cmds = { 'Man', '!' }
-          }
+      documentation = {
+        auto_show = true,
+        auto_show_delay_ms = 500,
+        window = {
+          border = 'rounded'
         }
-      })
-    })
-  end,
+      }
+    },
+    keymap = {
+      preset = 'default',
+      ['<C-space>'] = {},
+      ['<C-k>'] = { 'show_documentation', 'hide_documentation' },
+      ['<C-a>'] = { 'select_and_accept' },
+      ['<C-x>'] = { 'show', 'hide' },
+      cmdline = {
+        preset = 'none',
+        ['<Tab>'] = { 'select_next', },
+        ['<S-Tab>'] = { 'select_prev', },
+        ['<C-a>'] = { 'select_and_accept' },
+        ['<C-x>'] = { 'show', 'hide' },
+        ['<Space>'] = { function(cmp)
+          cmp.accept({
+            callback = function()
+              local keys = vim.api.nvim_replace_termcodes('<Space>', true, true, true)
+              vim.api.nvim_feedkeys(keys, 'n', true)
+            end
+          })
+        end, 'fallback' },
+      }
+    },
+    snippets = {
+      expand = function(snippet) require('luasnip').lsp_expand(snippet) end,
+      active = function(filter)
+        if filter and filter.direction then
+          return require('luasnip').jumpable(filter.direction)
+        end
+        return require('luasnip').in_snippet()
+      end,
+      jump = function(direction) require('luasnip').jump(direction) end,
+    },
+    sources = {
+      providers = {
+        copilot = {
+          name = "copilot",
+          module = "blink-cmp-copilot",
+          score_offset = 100,
+          transform_items = function(_, items)
+            local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
+            local kind_idx = #CompletionItemKind + 1
+            CompletionItemKind[kind_idx] = "Copilot"
+            for _, item in ipairs(items) do
+              item.kind = kind_idx
+            end
+            return items
+          end,
+        },
+        dadbod = {
+          name = "Dadbod",
+          module = "vim_dadbod_completion.blink",
+        },
+      },
+      default = { 'copilot', 'lsp', 'path', 'buffer', 'dadbod', 'snippets' },
+    },
+    appearance = {
+      use_nvim_cmp_as_default = true,
+      nerd_font_variant = 'mono',
+      kind_icons = {
+        Copilot = "",
+        Text = '󰉿',
+        Method = '󰊕',
+        Function = '󰊕',
+        Constructor = '󰒓',
+
+        Field = '󰜢',
+        Variable = '󰆦',
+        Property = '󰖷',
+
+        Class = '󱡠',
+        Interface = '󱡠',
+        Struct = '󱡠',
+        Module = '󰅩',
+
+        Unit = '󰪚',
+        Value = '󰦨',
+        Enum = '󰦨',
+        EnumMember = '󰦨',
+
+        Keyword = '󰻾',
+        Constant = '󰏿',
+
+        Snippet = '󱄽',
+        Color = '󰏘',
+        File = '󰈔',
+        Reference = '󰬲',
+        Folder = '󰉋',
+        Event = '󱐋',
+        Operator = '󰪚',
+        TypeParameter = '󰬛',
+      },
+    },
+
+  },
+  -- allows extending the providers array elsewhere in your config
+  -- without having to redefine it
+  opts_extend = { "sources.default" }
 }
