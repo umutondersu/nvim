@@ -1,20 +1,18 @@
 return {
   'saghen/blink.cmp',
   dependencies = {
-    -- Snippet Engine
-    { 'L3MON4D3/LuaSnip', version = 'v2.*' },
-
     -- Sources
     'kristijanhusak/vim-dadbod-completion',
     'giuxtaposition/blink-cmp-copilot',
 
-    -- Adds a number of user-friendly snippets
-    'rafamadriz/friendly-snippets',
+    -- Snippet Engine
+    { 'L3MON4D3/LuaSnip', version = 'v2.*' },
 
-    -- Additional snippets
+    -- Snippets
+    'rafamadriz/friendly-snippets',
     'solidjs-community/solid-snippets',
   },
-  version = 'v0.*',
+  version = '*',
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
   opts = {
@@ -37,18 +35,20 @@ return {
     },
     keymap = {
       preset = 'default',
-      ['<C-space>'] = {},
-      ['<C-k>'] = { 'show_documentation', 'hide_documentation' },
       ['<C-a>'] = { 'select_and_accept' },
+      ['<C-s>'] = { 'select_and_accept' },
       ['<C-x>'] = { 'show', 'hide' },
+      ['<C-k>'] = { 'show_documentation', 'hide_documentation' },
+      ['<C-space>'] = {},
       cmdline = {
         preset = 'none',
+        ['<C-a>'] = { 'select_and_accept' },
+        ['<C-s>'] = { 'select_and_accept' },
+        ['<C-x>'] = { 'show', 'hide' },
         ['<Tab>'] = { 'select_next', },
         ['<S-Tab>'] = { 'select_prev', },
-        ['<C-a>'] = { 'select_and_accept' },
-        ['<C-x>'] = { 'show', 'hide' },
         ['<Space>'] = { function(cmp)
-          cmp.accept({
+          return cmp.accept({
             callback = function()
               local keys = vim.api.nvim_replace_termcodes('<Space>', true, true, true)
               vim.api.nvim_feedkeys(keys, 'n', true)
@@ -72,7 +72,7 @@ return {
         copilot = {
           name = "copilot",
           module = "blink-cmp-copilot",
-          score_offset = 100,
+          score_offset = -1,
           transform_items = function(_, items)
             local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
             local kind_idx = #CompletionItemKind + 1
@@ -88,7 +88,7 @@ return {
           module = "vim_dadbod_completion.blink",
         },
       },
-      default = { 'copilot', 'lsp', 'path', 'buffer', 'dadbod', 'snippets' },
+      default = { 'copilot', 'lsp', 'path', 'buffer', 'dadbod', 'snippets', 'luasnip' },
     },
     appearance = {
       use_nvim_cmp_as_default = true,
