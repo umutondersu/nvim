@@ -4,6 +4,7 @@ return {
     -- Sources
     'kristijanhusak/vim-dadbod-completion',
     'giuxtaposition/blink-cmp-copilot',
+    'folke/lazydev.nvim',
 
     -- Snippet Engine
     { 'L3MON4D3/LuaSnip', version = 'v2.*' },
@@ -83,12 +84,17 @@ return {
             return items
           end,
         },
+        lazydev = {
+          name = "LazyDev",
+          module = "lazydev.integrations.blink",
+          score_offset = 100,
+        },
         dadbod = {
           name = "Dadbod",
           module = "vim_dadbod_completion.blink",
         },
       },
-      default = { 'copilot', 'lsp', 'path', 'buffer', 'dadbod', 'snippets', 'luasnip' },
+      default = { 'copilot', 'lsp', 'path', 'buffer', 'dadbod', 'snippets', 'luasnip', 'lazydev' },
     },
     appearance = {
       use_nvim_cmp_as_default = true,
