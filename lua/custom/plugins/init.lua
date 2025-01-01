@@ -37,5 +37,8 @@ return
     config = function()
         vim.api.nvim_set_keymap('n', '<C-W>z', '<Plug>(zoom-toggle)', { noremap = true, silent = true })
     end
+}, {
+    'numToStr/Comment.nvim',
+    opts = {}
 },
 }
