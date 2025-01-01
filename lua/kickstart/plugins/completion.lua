@@ -37,14 +37,12 @@ return {
     keymap = {
       preset = 'default',
       ['<C-a>'] = { 'select_and_accept' },
-      ['<C-s>'] = { 'select_and_accept' },
       ['<C-x>'] = { 'show', 'hide' },
       ['<C-k>'] = { 'show_documentation', 'hide_documentation' },
       ['<C-space>'] = {},
       cmdline = {
         preset = 'none',
         ['<C-a>'] = { 'select_and_accept' },
-        ['<C-s>'] = { 'select_and_accept' },
         ['<C-x>'] = { 'show', 'hide' },
         ['<Tab>'] = { 'select_next', },
         ['<S-Tab>'] = { 'select_prev', },
