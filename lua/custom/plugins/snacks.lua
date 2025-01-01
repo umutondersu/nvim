@@ -5,7 +5,6 @@ return {
     lazy = false,
     opts = {
         bigfile = { enabled = true },
-        dashboard = { enabled = false },
         notifier = {
             enabled = true,
             timeout = 3000,
@@ -13,6 +12,7 @@ return {
         quickfile = { enabled = true },
         statuscolumn = { enabled = false },
         words = { enabled = true },
+        indent = { enabled = true, animate = { enabled = false } },
         styles = {
             notification = {
                 wo = { wrap = true } -- Wrap notifications
