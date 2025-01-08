@@ -32,7 +32,7 @@ return {
         version = false, -- set this if you want to always pull the latest change
         opts = {
             provider = "copilot",
-            debug = true,
+            file_selector = { provider = "telescope" }
         },
         -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
         build = "make",
@@ -43,7 +43,6 @@ return {
             "MunifTanjim/nui.nvim",
             "zbirenbaum/copilot.lua",      -- for providers='copilot'
             --- The below dependencies are optional,
-            "hrsh7th/nvim-cmp",            -- autocompletion for avante commands and mentions
             "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
             "MeanderingProgrammer/render-markdown.nvim",
             {

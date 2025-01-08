@@ -1,13 +1,16 @@
 return {
   'saghen/blink.cmp',
   dependencies = {
+    -- Integrate Nvim-cmp completion sources
+    { 'saghen/blink.compat', version = '*',   lazy = true, opts = {} },
+
     -- Sources
     'kristijanhusak/vim-dadbod-completion',
     'giuxtaposition/blink-cmp-copilot',
     'folke/lazydev.nvim',
 
     -- Snippet Engine
-    { 'L3MON4D3/LuaSnip', version = 'v2.*' },
+    { 'L3MON4D3/LuaSnip',    version = 'v2.*' },
 
     -- Snippets
     'rafamadriz/friendly-snippets',
@@ -82,8 +85,11 @@ return {
           name = "Dadbod",
           module = "vim_dadbod_completion.blink",
         },
+        avante_commands = { name = "avante_commands", module = "blink.compat.source", score_offset = 90, opts = {} },
+        avante_files = { name = "avante_commands", module = "blink.compat.source", score_offset = 100, opts = {} },
+        avante_mentions = { name = "avante_mentions", module = "blink.compat.source", score_offset = 1000, opts = {} }
       },
-      default = { 'copilot', 'lsp', 'path', 'buffer', 'dadbod', 'snippets', 'lazydev' },
+      default = { 'copilot', 'lsp', 'path', 'buffer', 'dadbod', 'snippets', 'lazydev', 'avante_commands', 'avante_files', 'avante_mentions' },
     },
     appearance = {
       use_nvim_cmp_as_default = true,
