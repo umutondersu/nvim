@@ -56,16 +56,7 @@ return {
         end, 'fallback' },
       }
     },
-    snippets = {
-      expand = function(snippet) require('luasnip').lsp_expand(snippet) end,
-      active = function(filter)
-        if filter and filter.direction then
-          return require('luasnip').jumpable(filter.direction)
-        end
-        return require('luasnip').in_snippet()
-      end,
-      jump = function(direction) require('luasnip').jump(direction) end,
-    },
+    snippets = { preset = 'luasnip' },
     sources = {
       providers = {
         copilot = {
@@ -92,7 +83,7 @@ return {
           module = "vim_dadbod_completion.blink",
         },
       },
-      default = { 'copilot', 'lsp', 'path', 'buffer', 'dadbod', 'snippets', 'luasnip', 'lazydev' },
+      default = { 'copilot', 'lsp', 'path', 'buffer', 'dadbod', 'snippets', 'lazydev' },
     },
     appearance = {
       use_nvim_cmp_as_default = true,
