@@ -223,8 +223,6 @@ return {
 			if vim.fn.executable('go') == 1 then
 				vim.list_extend(ensure_installed, {
 					'golangci-lint',
-					'gofumpt',
-					'goimports',
 					-- Gopher.nvim
 					'gomodifytags',
 					'gotests',

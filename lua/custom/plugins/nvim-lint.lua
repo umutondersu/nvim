@@ -1,4 +1,4 @@
-return {
+return { {
   "mfussenegger/nvim-lint",
   event = {
     "BufReadPre",
@@ -25,4 +25,11 @@ return {
       end,
     })
   end,
+},
+  {
+    "rshkarin/mason-nvim-lint",
+    opts = {
+      ignore_install = { 'golangcilint' },
+    }
+  }
 }
