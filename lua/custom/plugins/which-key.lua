@@ -19,6 +19,7 @@ return {
             { "<leader>n",  group = "Notification" },
             { "<leader>S",  group = "Scratch" }
         },
+        delay = 0,
     },
     config = function(_, opts)
         -- For nvim-surround to work with which-key TODO: Remove when/if the bug is fixed
