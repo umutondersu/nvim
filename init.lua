@@ -32,6 +32,7 @@ require('lazy').setup({
   require 'kickstart.plugins.colorscheme',
   require 'kickstart.plugins.autoformat',
   require 'kickstart.plugins.debug',
+  require 'kickstart.plugins.ai',
 
   { import = 'custom.plugins' },
 }, {
