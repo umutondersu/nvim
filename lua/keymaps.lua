@@ -7,11 +7,6 @@ map({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 map('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 map('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
--- Diagnostic keymaps
-map('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
-map('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
-map('n', 'gq', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
-
 -- jj for escaping insert mode
 map('i', 'jj', '<Esc>', { silent = true })
 
@@ -49,7 +44,7 @@ map("n", "<C-d>", "<C-d>zz")
 map("n", "<C-u>", "<C-u>zz")
 
 map("n", "<leader>rw", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gcI<Left><Left><Left><Left>]],
-  { desc = '[R]eplace the [W]ord under cursor' })
+	{ desc = '[R]eplace the [W]ord under cursor' })
 
 map("n", "<M-u>", ":e!<CR>", { desc = 'Undo all unsaved writes' })
 
@@ -57,14 +52,13 @@ map('n', '<leader>gw', '<cmd>G<cr>', { desc = '[G]it Summary [W]indow' })
 
 -- Shortcuts for save and exit
 map('n', '<leader>w', '<cmd>w<CR>', { desc = 'Save Buffer' })
-map('n', '<leader>x', '<cmd>wqa<CR>', { desc = 'Save and Exit Buffer' })
-map('n', '<leader>q', '<cmd>q<CR>', { desc = 'Exit Buffer' })
+map('n', '<leader>x', '<cmd>wqa<CR>', { desc = 'Save and Exit All Buffers' })
+map('n', '<leader>q', '<cmd>q<CR>', { desc = 'Quit a Window' })
+
+-- Esc does nothing in normal mode
+map('n', '<Esc>', '<Nop>', { silent = true })
 
 -- Buffer Management NOTE: Should not be used barbar.nvim
--- map('n', '<M-c>', function()
---   vim.cmd(':Bdelete')
---   vim.cmd(':clear')
--- end, { desc = 'Close buffer', noremap = true })
 -- map('n', '<M-.>', function()
 --   vim.cmd(':bn')
 --   vim.cmd(':clear')
