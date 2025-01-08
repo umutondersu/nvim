@@ -7,7 +7,4 @@ return {
         "mfussenegger/nvim-dap", -- (optional) only if you use `gopher.dap`
     },
     opts = {},
-    build = function() -- package settings
-        vim.cmd [[silent! GoInstallDeps]]
-    end,
 }
