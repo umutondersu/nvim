@@ -35,5 +35,10 @@ return
 }, {
     'numToStr/Comment.nvim',
     opts = {}
+}, {
+    'danitrap/cheatsh.nvim',
+}, {
+    "aliqyan-21/wit.nvim",
+    opts = {},
 },
 }
