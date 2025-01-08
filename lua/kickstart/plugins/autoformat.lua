@@ -79,4 +79,8 @@ return {
       end, { desc = "Toggle autoformatting" })
     end,
   },
+  {
+    "zapling/mason-conform.nvim",
+    opts = { ignore_install = { 'csharpier' } },
+  },
 }

@@ -213,16 +213,6 @@ return {
 			-- You can add other tools here that you want Mason to install
 			-- for you, so that they are available from within Neovim.
 			local ensure_installed = vim.tbl_keys(servers or {})
-			vim.list_extend(ensure_installed, {
-				-- Formatters
-				'black',
-				'isort',
-				'prettier',
-				'prettierd',
-				-- Linters
-				'eslint_d',
-				'flake8',
-			})
 
 			if vim.fn.executable('dotnet') == 1 then
 				vim.list_extend(ensure_installed, {
