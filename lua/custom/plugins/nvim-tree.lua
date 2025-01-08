@@ -18,7 +18,7 @@ return {
         {
             '<leader>e',
             '<Cmd>NvimTreeToggle<CR>',
-            desc = 'Toggle [E]xplorer',
+            desc = 'Toggle Explorer',
         },
     },
     config = function()
