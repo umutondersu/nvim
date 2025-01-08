@@ -3,7 +3,7 @@ return {
     keys = {
         {
             "<leader>fs",
-            function() vim.cmd "TSJToggle" end,
+            "<cmd>TSJToggle<cr>",
             mode = "n",
             desc = "Join or Split Code Block",
         },
