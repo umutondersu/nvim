@@ -23,29 +23,17 @@ return {
     'mfussenegger/nvim-dap-python',
     'leoluz/nvim-dap-go',
   },
-  keys = function(_, keys)
-    local dap = require 'dap'
-    local dapui = require 'dapui'
-    return {
-      -- Basic debugging keymaps, feel free to change to your liking!
-      { '<F5>',  dap.continue,          desc = 'Debug: Start/Continue' },
-      { '<F9>',  dap.step_back,         desc = 'Debug: Step Back' },
-      { '<F11>', dap.step_into,         desc = 'Debug: Step Into' },
-      { '<F10>', dap.step_over,         desc = 'Debug: Step Over' },
-      { '<F12>', dap.step_out,          desc = 'Debug: Step Out' },
-      { '<F6>',  dap.toggle_breakpoint, desc = 'Debug: Toggle Breakpoint' },
-      {
-        '<F7>',
-        function()
-          dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
-        end,
-        desc = 'Debug: Set Breakpoint',
-      },
-      -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
-      { '<F8>', dapui.toggle, desc = 'Debug: See last session result.' },
-      unpack(keys),
-    }
-  end,
+  keys = {
+    -- Basic debugging keymaps, feel free to change to your liking!
+    { '<F5>',  function() require('dap').continue() end,                                            desc = 'Debug: Start/Continue' },
+    { '<F11>', function() require('dap').step_into() end,                                           desc = 'Debug: Step Into' },
+    { '<F10>', function() require('dap').step_over() end,                                           desc = 'Debug: Step Over' },
+    { '<F12>', function() require('dap').step_out() end,                                            desc = 'Debug: Step Out' },
+    { '<F6>',  function() require('dap').toggle_breakpoint() end,                                   desc = 'Debug: Toggle Breakpoint' },
+    { '<F7>',  function() require('dap').set_breakpoint(vim.fn.input 'Breakpoint condition: ') end, desc = 'Debug: Set Breakpoint' },
+    -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
+    { '<F8>',  function() require('dapui').toggle() end,                                            desc = 'Debug: See last session result.' },
+  },
   config = function()
     local dap = require 'dap'
     local dapui = require 'dapui'
