@@ -5,6 +5,8 @@ return
 }, {
     'famiu/bufdelete.nvim'
 }, {
+    'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
+}, {
     'anuvyklack/help-vsplit.nvim',
     opts = {},
 }, {

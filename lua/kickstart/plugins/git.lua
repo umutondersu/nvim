@@ -1,16 +1,7 @@
 return {
-
   -- Git related plugins
   { 'tpope/vim-fugitive' },
   { 'tpope/vim-rhubarb' },
-  {
-    'rbong/vim-flog',
-    cmd = { 'Flog', 'Flogsplit', 'Floggit' },
-    dependencies = { 'tpope/vim-fugitive' },
-  },
-
-  -- Detect tabstop and shiftwidth automatically
-  { 'tpope/vim-sleuth' },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -33,25 +24,21 @@ return {
         end
 
         -- Navigation
-        map({ 'n', 'v' }, ']h', function()
+        map({ 'n' }, ']h', function()
           if vim.wo.diff then
-            return ']h'
+            vim.cmd.normal { ']h', bang = true }
+          else
+            gs.nav_hunk('next')
           end
-          vim.schedule(function()
-            gs.next_hunk()
-          end)
-          return '<Ignore>'
-        end, { expr = true, desc = 'Jump to next hunk' })
+        end, { desc = 'Jump to next hunk' })
 
-        map({ 'n', 'v' }, '[h', function()
+        map({ 'n' }, '[h', function()
           if vim.wo.diff then
-            return '[h'
+            vim.cmd.normal { '[h', bang = true }
+          else
+            gs.nav_hunk('prev')
           end
-          vim.schedule(function()
-            gs.prev_hunk()
-          end)
-          return '<Ignore>'
-        end, { expr = true, desc = 'Jump to previous hunk' })
+        end, { desc = 'Jump to previous hunk' })
 
         -- Actions
         -- visual mode
@@ -75,15 +62,12 @@ return {
         end, { desc = 'git blame line' })
         map('n', '<leader>hd', gs.diffthis, { desc = 'git diff against index' })
         map('n', '<leader>hD', function()
-          gs.diffthis '~'
+          gs.diffthis '@'
         end, { desc = 'git diff against last commit' })
 
         -- Toggles
-        map('n', '<leader>gb', gs.toggle_current_line_blame, { desc = 'toggle [G]it [B]lame line' })
-        map('n', '<leader>ht', gs.toggle_deleted, { desc = 'toggle show deleted hunks' })
-
-        -- Text object
-        map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>', { desc = 'select git hunk' })
+        map('n', '<leader>gb', gs.toggle_current_line_blame, { desc = 'toggle git show blame line' })
+        map('n', '<leader>ht', gs.toggle_deleted, { desc = 'toggle git show deleted' })
       end,
     },
   },
