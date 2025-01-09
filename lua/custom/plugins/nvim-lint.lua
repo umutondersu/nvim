@@ -1,4 +1,4 @@
-return { {
+return {
   "mfussenegger/nvim-lint",
   event = {
     "BufReadPre",
@@ -7,6 +7,7 @@ return { {
   config = function()
     local lint = require("lint")
 
+    --NOTE: add the linters to ensure_installed with add_tools function
     lint.linters_by_ft = {
       javascript = { "eslint_d" },
       typescript = { "eslint_d" },
@@ -27,11 +28,4 @@ return { {
       end,
     })
   end,
-},
-  {
-    "rshkarin/mason-nvim-lint",
-    opts = {
-      ignore_install = { 'golangcilint' },
-    }
-  }
 }

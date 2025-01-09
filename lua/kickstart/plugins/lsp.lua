@@ -137,8 +137,6 @@ return {
 
 				pyright = {},
 
-				omnisharp = {},
-
 				tailwindcss = {},
 
 				ts_ls = {
@@ -183,24 +181,32 @@ return {
 
 			}
 
+			---@param command string
+			---@param server_name string
+			---@param server_config table
+			local function add_lsp(command, server_name, server_config)
+				if command == nil or vim.fn.executable(command) == 1 then
+					servers[server_name] = server_config
+				end
+			end
 
-			if vim.fn.executable('go') == 1 then
-				servers.gopls = {
-					settings = {
-						gopls = {
-							hints = {
-								assignVariableTypes = true,
-								compositeLiteralFields = true,
-								compositeLiteralTypes = true,
-								constantValues = true,
-								functionTypeParameters = true,
-								parameterNames = true,
-								rangeVariableTypes = true,
-							},
+			add_lsp('dotnet', 'omnisharp', {})
+
+			add_lsp('go', 'gopls', {
+				settings = {
+					gopls = {
+						hints = {
+							assignVariableTypes = true,
+							compositeLiteralFields = true,
+							compositeLiteralTypes = true,
+							constantValues = true,
+							functionTypeParameters = true,
+							parameterNames = true,
+							rangeVariableTypes = true,
 						},
 					},
-				}
-			end
+				},
+			})
 
 			-- Ensure the servers and tools above are installed
 			--  To check the current status of installed tools and/or manually install
@@ -212,24 +218,43 @@ return {
 
 			-- You can add other tools here that you want Mason to install
 			-- for you, so that they are available from within Neovim.
+			-- NOTE: be sure tools are assigned to languages in nvim-lint or conform.nvim
+
 			local ensure_installed = vim.tbl_keys(servers or {})
 
-			if vim.fn.executable('dotnet') == 1 then
-				vim.list_extend(ensure_installed, {
-					'csharpier'
-				})
+			local function ensure_install_tools(command, tools)
+				if command == nil or vim.fn.executable(command) == 1 then
+					vim.list_extend(ensure_installed, tools)
+				end
 			end
 
-			if vim.fn.executable('go') == 1 then
-				vim.list_extend(ensure_installed, {
-					'golangci-lint',
-					-- Gopher.nvim
-					'gomodifytags',
-					'gotests',
-					'iferr',
-					'impl',
-				})
-			end
+			--[[ Tools without extra requirements ]]
+			ensure_install_tools(nil, {
+				-- Formatters
+				'black',
+				'isort',
+				'prettier',
+				'prettierd',
+				-- Linters
+				'eslint_d',
+				'flake8',
+			})
+
+			--[[ Language Specific Tools ]]
+			ensure_install_tools('dotnet', {
+				'csharpier'
+			})
+
+			ensure_install_tools('go', {
+				'golangci-lint',
+				'gofumpt',
+				'goimports',
+				-- Gopher.nvim
+				'gomodifytags',
+				'gotests',
+				'iferr',
+				'impl',
+			})
 
 			require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
