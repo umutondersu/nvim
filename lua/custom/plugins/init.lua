@@ -40,5 +40,9 @@ return
 }, {
     "aliqyan-21/wit.nvim",
     opts = {},
+}, {
+    "max397574/colortils.nvim",
+    cmd = "Colortils",
+    opts = {},
 },
 }
