@@ -44,7 +44,7 @@ return {
     pcall(require('telescope').load_extension, 'ui-select')
 
     -- See `:help telescope.builtin`
-    vim.keymap.set('n', '<leader><space>',
+    vim.keymap.set('n', '<leader>sb',
       function()
         require('telescope.builtin').buffers {
           initial_mode = 'normal',
@@ -52,7 +52,7 @@ return {
           sort_lastused = true,
         }
       end,
-      { desc = 'Find existing buffers' })
+      { desc = '[S]earch existing [B]uffers' })
     vim.keymap.set('n', '<leader>/', function()
       -- You can pass additional configuration to telescope to change theme, layout, etc.
       require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
