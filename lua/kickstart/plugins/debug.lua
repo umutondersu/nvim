@@ -12,10 +12,6 @@ return {
     -- Creates a beautiful debugger UI
     { 'rcarriga/nvim-dap-ui', dependencies = { 'nvim-neotest/nvim-nio' } },
 
-    -- Installs the debug adapters for you
-    'williamboman/mason.nvim',
-    'jay-babu/mason-nvim-dap.nvim',
-
     -- Inline virtual text for debugging
     'theHamsta/nvim-dap-virtual-text',
 
@@ -39,23 +35,6 @@ return {
     local dapui = require 'dapui'
 
     require("nvim-dap-virtual-text").setup({})
-    require('mason-nvim-dap').setup {
-      -- Makes a best effort to setup the various debuggers with
-      -- reasonable debug configurations
-      automatic_installation = true,
-
-      -- You can provide additional configuration to the handlers,
-      -- see mason-nvim-dap README for more information
-      handlers = {},
-
-      -- You'll need to check that you have the required things installed
-      -- online, please don't ask me how to install them :)
-      ensure_installed = {
-        -- Update this to ensure that you have the debuggers for the langs you want
-        'debugpy',
-        'delve',
-      },
-    }
 
     -- Dap UI setup
     -- For more information, see |:help nvim-dap-ui|

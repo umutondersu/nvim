@@ -216,45 +216,10 @@ return {
 			--  You can press `g?` for help in this menu
 			require('mason').setup()
 
-			-- You can add other tools here that you want Mason to install
-			-- for you, so that they are available from within Neovim.
-			-- NOTE: be sure tools are assigned to languages in nvim-lint or conform.nvim
-
+			-- Grab the tools from the mason-tools.lua file and add them to the list of tools to install
 			local ensure_installed = vim.tbl_keys(servers or {})
-
-			local function ensure_install_tools(command, tools)
-				if command == nil or vim.fn.executable(command) == 1 then
-					vim.list_extend(ensure_installed, tools)
-				end
-			end
-
-			--[[ Tools without extra requirements ]]
-			ensure_install_tools(nil, {
-				-- Formatters
-				'black',
-				'isort',
-				'prettier',
-				'prettierd',
-				-- Linters
-				'eslint_d',
-				'flake8',
-			})
-
-			--[[ Language Specific Tools ]]
-			ensure_install_tools('dotnet', {
-				'csharpier'
-			})
-
-			ensure_install_tools('go', {
-				'golangci-lint',
-				'gofumpt',
-				'goimports',
-				-- Gopher.nvim
-				'gomodifytags',
-				'gotests',
-				'iferr',
-				'impl',
-			})
+			local tools = require('kickstart.mason-tools')
+			vim.list_extend(ensure_installed, tools)
 
 			require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
