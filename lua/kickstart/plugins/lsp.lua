@@ -120,11 +120,6 @@ return { -- LSP Configuration & Plugins
 				end
 
 				if check_client('jdtls') then
-					-- Runner
-					map('<leader>lr', [[<cmd>lua require('java').runner.built_in.run_app({})<cr>]], 'Run App')
-					map('<leader>ls', require('java').runner.built_in.stop_app, 'Stop App')
-					map('<leader>ll', require('java').runner.built_in.toggle_logs, 'Toggle Logs')
-					-- Test
 					map('<leader>tc', require('java').test.run_current_class, 'Run Current Class')
 					map('<leader>tm', require('java').test.run_current_method, 'Run Current Method')
 					map('<leader>tv', require('java').test.view_last_report, 'View Last Report')

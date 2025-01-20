@@ -13,8 +13,6 @@ return {
         end
         local gopher = require("gopher")
         gopher.setup({})
-        map('<leader>lt', gopher.tags.add, 'Add JSON tags to struct fields')
-        map('<leader>ld', '<cmd>GoCmt<cr>', 'Generate boilerplate for doc comments')
         map('<leader>tgf', gopher.test.add, 'Generate Test for the function under the cursor')
         map('<leader>tgF', gopher.test.all, 'Generate Test for all the functions in the file')
     end

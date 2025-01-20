@@ -17,7 +17,6 @@ return {
             { "<leader>u",  group = "User" },
             { "<leader>n",  group = "Notification" },
             { "<leader>S",  group = "Scratch" },
-            { "<leader>l",  group = "LSP" },
         },
         delay = 0,
     },
