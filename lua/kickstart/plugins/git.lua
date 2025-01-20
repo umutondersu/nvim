@@ -50,10 +50,9 @@ return {
         end, { desc = 'reset git hunk' })
 
         -- normal mode
-        map('n', '<leader>hs', gs.stage_hunk, { desc = 'git stage hunk' })
+        map('n', '<leader>hs', gs.stage_hunk, { desc = 'git stage/unstage hunk' })
         map('n', '<leader>hr', gs.reset_hunk, { desc = 'git reset hunk' })
         map('n', '<leader>hS', gs.stage_buffer, { desc = 'git Stage buffer' })
-        map('n', '<leader>hu', gs.undo_stage_hunk, { desc = 'undo stage hunk' })
         map('n', '<leader>hR', gs.reset_buffer, { desc = 'git Reset buffer' })
         map('n', '<leader>hp', gs.preview_hunk_inline, { desc = 'preview git hunk inline' })
         map('n', '<leader>hP', gs.preview_hunk, { desc = 'preview git hunk' })
@@ -67,7 +66,7 @@ return {
 
         -- Toggles
         map('n', '<leader>gb', gs.toggle_current_line_blame, { desc = 'toggle git show blame line' })
-        map('n', '<leader>ht', gs.toggle_deleted, { desc = 'toggle git show deleted' })
+        map('n', '<leader>ht', gs.preview_hunk_inline, { desc = 'toggle git show deleted' })
       end,
     },
   },
