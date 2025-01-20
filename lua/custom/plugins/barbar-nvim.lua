@@ -11,10 +11,6 @@ return {
         animation = true,
         clickable = true,
         auto_hide = false,
-        sidebar_filetypes = {
-            -- Use the default values: {event = 'BufWinLeave', text = nil}
-            NvimTree = true,
-        },
         icons = {
             button = ' ',
             separator_at_end = false,

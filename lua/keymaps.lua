@@ -32,10 +32,6 @@ map({ 'n', 'v' }, 'P', '"+P', { silent = true })
 map({ 'n', 'v' }, 'x', '"+d', { silent = true })
 map({ 'n', 'v' }, 'X', '"+D', { silent = true })
 
--- Move selected line / block of text in visual mode
-map("v", "J", ":m '>+1<CR>gv=gv")
-map("v", "K", ":m '<-2<CR>gv=gv")
-
 -- Append line to bottom line while keeping cursor position
 map("n", "J", "mzJ`z")
 

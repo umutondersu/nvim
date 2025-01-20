@@ -50,8 +50,6 @@ return { -- LSP Configuration & Plugins
 				end
 
 				-- Diagnostic keymaps
-				map('[d', vim.diagnostic.goto_prev, 'Go to previous diagnostic message')
-				map(']d', vim.diagnostic.goto_next, 'Go to next diagnostic message')
 				map('gq', vim.diagnostic.open_float, 'Open floating diagnostic message')
 
 				-- Jump to the definition of the word under your cursor.
