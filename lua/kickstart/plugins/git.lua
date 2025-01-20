@@ -1,6 +1,16 @@
 return {
   -- Git related plugins
-  { 'tpope/vim-fugitive' },
+  {
+    'tpope/vim-fugitive',
+    keys = {
+      {
+        '<leader>gw',
+        '<cmd>G<cr>',
+        mode = 'n',
+        desc = 'Git Summary Window'
+      }
+    }
+  },
   { 'tpope/vim-rhubarb' },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes

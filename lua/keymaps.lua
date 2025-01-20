@@ -48,8 +48,6 @@ map("n", "<leader>rw", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gcI<Left><Left><Left><Lef
 
 map("n", "<M-u>", ":e!<CR>", { desc = 'Undo all unsaved writes' })
 
-map('n', '<leader>gw', '<cmd>G<cr>', { desc = '[G]it Summary [W]indow' })
-
 -- Shortcuts for save and exit
 map('n', '<leader>w', '<cmd>w<CR>', { desc = 'Save Buffer' })
 map('n', '<leader>x', '<cmd>wqa<CR>', { desc = 'Save and Exit All Buffers' })
