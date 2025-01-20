@@ -185,7 +185,7 @@ return {
 			---@param server_name string
 			---@param server_config table
 			local function add_lsp(command, server_name, server_config)
-				if command == nil or vim.fn.executable(command) == 1 then
+				if vim.fn.executable(command) == 1 then
 					servers[server_name] = server_config
 				end
 			end
