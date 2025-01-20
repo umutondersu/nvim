@@ -16,7 +16,8 @@ return {
             { "<leader>a",  group = "Avante",           mode = { 'n', 'v' } },
             { "<leader>u",  group = "User" },
             { "<leader>n",  group = "Notification" },
-            { "<leader>S",  group = "Scratch" }
+            { "<leader>S",  group = "Scratch" },
+            { "<leader>l",  group = "LSP" },
         },
         delay = 0,
     },
