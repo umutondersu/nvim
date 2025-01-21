@@ -31,6 +31,9 @@ return {
             ['d'] = require('telescope.actions').delete_buffer,
           },
         },
+        file_ignore_patterns = {
+          "node_modules"
+        },
       },
       extensions = {
         ['ui-select'] = {
