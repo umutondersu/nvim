@@ -12,12 +12,12 @@ return { -- Collection of various small independent plugins/modules
 
         -- Add/delete/replace surroundings (brackets, quotes, etc.)
         --
-        -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
+        -- - siw) - [S]urround [I]nner [W]ord [)]Paren
         -- - sd'   - [S]urround [D]elete [']quotes
         -- - sc)'  - [S]urround [C]hange [)] [']
         require('mini.surround').setup({
             mappings = {
-                add = 'sa',            -- Add surrounding in Normal and Visual modes
+                add = 's',             -- Add surrounding in Normal and Visual modes
                 delete = 'sd',         -- Delete surrounding
                 find = 'sf',           -- Find surrounding (to the right)
                 find_left = 'sF',      -- Find surrounding (to the left)
@@ -80,8 +80,6 @@ return { -- Collection of various small independent plugins/modules
                 join = '',
             }
         })
-
-
         -- ... and there is more!
         --  Check out: https://github.com/echasnovski/mini.nvim
     end,
