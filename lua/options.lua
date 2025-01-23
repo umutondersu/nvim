@@ -59,5 +59,5 @@ vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,
 
 -- Disable Node Provider for windows
 if vim.fn.has('win32') == 1 then
-  vim.g.loaded_node_provider = 0
+	vim.g.loaded_node_provider = 0
 end
