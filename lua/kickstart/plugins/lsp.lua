@@ -16,9 +16,26 @@ return { -- LSP Configuration & Plugins
 		'artemave/workspace-diagnostics.nvim',
 
 		-- [[Language specific dependencies]]
-		-- For Tsserver
+		-- Typescript
 		'dmmulroy/ts-error-translator.nvim',
-		-- Omnisharp Extensions
+		{
+			"pmizio/typescript-tools.nvim",
+			dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+			opts = {
+				settings = {
+					tsserver_file_preferences = {
+						includeInlayEnumMemberValueHints = true,
+						includeInlayFunctionLikeReturnTypeHints = false,
+						includeInlayFunctionParameterTypeHints = true,
+						includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
+						includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+						includeInlayPropertyDeclarationTypeHints = true,
+						includeInlayVariableTypeHints = true,
+					}
+				},
+			},
+		},
+		-- C#
 		'Hoffs/omnisharp-extended-lsp.nvim',
 		-- Java
 		{
@@ -124,6 +141,12 @@ return { -- LSP Configuration & Plugins
 					map('<leader>tm', require('java').test.run_current_method, 'Run Current Method')
 					map('<leader>tv', require('java').test.view_last_report, 'View Last Report')
 				end
+
+				if check_client('typescript-tools') then
+					map('<leader>fa', '<cmd>TSToolsAddMissingImports<cr>', 'Add Missing Tools')
+					map('<leader>fo', '<cmd>TSToolsOrganizeImports<cr>', 'Sort and Remove Unused Imports')
+					map('<leader>rf', '<cmd>TSToolsRenameFile<cr>', 'Rename File')
+				end
 			end,
 		})
 
@@ -151,33 +174,6 @@ return { -- LSP Configuration & Plugins
 			pyright = {},
 
 			tailwindcss = {},
-
-			ts_ls = {
-				settings = {
-					javascript = {
-						inlayHints = {
-							includeInlayEnumMemberValueHints = true,
-							includeInlayFunctionLikeReturnTypeHints = false,
-							includeInlayFunctionParameterTypeHints = true,
-							includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
-							includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-							includeInlayPropertyDeclarationTypeHints = true,
-							includeInlayVariableTypeHints = true,
-						},
-					},
-					typescript = {
-						inlayHints = {
-							includeInlayEnumMemberValueHints = true,
-							includeInlayFunctionLikeReturnTypeHints = false,
-							includeInlayFunctionParameterTypeHints = true,
-							includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
-							includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-							includeInlayPropertyDeclarationTypeHints = true,
-							includeInlayVariableTypeHints = true,
-						},
-					},
-				},
-			},
 
 			lua_ls = {
 				settings = {
