@@ -7,7 +7,7 @@ return
     {
       "<leader>ff",
       function()
-        require("conform").format({ async = true }, function(err)
+        require("conform").format({ async = true, lsp_format = 'fallback' }, function(err)
           if not err then
             local mode = vim.api.nvim_get_mode().mode
             if vim.startswith(string.lower(mode), "v") then
