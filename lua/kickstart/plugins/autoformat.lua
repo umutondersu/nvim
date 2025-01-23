@@ -7,16 +7,21 @@ return
     {
       "<leader>ff",
       function()
-        require("conform").format { async = true, lsp_format = "fallback" }
+        require("conform").format({ async = true }, function(err)
+          if not err then
+            local mode = vim.api.nvim_get_mode().mode
+            if vim.startswith(string.lower(mode), "v") then
+              vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true)
+            end
+          end
+        end)
       end,
       mode = { "n", "v" },
       desc = "Format buffer or range",
     },
     {
       "<leader>ft",
-      function()
-        vim.cmd "Ftoggle"
-      end,
+      "<cmd>Ftoggle<cr>",
       mode = "n",
       desc = "Toggle autoformatting",
     }, {
@@ -58,25 +63,10 @@ return
       markdown = { "prettierd", "prettier", stop_after_first = true },
       html = { "prettierd", "prettier", stop_after_first = true },
       css = { "prettierd", "prettier", stop_after_first = true },
-      -- lua = { "stylua" },
       python = { "isort", "black" },
       go = { 'gofumpt', 'goimports' },
       cshart = { 'csharpier' },
+      -- lua = { "stylua" },
     },
-    -- Customize formatters
-    -- formatters = {
-    --     shfmt = {
-    --         prepend_args = { '-i', '2' },
-    --     },
-    -- },
   },
-  config = function(_, opts)
-    require("conform").setup(opts)
-    vim.api.nvim_create_user_command("Ftoggle", function()
-      vim.g.disable_autoformat = not vim.g.disable_autoformat
-      vim.b.disable_autoformat = vim.g.disable_autoformat
-      local status = vim.g.disable_autoformat and "Disabled" or "Enabled"
-      print("Auto Formatting is " .. status)
-    end, { desc = "Toggle autoformatting" })
-  end,
 }

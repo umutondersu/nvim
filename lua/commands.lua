@@ -35,3 +35,11 @@ vim.api.nvim_create_autocmd("BufEnter", {
   group = general,
   desc = "Disable New Line Comment",
 })
+
+-- [[ Toggle Autoformatting with Conform.nvim ]]
+vim.api.nvim_create_user_command("Ftoggle", function()
+  vim.g.disable_autoformat = not vim.g.disable_autoformat
+  vim.b.disable_autoformat = vim.g.disable_autoformat
+  local status = vim.g.disable_autoformat and "Disabled" or "Enabled"
+  print("Auto Formatting is " .. status)
+end, { desc = "Toggle autoformatting" })
