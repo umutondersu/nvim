@@ -14,6 +14,7 @@ return {
             { "<leader>t",  group = "Test" },
             { "gp",         group = "Preview" },
             { "<leader>a",  group = "Avante",           mode = { 'n', 'v' } },
+            { "<leader>ap", group = "avante: prompts",  mode = { 'n', 'v' } },
             { "<leader>u",  group = "User" },
             { "<leader>n",  group = "Notification" },
             { "<leader>S",  group = "Scratch" },

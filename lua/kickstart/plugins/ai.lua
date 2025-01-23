@@ -63,5 +63,110 @@ return {
                 },
             },
         },
+        keys = {
+            {
+                '<leader>apg',
+                function()
+                    require('avante.api').ask { question = 'Correct the text to standard English, but keep any code blocks inside intact.' }
+                end,
+                mode = { 'n', 'v' },
+                desc = 'Grammar Correction',
+            },
+            {
+                '<leader>apk',
+                function()
+                    require('avante.api').ask { question = 'Extract the main keywords from the following text' }
+                end,
+                mode = { 'n', 'v' },
+                desc = 'Extract Main Keywords',
+            },
+            {
+                '<leader>apl',
+                function()
+                    require('avante.api').ask { question = [[
+  You must identify any readability issues in the code snippet.
+  Some readability issues to consider:
+  - Unclear naming
+  - Unclear purpose
+  - Redundant or obvious comments
+  - Lack of comments
+  - Long or complex one liners
+  - Too much nesting
+  - Long variable names
+  - Inconsistent naming and code style.
+  - Code repetition
+  You may identify additional problems. The user submits a small section of code from a larger file.
+  Only list lines with readability issues, in the format <line_num>|<issue and proposed solution>
+  If there's no issues with code respond with only: <OK>
+]] }
+                end,
+                mode = { 'n', 'v' },
+                desc = 'Code Readability Analysis',
+            },
+            {
+                '<leader>apo',
+                function()
+                    require('avante.api').ask { question = 'Optimize the following code' }
+                end,
+                mode = { 'n', 'v' },
+                desc = 'Optimize Code',
+            },
+            {
+                '<leader>apm',
+                function()
+                    require('avante.api').ask { question = 'Summarize the following text' }
+                end,
+                mode = { 'n', 'v' },
+                desc = 'Summarize text',
+            },
+            {
+                '<leader>apn',
+                function()
+                    require('avante.api').ask { question = 'Translate this into Spanish, but keep any code blocks inside intact' }
+                end,
+                mode = { 'n', 'v' },
+                desc = 'Translate text',
+            },
+            {
+                '<leader>apx',
+                function()
+                    require('avante.api').ask { question = 'Explain the following code' }
+                end,
+                mode = { 'n', 'v' },
+                desc = 'Explain Code',
+            },
+            {
+                '<leader>apc',
+                function()
+                    require('avante.api').ask { question = 'Complete the following codes written in ' .. vim.bo.filetype }
+                end,
+                mode = { 'n', 'v' },
+                desc = 'Complete Code',
+            },
+            {
+                '<leader>apd',
+                function()
+                    require('avante.api').ask { question = 'Add docstring to the following codes' }
+                end,
+                mode = { 'n', 'v' },
+                desc = 'Docstring',
+            },
+            {
+                '<leader>apb',
+                function()
+                    require('avante.api').ask { question = 'Fix the bugs inside the following codes if any' }
+                end,
+                mode = { 'n', 'v' },
+                desc = 'Fix Bugs',
+            },
+            {
+                '<leader>apu',
+                function()
+                    require('avante.api').ask { question = 'Implement tests for the following code' }
+                end,
+                mode = { 'n', 'v' },
+                desc = 'Add Tests',
+            },
+        },
     },
 }
