@@ -25,7 +25,7 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
 
   require 'kickstart.plugins.git',
-  require 'kickstart.plugins.telescope',
+  require 'kickstart.plugins.snacks',
   require 'kickstart.plugins.lsp',
   require 'kickstart.plugins.completion',
   require 'kickstart.plugins.treesitter',

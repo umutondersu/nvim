@@ -15,6 +15,9 @@ return { -- LSP Configuration & Plugins
 		-- Populates project-wide lsp diagnostcs
 		'artemave/workspace-diagnostics.nvim',
 
+		-- Provides keymaps for LSP actions
+		"folke/snacks.nvim",
+
 		-- [[Language specific dependencies]]
 		-- Typescript
 		'dmmulroy/ts-error-translator.nvim',
@@ -69,32 +72,29 @@ return { -- LSP Configuration & Plugins
 				-- Diagnostic keymaps
 				map('gq', vim.diagnostic.open_float, 'Open floating diagnostic message')
 
+				---@diagnostic disable: undefined-global
 				-- Jump to the definition of the word under your cursor.
 				--  This is where a variable was first declared, or where a function is defined, etc.
 				--  To jump back, press <C-t>.
-				map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
+				map('gd', Snacks.picker.lsp_definitions, '[G]oto [D]efinition')
 
 
 				-- Find references for the word under your cursor.
-				map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+				map('gr', Snacks.picker.lsp_references, '[G]oto [R]eferences')
 
 				-- Jump to the implementation of the word under your cursor.
 				--  Useful when your language has ways of declaring types without an actual implementation.
-				map('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
+				map('gI', Snacks.picker.lsp_implementations, '[G]oto [I]mplementation')
 
 				-- Jump to the type of the word under your cursor.
 				--  Useful when you're not sure what type a variable is and you want to see
 				--  the definition of its *type*, not where it was *defined*.
-				map('gy', require('telescope.builtin').lsp_type_definitions, '[G]oto T[Y]pe [D]efinition')
+				map('gy', Snacks.picker.lsp_type_definitions, '[G]oto T[Y]pe [D]efinition')
 
-				-- Fuzzy find all the symbols in your current document.
+				-- Fuzzy find all the symbols.
 				--  Symbols are things like variables, functions, types, etc.
-				map('<leader>sD', require('telescope.builtin').lsp_document_symbols, '[S]earch [D]ocument Symbols')
-
-				-- Fuzzy find all the symbols in your current workspace
-				--  Similar to document symbols, except searches over your whole project.
-				map('<leader>sW', require('telescope.builtin').lsp_dynamic_workspace_symbols,
-					'[S]earch [W]orkspace Symbols')
+				map('<leader>sD', Snacks.picker.lsp_symbols, '[S]earch Symbols')
+				---@diagnostic enable: undefined-global
 
 				-- Rename the variable under your cursor
 				--  Most Language Servers support renaming across files, etc.
@@ -110,13 +110,13 @@ return { -- LSP Configuration & Plugins
 				map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
 				-- Peek Keymaps
-				map('gpd', function() require("goto-preview").goto_preview_definition({}) end,
+				map('gpd', require("goto-preview").goto_preview_definition,
 					'[P]review [D]efinition')
-				map('gpy', function() require("goto-preview").goto_preview_type_definition({}) end,
+				map('gpy', require("goto-preview").goto_preview_type_definition,
 					'[P]review t[Y]pe [D]efinition')
-				map('gpi', function() require("goto-preview").goto_preview_implementation({}) end,
+				map('gpi', require("goto-preview").goto_preview_implementation,
 					'[P]review [I]mplementation')
-				map('gpD', function() require("goto-preview").goto_preview_declaration({}) end,
+				map('gpD', require("goto-preview").goto_preview_declaration,
 					'[P]review [D]eclaration')
 
 				-- Language specific keymaps
@@ -127,12 +127,12 @@ return { -- LSP Configuration & Plugins
 				end
 
 				if check_client('omnisharp') then
-					map('gd', function() require('omnisharp_extended').lsp_definition() end, '[G]oto [D]efinition')
-					map('gy', function() require('omnisharp_extended').lsp_type_definition() end,
+					map('gd', require('omnisharp_extended').lsp_definition, '[G]oto [D]efinition')
+					map('gy', require('omnisharp_extended').lsp_type_definition,
 						'[G]oto T[Y]pe [D]efinition')
-					map('gr', function() require('omnisharp_extended').telescope_lsp_references() end,
+					map('gr', require('omnisharp_extended').lsp_references,
 						'[G]oto [R]eferences')
-					map('gI', function() require('omnisharp_extended').lsp_implementation() end,
+					map('gI', require('omnisharp_extended').lsp_implementation,
 						'[G]oto [I]mplementation')
 				end
 
