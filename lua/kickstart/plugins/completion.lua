@@ -43,6 +43,8 @@ return {
       ['<C-x>'] = { 'show', 'hide' },
       ['<C-k>'] = { 'show_documentation', 'hide_documentation' },
       ['<C-space>'] = {},
+      ['<Up>'] = {},
+      ['<Down>'] = {},
       cmdline = {
         preset = 'none',
         ['<C-a>'] = { 'select_and_accept' },
@@ -87,7 +89,7 @@ return {
           module = "vim_dadbod_completion.blink",
         },
         avante_commands = { name = "avante_commands", module = "blink.compat.source", score_offset = 90, opts = {} },
-        avante_files = { name = "avante_commands", module = "blink.compat.source", score_offset = 100, opts = {} },
+        avante_files = { name = "avante_files", module = "blink.compat.source", score_offset = 100, opts = {} },
         avante_mentions = { name = "avante_mentions", module = "blink.compat.source", score_offset = 1000, opts = {} }
       },
     },

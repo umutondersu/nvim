@@ -32,7 +32,7 @@ return {
         version = false, -- set this if you want to always pull the latest change
         opts = {
             provider = "copilot",
-            file_selector = { provider = "telescope" }
+            file_selector = { provider = "snacks" }
         },
         -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
         build = "make",
@@ -42,6 +42,7 @@ return {
             "nvim-lua/plenary.nvim",
             "MunifTanjim/nui.nvim",
             "zbirenbaum/copilot.lua",      -- for providers='copilot'
+            "folke/snacks.nvim",           -- file selector provider
             --- The below dependencies are optional,
             "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
             "MeanderingProgrammer/render-markdown.nvim",
@@ -73,7 +74,7 @@ return {
                 desc = 'Grammar Correction',
             },
             {
-                '<leader>apk',
+                '<leader>apm',
                 function()
                     require('avante.api').ask { question = 'Extract the main keywords from the following text' }
                 end,
@@ -81,7 +82,7 @@ return {
                 desc = 'Extract Main Keywords',
             },
             {
-                '<leader>apl',
+                '<leader>apr',
                 function()
                     require('avante.api').ask { question = [[
   You must identify any readability issues in the code snippet.
@@ -112,7 +113,7 @@ return {
                 desc = 'Optimize Code',
             },
             {
-                '<leader>apm',
+                '<leader>aps',
                 function()
                     require('avante.api').ask { question = 'Summarize the following text' }
                 end,
@@ -120,7 +121,7 @@ return {
                 desc = 'Summarize text',
             },
             {
-                '<leader>apn',
+                '<leader>apt',
                 function()
                     require('avante.api').ask { question = 'Translate this into Spanish, but keep any code blocks inside intact' }
                 end,
@@ -128,7 +129,7 @@ return {
                 desc = 'Translate text',
             },
             {
-                '<leader>apx',
+                '<leader>ape',
                 function()
                     require('avante.api').ask { question = 'Explain the following code' }
                 end,
@@ -149,7 +150,7 @@ return {
                     require('avante.api').ask { question = 'Add docstring to the following codes' }
                 end,
                 mode = { 'n', 'v' },
-                desc = 'Docstring',
+                desc = 'Add Docstring',
             },
             {
                 '<leader>apb',
@@ -160,7 +161,7 @@ return {
                 desc = 'Fix Bugs',
             },
             {
-                '<leader>apu',
+                '<leader>apt',
                 function()
                     require('avante.api').ask { question = 'Implement tests for the following code' }
                 end,
