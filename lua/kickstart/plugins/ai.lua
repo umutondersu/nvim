@@ -145,12 +145,20 @@ return {
                 desc = 'Complete Code',
             },
             {
-                '<leader>apd',
+                '<leader>apD',
                 function()
                     require('avante.api').ask { question = 'Add docstring to the following codes' }
                 end,
                 mode = { 'n', 'v' },
                 desc = 'Add Docstring',
+            },
+            {
+                '<leader>apd',
+                function()
+                    require('avante.api').ask { question = 'Fix the diagnostics inside the following codes if any @diagnostics' }
+                end,
+                mode = { 'n', 'v' },
+                desc = 'Fix Diagnostics',
             },
             {
                 '<leader>apb',

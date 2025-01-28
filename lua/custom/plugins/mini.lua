@@ -42,7 +42,7 @@ return { -- Collection of various small independent plugins/modules
                 go_out_plus = '<BS>',
                 mark_goto   = '',
                 mark_set    = '',
-                reset       = 'R',
+                reset       = 'r',
                 reveal_cwd  = '@',
                 show_help   = 'g?',
                 synchronize = '<leader>w',
@@ -53,10 +53,10 @@ return { -- Collection of various small independent plugins/modules
         vim.api.nvim_create_autocmd('FileType', {
             pattern = 'minifiles',
             callback = function()
-                vim.keymap.set('n', '<C-r>', '^ct.', { desc = 'Change File Name w/o extension', buffer = true })
-                vim.keymap.set('n', '<C-x>', 'V"+d', { desc = 'Cut File', buffer = true })
-                vim.keymap.set('n', '<C-y>', 'Vy', { desc = 'Copy File', buffer = true })
-                vim.keymap.set('n', '<C-d>', 'Vd', { desc = 'Delete File', buffer = true })
+                vim.keymap.set('n', '<leader>r', '^ct.', { desc = 'Change File Name w/o extension', buffer = true })
+                vim.keymap.set('n', '<leader>x', 'V"+d', { desc = 'Cut File', buffer = true })
+                vim.keymap.set('n', '<leader>y', 'Vy', { desc = 'Copy File', buffer = true })
+                vim.keymap.set('n', '<leader>d', 'Vd', { desc = 'Delete File', buffer = true })
             end,
         })
         require('mini.move').setup({
@@ -73,7 +73,7 @@ return { -- Collection of various small independent plugins/modules
                 line_up = '<M-k>',
             },
         })
-        vim.keymap.set('n', '<leader>e', function() MiniFiles.open() end, { desc = 'Open File Editor' })
+        vim.keymap.set('n', '<leader>e', function() MiniFiles.open() end, { desc = 'Open File Navigation' })
         require('mini.splitjoin').setup({
             mappings = {
                 toggle = '<leader>fs',
