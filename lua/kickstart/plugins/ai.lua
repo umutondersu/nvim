@@ -41,10 +41,10 @@ return {
             "stevearc/dressing.nvim",
             "nvim-lua/plenary.nvim",
             "MunifTanjim/nui.nvim",
-            "zbirenbaum/copilot.lua",      -- for providers='copilot'
-            "folke/snacks.nvim",           -- file selector provider
+            "zbirenbaum/copilot.lua", -- for providers='copilot'
+            "folke/snacks.nvim",      -- file selector provider
             --- The below dependencies are optional,
-            "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+            "echasnovski/mini.icons",
             "MeanderingProgrammer/render-markdown.nvim",
             {
                 -- support for image pasting

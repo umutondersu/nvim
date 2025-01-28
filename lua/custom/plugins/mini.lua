@@ -32,6 +32,7 @@ return { -- Collection of various small independent plugins/modules
         -- Extras
         require('mini.pairs').setup()
         require('mini.bracketed').setup()
+        require('mini.icons').setup()
         require('mini.files').setup({
             mappings = {
                 close       = 'q',
