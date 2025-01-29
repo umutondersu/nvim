@@ -2,15 +2,18 @@ return {
   'saghen/blink.cmp',
   dependencies = {
     -- Integrate Nvim-cmp completion sources
-    { 'saghen/blink.compat', version = '*',   lazy = true, opts = {} },
+    { 'saghen/blink.compat',       version = '*',   lazy = true, opts = {} },
 
     -- Sources
     'kristijanhusak/vim-dadbod-completion',
-    "fang2hou/blink-copilot",
+    'fang2hou/blink-copilot',
     'folke/lazydev.nvim',
 
+    -- Visual
+    { 'xzbdmw/colorful-menu.nvim', opts = {} },
+
     -- Snippet Engine
-    { 'L3MON4D3/LuaSnip',    version = 'v2.*' },
+    { 'L3MON4D3/LuaSnip',          version = 'v2.*' },
 
     -- Snippets
     'rafamadriz/friendly-snippets',
@@ -23,7 +26,17 @@ return {
     completion = {
       menu = {
         draw = {
-          columns = { { "label", "label_description" }, { "kind_icon", "kind", gap = 1 } },
+          columns = { { "kind_icon" }, { "label", gap = 1 } },
+          components = {
+            label = {
+              text = function(ctx)
+                return require("colorful-menu").blink_components_text(ctx)
+              end,
+              highlight = function(ctx)
+                return require("colorful-menu").blink_components_highlight(ctx)
+              end,
+            },
+          },
         },
         border = 'rounded',
         winhighlight =
