@@ -15,6 +15,9 @@ return {
     -- Snippets
     'rafamadriz/friendly-snippets',
     'solidjs-community/solid-snippets',
+
+    -- Visual
+    { 'xzbdmw/colorful-menu.nvim', opts = {} }
   },
   version = '*',
   ---@module 'blink.cmp'
@@ -23,7 +26,17 @@ return {
     completion = {
       menu = {
         draw = {
-          columns = { { "label", "label_description" }, { "kind_icon", "kind", gap = 1 } },
+          columns = { { "kind_icon" }, { "label", gap = 1 } },
+          components = {
+            label = {
+              text = function(ctx)
+                return require("colorful-menu").blink_components_text(ctx)
+              end,
+              highlight = function(ctx)
+                return require("colorful-menu").blink_components_highlight(ctx)
+              end,
+            },
+          },
         },
         border = 'rounded',
         winhighlight =
@@ -96,7 +109,6 @@ return {
         Copilot = "",
       },
     },
-
   },
   -- allows extending the providers array elsewhere in your config
   -- without having to redefine it
