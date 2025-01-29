@@ -2,7 +2,7 @@ return {
   -- Git related plugins
   {
     'tpope/vim-fugitive',
-    config = function() vim.keymap.set('n', '<leader>gw', '<cmd>G<cr>', { desc = '[G]it Summary [W]indow' }) end
+    config = function() vim.keymap.set('n', '<leader>gw', '<cmd>G<cr>', { desc = 'Git Fugitive Window' }) end
   },
   { 'tpope/vim-rhubarb' },
   {
