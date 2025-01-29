@@ -6,8 +6,8 @@ return {
 
     -- Sources
     'kristijanhusak/vim-dadbod-completion',
-    "fang2hou/blink-copilot",
     'folke/lazydev.nvim',
+    'milanglacier/minuet-ai.nvim',
 
     -- Snippet Engine
     { 'L3MON4D3/LuaSnip',    version = 'v2.*' },
@@ -76,16 +76,21 @@ return {
     },
     snippets = { preset = 'luasnip' },
     sources = {
-      default = { 'copilot', 'lsp', 'path', 'buffer', 'dadbod', 'snippets', 'lazydev', 'avante_commands', 'avante_files', 'avante_mentions' },
+      default = { 'minuet', 'lsp', 'path', 'buffer', 'dadbod', 'snippets', 'lazydev', 'avante_commands', 'avante_files', 'avante_mentions' },
       providers = {
-        copilot = {
-          name = "copilot",
-          module = "blink-copilot",
+        minuet = {
+          name = 'minuet',
+          module = 'minuet.blink',
           async = true,
-          opts = {
-            max_completions = 3,
-            max_attempts = 4,
-          }
+          transform_items = function(_, items)
+            local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
+            local kind_idx = #CompletionItemKind + 1
+            CompletionItemKind[kind_idx] = "Minuet"
+            for _, item in ipairs(items) do
+              item.kind = kind_idx
+            end
+            return items
+          end
         },
         lazydev = {
           name = "LazyDev",
@@ -105,8 +110,8 @@ return {
       use_nvim_cmp_as_default = true,
       nerd_font_variant = 'mono',
       kind_icons = {
-        Copilot = "",
-      },
+        Minuet = ''
+      }
     },
   },
   -- allows extending the providers array elsewhere in your config
