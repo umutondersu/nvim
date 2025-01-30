@@ -1,28 +1,26 @@
 return {
     {
-        'zbirenbaum/copilot.lua',
-        cmd = 'Copilot',
-        event = 'InsertEnter',
+        'milanglacier/minuet-ai.nvim',
         opts = {
-            panel = {
-                enabled = false,
+            notify = 'debug',
+            provider = 'openai_compatible',
+            n_completions = 1, -- recommend for local model for resource saving
+            -- I recommend you start with a small context window firstly, and gradually
+            -- increase it based on your local computing power.
+            context_window = 512,
+            provider_options = {
+                openai_compatible = {
+                    api_key = 'TERM',
+                    name = 'Ollama',
+                    end_point = 'http://localhost:11434/v1/chat/completions',
+                    model = 'deepseek-r1',
+                    stream = true,
+                    optional = {
+                        max_tokens = 256,
+                        top_p = 0.9,
+                    },
+                },
             },
-            suggestion = {
-                enabled = false,
-            },
-            filetypes = {
-                yaml = false,
-                markdown = false,
-                help = false,
-                gitcommit = false,
-                gitrebase = false,
-                hgcommit = false,
-                svn = false,
-                cvs = false,
-                ['.'] = false,
-            },
-            copilot_node_command = 'node',
-            server_opts_overrides = {},
         }
     },
     {
@@ -39,7 +37,7 @@ return {
                     api_key_name = "",
                     ask = "",
                     endpoint = "http://127.0.0.1:11434/api",
-                    model = "deepseek-r1",
+                    model = 'deepseek-r1',
                     parse_curl_args = function(opts, code_opts)
                         return {
                             url = opts.endpoint .. "/chat",
@@ -83,8 +81,7 @@ return {
             "stevearc/dressing.nvim",
             "nvim-lua/plenary.nvim",
             "MunifTanjim/nui.nvim",
-            "zbirenbaum/copilot.lua", -- for providers='copilot'
-            "folke/snacks.nvim",      -- file selector provider
+            "folke/snacks.nvim", -- file selector provider
             --- The below dependencies are optional,
             "echasnovski/mini.icons",
             "MeanderingProgrammer/render-markdown.nvim",
