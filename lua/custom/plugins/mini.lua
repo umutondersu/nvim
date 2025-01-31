@@ -73,7 +73,7 @@ return { -- Collection of various small independent plugins/modules
                 line_up = '<M-k>',
             },
         })
-        vim.keymap.set('n', '<leader>e', function() MiniFiles.open() end, { desc = 'Open File Navigation' })
+        vim.keymap.set('n', '<leader>e', MiniFiles.open, { desc = 'Open File Navigation' })
         require('mini.splitjoin').setup({
             mappings = {
                 toggle = '<leader>fs',
