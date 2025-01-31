@@ -3,8 +3,6 @@ return
     'ThePrimeagen/vim-be-good',
     event = "VeryLazy",
 }, {
-    'famiu/bufdelete.nvim'
-}, {
     'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
 }, {
     'anuvyklack/help-vsplit.nvim',
@@ -25,10 +23,6 @@ return
     'stevearc/dressing.nvim',
     event = 'VeryLazy',
     opts = {},
-}, {
-    "rest-nvim/rest.nvim",
-    dependencies = { { "j-hui/fidget.nvim", opts = {} } },
-    ft = "http",
 }, {
     'numToStr/Comment.nvim',
     opts = {}
