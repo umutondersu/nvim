@@ -57,6 +57,7 @@ return { -- Collection of various small independent plugins/modules
                 vim.keymap.set('n', '<leader>x', 'V"+d', { desc = 'Cut File', buffer = true })
                 vim.keymap.set('n', '<leader>y', 'Vy', { desc = 'Copy File', buffer = true })
                 vim.keymap.set('n', '<leader>d', 'Vd', { desc = 'Delete File', buffer = true })
+                vim.keymap.set('n', '<leader>e', '<cmd>q<cr>', { desc = 'Toggle File Navigation', buffer = true })
             end,
         })
         require('mini.move').setup({
@@ -73,7 +74,7 @@ return { -- Collection of various small independent plugins/modules
                 line_up = '<M-k>',
             },
         })
-        vim.keymap.set('n', '<leader>e', MiniFiles.open, { desc = 'Open File Navigation' })
+        vim.keymap.set('n', '<leader>e', MiniFiles.open, { desc = 'Toggle File Navigation' })
         require('mini.splitjoin').setup({
             mappings = {
                 toggle = '<leader>fs',
