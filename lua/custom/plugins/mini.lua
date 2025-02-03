@@ -75,13 +75,6 @@ return { -- Collection of various small independent plugins/modules
             },
         })
         vim.keymap.set('n', '<leader>e', MiniFiles.open, { desc = 'Toggle File Navigation' })
-        require('mini.splitjoin').setup({
-            mappings = {
-                toggle = '<leader>fs',
-                split = '',
-                join = '',
-            }
-        })
         -- ... and there is more!
         --  Check out: https://github.com/echasnovski/mini.nvim
     end,
