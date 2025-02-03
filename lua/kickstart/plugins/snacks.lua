@@ -25,6 +25,7 @@ return {
         },
     },
     keys = {
+        { "<leader>e",  function() Snacks.explorer.open() end,           desc = "Toggle File Explorer" },
         { "<leader>St", function() Snacks.scratch() end,                 desc = "Toggle Scratch Buffer" },
         { "<leader>Ss", function() Snacks.scratch.select() end,          desc = "Select Scratch Buffer" },
         { "<leader>nh", function() Snacks.notifier.show_history() end,   desc = "Notification History" },
@@ -166,14 +167,6 @@ return {
                 -- Snacks.toggle.line_number():map("<leader>ul")
                 -- Snacks.toggle.treesitter():map("<leader>uT")
                 -- Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>ub")
-            end,
-        })
-
-        -- Integrate with Mini Files
-        vim.api.nvim_create_autocmd("User", {
-            pattern = "MiniFilesActionRename",
-            callback = function(event)
-                Snacks.rename.on_rename_file(event.data.from, event.data.to)
             end,
         })
 

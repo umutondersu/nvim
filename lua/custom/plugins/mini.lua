@@ -29,37 +29,9 @@ return { -- Collection of various small independent plugins/modules
             },
         })
 
-        -- Extras
         require('mini.pairs').setup()
         require('mini.bracketed').setup()
         require('mini.icons').setup()
-        require('mini.files').setup({
-            mappings = {
-                close       = 'q',
-                go_in       = 'l',
-                go_in_plus  = '<cr>',
-                go_out      = 'h',
-                go_out_plus = '<BS>',
-                mark_goto   = '',
-                mark_set    = '',
-                reset       = 'r',
-                reveal_cwd  = '@',
-                show_help   = 'g?',
-                synchronize = '<leader>w',
-                trim_left   = '<',
-                trim_right  = '>',
-            },
-        })
-        vim.api.nvim_create_autocmd('FileType', {
-            pattern = 'minifiles',
-            callback = function()
-                vim.keymap.set('n', '<leader>r', '^ct.', { desc = 'Change File Name w/o extension', buffer = true })
-                vim.keymap.set('n', '<leader>x', 'V"+d', { desc = 'Cut File', buffer = true })
-                vim.keymap.set('n', '<leader>y', 'Vy', { desc = 'Copy File', buffer = true })
-                vim.keymap.set('n', '<leader>d', 'Vd', { desc = 'Delete File', buffer = true })
-                vim.keymap.set('n', '<leader>e', '<cmd>q<cr>', { desc = 'Toggle File Navigation', buffer = true })
-            end,
-        })
         require('mini.move').setup({
             mappings = {
                 -- Move visual selection in Visual mode. Defaults are Alt (Meta) + hjkl.
@@ -74,7 +46,6 @@ return { -- Collection of various small independent plugins/modules
                 line_up = '<M-k>',
             },
         })
-        vim.keymap.set('n', '<leader>e', MiniFiles.open, { desc = 'Toggle File Navigation' })
         -- ... and there is more!
         --  Check out: https://github.com/echasnovski/mini.nvim
     end,
