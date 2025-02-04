@@ -47,6 +47,6 @@ return {
     pcall(require('telescope').load_extension, 'ui-select')
 
     -- See `:help telescope.builtin`
-    vim.keymap.set('n', '<leader>sT', require('telescope.builtin').builtin, { desc = '[S]earch [S]elect Telescope' })
+    vim.keymap.set('n', '<leader>sT', require('telescope.builtin').builtin, { desc = 'Select [T]elescope' })
   end,
 }

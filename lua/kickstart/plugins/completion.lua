@@ -18,6 +18,9 @@ return {
     -- Snippets
     'rafamadriz/friendly-snippets',
     'solidjs-community/solid-snippets',
+
+    -- Visual
+    { 'xzbdmw/colorful-menu.nvim', opts = {} }
   },
   version = '*',
   ---@module 'blink.cmp'

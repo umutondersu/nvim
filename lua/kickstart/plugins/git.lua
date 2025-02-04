@@ -68,7 +68,7 @@ return {
         end, { desc = 'git diff against last commit' })
 
         -- Toggles
-        map('n', '<leader>gb', gs.toggle_current_line_blame, { desc = 'toggle git show blame line' })
+        map('n', '<leader>gB', gs.toggle_current_line_blame, { desc = 'toggle git show blame line' })
         map('n', '<leader>ht', gs.preview_hunk_inline, { desc = 'toggle git show deleted' })
       end,
     },
