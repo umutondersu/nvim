@@ -2,18 +2,15 @@ return {
   'saghen/blink.cmp',
   dependencies = {
     -- Integrate Nvim-cmp completion sources
-    { 'saghen/blink.compat',       version = '*',   lazy = true, opts = {} },
+    { 'saghen/blink.compat', version = '*',   lazy = true, opts = {} },
 
     -- Sources
     'kristijanhusak/vim-dadbod-completion',
     'fang2hou/blink-copilot',
     'folke/lazydev.nvim',
 
-    -- Visual
-    { 'xzbdmw/colorful-menu.nvim', opts = {} },
-
     -- Snippet Engine
-    { 'L3MON4D3/LuaSnip',          version = 'v2.*' },
+    { 'L3MON4D3/LuaSnip',    version = 'v2.*' },
 
     -- Snippets
     'rafamadriz/friendly-snippets',
