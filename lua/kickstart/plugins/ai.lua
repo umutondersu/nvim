@@ -1,4 +1,3 @@
-local ollama = require('kickstart.ollama_provider')
 return {
     {
         'milanglacier/minuet-ai.nvim',
@@ -13,7 +12,7 @@ return {
                     api_key = 'TERM',
                     name = 'Ollama',
                     end_point = 'http://localhost:11434/v1/completions',
-                    model = ollama.model,
+                    model = 'qwen2.5-coder',
                     stream = true,
                     optional = {
                         max_tokens = 256,
@@ -27,13 +26,48 @@ return {
         "yetone/avante.nvim",
         event = "VeryLazy",
         lazy = false,
-        version = '0.0.15', -- NOTE: Ollama Does not support tools feature that came with 0.0.16 yet
+        version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
         opts = {
             file_selector = { provider = 'snacks' },
             provider = 'ollama',
             vendors = {
                 ---@type AvanteProvider
-                ollama = ollama
+                ollama = {
+                    disable_tools = true,
+                    api_key_name = "",
+                    ask = true,
+                    endpoint = "http://127.0.0.1:11434/api",
+                    model = 'qwen2.5-coder',
+                    parse_curl_args = function(opts, code_opts)
+                        return {
+                            url = opts.endpoint .. "/chat",
+                            headers = {
+                                ["Accept"] = "application/json",
+                                ["Content-Type"] = "application/json",
+                            },
+                            body = {
+                                model = opts.model,
+                                options = {
+                                    num_ctx = 32768,
+                                },
+                                messages = require("avante.providers").copilot.parse_messages(code_opts), -- you can make your own message, but this is very advanced
+                                -- max_tokens = 2048,
+                                stream = true,
+                            },
+                        }
+                    end,
+                    parse_stream_data = function(data, handler_opts)
+                        -- Parse the JSON data
+                        local json_data = vim.fn.json_decode(data)
+                        -- Check if the response contains a message
+                        if json_data and json_data.message and json_data.message.content then
+                            -- Extract the content from the message
+                            local content = json_data.message.content
+                            -- Call the handler with the content
+                            handler_opts.on_chunk(content)
+                        end
+                    end,
+                },
             }
         },
         -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
