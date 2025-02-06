@@ -90,7 +90,7 @@ end
 return {
 	api_key_name = "",
 	endpoint = "http://127.0.0.1:11434",
-	model = 'deepseek-r1',
+	model = 'qwen2.5-coder',
 	parse_messages = parse_messages,
 	parse_curl_args = parse_curl_args,
 	parse_stream_data = parse_stream_data,

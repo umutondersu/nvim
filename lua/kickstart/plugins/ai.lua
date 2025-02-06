@@ -13,7 +13,7 @@ return {
                     api_key = 'TERM',
                     name = 'Ollama',
                     end_point = 'http://localhost:11434/v1/completions',
-                    model = 'qwen2.5-coder',
+                    model = ollama.model,
                     stream = true,
                     optional = {
                         max_tokens = 256,
@@ -27,7 +27,7 @@ return {
         "yetone/avante.nvim",
         event = "VeryLazy",
         lazy = false,
-        version = false, -- set this if you want to always pull the latest change
+        version = '0.0.15', -- NOTE: Ollama Does not support tools feature that came with 0.0.16 yet
         opts = {
             file_selector = { provider = 'snacks' },
             provider = 'ollama',
