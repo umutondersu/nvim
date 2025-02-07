@@ -45,10 +45,9 @@ return {
         -- Search
         { "<leader>sf", function() Snacks.picker.files() end,            desc = "Files" },
         {
-            "<leader>sb",
+            "<leader><space>",
             function()
                 Snacks.picker.buffers({
-                    -- I always want my buffers picker to start in normal mode
                     on_show = function()
                         vim.cmd.stopinsert()
                     end,
@@ -60,11 +59,9 @@ return {
                         },
                         list = { keys = { ["d"] = "bufdelete" } },
                     },
-                    -- In case you want to override the layout for this keymap
-                    -- layout = "ivy",
                 })
             end,
-            desc = "Buffers"
+            desc = "Find Buffers"
         },
         { "<leader>sc", function() Snacks.picker.commands() end,           desc = "Commands" },
         { "<leader>sC", function() Snacks.picker.command_history() end,    desc = "Command History" },
