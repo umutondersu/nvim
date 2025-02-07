@@ -131,7 +131,7 @@ return {
             {
                 '<leader>ape',
                 function()
-                    require('avante.api').ask { question = 'Explain the following code' }
+                    require('avante.api').ask { question = 'Explain the following code. Do not edit or suggest code' }
                 end,
                 mode = { 'n', 'v' },
                 desc = 'Explain Code',
