@@ -43,3 +43,22 @@ vim.api.nvim_create_user_command("Ftoggle", function()
   local status = vim.g.disable_autoformat and "Disabled" or "Enabled"
   print("Auto Formatting is " .. status)
 end, { desc = "Toggle autoformatting" })
+
+-- wrap and check for spell in text filetypes
+vim.api.nvim_create_autocmd("FileType", {
+  group = vim.api.nvim_create_augroup('wrap_spell', { clear = true }),
+  pattern = { "text", "plaintex", "typst", "gitcommit", "markdown" },
+  callback = function()
+    vim.opt_local.wrap = true
+    vim.opt_local.spell = true
+  end,
+})
+
+-- Fix conceallevel for json files
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  group = vim.api.nvim_create_augroup('json_conceal', { clear = true }),
+  pattern = { "json", "jsonc", "json5" },
+  callback = function()
+    vim.opt_local.conceallevel = 0
+  end,
+})

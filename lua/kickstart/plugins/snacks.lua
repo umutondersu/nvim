@@ -28,8 +28,8 @@ return {
         { "<leader>e",  function() Snacks.explorer.open() end,           desc = "Toggle File Explorer" },
         { "<leader>St", function() Snacks.scratch() end,                 desc = "Toggle Scratch Buffer" },
         { "<leader>Ss", function() Snacks.scratch.select() end,          desc = "Select Scratch Buffer" },
-        { "<leader>nh", function() Snacks.notifier.show_history() end,   desc = "Notification History" },
-        { "<leader>nd", function() Snacks.notifier.hide() end,           desc = "Dismiss All Notifications" },
+        { "<leader>sN", function() Snacks.notifier.show_history() end,   desc = "Notification History" },
+        { "<leader>un", function() Snacks.notifier.hide() end,           desc = "Dismiss All Notifications" },
         { "<A-c>",      function() Snacks.bufdelete() end,               desc = "Delete Buffer" },
         { "<leader>rf", function() Snacks.rename.rename_file() end,      desc = "Rename File" },
         { "<c-/>",      function() Snacks.terminal() end,                desc = "Toggle Terminal" },
@@ -45,10 +45,9 @@ return {
         -- Search
         { "<leader>sf", function() Snacks.picker.files() end,            desc = "Files" },
         {
-            "<leader>sb",
+            "<leader><space>",
             function()
                 Snacks.picker.buffers({
-                    -- I always want my buffers picker to start in normal mode
                     on_show = function()
                         vim.cmd.stopinsert()
                     end,
@@ -60,16 +59,13 @@ return {
                         },
                         list = { keys = { ["d"] = "bufdelete" } },
                     },
-                    -- In case you want to override the layout for this keymap
-                    -- layout = "ivy",
                 })
             end,
-            desc = "Buffers"
+            desc = "Find Buffers"
         },
         { "<leader>sc", function() Snacks.picker.commands() end,           desc = "Commands" },
         { "<leader>sC", function() Snacks.picker.command_history() end,    desc = "Command History" },
         { "<leader>sd", function() Snacks.picker.diagnostics() end,        desc = "Diagnostics" },
-        ---@diagnostic disable-next-line: undefined-field
         { "<leader>sD", function() Snacks.picker.diagnostics_buffer() end, desc = "Diagnostics on Buffer" },
         { "<leader>sp", function() Snacks.picker.projects() end,           desc = "Projects" },
         ---@diagnostic disable-next-line: undefined-field
@@ -172,19 +168,7 @@ return {
 
         -- New command to create a snacks window for running lazydocker like lazygit
         vim.api.nvim_create_user_command("Docker", function()
-            Snacks.win({
-                style = 'lazygit',
-                file = nil,
-                buf = vim.api.nvim_create_buf(false, true), -- Create a scratch buffer for the terminal
-                on_win = function(self)
-                    vim.fn.termopen("lazydocker", {
-                        on_exit = function() -- Close the window when the process exits
-                            self:close()
-                        end,
-                    })
-                    vim.cmd("startinsert") -- Enter insert mode for terminal
-                end,
-            })
+            Snacks.terminal('lazydocker')
         end, { nargs = 0 })
     end,
 }
