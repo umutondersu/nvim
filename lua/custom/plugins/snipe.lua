@@ -4,6 +4,15 @@ return {
         { "<M-X>", function() require("snipe").open_buffer_menu() end, desc = "Open Snipe buffer menu" }
     },
     opts = {
+        sort = "last",
+        ui = {
+            position = "center",
+            open_win_override = {
+                title = "Snipe Menu",
+                border = "rounded", -- use "rounded" for rounded border
+            },
+            text_align = 'file-first'
+        },
         hints = {
             -- Charaters to use for hints (NOTE: make sure they don't collide with the navigation keymaps)
             dictionary = "sauflewcmpghio",
@@ -30,7 +39,7 @@ return {
             close_buffer = "d",
 
             -- Open buffer in vertical split
-            open_vsplit = "V",
+            open_vsplit = "v",
 
             -- Open buffer in split, based on `vim.opt.splitbelow`
             open_split = "H",
