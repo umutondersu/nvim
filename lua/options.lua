@@ -54,9 +54,6 @@ vim.opt.splitbelow = true
 -- Custom diagnostic config
 vim.diagnostic.config({ float = { source = true } })
 
--- recommended by auto-session
-vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
-
 -- Disable Node Provider for windows
 if vim.fn.has('win32') == 1 then
 	vim.g.loaded_node_provider = 0

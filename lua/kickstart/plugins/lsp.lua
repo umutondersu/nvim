@@ -100,6 +100,9 @@ return { -- LSP Configuration & Plugins
 				--  Symbols are things like variables, functions, types, etc.
 				map('<leader>ss', Snacks.picker.lsp_symbols, 'Symbols')
 
+				-- Fuzzy find symbols in the workspace
+				map('<leader>sS', Snacks.picker.lsp_workspace_symbols, 'Workspace Symbols')
+
 				-- Rename the variable under your cursor
 				--  Most Language Servers support renaming across files, etc.
 				map('<leader>rv', vim.lsp.buf.rename, 'Rename the variable under cursor')
