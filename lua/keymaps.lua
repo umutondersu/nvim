@@ -48,16 +48,3 @@ map("n", "<M-u>", ":e!<CR>", { desc = 'Undo all unsaved writes' })
 map('n', '<leader>w', '<cmd>w<CR>', { desc = 'Save Buffer' })
 map('n', '<leader>x', '<cmd>wqa<CR>', { desc = 'Save and Exit All Buffers' })
 map('n', '<leader>q', '<cmd>q<CR>', { desc = 'Quit a Window' })
-
--- Esc does nothing in normal mode
-map('n', '<Esc>', '<Nop>', { silent = true })
-
--- Buffer Management NOTE: Should not be used barbar.nvim
--- map('n', '<M-.>', function()
---   vim.cmd(':bn')
---   vim.cmd(':clear')
--- end, { desc = 'Next buffer', noremap = true })
--- map('n', '<M-,>', function()
---   vim.cmd(':bp')
---   vim.cmd(':clear')
--- end, { desc = 'Previous buffer', noremap = true })
