@@ -10,7 +10,7 @@ return { -- LSP Configuration & Plugins
 		'aznhe21/actions-preview.nvim',
 
 		-- Preview for go to methods
-		{ 'rmagatti/goto-preview', opts = {},  event = 'VeryLazy', },
+		{ 'rmagatti/goto-preview', opts = {}, event = 'VeryLazy', },
 
 		-- Populates project-wide lsp diagnostcs
 		'artemave/workspace-diagnostics.nvim',
@@ -54,11 +54,10 @@ return { -- LSP Configuration & Plugins
 			opts = {
 				library = {
 					-- Load luvit types when the `vim.uv` word is found
-					{ path = 'luvit-meta/library', words = { 'vim%.uv' } },
+					{ path = '${3rd}/luv/library', words = { 'vim%.uv' } },
 				},
 			},
 		},
-		{ "Bilal2453/luvit-meta",  lazy = true }, -- optional `vim.uv` typings
 	},
 	config = function()
 		vim.api.nvim_create_autocmd('LspAttach', {
