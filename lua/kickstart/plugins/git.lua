@@ -2,7 +2,7 @@ return {
   -- Git related plugins
   {
     'tpope/vim-fugitive',
-    config = function() vim.keymap.set('n', '<leader>gw', '<cmd>G<cr>', { desc = 'Git Fugitive Window' }) end
+    init = function() vim.keymap.set('n', '<leader>gw', '<cmd>G<cr>', { desc = 'Git Fugitive Window' }) end
   },
   { 'tpope/vim-rhubarb' },
   {
@@ -10,13 +10,6 @@ return {
     'lewis6991/gitsigns.nvim',
     opts = {
       -- See `:help gitsigns.txt`
-      signs = {
-        add = { text = '+' },
-        change = { text = '~' },
-        delete = { text = '_' },
-        topdelete = { text = '‾' },
-        changedelete = { text = '~' },
-      },
       on_attach = function(bufnr)
         local gs = require 'gitsigns'
 

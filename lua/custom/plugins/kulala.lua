@@ -1,8 +1,8 @@
 return {
     'mistweaverco/kulala.nvim',
-    config = function()
-        require('kulala').setup()
-
+    opts = {},
+    ft = 'http',
+    init = function()
         local commands = {
             Run = "run",
             RunAll = "run_all",

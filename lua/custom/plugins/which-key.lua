@@ -20,9 +20,8 @@ return {
         },
         delay = 0,
     },
-    config = function(_, opts)
+    init = function()
         -- For surround plugins to work with which-key TODO: Remove when/if the bug is fixed
         vim.o.timeout = false
-        require("which-key").setup(opts)
     end,
 }

@@ -48,13 +48,11 @@ return {
             "<leader><space>",
             function()
                 Snacks.picker.buffers({
-                    on_show = function()
-                        vim.cmd.stopinsert()
-                    end,
                     win = {
                         input = {
                             keys = {
                                 ["d"] = "bufdelete",
+                                ["<c-d>"] = { "bufdelete", mode = { "n", "i" } },
                             },
                         },
                         list = { keys = { ["d"] = "bufdelete" } },
