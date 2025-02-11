@@ -176,6 +176,8 @@ return { -- LSP Configuration & Plugins
 
 			pyright = {},
 
+			ts_ls = {},
+
 			tailwindcss = {},
 
 			lua_ls = {
@@ -244,6 +246,8 @@ return { -- LSP Configuration & Plugins
 			handlers = {
 				function(server_name)
 					local server = servers[server_name] or {}
+					-- Do not set up ts_ls since typescript-tools is used
+					if server_name == 'ts_ls' then return end
 					-- This handles overriding only values explicitly passed
 					-- by the server configuration above. Useful when disabling
 					-- certain features of an LSP (for example, turning off formatting for tsserver)
