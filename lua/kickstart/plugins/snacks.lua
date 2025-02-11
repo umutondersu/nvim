@@ -105,7 +105,8 @@ return {
             "<leader>snf",
             function()
                 Snacks.picker.files({
-                    cwd = vim.fn.stdpath('config')[0]
+                    ---@diagnostic disable-next-line: assign-type-mismatch
+                    cwd = vim.fn.stdpath("config")
                 })
             end,
             desc = "Files"
