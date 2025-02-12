@@ -1,5 +1,3 @@
-local general = vim.api.nvim_create_augroup("General Settings", { clear = true })
-
 vim.api.nvim_create_user_command('Gc', function(args)
   local vimCmd = 'Git commit -m'
   if args['args'] then
@@ -8,13 +6,13 @@ vim.api.nvim_create_user_command('Gc', function(args)
   vim.cmd(vimCmd)
 end, { desc = 'Commit with a message', nargs = '*' })
 
-vim.api.nvim_create_user_command('Gp', 'Git push', { desc = 'git push' })
-
-vim.api.nvim_create_user_command("Cppath", function()
-  local path = vim.fn.expand("%:p")
-  vim.fn.setreg("+", path)
-  vim.notify('Copied "' .. path .. '" to the clipboard!')
-end, {})
+vim.api.nvim_create_user_command('Gp', function(args)
+  local vimCmd = 'Git push'
+  if args['args'] then
+    vimCmd = vimCmd .. ' ' .. args['args']
+  end
+  vim.cmd(vimCmd)
+end, { desc = 'Git push', nargs = '*' })
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -32,17 +30,9 @@ vim.api.nvim_create_autocmd("BufEnter", {
   callback = function()
     vim.opt.formatoptions:remove { "c", "r", "o" }
   end,
-  group = general,
+  group = vim.api.nvim_create_augroup('disable_newline_comment', { clear = true }),
   desc = "Disable New Line Comment",
 })
-
--- [[ Toggle Autoformatting with Conform.nvim ]]
-vim.api.nvim_create_user_command("Ftoggle", function()
-  vim.g.disable_autoformat = not vim.g.disable_autoformat
-  vim.b.disable_autoformat = vim.g.disable_autoformat
-  local status = vim.g.disable_autoformat and "Disabled" or "Enabled"
-  print("Auto Formatting is " .. status)
-end, { desc = "Toggle autoformatting" })
 
 -- wrap and check for spell in text filetypes
 vim.api.nvim_create_autocmd("FileType", {

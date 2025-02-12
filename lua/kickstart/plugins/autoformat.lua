@@ -26,9 +26,7 @@ return
       desc = "Toggle autoformatting",
     }, {
     "<leader>fi",
-    function()
-      vim.cmd "ConformInfo"
-    end,
+    "<cmd>ConformInfo<cr>",
     mode = "n",
     desc = "Conform Info",
   },
@@ -54,19 +52,30 @@ return
     end,
     --NOTE: add the formatters to ensure_installed with add_tools function
     formatters_by_ft = {
-      javascript = { "prettierd", "prettier", stop_after_first = true },
-      typescript = { "prettierd", "prettier", stop_after_first = true },
-      javascriptreact = { "prettierd", "prettier", stop_after_first = true },
-      typescriptreact = { "prettierd", "prettier", stop_after_first = true },
-      json = { "prettierd", "prettier", stop_after_first = true },
-      yaml = { "prettierd", "prettier", stop_after_first = true },
-      markdown = { "prettierd", "prettier", stop_after_first = true },
-      html = { "prettierd", "prettier", stop_after_first = true },
-      css = { "prettierd", "prettier", stop_after_first = true },
+      javascript = { "prettier" },
+      typescript = { "prettier" },
+      javascriptreact = { "prettier" },
+      typescriptreact = { "prettier" },
+      json = { "prettier" },
+      yaml = { "prettier" },
+      markdown = { "prettier" },
+      html = { "prettier" },
+      css = { "prettier" },
       python = { "isort", "black" },
-      go = { 'gofumpt', 'goimports' },
-      cshart = { 'csharpier' },
-      -- lua = { "stylua" },
+      go = { "gofumpt", "goimports" },
+      cshart = { "csharpier" },
     },
+    formatters = {
+      prettier = { prepend_args = { "--tab-width", "2", "--use-tabs", "--single-quote" } },
+    }
   },
+  init = function()
+    -- [[ Toggle Autoformatting with Conform.nvim ]]
+    vim.api.nvim_create_user_command("Ftoggle", function()
+      vim.g.disable_autoformat = not vim.g.disable_autoformat
+      vim.b.disable_autoformat = vim.g.disable_autoformat
+      local status = vim.g.disable_autoformat and "Disabled" or "Enabled"
+      print("Auto Formatting is " .. status)
+    end, { desc = "Toggle autoformatting" })
+  end
 }
