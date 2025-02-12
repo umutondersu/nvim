@@ -93,7 +93,7 @@ return { -- LSP Configuration & Plugins
 				-- This is not Goto Definition, this is Goto Declaration.
 				-- For example, in C this would take you to the header
 				-- Many servers do not implement this method
-				map('gD', vim.lsp.buf.declaration, 'Goto Declaration')
+				map('gD', Snacks.picker.lsp_declarations, 'Goto Declaration')
 
 				-- Fuzzy find all the symbols.
 				--  Symbols are things like variables, functions, types, etc.
@@ -142,7 +142,7 @@ return { -- LSP Configuration & Plugins
 				if check_client('jdtls') then
 					map('<leader>tc', require('java').test.run_current_class, 'Run Current Class')
 					map('<leader>tm', require('java').test.run_current_method, 'Run Current Method')
-					map('<leader>tv', require('java').test.view_last_report, 'View Last Report')
+					map('<leader>tr', require('java').test.view_last_report, 'View Last Report')
 				end
 
 				if check_client('typescript-tools') then
@@ -197,14 +197,15 @@ return { -- LSP Configuration & Plugins
 
 		---@param command string
 		---@param server_name string
-		---@param server_config table
+		---@param server_config table?
 		local function add_lsp(command, server_name, server_config)
+			server_config = server_config or {}
 			if vim.fn.executable(command) == 1 then
 				servers[server_name] = server_config
 			end
 		end
 
-		add_lsp('dotnet', 'omnisharp', {})
+		add_lsp('dotnet', 'omnisharp')
 
 		add_lsp('go', 'gopls', {
 			settings = {
@@ -225,7 +226,7 @@ return { -- LSP Configuration & Plugins
 		if vim.fn.executable('java') == 1 then
 			require('java').setup()
 		end
-		add_lsp('java', 'jdtls', {})
+		add_lsp('java', 'jdtls')
 
 		-- Ensure the servers and tools above are installed
 		--  To check the current status of installed tools and/or manually install
@@ -245,9 +246,9 @@ return { -- LSP Configuration & Plugins
 		require('mason-lspconfig').setup {
 			handlers = {
 				function(server_name)
-					local server = servers[server_name] or {}
 					-- Do not set up ts_ls since typescript-tools is used
 					if server_name == 'ts_ls' then return end
+					local server = servers[server_name] or {}
 					-- This handles overriding only values explicitly passed
 					-- by the server configuration above. Useful when disabling
 					-- certain features of an LSP (for example, turning off formatting for tsserver)
