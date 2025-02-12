@@ -17,6 +17,8 @@ return {
             { "<leader>ap", group = "avante: prompts", mode = { 'n', 'v' } },
             { "<leader>u",  group = "Ui" },
             { "<leader>S",  group = "Scratch" },
+            { "<leader>c",  group = "Code",            mode = { 'n', 'v' } },
+
         },
         delay = 0,
     },

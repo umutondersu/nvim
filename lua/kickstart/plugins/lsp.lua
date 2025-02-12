@@ -108,7 +108,7 @@ return { -- LSP Configuration & Plugins
 
 				-- Execute a code action, usually your cursor needs to be on top of an error
 				-- or a suggestion from your LSP for this to activate.
-				map('<leader>c', require("actions-preview").code_actions, 'Code action', { 'n', 'x' })
+				map('<leader>ca', require("actions-preview").code_actions, 'Code action', { 'n', 'x' })
 				-- map('<leader>a', vim.lsp.buf.code_action, 'Code [A]ction')
 
 
@@ -143,12 +143,26 @@ return { -- LSP Configuration & Plugins
 					map('<leader>tc', require('java').test.run_current_class, 'Run Current Class')
 					map('<leader>tm', require('java').test.run_current_method, 'Run Current Method')
 					map('<leader>tr', require('java').test.view_last_report, 'View Last Report')
+					map('<leader>ct', require('java').runner.built_in.toggle_logs, 'Toggle Logs')
+					map('<leader>cv', require('java').refactor.extract_variable, 'Extract Variable')
+					map('<leader>cV', require('java').refactor.extract_variable_all_occurrence,
+						'Extract Variable All Occurrences')
+					map('<leader>cc', require('java').refactor.extract_constant, 'Extract Constant')
+					map('<leader>cm', require('java').refactor.extract_method, 'Extract Method')
+					map('<leader>cf', require('java').refactor.extract_field, 'Extract Field')
 				end
 
 				if check_client('typescript-tools') then
-					map('<leader>fa', '<cmd>TSToolsAddMissingImports<cr>', 'Add Missing Tools')
-					map('<leader>fo', '<cmd>TSToolsOrganizeImports<cr>', 'Sort and Remove Unused Imports')
+					map('<leader>cm', '<cmd>TSToolsAddMissingImports<cr>', 'Add Missing Tools')
+					map('<leader>co', '<cmd>TSToolsOrganizeImports<cr>', 'Sort and Remove Unused Imports')
+					map('<leader>cf', '<cmd>TSToolsFixAll<cr>', 'Fix all fixable errors')
+					map('<leader>cr', '<cmd>TSToolsRemoveUnused<cr>', 'Remove all unused statements')
 					map('<leader>rf', '<cmd>TSToolsRenameFile<cr>', 'Rename File')
+				end
+
+				if check_client('gopls') then
+					map('<leader>ct', function() require("gopher").tags.add "json" end, 'Add JSON Tags to struct')
+					map('<leader>cc', '<cmd>GoCmt<cr>', 'Generate boilerplate for doc comments')
 				end
 			end,
 		})
