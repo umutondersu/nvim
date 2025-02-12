@@ -153,7 +153,7 @@ return { -- LSP Configuration & Plugins
 				end
 
 				if check_client('typescript-tools') then
-					map('<leader>cm', '<cmd>TSToolsAddMissingImports<cr>', 'Add Missing Tools')
+					map('<leader>cm', '<cmd>TSToolsAddMissingImports<cr>', 'Add Missing Imports')
 					map('<leader>co', '<cmd>TSToolsOrganizeImports<cr>', 'Sort and Remove Unused Imports')
 					map('<leader>cf', '<cmd>TSToolsFixAll<cr>', 'Fix all fixable errors')
 					map('<leader>cr', '<cmd>TSToolsRemoveUnused<cr>', 'Remove all unused statements')
