@@ -65,9 +65,6 @@ return
       go = { "gofumpt", "goimports" },
       cshart = { "csharpier" },
     },
-    formatters = {
-      prettier = { prepend_args = { "--tab-width", "2", "--use-tabs", "--single-quote" } },
-    }
   },
   init = function()
     -- [[ Toggle Autoformatting with Conform.nvim ]]
