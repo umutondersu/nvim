@@ -65,7 +65,7 @@ return {
         { "<leader>sC", function() Snacks.picker.command_history() end,    desc = "Command History" },
         { "<leader>sd", function() Snacks.picker.diagnostics() end,        desc = "Diagnostics" },
         { "<leader>sD", function() Snacks.picker.diagnostics_buffer() end, desc = "Diagnostics on Buffer" },
-        { "<leader>sp", function() Snacks.picker.projects() end,           desc = "Projects" },
+        { "<leader>sp", function() Snacks.picker.pickers() end,            desc = "Pickers" },
         ---@diagnostic disable-next-line: undefined-field
         { "<leader>st", function() Snacks.picker.todo_comments() end,      desc = "Todo Comments" },
         { "<leader>sr", function() Snacks.picker.resume() end,             desc = "Resume" },
