@@ -170,4 +170,7 @@ return {
             Snacks.terminal('lazydocker')
         end, { nargs = 0 })
     end,
+    dependencies = {
+        { 'folke/todo-comments.nvim', event = 'VeryLazy', dependencies = { 'nvim-lua/plenary.nvim' }, opts = {} },
+    },
 }

@@ -5,17 +5,14 @@ return
 }, {
     'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
 }, {
+    'tpope/vim-repeat' -- Make most of the plugins repeatable with .
+}, {
     'anuvyklack/help-vsplit.nvim',
     opts = {},
 }, {
-    "dmmulroy/tsc.nvim",
-    event = "VeryLazy",
+    'dmmulroy/tsc.nvim',
+    event = 'VeryLazy',
     opts = {},
-}, {
-    "folke/todo-comments.nvim",
-    event = "VeryLazy",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    opts = {}
 }, {
     'ibhagwan/smartyank.nvim',
     opts = {},
@@ -29,11 +26,11 @@ return
 }, {
     'danitrap/cheatsh.nvim',
 }, {
-    "aliqyan-21/wit.nvim",
+    'aliqyan-21/wit.nvim',
     opts = {},
 }, {
-    "max397574/colortils.nvim",
-    cmd = "Colortils",
+    'max397574/colortils.nvim',
+    cmd = 'Colortils',
     opts = {},
 },
 }
