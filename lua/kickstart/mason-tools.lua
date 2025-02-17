@@ -7,7 +7,6 @@ local ensure_installed = {
 	'black',
 	'isort',
 	'prettier',
-	'prettierd',
 	-- Linters
 	'eslint_d',
 	'flake8',

@@ -2,7 +2,16 @@ return {
   -- Git related plugins
   {
     'tpope/vim-fugitive',
-    init = function() vim.keymap.set('n', '<leader>gw', '<cmd>G<cr>', { desc = 'Git Fugitive Window' }) end
+    init = function()
+      vim.keymap.set('n', '<leader>gw',
+        function()
+          if vim.bo.filetype == 'fugitive' then
+            vim.cmd('quit')
+          else
+            vim.cmd('G')
+          end
+        end, { desc = 'Toggle Git Fugitive Window' })
+    end
   },
   { 'tpope/vim-rhubarb' },
   {

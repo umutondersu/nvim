@@ -56,7 +56,9 @@ return {
       ['<C-space>'] = {},
       ['<Up>'] = {},
       ['<Down>'] = {},
-      cmdline = {
+    },
+    cmdline = {
+      keymap = {
         preset = 'none',
         ['<C-a>'] = { 'select_and_accept' },
         ['<C-x>'] = { 'show', 'hide' },
