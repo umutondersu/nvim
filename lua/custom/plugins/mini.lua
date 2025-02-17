@@ -12,20 +12,21 @@ return { -- Collection of various small independent plugins/modules
 
         -- Add/delete/replace surroundings (brackets, quotes, etc.)
         --
-        -- - siw) - [S]urround [I]nner [W]ord [)]Paren
-        -- - sd'   - [S]urround [D]elete [']quotes
-        -- - sc)'  - [S]urround [C]hange [)] [']
+        -- - gsaw) - [G]enorously [S]urround [A]round [W]ord [)]Paren
+        -- - gsd'   - [G]racefully [S]urround [D]elete [']quotes
+        -- - gsc)'  - [G]loriously [S]urround [C]hange [)] [']
         require('mini.surround').setup({
             mappings = {
-                add = 'S',             -- Add surrounding in Normal and Visual modes
-                delete = 'Sd',         -- Delete surrounding
-                find = 'Sf',           -- Find surrounding (to the right)
-                find_left = 'SF',      -- Find surrounding (to the left)
-                highlight = 'Sh',      -- Highlight surrounding
-                replace = 'Sc',        -- Replace surrounding
-                update_n_lines = 'Sn', -- Update `n_lines`
-                suffix_last = 'l',     -- Suffix to search with "prev" method
-                suffix_next = 'n',     -- Suffix to search with "next" method
+                add = 'gs',             -- Add surrounding in Normal and Visual modes
+                delete = 'gsd',         -- Delete surrounding
+                find = 'gsf',           -- Find surrounding (to the right)
+                find_left = 'gsF',      -- Find surrounding (to the left)
+                highlight = 'gsh',      -- Highlight surrounding
+                replace = 'gsc',        -- Replace surrounding
+                update_n_lines = 'gsn', -- Update `n_lines`
+
+                suffix_last = 'l',      -- Suffix to search with "prev" method
+                suffix_next = 'n',      -- Suffix to search with "next" method
             },
         })
 
