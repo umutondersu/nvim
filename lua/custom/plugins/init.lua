@@ -14,9 +14,6 @@ return
     event = 'VeryLazy',
     opts = {},
 }, {
-    'ibhagwan/smartyank.nvim',
-    opts = {},
-}, {
     'stevearc/dressing.nvim',
     event = 'VeryLazy',
     opts = {},
