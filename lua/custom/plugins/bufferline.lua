@@ -3,13 +3,12 @@ return {
     'akinsho/bufferline.nvim',
     event = 'VeryLazy',
     keys = {
-        { '<A-P>', '<Cmd>BufferLineTogglePin<CR>',   desc = 'Toggle Buffer Pin' },
-        { '<A-x>', '<cmd>BufferLinePick<cr>',        desc = 'Pick Buffer' },
-        { '<A-o>', '<cmd>BufferLineCloseOthers<cr>', desc = 'Close other Buffers' },
-        { '<A-.>', '<cmd>BufferLineCycleNext<cr>',   desc = 'Next Buffer' },
-        { '<A-,>', '<cmd>BufferLineCyclePrev<cr>',   desc = 'Prev Buffer' },
-        { '<A->>', '<cmd>BufferLineMoveNext<cr>',    desc = 'Prev Buffer' },
-        { '<A-<>', '<cmd>BufferLineMovePrev<cr>',    desc = 'Next Buffer' },
+        { '<A-P>', '<Cmd>BufferLineTogglePin<CR>', desc = 'Toggle Buffer Pin' },
+        { '<A-x>', '<cmd>BufferLinePick<cr>',      desc = 'Pick Buffer' },
+        { '<A-.>', '<cmd>BufferLineCycleNext<cr>', desc = 'Next Buffer' },
+        { '<A-,>', '<cmd>BufferLineCyclePrev<cr>', desc = 'Prev Buffer' },
+        { '<A->>', '<cmd>BufferLineMoveNext<cr>',  desc = 'Prev Buffer' },
+        { '<A-<>', '<cmd>BufferLineMovePrev<cr>',  desc = 'Next Buffer' },
     },
     opts = {
         ---@module 'snacks'
