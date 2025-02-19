@@ -12,7 +12,7 @@ return { -- Collection of various small independent plugins/modules
 
         -- Add/delete/replace surroundings (brackets, quotes, etc.)
         --
-        -- - gsaw) - [G]enorously [S]urround [A]round [W]ord [)]Paren
+        -- - gsaw)  - [G]enorously [S]urround [A]round [W]ord [)]Paren
         -- - gsd'   - [G]racefully [S]urround [D]elete [']quotes
         -- - gsc)'  - [G]loriously [S]urround [C]hange [)] [']
         require('mini.surround').setup({
