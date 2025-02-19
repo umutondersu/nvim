@@ -2,6 +2,7 @@ return {
     {
         'zbirenbaum/copilot.lua',
         cmd = 'Copilot',
+        build = ":Copilot auth",
         event = 'InsertEnter',
         opts = {
             panel = {
@@ -11,15 +12,8 @@ return {
                 enabled = false,
             },
             filetypes = {
-                yaml = false,
-                markdown = false,
-                help = false,
-                gitcommit = false,
-                gitrebase = false,
-                hgcommit = false,
-                svn = false,
-                cvs = false,
-                ['.'] = false,
+                markdown = true,
+                help = true,
             },
             copilot_node_command = 'node',
             server_opts_overrides = {},

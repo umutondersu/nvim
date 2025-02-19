@@ -38,26 +38,25 @@ return {
 
     -- Dap UI setup
     -- For more information, see |:help nvim-dap-ui|
+    local dapui_icons = require('kickstart.icons').dapui
     dapui.setup {
       -- Set icons to characters that are more likely to work in every terminal.
       --    Feel free to remove or use ones that you like more! :)
-      --    Don't feel like these are good choices.
-      icons = { expanded = '▾', collapsed = '▸', current_frame = '*' },
+      icons = dapui_icons.icons,
       controls = {
-        icons = {
-          pause = '󰏤',
-          play = '▶',
-          step_into = '',
-          step_over = '',
-          step_out = '',
-          step_back = '',
-          run_last = '▶▶',
-          terminate = '',
-          disconnect = '',
-        },
+        icons = dapui_icons.control_icons
       },
     }
 
+    local dap_icons = require('kickstart.icons').dap
+    for name, sign in pairs(dap_icons) do
+      sign = type(sign) == "table" and sign or { sign }
+      vim.fn.sign_define(
+        "Dap" .. name,
+        ---@diagnostic disable-next-line: assign-type-mismatch
+        { text = sign[1], texthl = sign[2] or "DiagnosticInfo", linehl = sign[3], numhl = sign[3] }
+      )
+    end
 
     dap.listeners.after.event_initialized['dapui_config'] = dapui.open
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close
