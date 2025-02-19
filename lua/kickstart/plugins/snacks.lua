@@ -23,6 +23,7 @@ return {
                 frecency = true,
             },
         },
+        image = { enabled = true, force = true },
     },
     keys = {
         { "<leader>e",  function() Snacks.explorer.open() end,           desc = "Toggle File Explorer" },
@@ -105,8 +106,7 @@ return {
             "<leader>snf",
             function()
                 Snacks.picker.files({
-                    ---@diagnostic disable-next-line: assign-type-mismatch
-                    cwd = vim.fn.stdpath("config")
+                    cwd = vim.fn.stdpath("config") --[[@as string]]
                 })
             end,
             desc = "Files"
