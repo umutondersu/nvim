@@ -97,10 +97,11 @@ return { -- LSP Configuration & Plugins
 
 				-- Fuzzy find all the symbols.
 				--  Symbols are things like variables, functions, types, etc.
-				map('<leader>ss', Snacks.picker.lsp_symbols, 'Symbols')
+				local kind_filter = { filter = require('kickstart.icons').kind_filter }
+				map('<leader>ss', function() Snacks.picker.lsp_symbols(kind_filter) end, 'Symbols')
 
 				-- Fuzzy find symbols in the workspace
-				map('<leader>sS', Snacks.picker.lsp_workspace_symbols, 'Workspace Symbols')
+				map('<leader>sS', function() Snacks.picker.lsp_workspace_symbols(kind_filter) end, 'Workspace Symbols')
 
 				-- Rename the variable under your cursor
 				--  Most Language Servers support renaming across files, etc.
