@@ -161,6 +161,9 @@ return { -- LSP Configuration & Plugins
 					vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
 						pattern = { "*.ts", "*.js", "*.tsx", "*jsx" },
 						callback = vim.schedule_wrap(function()
+							if vim.g.disable_autoformat or vim.b[event.buf].disable_autoformat then
+								return
+							end
 							vim.cmd('TSToolsAddMissingImports')
 							vim.cmd('TSToolsOrganizeImports')
 							vim.cmd('write')
