@@ -122,9 +122,8 @@ return { -- LSP Configuration & Plugins
 				map('gpD', require("goto-preview").goto_preview_declaration,
 					'Declaration')
 
-				-- Language specific keymaps
+				-- Language specific configurations and keymaps
 				local client = vim.lsp.get_client_by_id(event.data.client_id)
-
 				local function check_client(client_name)
 					return client and client.name == client_name
 				end
@@ -158,6 +157,16 @@ return { -- LSP Configuration & Plugins
 					map('<leader>cf', '<cmd>TSToolsFixAll<cr>', 'Fix all fixable errors')
 					map('<leader>cr', '<cmd>TSToolsRemoveUnused<cr>', 'Remove all unused statements')
 					map('<leader>rf', '<cmd>TSToolsRenameFile<cr>', 'Rename File')
+					-- Organize and Add Missing Import automatically
+					vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
+						pattern = { "*.ts", "*.js", "*.tsx", "*jsx" },
+						callback = vim.schedule_wrap(function()
+							vim.cmd('TSToolsAddMissingImports')
+							vim.cmd('TSToolsOrganizeImports')
+							vim.cmd('write')
+						end),
+						group = vim.api.nvim_create_augroup('ts-tools', {}),
+					})
 				end
 
 				if check_client('gopls') then
