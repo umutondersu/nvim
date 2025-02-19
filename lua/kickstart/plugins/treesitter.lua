@@ -67,9 +67,6 @@ return {
           desc = 'Jump to context',
         },
       },
-      config = function()
-        vim.cmd('hi TreesitterContext guibg=none | hi TreesitterContextLineNumber guisp=Red')
-      end,
     }
   },
 }

@@ -1,12 +1,11 @@
+local Transparent = true
 return {
   'folke/tokyonight.nvim',
   lazy = false,
   priority = 1000,
-  opts = {},
-  config = function()
-    local Transparent = true
+  opts = function()
     if Transparent then
-      require("tokyonight").setup({
+      return {
         transparent = true,
         styles = {
           sidebars = "transparent",
@@ -24,24 +23,21 @@ return {
             fg = LineNrHighlight,
           }
         end,
-      })
-      vim.api.nvim_create_autocmd('ColorScheme', {
-        callback = vim.schedule_wrap(function()
-          vim.cmd('hi BufferTabpageFill guibg=none')
-          vim.cmd('hi BufferOffset guibg=none')
-        end),
-        group = vim.api.nvim_create_augroup('foo', {}),
-      })
-    else
-      require("tokyonight").setup()
-      vim.api.nvim_create_autocmd('ColorScheme', {
-        callback = vim.schedule_wrap(function()
-          vim.cmd('hi BufferTabpageFill guibg=none')
-        end),
-        group = vim.api.nvim_create_augroup('foo', {}),
-      })
+      }
     end
+    return {}
+  end,
+  init = function()
     vim.cmd.colorscheme 'tokyonight-night'
+    vim.api.nvim_create_autocmd({ 'ColorScheme', 'BufAdd' }, {
+      callback = vim.schedule_wrap(function()
+        if Transparent == true then
+          vim.cmd('hi TreesitterContext guibg=none ')
+          vim.cmd('hi TreesitterContextLineNumber guisp=Red')
+        end
+      end),
+      group = vim.api.nvim_create_augroup('Transparency', {}),
+    })
   end,
 
 }
