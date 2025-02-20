@@ -9,7 +9,7 @@ return {
             { "<leader>f",  group = "Format",          mode = { 'n', 'v' } },
             { "<leader>g",  group = "Git" },
             { "<leader>h",  group = "Git Hunk",        mode = { 'n', 'v' } },
-            { "<leader>r",  group = "Rename",          mode = { 'n', 'v' } },
+            { "<leader>r",  group = "Rename/Replace",  mode = { 'n', 'v' } },
             { "<leader>s",  group = "Search",          mode = { 'n', 'v' } },
             { "<leader>sn", group = "Search Neovim" },
             { "<leader>t",  group = "Test" },
