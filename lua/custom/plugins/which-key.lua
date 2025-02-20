@@ -21,8 +21,4 @@ return {
             { "<leader>c",  group = "Code" },
         },
     },
-    init = function()
-        -- For surround plugins to work with which-key TODO: Remove when/if the bug is fixed
-        vim.o.timeout = false
-    end,
 }
