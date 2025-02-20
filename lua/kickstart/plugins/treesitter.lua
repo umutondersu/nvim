@@ -49,13 +49,12 @@ return {
     textobjects = {
       move = {
         enable = true,
-        goto_next_start = { [']f'] = '@function.outer' },
-        goto_next_end = { [']F'] = '@function.outer' },
-        goto_previous_start = { ['[f'] = '@function.outer' },
-        goto_previous_end = { ['[F'] = '@function.outer' },
+        goto_next_start = { [']f'] = { query = '@function.outer', desc = 'Function forward' } },
+        goto_next_end = { [']F'] = { query = '@function.outer', desc = 'Function backward' } },
+        goto_previous_start = { ['[f'] = { query = '@function.outer', desc = 'Function backward' } },
+        goto_previous_end = { ['[F'] = { query = '@function.outer', desc = 'Function forward' } },
       },
     },
-
   },
   config = function(_, opts)
     require('nvim-treesitter.configs').setup(opts)
