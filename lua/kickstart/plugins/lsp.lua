@@ -160,7 +160,7 @@ return { -- LSP Configuration & Plugins
 					map('<leader>rf', '<cmd>TSToolsRenameFile<cr>', 'Rename File')
 					-- Organize and Add Missing Import automatically
 					vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
-						pattern = { "*.ts", "*.js", "*.tsx", "*jsx" },
+						pattern = { "*.ts", "*.js", "*.tsx", "*.jsx" },
 						callback = vim.schedule_wrap(function()
 							if vim.g.disable_autoformat or vim.b[event.buf].disable_autoformat then
 								return
