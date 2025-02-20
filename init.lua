@@ -29,7 +29,7 @@ require('lazy').setup({
   require 'kickstart.plugins.lsp',
   require 'kickstart.plugins.completion',
   require 'kickstart.plugins.treesitter',
-  require 'kickstart.plugins.colorscheme',
+  require 'kickstart.plugins.ui',
   require 'kickstart.plugins.autoformat',
   require 'kickstart.plugins.lint',
   require 'kickstart.plugins.debug',

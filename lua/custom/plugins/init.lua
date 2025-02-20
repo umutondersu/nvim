@@ -1,7 +1,7 @@
 return
 { {
     'ThePrimeagen/vim-be-good',
-    event = "VeryLazy",
+    cmd = 'VimBeGood',
 }, {
     'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
 }, {
