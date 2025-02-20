@@ -19,6 +19,7 @@ return {
             { "<leader>u",  group = "Ui" },
             { "<leader>S",  group = "Scratch" },
             { "<leader>c",  group = "Code" },
+            { "<leader>cd", group = "Debug" },
         },
     },
 }

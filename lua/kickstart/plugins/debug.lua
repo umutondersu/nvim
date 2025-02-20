@@ -1,11 +1,6 @@
 -- debug.lua
---
 -- Shows how to use the DAP plugin to debug your code.
---
--- Primarily focused on configuring the debugger for Go, but can
--- be extended to other languages as well. That's why it's called
--- kickstart.nvim and not kitchen-sink.nvim ;)
-
+local ft = { 'go', 'python' }
 return {
   'mfussenegger/nvim-dap',
   dependencies = {
@@ -21,14 +16,13 @@ return {
   },
   keys = {
     -- Basic debugging keymaps, feel free to change to your liking!
-    { '<F5>',  function() require('dap').continue() end,                                            desc = 'Debug: Start/Continue' },
-    { '<F11>', function() require('dap').step_into() end,                                           desc = 'Debug: Step Into' },
-    { '<F10>', function() require('dap').step_over() end,                                           desc = 'Debug: Step Over' },
-    { '<F12>', function() require('dap').step_out() end,                                            desc = 'Debug: Step Out' },
-    { '<F6>',  function() require('dap').toggle_breakpoint() end,                                   desc = 'Debug: Toggle Breakpoint' },
-    { '<F7>',  function() require('dap').set_breakpoint(vim.fn.input 'Breakpoint condition: ') end, desc = 'Debug: Set Breakpoint' },
-    -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
-    { '<F8>',  function() require('dapui').toggle() end,                                            desc = 'Debug: See last session result.' },
+    { '<leader>cdr', function() require('dap').continue() end,                                            desc = 'Run/Continue',             ft = ft },
+    { '<leader>cdi', function() require('dap').step_into() end,                                           desc = 'Step Into',                ft = ft },
+    { '<leader>cdo', function() require('dap').step_over() end,                                           desc = 'Step Over',                ft = ft },
+    { '<leader>cdO', function() require('dap').step_out() end,                                            desc = 'Step Out',                 ft = ft },
+    { '<leader>cdt', function() require('dap').toggle_breakpoint() end,                                   desc = 'Toggle Breakpoint',        ft = ft },
+    { '<leader>cds', function() require('dap').set_breakpoint(vim.fn.input 'Breakpoint condition: ') end, desc = 'Set Breakpoint',           ft = ft },
+    { '<Leader>cdR', function() require('dapui').toggle() end,                                            desc = 'See last session result.', ft = ft },
   },
   config = function()
     local dap = require 'dap'
