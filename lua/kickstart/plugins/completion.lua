@@ -8,6 +8,11 @@ return {
     'kristijanhusak/vim-dadbod-completion',
     'fang2hou/blink-copilot',
     'folke/lazydev.nvim',
+    {
+      'Kaiser-Yang/blink-cmp-git',
+      enabled = vim.fn.executable 'gh' == 1,
+      dependencies = { 'nvim-lua/plenary.nvim' }
+    },
 
     -- Snippet Engine
     { 'L3MON4D3/LuaSnip',    version = 'v2.*' },
@@ -76,7 +81,7 @@ return {
     },
     snippets = { preset = 'luasnip' },
     sources = {
-      default = { 'copilot', 'lsp', 'path', 'buffer', 'dadbod', 'snippets', 'lazydev', 'avante_commands', 'avante_files', 'avante_mentions' },
+      default = { 'copilot', 'lsp', 'path', 'buffer', 'dadbod', 'snippets', 'lazydev', 'avante_commands', 'avante_files', 'avante_mentions', 'git' },
       providers = {
         copilot = {
           name = "copilot",
@@ -95,6 +100,15 @@ return {
         dadbod = {
           name = "Dadbod",
           module = "vim_dadbod_completion.blink",
+        },
+        git = {
+          module = 'blink-cmp-git',
+          name = 'Git',
+          async = true,
+          enabled = function()
+            return vim.tbl_contains({ 'octo', 'gitcommit', 'markdown' }, vim.bo.filetype)
+          end,
+          opts = {},
         },
         avante_commands = { name = "avante_commands", module = "blink.compat.source", score_offset = 90, opts = {} },
         avante_files = { name = "avante_files", module = "blink.compat.source", score_offset = 100, opts = {} },
