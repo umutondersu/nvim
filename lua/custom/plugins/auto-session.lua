@@ -3,6 +3,7 @@ return {
     lazy = false,
     opts = {
         suppress_dirs = { '~/', '~/Projects', '~/Downloads', '/' },
+        session_lens = { load_on_setup = false }
     },
     init = function()
         -- recommended by auto-session

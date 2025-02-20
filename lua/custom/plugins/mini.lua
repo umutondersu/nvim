@@ -29,13 +29,10 @@ return { -- Collection of various small independent plugins/modules
                 suffix_next = 'n',      -- Suffix to search with "next" method
             },
         })
-
-        require('mini.pairs').setup()
-        require('mini.bracketed').setup()
-        require('mini.icons').setup()
+        -- Move lines easily in visual and normal mode
         require('mini.move').setup({
             mappings = {
-                -- Move visual selection in Visual mode. Defaults are Alt (Meta) + hjkl.
+                -- Move visual selection in Visual mode
                 left = 'H',
                 right = 'L',
                 down = 'J',
@@ -47,6 +44,10 @@ return { -- Collection of various small independent plugins/modules
                 line_up = '<M-k>',
             },
         })
+
+        require('mini.pairs').setup()
+        require('mini.bracketed').setup()
+        require('mini.icons').setup()
         -- ... and there is more!
         --  Check out: https://github.com/echasnovski/mini.nvim
     end,
