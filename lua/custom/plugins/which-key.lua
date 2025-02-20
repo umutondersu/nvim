@@ -4,6 +4,7 @@ return {
     dependencies = { 'echasnovski/mini.icons', 'nvim-tree/nvim-web-devicons', },
     opts = {
         preset = "modern",
+        delay = 0,
         spec = {
             { "<leader>f",  group = "Format",          mode = { 'n', 'v' } },
             { "<leader>g",  group = "Git" },
@@ -17,10 +18,8 @@ return {
             { "<leader>ap", group = "avante: prompts", mode = { 'n', 'v' } },
             { "<leader>u",  group = "Ui" },
             { "<leader>S",  group = "Scratch" },
-            { "<leader>c",  group = "Code",            mode = { 'n', 'v' } },
-
+            { "<leader>c",  group = "Code" },
         },
-        delay = 0,
     },
     init = function()
         -- For surround plugins to work with which-key TODO: Remove when/if the bug is fixed
