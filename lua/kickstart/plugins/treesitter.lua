@@ -1,10 +1,16 @@
 return {
   -- Highlight, edit, and navigate code
   'nvim-treesitter/nvim-treesitter',
+  version = false,
+  event = 'VeryLazy',
   build = ':TSUpdate',
-  main = 'nvim-treesitter.configs', -- Sets main module to use for opts
+  cmd = { 'TSUpdateSync', 'TSUpdate', 'TSInstall' },
+  lazy = vim.fn.argc(-1) == 0, -- load treesitter early when opening a file from the cmdline
+  keys = {
+    { '<C-A-space>', desc = 'Increment Selection' },
+    { '<bs>',        desc = 'Decrement Selection', mode = 'x' },
+  },
   opts = {
-    -- Add languages to be installed here that you want installed for treesitter
     ensure_installed = {
       'c',
       'cpp',
@@ -27,26 +33,26 @@ return {
       'diff',
     },
 
-    -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
     auto_install = true,
 
     highlight = { enable = true },
     indent = { enable = true },
+    incremental_selection = {
+      enable = true,
+      keymaps = {
+        init_selection = '<C-A-space>',
+        node_incremental = '<C-A-space>',
+        scope_incremental = false,
+        node_decremental = '<bs>',
+      },
+    },
     textobjects = {
-      select = {
-        enable = false,
-        lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
-        keymaps = {
-          -- You can use the capture groups defined in textobjects.scm
-          ['af'] = { query = '@function.outer', desc = "around function", },
-          ['if'] = { query = '@function.inner', desc = "inside function", },
-          ['ac'] = { query = '@class.outer', desc = "around class", },
-          ['ic'] = { query = '@class.inner', desc = "inside class", },
-          ['ii'] = { query = '@conditional.inner', desc = "inside conditional", },
-          ['ai'] = { query = '@conditional.outer', desc = "around conditional", },
-          ['il'] = { query = '@loop.inner', desc = "inside loop", },
-          ['al'] = { query = '@loop.outer', desc = "around loop", },
-        },
+      move = {
+        enable = true,
+        goto_next_start = { [']f'] = '@function.outer' },
+        goto_next_end = { [']F'] = '@function.outer' },
+        goto_previous_start = { ['[f'] = '@function.outer' },
+        goto_previous_end = { ['[F'] = '@function.outer' },
       },
     },
 
@@ -62,7 +68,7 @@ return {
       keys = {
         {
           'gC',
-          function() require("treesitter-context").go_to_context(vim.v.count1) end,
+          function() require('treesitter-context').go_to_context(vim.v.count1) end,
           mode = 'n',
           desc = 'Jump to context',
         },
