@@ -7,7 +7,12 @@ return { -- LSP Configuration & Plugins
 		'WhoIsSethDaniel/mason-tool-installer.nvim',
 
 		-- For LSP actions preview
-		'aznhe21/actions-preview.nvim',
+		{
+			'aznhe21/actions-preview.nvim',
+			opts = {
+				backend = { "snacks", "nui" },
+			}
+		},
 
 		-- Preview for go to methods
 		{ 'rmagatti/goto-preview', opts = {}, event = 'VeryLazy', },
@@ -16,7 +21,7 @@ return { -- LSP Configuration & Plugins
 		'artemave/workspace-diagnostics.nvim',
 
 		-- Provides keymaps for LSP actions
-		"folke/snacks.nvim",
+		'folke/snacks.nvim',
 
 		-- [[Language specific dependencies]]
 		-- Typescript

@@ -2,7 +2,7 @@ return {
     {
         'zbirenbaum/copilot.lua',
         cmd = 'Copilot',
-        build = ":Copilot auth",
+        build = ':Copilot auth',
         event = 'InsertEnter',
         opts = {
             panel = {
@@ -20,8 +20,8 @@ return {
         }
     },
     {
-        "yetone/avante.nvim",
-        event = "VeryLazy",
+        'yetone/avante.nvim',
+        event = 'VeryLazy',
         lazy = false,
         version = false, -- set this if you want to always pull the latest change
         opts = {
@@ -29,21 +29,21 @@ return {
             file_selector = { provider = "snacks" }
         },
         -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-        build = "make",
-        -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
+        build = 'make',
+        -- build = 'powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false' -- for windows
         dependencies = {
-            "stevearc/dressing.nvim",
-            "nvim-lua/plenary.nvim",
-            "MunifTanjim/nui.nvim",
-            "zbirenbaum/copilot.lua", -- for providers='copilot'
-            "folke/snacks.nvim",      -- file selector provider
+            'stevearc/dressing.nvim',
+            'nvim-lua/plenary.nvim',
+            'MunifTanjim/nui.nvim',
+            'zbirenbaum/copilot.lua', -- for providers='copilot'
+            'folke/snacks.nvim',      -- file selector provider
             --- The below dependencies are optional,
-            "echasnovski/mini.icons",
-            "MeanderingProgrammer/render-markdown.nvim",
+            'echasnovski/mini.icons',
+            'MeanderingProgrammer/render-markdown.nvim',
             {
                 -- support for image pasting
-                "HakonHarnes/img-clip.nvim",
-                event = "VeryLazy",
+                'HakonHarnes/img-clip.nvim',
+                event = 'VeryLazy',
                 opts = {
                     -- recommended settings
                     default = {
