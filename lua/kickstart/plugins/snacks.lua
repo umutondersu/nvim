@@ -23,6 +23,7 @@ return {
                 frecency = true,
             },
         },
+        input = { enabled = true },
         image = { enabled = true, force = true },
     },
     keys = {

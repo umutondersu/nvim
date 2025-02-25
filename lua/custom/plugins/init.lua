@@ -10,16 +10,10 @@ return
     'anuvyklack/help-vsplit.nvim',
     opts = {},
 }, {
-    'dmmulroy/tsc.nvim',
-    event = 'VeryLazy',
-    opts = {},
-}, {
-    'stevearc/dressing.nvim',
-    event = 'VeryLazy',
-    opts = {},
-}, {
     'numToStr/Comment.nvim',
     opts = {}
+}, {
+    'JoosepAlviste/nvim-ts-context-commentstring',
 }, {
     'danitrap/cheatsh.nvim',
 }, {

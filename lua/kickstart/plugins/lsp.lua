@@ -27,6 +27,11 @@ return { -- LSP Configuration & Plugins
 		-- Typescript
 		'dmmulroy/ts-error-translator.nvim',
 		{
+			'dmmulroy/tsc.nvim',
+			event = 'VeryLazy',
+			opts = {},
+		},
+		{
 			"pmizio/typescript-tools.nvim",
 			dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
 			opts = {
