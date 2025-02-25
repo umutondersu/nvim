@@ -68,6 +68,16 @@ return { -- LSP Configuration & Plugins
 				},
 			},
 		},
+		-- Go
+		{
+			"olexsmir/gopher.nvim",
+			ft = "go",
+			dependencies = { -- dependencies
+				"nvim-lua/plenary.nvim",
+				"nvim-treesitter/nvim-treesitter",
+			},
+			opts = {},
+		}
 	},
 	config = function()
 		vim.api.nvim_create_autocmd('LspAttach', {
