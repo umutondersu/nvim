@@ -64,19 +64,9 @@ return {
     },
     cmdline = {
       keymap = {
-        preset = 'none',
+        preset = 'cmdline',
         ['<C-a>'] = { 'select_and_accept' },
         ['<C-x>'] = { 'show', 'hide' },
-        ['<Tab>'] = { 'select_next', },
-        ['<S-Tab>'] = { 'select_prev', },
-        ['<Space>'] = { function(cmp)
-          return cmp.accept({
-            callback = function()
-              local keys = vim.api.nvim_replace_termcodes('<Space>', true, true, true)
-              vim.api.nvim_feedkeys(keys, 'n', true)
-            end
-          })
-        end, 'fallback' },
       }
     },
     snippets = { preset = 'luasnip' },
