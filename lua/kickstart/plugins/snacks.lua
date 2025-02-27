@@ -156,9 +156,9 @@ return {
                 Snacks.toggle.diagnostics():map("<leader>ud")
                 Snacks.toggle.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
                     :map("<leader>uc")
-                Snacks.toggle.inlay_hints():map("<leader>uh")
                 Snacks.toggle.animate():map("<leader>ua")
 
+                -- Snacks.toggle.inlay_hints():map("<leader>uh")
                 -- Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
                 -- Snacks.toggle.line_number():map("<leader>ul")
                 -- Snacks.toggle.treesitter():map("<leader>uT")
