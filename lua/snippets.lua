@@ -4,7 +4,7 @@ local t = ls.text_node
 local i = ls.insert_node
 local fmt = require("luasnip.extras.fmt").fmta
 
-local all_js_file_types = {
+local js_filetypes = {
   "javascript",
   "typescript",
   "javascriptreact",
@@ -12,9 +12,11 @@ local all_js_file_types = {
 }
 
 -- [[ JS/JSX/TS/TSX ]] --
-ls.add_snippets(all_js_file_types, {
-  s({ trig = "clg", desc = "Output a message to the console" }, fmt('console.log(<>)', i(1))),
-})
+for _, ft in ipairs(js_filetypes) do
+  ls.add_snippets(ft, {
+    s({ trig = "clg", desc = "Output a message to the console" }, fmt('console.log(<>)', i(1))),
+  })
+end
 
 -- [[ GO ]] --
 ls.add_snippets("go", {
@@ -26,9 +28,7 @@ ls.add_snippets("go", {
     ]], {
       i(1), t = t("\t")
     })),
-})
 
-ls.add_snippets("go", {
   s({ trig = "errv", desc = "Create an if statement to check the value of err" }, fmt(
     [[
     if err == <> {
@@ -37,9 +37,7 @@ ls.add_snippets("go", {
     ]], {
       i(1), i(2), t = t("\t")
     })),
-})
 
-ls.add_snippets("go", {
   s({ trig = "err_", desc = "Create an if statement initilazing with the err value of a variable" }, fmt(
     [[
     if _, err := <>; err != nil {
