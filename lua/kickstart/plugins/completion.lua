@@ -67,6 +67,7 @@ return {
         preset = 'cmdline',
         ['<C-a>'] = { 'select_and_accept' },
         ['<C-x>'] = { 'show', 'hide' },
+        ['<C-space>'] = {},
       }
     },
     snippets = { preset = 'luasnip' },
