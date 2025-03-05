@@ -22,6 +22,7 @@ return {
     { '<leader>cdO', function() require('dap').step_out() end,                                            desc = 'Step Out',                 ft = ft },
     { '<leader>cdt', function() require('dap').toggle_breakpoint() end,                                   desc = 'Toggle Breakpoint',        ft = ft },
     { '<leader>cds', function() require('dap').set_breakpoint(vim.fn.input 'Breakpoint condition: ') end, desc = 'Set Breakpoint',           ft = ft },
+    { '<Leader>cdp', function() require('dap').pause() end,                                               desc = 'Pause',                    ft = ft },
     { '<Leader>cdR', function() require('dapui').toggle() end,                                            desc = 'See last session result.', ft = ft },
   },
   config = function()
