@@ -15,7 +15,7 @@ return { -- LSP Configuration & Plugins
 		},
 
 		-- Preview for go to methods
-		{ 'rmagatti/goto-preview', opts = {}, event = 'VeryLazy', },
+		{ 'rmagatti/goto-preview', opts = { default_mappings = true, references = { provider = 'snacks' } }, event = 'VeryLazy', },
 
 		-- Populates project-wide lsp diagnostcs
 		'artemave/workspace-diagnostics.nvim',
@@ -131,17 +131,6 @@ return { -- LSP Configuration & Plugins
 				-- or a suggestion from your LSP for this to activate.
 				map('<leader>ca', require("actions-preview").code_actions, 'Code action')
 				-- map('<leader>a', vim.lsp.buf.code_action, 'Code [A]ction')
-
-
-				-- Peek Keymaps
-				map('gpd', require("goto-preview").goto_preview_definition,
-					'Definition')
-				map('gpy', require("goto-preview").goto_preview_type_definition,
-					't[Y]pe Definition')
-				map('gpi', require("goto-preview").goto_preview_implementation,
-					'Implementation')
-				map('gpD', require("goto-preview").goto_preview_declaration,
-					'Declaration')
 
 				-- Language specific configurations and keymaps
 				local client = vim.lsp.get_client_by_id(event.data.client_id)
