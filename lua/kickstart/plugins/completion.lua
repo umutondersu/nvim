@@ -1,4 +1,4 @@
-return {
+local cmp = {
   'saghen/blink.cmp',
   dependencies = {
     -- Integrate Nvim-cmp completion sources
@@ -72,7 +72,7 @@ return {
     },
     snippets = { preset = 'luasnip' },
     sources = {
-      default = { 'copilot', 'lsp', 'path', 'buffer', 'dadbod', 'snippets', 'lazydev', 'avante_commands', 'avante_files', 'avante_mentions', 'git' },
+      default = { 'copilot', 'lsp', 'path', 'buffer', 'dadbod', 'snippets', 'lazydev', 'avante_commands', 'avante_files', 'avante_mentions' },
       providers = {
         copilot = {
           name = "copilot",
@@ -92,15 +92,6 @@ return {
           name = "Dadbod",
           module = "vim_dadbod_completion.blink",
         },
-        git = {
-          module = 'blink-cmp-git',
-          name = 'Git',
-          async = true,
-          enabled = function()
-            return vim.tbl_contains({ 'octo', 'gitcommit', 'markdown' }, vim.bo.filetype)
-          end,
-          opts = {},
-        },
         avante_commands = { name = "avante_commands", module = "blink.compat.source", score_offset = 90, opts = {} },
         avante_files = { name = "avante_files", module = "blink.compat.source", score_offset = 100, opts = {} },
         avante_mentions = { name = "avante_mentions", module = "blink.compat.source", score_offset = 1000, opts = {} }
@@ -111,9 +102,22 @@ return {
       nerd_font_variant = 'mono',
       kind_icons = require('kickstart.icons').kinds
     },
-
   },
   -- allows extending the providers array elsewhere in your config
   -- without having to redefine it
   opts_extend = { "sources.default" }
 }
+if vim.fn.executable 'gh' == 1 then
+  cmp.opts.sources.providers.git = {
+    module = 'blink-cmp-git',
+    name = 'Git',
+    async = true,
+    enabled = function()
+      return vim.tbl_contains({ 'octo', 'gitcommit', 'markdown' }, vim.bo.filetype)
+    end,
+    opts = {},
+  }
+  ---@diagnostic disable-next-line
+  table.insert(cmp.opts.sources.default, 'git')
+end
+return cmp
