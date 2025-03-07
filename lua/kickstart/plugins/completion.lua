@@ -6,8 +6,10 @@ local cmp = {
 
     -- Sources
     'kristijanhusak/vim-dadbod-completion',
-    'fang2hou/blink-copilot',
-    'folke/lazydev.nvim',
+    {
+      'fang2hou/blink-copilot',
+      dependencies = 'zbirenbaum/copilot.lua'
+    },
     {
       'Kaiser-Yang/blink-cmp-git',
       enabled = vim.fn.executable 'gh' == 1,
