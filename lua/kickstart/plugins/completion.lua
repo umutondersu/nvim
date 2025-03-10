@@ -1,4 +1,4 @@
-local cmp = {
+return {
   'saghen/blink.cmp',
   dependencies = {
     -- Integrate Nvim-cmp completion sources
@@ -12,8 +12,7 @@ local cmp = {
     },
     {
       'Kaiser-Yang/blink-cmp-git',
-      enabled = vim.fn.executable 'gh' == 1,
-      dependencies = { 'nvim-lua/plenary.nvim' }
+      dependencies = 'nvim-lua/plenary.nvim'
     },
     {
       "Yu-Leo/cmp-go-pkgs",
@@ -86,7 +85,7 @@ local cmp = {
     },
     snippets = { preset = 'luasnip' },
     sources = {
-      default = { 'copilot', 'lsp', 'path', 'buffer', 'dadbod', 'snippets', 'lazydev', 'avante_commands', 'avante_files', 'avante_mentions', 'go_pkgs' },
+      default = { 'copilot', 'lsp', 'path', 'buffer', 'dadbod', 'snippets', 'lazydev', 'avante_commands', 'avante_files', 'avante_mentions', 'go_pkgs', 'git' },
       providers = {
         copilot = {
           name = "copilot",
@@ -106,10 +105,18 @@ local cmp = {
           name = "Dadbod",
           module = "vim_dadbod_completion.blink",
         },
+        git = {
+          module = 'blink-cmp-git',
+          name = 'Git',
+          async = true,
+          enabled = function()
+            return vim.tbl_contains({ 'octo', 'gitcommit', 'markdown' }, vim.bo.filetype) and vim.fn.executable 'gh' == 1
+          end,
+          opts = {},
+        },
         go_pkgs = {
           name = "go_pkgs",
           module = "blink.compat.source",
-          score_offset = 1000,
           enabled = function()
             return vim.fn.executable 'go' == 1
           end,
@@ -130,17 +137,3 @@ local cmp = {
   -- without having to redefine it
   opts_extend = { "sources.default" }
 }
-if vim.fn.executable 'gh' == 1 then
-  cmp.opts.sources.providers.git = {
-    module = 'blink-cmp-git',
-    name = 'Git',
-    async = true,
-    enabled = function()
-      return vim.tbl_contains({ 'octo', 'gitcommit', 'markdown' }, vim.bo.filetype)
-    end,
-    opts = {},
-  }
-  ---@diagnostic disable-next-line
-  table.insert(cmp.opts.sources.default, 'git')
-end
-return cmp
