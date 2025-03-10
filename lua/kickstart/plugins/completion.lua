@@ -15,6 +15,18 @@ local cmp = {
       enabled = vim.fn.executable 'gh' == 1,
       dependencies = { 'nvim-lua/plenary.nvim' }
     },
+    {
+      "Yu-Leo/cmp-go-pkgs",
+      enabled = vim.fn.executable 'go' == 1,
+      init = function()
+        vim.api.nvim_create_autocmd({ "LspAttach" }, {
+          pattern = { "*.go" },
+          callback = function(args)
+            require("cmp_go_pkgs").init_items(args)
+          end,
+        })
+      end
+    },
 
     -- Snippet Engine
     { 'L3MON4D3/LuaSnip',    version = 'v2.*' },
@@ -74,7 +86,7 @@ local cmp = {
     },
     snippets = { preset = 'luasnip' },
     sources = {
-      default = { 'copilot', 'lsp', 'path', 'buffer', 'dadbod', 'snippets', 'lazydev', 'avante_commands', 'avante_files', 'avante_mentions' },
+      default = { 'copilot', 'lsp', 'path', 'buffer', 'dadbod', 'snippets', 'lazydev', 'avante_commands', 'avante_files', 'avante_mentions', 'go_pkgs' },
       providers = {
         copilot = {
           name = "copilot",
@@ -93,6 +105,15 @@ local cmp = {
         dadbod = {
           name = "Dadbod",
           module = "vim_dadbod_completion.blink",
+        },
+        go_pkgs = {
+          name = "go_pkgs",
+          module = "blink.compat.source",
+          score_offset = 1000,
+          enabled = function()
+            return vim.fn.executable 'go' == 1
+          end,
+          opts = {}
         },
         avante_commands = { name = "avante_commands", module = "blink.compat.source", score_offset = 90, opts = {} },
         avante_files = { name = "avante_files", module = "blink.compat.source", score_offset = 100, opts = {} },
