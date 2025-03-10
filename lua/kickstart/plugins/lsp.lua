@@ -224,6 +224,8 @@ return { -- LSP Configuration & Plugins
 
 			tailwindcss = {},
 
+			dockerls = {},
+
 			lua_ls = {
 				settings = {
 					Lua = {
