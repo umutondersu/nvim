@@ -85,7 +85,7 @@ return {
     },
     snippets = { preset = 'luasnip' },
     sources = {
-      default = { 'copilot', 'lsp', 'path', 'buffer', 'dadbod', 'snippets', 'lazydev', 'avante_commands', 'avante_files', 'avante_mentions', 'go_pkgs', 'git' },
+      default = { 'copilot', 'lsp', 'path', 'buffer', 'dadbod', 'snippets', 'lazydev', 'avante_commands', 'avante_files', 'avante_mentions', 'go_pkgs', 'git', 'markdown' },
       providers = {
         copilot = {
           name = "copilot",
@@ -113,6 +113,11 @@ return {
             return vim.tbl_contains({ 'octo', 'gitcommit', 'markdown' }, vim.bo.filetype) and vim.fn.executable 'gh' == 1
           end,
           opts = {},
+        },
+        markdown = {
+          name = 'RenderMarkdown',
+          module = 'render-markdown.integ.blink',
+          fallbacks = { 'lsp' },
         },
         go_pkgs = {
           name = "go_pkgs",
