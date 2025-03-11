@@ -1,7 +1,7 @@
 return {
     'mistweaverco/kulala.nvim',
     opts = {},
-    ft = 'http',
+    ft = { 'http', 'rest' },
     dependencies = {
         {
             "Redoxahmii/json-to-types.nvim",
@@ -25,7 +25,7 @@ return {
             Search = "search",
             JumpPrev = "jump_prev",
             JumpNext = "jump_next",
-            TypeDef = "TypeDef" -- Add Type as a subcommand
+            TypeDef = "TypeDef"
         }
         vim.api.nvim_create_user_command("Kulala", function(opts)
             local kulala = require("kulala")
