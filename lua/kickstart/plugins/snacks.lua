@@ -25,6 +25,7 @@ return {
         },
         input = { enabled = true },
         image = { enabled = true, force = true },
+        dashboard = { enabled = true },
     },
     keys = {
         { "<leader>e",  function() Snacks.explorer.open() end,           desc = "Toggle File Explorer" },
