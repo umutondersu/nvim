@@ -6,6 +6,8 @@ return {
 
     -- Sources
     'kristijanhusak/vim-dadbod-completion',
+    'Kaiser-Yang/blink-cmp-avante',
+    'disrupted/blink-cmp-conventional-commits',
     {
       'fang2hou/blink-copilot',
       dependencies = 'zbirenbaum/copilot.lua'
@@ -13,10 +15,6 @@ return {
     {
       'Kaiser-Yang/blink-cmp-git',
       dependencies = 'nvim-lua/plenary.nvim'
-    },
-    {
-      'Kaiser-Yang/blink-cmp-avante',
-      dependencies = 'yetone/avante.nvim'
     },
     {
       "Yu-Leo/cmp-go-pkgs",
@@ -89,7 +87,7 @@ return {
     },
     snippets = { preset = 'luasnip' },
     sources = {
-      default = { 'copilot', 'lsp', 'path', 'buffer', 'dadbod', 'snippets', 'lazydev', 'avante', 'go_pkgs', 'git', 'markdown' },
+      default = { 'copilot', 'lsp', 'path', 'buffer', 'dadbod', 'snippets', 'lazydev', 'avante', 'go_pkgs', 'git', 'markdown', 'conventional_commits' },
       providers = {
         copilot = {
           name = "copilot",
@@ -115,6 +113,14 @@ return {
           async = true,
           enabled = function()
             return vim.tbl_contains({ 'octo', 'gitcommit', 'markdown' }, vim.bo.filetype) and vim.fn.executable 'gh' == 1
+          end,
+          opts = {},
+        },
+        conventional_commits = {
+          name = 'Conventional Commits',
+          module = 'blink-cmp-conventional-commits',
+          enabled = function()
+            return vim.bo.filetype == 'gitcommit'
           end,
           opts = {},
         },
