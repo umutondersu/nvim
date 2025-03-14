@@ -46,9 +46,24 @@ return {
             'stevearc/dressing.nvim',
             'nvim-lua/plenary.nvim',
             'MunifTanjim/nui.nvim',
-            'zbirenbaum/copilot.lua', -- for providers='copilot'
-            'folke/snacks.nvim',      -- file selector provider
-            'ravitemer/mcphub.nvim',  -- for MCP Integration
+            'zbirenbaum/copilot.lua',                                        -- for providers='copilot'
+            'folke/snacks.nvim',                                             -- file selector provider
+            {                                                                -- MCP Integration
+                "ravitemer/mcphub.nvim",
+                dependencies = "nvim-lua/plenary.nvim",                      -- Required for Job and HTTP requests
+                build = "npm install -g mcp-hub@latest",                     -- Installs required mcp-hub npm module
+                opts = {
+                    port = 3000,                                             -- Port for MCP Hub server
+                    config = vim.fn.stdpath("config") .. "/mcpservers.json", -- Path to config file in Neovim config directory
+                    shutdown_delay = 0,                                      -- Wait 0ms before shutting down server after last client exits
+                    log = {
+                        level = vim.log.levels.WARN,
+                        to_file = false,
+                        file_path = nil,
+                        prefix = "MCPHub"
+                    },
+                }
+            },
             --- The below dependencies are optional,
             'echasnovski/mini.icons',
             'MeanderingProgrammer/render-markdown.nvim',
@@ -183,21 +198,5 @@ return {
                 desc = 'Add Tests',
             },
         },
-    },
-    {
-        "ravitemer/mcphub.nvim",
-        dependencies = "nvim-lua/plenary.nvim",                      -- Required for Job and HTTP requests
-        build = "npm install -g mcp-hub@latest",                     -- Installs required mcp-hub npm module
-        opts = {
-            port = 3000,                                             -- Port for MCP Hub server
-            config = vim.fn.stdpath("config") .. "/mcpservers.json", -- Path to config file in Neovim config directory
-            shutdown_delay = 0,                                      -- Wait 0ms before shutting down server after last client exits
-            log = {
-                level = vim.log.levels.WARN,
-                to_file = false,
-                file_path = nil,
-                prefix = "MCPHub"
-            },
-        }
     }
 }
