@@ -26,7 +26,18 @@ return {
         version = false, -- set this if you want to always pull the latest change
         opts = {
             provider = "copilot",
-            file_selector = { provider = "snacks" }
+            file_selector = { provider = "snacks" },
+            system_prompt = function()
+                local hub = require("mcphub").get_hub_instance()
+                ---@diagnostic disable-next-line: need-check-nil
+                return hub:get_active_servers_prompt()
+            end,
+            -- The custom_tools type supports both a list and a function that returns a list. Using a function here prevents requiring mcphub before it's loaded
+            custom_tools = function()
+                return {
+                    require("mcphub.extensions.avante").mcp_tool(),
+                }
+            end,
         },
         -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
         build = 'make',
@@ -37,6 +48,7 @@ return {
             'MunifTanjim/nui.nvim',
             'zbirenbaum/copilot.lua', -- for providers='copilot'
             'folke/snacks.nvim',      -- file selector provider
+            'ravitemer/mcphub.nvim',  -- for MCP Integration
             --- The below dependencies are optional,
             'echasnovski/mini.icons',
             'MeanderingProgrammer/render-markdown.nvim',
@@ -172,4 +184,20 @@ return {
             },
         },
     },
+    {
+        "ravitemer/mcphub.nvim",
+        dependencies = "nvim-lua/plenary.nvim",                      -- Required for Job and HTTP requests
+        build = "npm install -g mcp-hub@latest",                     -- Installs required mcp-hub npm module
+        opts = {
+            port = 3000,                                             -- Port for MCP Hub server
+            config = vim.fn.stdpath("config") .. "/mcpservers.json", -- Path to config file in Neovim config directory
+            shutdown_delay = 0,                                      -- Wait 0ms before shutting down server after last client exits
+            log = {
+                level = vim.log.levels.WARN,
+                to_file = false,
+                file_path = nil,
+                prefix = "MCPHub"
+            },
+        }
+    }
 }
