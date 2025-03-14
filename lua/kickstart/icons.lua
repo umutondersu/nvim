@@ -41,7 +41,7 @@ return {
 		modified = " ",
 		removed  = " ",
 	},
-	kinds = {
+	kind_icons = {
 		Array         = " ",
 		Boolean       = "󰨙 ",
 		Class         = " ",
