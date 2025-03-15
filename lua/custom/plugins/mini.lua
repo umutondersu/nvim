@@ -12,7 +12,7 @@ return { -- Collection of various small independent plugins/modules
 
         -- Add/delete/replace surroundings (brackets, quotes, etc.)
         --
-        -- - gsaw)  - [G]enorously [S]urround [A]round [W]ord [)]Paren
+        -- - gsaw)  - [G]enerously [S]urround [A]round [W]ord [)]Paren
         -- - gsd'   - [G]racefully [S]urround [D]elete [']quotes
         -- - gsc)'  - [G]loriously [S]urround [C]hange [)] [']
         require('mini.surround').setup({
@@ -38,8 +38,8 @@ return { -- Collection of various small independent plugins/modules
                 down = 'J',
                 up = 'K',
                 -- Move current line in Normal mode
-                line_left = '<M-h>',
-                line_right = '<M-l>',
+                line_left = '',
+                line_right = '',
                 line_down = '<M-j>',
                 line_up = '<M-k>',
             },
