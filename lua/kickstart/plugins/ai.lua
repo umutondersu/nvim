@@ -142,7 +142,7 @@ return {
                 desc = 'Summarize text',
             },
             {
-                '<leader>apt',
+                '<leader>apT',
                 function()
                     require('avante.api').ask { question = 'Translate this into Spanish, but keep any code blocks inside intact' }
                 end,
@@ -164,6 +164,15 @@ return {
                 end,
                 mode = { 'n', 'v' },
                 desc = 'Complete Code',
+            },
+            {
+                '<leader>apc',
+                function()
+                    require('avante.api').ask { question = 'Create a commit message for the following changes' }
+                end,
+                mode = { 'n', 'v' },
+                desc = 'Create Commit Message',
+                ft = { 'fugitive', 'gitcommit' },
             },
             {
                 '<leader>apD',
@@ -196,6 +205,15 @@ return {
                 end,
                 mode = { 'n', 'v' },
                 desc = 'Add Tests',
+            },
+            {
+                '<leader>apt',
+                function()
+                    require('avante.api').ask { question = 'Check the results of the test to give me feedback about the tests and the tested code' }
+                end,
+                mode = { 'n', 'v' },
+                desc = 'Give Test Feedback',
+                ft = 'neotest-output-panel'
             },
         },
     }
