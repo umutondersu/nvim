@@ -1,29 +1,35 @@
 {
   "mcpServers": {
-    "fetch": {
-      "command": "uvx",
-      "args": ["mcp-server-fetch"]
-    },
-    "brave-search": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-brave-search"],
-      "env": {
-        "BRAVE_API_KEY": ""
-      }
-    },
-    "git": {
-      "command": "uv",
-      "args": ["run", "mcp-server-git"],
-      "disabled": false
-    },
     "filesystem": {
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-filesystem"]
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/home/qorcialwolf"
+      ]
+    },
+    "brave-search": {
+      "env": {
+        "BRAVE_API_KEY": ""
+      },
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-brave-search"
+      ]
     },
     "sequential-thinking": {
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ]
+    },
+    "fetch": {
+      "command": "uvx",
+      "args": [
+        "mcp-server-fetch"
+      ]
     }
   }
 }
-
