@@ -10,7 +10,23 @@ return {
     'disrupted/blink-cmp-conventional-commits',
     {
       'fang2hou/blink-copilot',
-      dependencies = 'zbirenbaum/copilot.lua'
+      dependencies = {
+        'zbirenbaum/copilot.lua',
+        build = ':Copilot auth',
+        cmd = 'Copilot',
+        event = 'InsertEnter',
+        opts = {
+          panel = { enabled = false },
+          suggestion = { enabled = false },
+          filetypes = {
+            markdown = true,
+            help = true,
+          },
+          copilot_node_command = 'node',
+          server_opts_overrides = {},
+        }
+      },
+
     },
     {
       'Kaiser-Yang/blink-cmp-git',

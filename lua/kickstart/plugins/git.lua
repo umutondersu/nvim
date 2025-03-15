@@ -1,5 +1,5 @@
 return {
-  -- Git related plugins
+  'tpope/vim-rhubarb',
   {
     'tpope/vim-fugitive',
     init = function()
@@ -13,7 +13,6 @@ return {
         end, { desc = 'Toggle Git Fugitive Window' })
     end
   },
-  { 'tpope/vim-rhubarb' },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',

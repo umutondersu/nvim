@@ -24,17 +24,17 @@ vim.opt.rtp:prepend(lazypath)
 -- [[ Configure plugins ]]
 require('lazy').setup({
 
+  require 'kickstart.plugins.ui',
   require 'kickstart.plugins.treesitter',
   require 'kickstart.plugins.git',
   require 'kickstart.plugins.snacks',
   require 'kickstart.plugins.lsp',
   require 'kickstart.plugins.completion',
-  require 'kickstart.plugins.ui',
   require 'kickstart.plugins.autoformat',
   require 'kickstart.plugins.lint',
   require 'kickstart.plugins.debug',
-  require 'kickstart.plugins.ai',
   require 'kickstart.plugins.test',
+  require 'kickstart.plugins.avante',
 
   { import = 'custom.plugins' },
 }, {
