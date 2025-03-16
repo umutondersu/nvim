@@ -226,6 +226,8 @@ return { -- LSP Configuration & Plugins
 
 			dockerls = {},
 
+			jsonls = {},
+
 			lua_ls = {
 				settings = {
 					Lua = {
