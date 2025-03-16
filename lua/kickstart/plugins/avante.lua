@@ -155,7 +155,7 @@ return
         {
             '<leader>apc',
             function()
-                require('avante.api').ask { question = 'Create a commit message for the following changes' }
+                require('avante.api').ask { question = 'Create a commit message for the following staged changes. If there are no staged changes, create the message for the unstaged changes' }
             end,
             mode = { 'n', 'v' },
             desc = 'Create Commit Message',
