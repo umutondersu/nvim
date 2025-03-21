@@ -162,6 +162,15 @@ return
             ft = { 'fugitive', 'gitcommit' },
         },
         {
+            '<leader>apr',
+            function()
+                require('avante.api').ask { question = 'Update the README.md with the staged changes. If there are no staged changes, create the message for the unstaged changes' }
+            end,
+            mode = { 'n', 'v' },
+            desc = 'Update README',
+            ft = { 'fugitive', 'gitcommit' },
+        },
+        {
             '<leader>apD',
             function()
                 require('avante.api').ask { question = 'Add docstring to the following codes' }
@@ -196,7 +205,7 @@ return
         {
             '<leader>apt',
             function()
-                require('avante.api').ask { question = 'Check the results of the test to give me feedback about the tests and the tested code' }
+                require('avante.api').ask { question = 'Check the results of the test to give me suggestions in my code to fix errors if any' }
             end,
             mode = { 'n', 'v' },
             desc = 'Give Test Feedback',
