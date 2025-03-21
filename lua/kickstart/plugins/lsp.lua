@@ -309,7 +309,8 @@ return { -- LSP Configuration & Plugins
 				end,
 			},
 			diagnostics = {
-				underline = true,
+				float = { border = 'rounded', source = 'if_many' },
+				underline = { severity = vim.diagnostic.severity.ERROR },
 				update_in_insert = false,
 				virtual_text = {
 					spacing = 4,
