@@ -49,11 +49,14 @@ return { -- LSP Configuration & Plugins
 			},
 		},
 		-- C#
-		'Hoffs/omnisharp-extended-lsp.nvim',
+		{
+			'Hoffs/omnisharp-extended-lsp.nvim',
+			enabled = vim.fn.executable 'dotnet' == 1
+		},
 		-- Java
 		{
 			'nvim-java/nvim-java',
-			enabled = vim.fn.executable('java') == 1,
+			enabled = vim.fn.executable 'java' == 1
 		},
 		-- Lua
 		{
