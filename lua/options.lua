@@ -46,6 +46,7 @@ vim.o.termguicolors = true
 -- Disable Statusline
 vim.opt.laststatus = 0
 vim.opt.ruler = false
+vim.o.statusline = " "
 
 -- Set default splits
 vim.opt.splitright = true
