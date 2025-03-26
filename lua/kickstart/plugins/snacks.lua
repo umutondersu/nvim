@@ -19,9 +19,7 @@ return {
         },
         scope = { enabled = true }, -- Jumps: ]i [i textobjects: ii(inner scope) ai(full scope)
         picker = {
-            matcher = {
-                frecency = true,
-            },
+            matcher = { frecency = true },
         },
         input = { enabled = true },
         image = { enabled = true, force = true },
@@ -37,13 +35,9 @@ return {
         { "<leader>rf", function() Snacks.rename.rename_file() end,      desc = "Rename File" },
         { "<c-/>",      function() Snacks.terminal() end,                desc = "Toggle Terminal" },
         { "<c-_>",      function() Snacks.terminal() end,                desc = "which_key_ignore" },
-        { "]]",         function() Snacks.words.jump(vim.v.count1) end,  desc = "Next Reference",              mode = { "n", "t" } },
-        { "[[",         function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference",              mode = { "n", "t" } },
+        { "]]",         function() Snacks.words.jump(vim.v.count1) end,  desc = "Next Reference",           mode = { "n", "t" } },
+        { "[[",         function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference",           mode = { "n", "t" } },
         { "<leader>gx", function() Snacks.gitbrowse() end,               desc = "Git Browse" },
-        -- LazyGit
-        { "<leader>gF", function() Snacks.lazygit.log_file() end,        desc = "Lazygit Current File History" },
-        { "<leader>gg", function() Snacks.lazygit.open() end,            desc = "Lazygit" },
-        { "<leader>gL", function() Snacks.lazygit.log() end,             desc = "Lazygit Log (cwd)" },
         -- [[ Picker ]]
         -- Search
         { "<leader>sf", function() Snacks.picker.files() end,            desc = "Files" },
@@ -64,37 +58,29 @@ return {
             end,
             desc = "Find Buffers"
         },
-        { "<leader>sc", function() Snacks.picker.commands() end,           desc = "Commands" },
-        { "<leader>sC", function() Snacks.picker.command_history() end,    desc = "Command History" },
-        { "<leader>sd", function() Snacks.picker.diagnostics() end,        desc = "Diagnostics" },
-        { "<leader>sD", function() Snacks.picker.diagnostics_buffer() end, desc = "Diagnostics on Buffer" },
-        { "<leader>sp", function() Snacks.picker.pickers() end,            desc = "Pickers" },
+        { "<leader>sh",  function() Snacks.picker.command_history() end,    desc = "Command History" },
+        { "<leader>sd",  function() Snacks.picker.diagnostics() end,        desc = "Diagnostics" },
+        { "<leader>sD",  function() Snacks.picker.diagnostics_buffer() end, desc = "Diagnostics on Buffer" },
+        { "<leader>sp",  function() Snacks.picker.pickers() end,            desc = "Pickers" },
         ---@diagnostic disable-next-line: undefined-field
-        { "<leader>st", function() Snacks.picker.todo_comments() end,      desc = "Todo Comments" },
-        { "<leader>sr", function() Snacks.picker.resume() end,             desc = "Resume" },
+        { "<leader>st",  function() Snacks.picker.todo_comments() end,      desc = "Todo Comments" },
+        { "<leader>sr",  function() Snacks.picker.resume() end,             desc = "Resume" },
         -- Grep
-        { "<leader>s/", function() Snacks.picker.lines() end,              desc = "Grep Buffer Lines" },
-        { "<leader>sG", function() Snacks.picker.grep_buffers() end,       desc = "Grep Open Buffers" },
-        { "<leader>sg", function() Snacks.picker.grep() end,               desc = "Grep" },
-        { "<leader>sw", function() Snacks.picker.grep_word() end,          desc = "Grep Visual selection or word", mode = { "n", "x" } },
+        { "<leader>s/",  function() Snacks.picker.lines() end,              desc = "Grep Buffer Lines" },
+        { "<leader>sG",  function() Snacks.picker.grep_buffers() end,       desc = "Grep Open Buffers" },
+        { "<leader>sg",  function() Snacks.picker.grep() end,               desc = "Grep" },
+        { "<leader>sw",  function() Snacks.picker.grep_word() end,          desc = "Grep Visual selection or word", mode = { "n", "x" } },
         -- Git
         -- - `<Tab>`: stages or unstages the currently selected file
         -- - `<cr>`: opens the currently selected file
-        {
-            "<leader>gb",
-            function()
-                Snacks.picker.git_branches({
-                    layout = "select",
-                })
-            end,
-            desc = "Git Branches"
-        },
-        { "<leader>gf",  function() Snacks.picker.git_files() end,  desc = "Find Git Files" },
-        { "<leader>gs",  function() Snacks.picker.git_status() end, desc = "Git Status" },
-        { "<leader>gS",  function() Snacks.picker.git_stash() end,  desc = "Git Stash" },
-        { "<leader>gl",  function() Snacks.picker.git_log() end,    desc = "Git Log" },
+        { "<leader>sF",  function() Snacks.picker.git_files() end,          desc = "Git Files" },
+        { "<leader>gs",  function() Snacks.picker.git_status() end,         desc = "Git Status" },
+        -- LazyGit
+        { "<leader>gF",  function() Snacks.lazygit.log_file() end,          desc = "Lazygit Current File History" },
+        { "<leader>gg",  function() Snacks.lazygit.open() end,              desc = "Lazygit" },
+        { "<leader>gl",  function() Snacks.lazygit.log() end,               desc = "Git Log" },
         -- Neovim
-        { "<leader>snh", function() Snacks.picker.help() end,       desc = "Help" },
+        { "<leader>snh", function() Snacks.picker.help() end,               desc = "Help" },
         {
             "<leader>snk",
             function()
