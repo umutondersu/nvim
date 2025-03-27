@@ -6,10 +6,6 @@ return
     version = false, -- set this if you want to always pull the latest change
     opts = {
         provider = "claude",
-        claude = { disable_tools = true },
-        behaviour = {
-            enable_claude_text_editor_tool_mode = true,
-        },
         file_selector = { provider = "snacks" },
         system_prompt = function()
             local hub = require("mcphub").get_hub_instance()
