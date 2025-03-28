@@ -6,16 +6,18 @@ return
     version = false, -- set this if you want to always pull the latest change
     opts = {
         provider = 'claude',
-        gemini = { model = 'gemini-2.5-pro-exp-03-25' },
+        claude = { disable_tools = true },
+        gemini = { model = 'gemini-2.5-pro-exp-03-25', disable_tools = true },
         vendors = {
             groq = {
                 __inherited_from = "openai",
                 api_key_name = "GROQ_API_KEY",
                 endpoint = "https://api.groq.com/openai/v1/",
                 model = "deepseek-r1-distill-llama-70b",
+                disable_tools = true
             },
         },
-        file_selector = { provider = "snacks" },
+        file_selector = { provider = 'snacks' },
         system_prompt = function()
             local hub = require("mcphub").get_hub_instance()
             ---@diagnostic disable-next-line: need-check-nil
