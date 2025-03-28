@@ -5,7 +5,16 @@ return
     lazy = false,
     version = false, -- set this if you want to always pull the latest change
     opts = {
-        provider = "claude",
+        provider = 'claude',
+        gemini = { model = 'gemini-2.5-pro-exp-03-25' },
+        vendors = {
+            groq = {
+                __inherited_from = "openai",
+                api_key_name = "GROQ_API_KEY",
+                endpoint = "https://api.groq.com/openai/v1/",
+                model = "deepseek-r1-distill-llama-70b",
+            },
+        },
         file_selector = { provider = "snacks" },
         system_prompt = function()
             local hub = require("mcphub").get_hub_instance()
