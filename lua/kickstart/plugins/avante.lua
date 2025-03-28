@@ -72,13 +72,16 @@ return
                     return
                 end
                 vim.api.nvim_set_hl(0, "AvanteSideBarWinSeparator", { fg = "#232735", bg = "None" })
-                vim.api.nvim_set_hl(10, "StatusLine",
-                    { bg = "NONE", fg = "NONE", ctermbg = "NONE", ctermfg = "NONE" })
-                vim.api.nvim_set_hl(10, "StatusLineNC",
-                    { bg = "NONE", fg = "NONE", ctermbg = "NONE", ctermfg = "NONE" })
+                vim.api.nvim_set_hl(0, "InvisibleStatusLine",
+                    { bg = "none", fg = "none", ctermbg = "none", ctermfg = "none" })
+                vim.api.nvim_set_hl(0, "InvisibleStatusLineNC",
+                    { bg = "none", fg = "none", ctermbg = "none", ctermfg = "none" })
+
                 for _, win in ipairs(vim.api.nvim_list_wins()) do
-                    if (vim.bo.filetype == 'Avante' or vim.bo.filetype == 'AvanteSelectedFiles') then
-                        vim.api.nvim_win_set_hl_ns(win, 10)
+                    local filetype = vim.api.nvim_get_option_value("filetype", { buf = vim.api.nvim_win_get_buf(win) })
+                    if filetype == 'Avante' or filetype == 'AvanteSelectedFiles' then
+                        vim.api.nvim_set_option_value("winhl",
+                            "StatusLine:InvisibleStatusLine,StatusLineNC:InvisibleStatusLineNC", { win = win })
                     end
                 end
             end,
