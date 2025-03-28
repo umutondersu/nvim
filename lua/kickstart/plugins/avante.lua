@@ -64,6 +64,27 @@ return
             },
         },
     },
+    init = function()
+        -- Autocmd for getting rid of statusline in Avante
+        vim.api.nvim_create_autocmd('BufEnter', {
+            callback = function()
+                if not vim.g.Transparent then
+                    return
+                end
+                vim.api.nvim_set_hl(0, "AvanteSideBarWinSeparator", { fg = "#232735", bg = "None" })
+                for _, win in ipairs(vim.api.nvim_list_wins()) do
+                    if (vim.bo.filetype == 'Avante' or vim.bo.filetype == 'AvanteSelectedFiles') then
+                        vim.api.nvim_set_hl(10, "StatusLine",
+                            { bg = "NONE", fg = "NONE", ctermbg = "NONE", ctermfg = "NONE" })
+                        vim.api.nvim_set_hl(10, "StatusLineNC",
+                            { bg = "NONE", fg = "NONE", ctermbg = "NONE", ctermfg = "NONE" })
+                        vim.api.nvim_win_set_hl_ns(win, 10)
+                    end
+                end
+            end,
+            group = vim.api.nvim_create_augroup('Transparency', { clear = false }),
+        })
+    end,
     keys = {
         {
             '<leader>apg',
