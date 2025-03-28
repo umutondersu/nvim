@@ -11,16 +11,11 @@ return {
           floats = "transparent",
         },
         on_highlights = function(hl)
-          local LineNrHighlight = "#898da0"
-          hl.LineNr = {
-            fg = LineNrHighlight,
-          }
-          hl.LineNrAbove = {
-            fg = LineNrHighlight,
-          }
-          hl.LineNrBelow = {
-            fg = LineNrHighlight,
-          }
+          local line_number_color = "#898da0"
+          local line_number_groups = { "LineNr", "LineNrAbove", "LineNrBelow" }
+          for _, group in ipairs(line_number_groups) do
+            hl[group] = { fg = line_number_color }
+          end
         end,
       }
     end
