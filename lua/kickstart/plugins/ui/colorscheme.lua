@@ -34,6 +34,7 @@ return {
         if vim.g.Transparent then
           vim.api.nvim_set_hl(0, "TreesitterContext", { bg = "None" })
           vim.api.nvim_set_hl(0, "TreesitterContextLineNumber", { sp = "red" })
+          vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#232735", bg = "None" })
         end
       end),
       group = vim.api.nvim_create_augroup('Transparency', {}),
