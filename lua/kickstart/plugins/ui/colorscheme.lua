@@ -1,10 +1,9 @@
-local Transparent = true
 return {
   'folke/tokyonight.nvim',
   lazy = false,
   priority = 1000,
   opts = function()
-    if Transparent then
+    if vim.g.Transparent then
       return {
         transparent = true,
         styles = {
@@ -28,14 +27,13 @@ return {
     return {}
   end,
   init = function()
+    vim.g.Transparent = true
     vim.cmd.colorscheme 'tokyonight-night'
     vim.api.nvim_create_autocmd({ 'ColorScheme', 'BufAdd' }, {
       callback = vim.schedule_wrap(function()
-        if Transparent then
-          local colors = require('tokyonight.colors').setup()
-          vim.api.nvim_set_hl(0, "AvanteSideBarWinSeparator", { fg = colors.black, bg = "None" })
+        if vim.g.Transparent then
           vim.api.nvim_set_hl(0, "TreesitterContext", { bg = "None" })
-          vim.api.nvim_set_hl(0, "TreesitterContextLineNumber", { sp = colors.red })
+          vim.api.nvim_set_hl(0, "TreesitterContextLineNumber", { sp = "red" })
         end
       end),
       group = vim.api.nvim_create_augroup('Transparency', {}),
