@@ -28,7 +28,7 @@
       "command": "npx"
     },
     "git": {
-      "args": ["mcp-server-git", "--repository", "$GIT_ROOT"],
+      "args": ["mcp-server-git", "--repository", "$PWD"],
       "command": "uvx"
     },
     "github": {
