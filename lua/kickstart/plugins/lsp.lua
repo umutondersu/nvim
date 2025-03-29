@@ -80,6 +80,17 @@ return { -- LSP Configuration & Plugins
 				"nvim-treesitter/nvim-treesitter",
 			},
 			opts = {},
+		},
+		{
+			"fredrikaverpil/godoc.nvim",
+			ft = "go",
+			version = "*",
+			dependencies = { "folke/snacks.nvim" },
+			build = "go install github.com/lotusirous/gostdsym/stdsym@latest",
+			cmd = { "GoDoc" },
+			opts = {
+				picker = { type = "snacks" }
+			},
 		}
 	},
 	config = function()
@@ -139,7 +150,7 @@ return { -- LSP Configuration & Plugins
 				local client = vim.lsp.get_client_by_id(event.data.client_id)
 
 				-- Toggle Inlay Hints
-				if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight, { bufnr = event.bufnr }) then
+				if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight, { bufnr = event.buf }) then
 					map('<leader>uh', function()
 						vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
 					end, 'Toggle Inlay Hints')
@@ -196,6 +207,7 @@ return { -- LSP Configuration & Plugins
 				if check_client('gopls') then
 					map('<leader>ct', function() require("gopher").tags.add "json" end, 'Add JSON Tags to struct')
 					map('<leader>cc', '<cmd>GoCmt<cr>', 'Generate boilerplate for doc comments')
+					map('<leader>cD', '<cmd>GoDoc<cr>', 'Search Go Docs')
 				end
 			end,
 		})
