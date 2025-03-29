@@ -33,7 +33,7 @@
     },
     "github": {
       "env": {
-        "GITHUB_PERSONAL_ACCESS_TOKEN": ""
+        "GITHUB_PERSONAL_ACCESS_TOKEN": null
       },
       "args": [
         "run",
@@ -49,7 +49,7 @@
       "command": "npx",
       "args": ["-y", "@modelcontextprotocol/server-brave-search"],
       "env": {
-        "BRAVE_API_KEY": "$BRAVE_API_KEY"
+        "BRAVE_API_KEY": null
       }
     }
   }
