@@ -233,6 +233,8 @@ return { -- LSP Configuration & Plugins
 			-- rust_analyzer = {},
 			-- html = { filetypes = { 'html', 'twig', 'hbs'} },
 
+			bashls = {},
+
 			pyright = {},
 
 			ts_ls = {},
@@ -254,7 +256,7 @@ return { -- LSP Configuration & Plugins
 						},
 					},
 				},
-			},
+			}
 
 		}
 

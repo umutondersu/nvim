@@ -3,34 +3,6 @@ return
   "stevearc/conform.nvim",
   event = { "BufWritePre" },
   cmd = { "ConformInfo" },
-  keys = {
-    {
-      "<leader>ff",
-      function()
-        require("conform").format({ async = true, lsp_format = 'fallback' }, function(err)
-          if not err then
-            local mode = vim.api.nvim_get_mode().mode
-            if vim.startswith(string.lower(mode), "v") then
-              vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true)
-            end
-          end
-        end)
-      end,
-      mode = { "n", "v" },
-      desc = "Format buffer or range",
-    },
-    {
-      "<leader>ft",
-      "<cmd>Ftoggle<cr>",
-      mode = "n",
-      desc = "Toggle autoformatting",
-    }, {
-    "<leader>fi",
-    "<cmd>ConformInfo<cr>",
-    mode = "n",
-    desc = "Conform Info",
-  },
-  },
   opts = {
     notify_on_error = false,
     format_on_save = function(bufnr)
@@ -65,7 +37,36 @@ return
       python = { "isort", "black" },
       go = { "gofumpt", "goimports" },
       cshart = { "csharpier" },
+      sh = { "shellharden" }
     },
+  },
+  keys = {
+    {
+      "<leader>ff",
+      function()
+        require("conform").format({ async = true, lsp_format = 'fallback' }, function(err)
+          if not err then
+            local mode = vim.api.nvim_get_mode().mode
+            if vim.startswith(string.lower(mode), "v") then
+              vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true)
+            end
+          end
+        end)
+      end,
+      mode = { "n", "v" },
+      desc = "Format buffer or range",
+    },
+    {
+      "<leader>ft",
+      "<cmd>Ftoggle<cr>",
+      mode = "n",
+      desc = "Toggle autoformatting",
+    }, {
+    "<leader>fi",
+    "<cmd>ConformInfo<cr>",
+    mode = "n",
+    desc = "Conform Info",
+  },
   },
   init = function()
     -- [[ Toggle Autoformatting with Conform.nvim ]]

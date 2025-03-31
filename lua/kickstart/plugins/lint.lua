@@ -13,7 +13,8 @@ return {
       typescriptreact = { "eslint_d" },
       python = { "flake8" },
       go = { "golangcilint" },
-      fish = { "fish" }
+      fish = { "fish" },
+      sh = { "shellcheck" },
     }
   },
   config = function(_, opts)

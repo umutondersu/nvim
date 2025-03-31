@@ -7,11 +7,13 @@ local ensure_installed = {
 	'black',
 	'isort',
 	'prettier',
+	'shellharden',
 	-- Linters
 	'eslint_d',
 	'flake8',
+	'shellcheck',
 	-- DAP
-	'debugpy'
+	'debugpy',
 }
 
 local function add_tool(command, tools)
