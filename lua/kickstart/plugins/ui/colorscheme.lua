@@ -3,35 +3,42 @@ return {
   lazy = false,
   priority = 1000,
   opts = function()
-    if vim.g.Transparent then
-      return {
-        transparent = true,
-        styles = {
-          sidebars = "transparent",
-          floats = "transparent",
-        },
-        hide_inactive_statusline = true,
-        on_highlights = function(hl)
-          local line_number_color = "#898da0"
-          local line_number_groups = { "LineNr", "LineNrAbove", "LineNrBelow" }
-          for _, group in ipairs(line_number_groups) do
-            hl[group] = { fg = line_number_color }
-          end
-        end,
-      }
+    if not vim.g.Transparent then
+      return {}
     end
-    return {}
+    return {
+      transparent = true,
+      styles = {
+        sidebars = "transparent",
+        floats = "transparent",
+      },
+      hide_inactive_statusline = true,
+      on_highlights = function(hl, c)
+        local line_number_color = "#898da0"
+        local transparent = c.none
+        local line_number_groups = { "LineNr", "LineNrAbove", "LineNrBelow" }
+        for _, group in ipairs(line_number_groups) do
+          hl[group] = { fg = line_number_color }
+        end
+        hl.TabLineFill = {
+          bg = transparent,
+        }
+      end,
+    }
   end,
   init = function()
     vim.g.Transparent = true
     vim.cmd.colorscheme 'tokyonight-night'
     vim.api.nvim_create_autocmd({ 'ColorScheme', 'BufAdd' }, {
       callback = vim.schedule_wrap(function()
-        if vim.g.Transparent then
-          vim.api.nvim_set_hl(0, "TreesitterContext", { bg = "None" })
-          vim.api.nvim_set_hl(0, "TreesitterContextLineNumber", { sp = "red" })
-          vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#232735", bg = "None" })
+        if not vim.g.Transparent then
+          return
         end
+        vim.api.nvim_set_hl(0, "TreesitterContext", { bg = "None" })
+        vim.api.nvim_set_hl(0, "TreesitterContextLineNumber", { sp = "red" })
+        vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#232735", bg = "None" })
+        vim.api.nvim_set_hl(0, "WinBar", { bg = "NONE" })
+        vim.api.nvim_set_hl(0, "WinBarNC", { bg = "NONE" })
       end),
       group = vim.api.nvim_create_augroup('Transparency', {}),
     })

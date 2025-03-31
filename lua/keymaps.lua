@@ -1,7 +1,12 @@
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
 local map = vim.keymap.set
-map({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+
+-- Delete some default LSP keymaps
+vim.keymap.del('n', 'gra')
+vim.keymap.del('n', 'gri')
+vim.keymap.del('n', 'grn')
+vim.keymap.del('n', 'grr')
 
 -- Remap for dealing with word wrap
 map('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
