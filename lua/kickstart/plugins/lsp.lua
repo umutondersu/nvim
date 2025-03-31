@@ -102,8 +102,8 @@ return { -- LSP Configuration & Plugins
 					vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
 				end
 
-				-- Diagnostic keymaps
 				map('gq', vim.diagnostic.open_float, 'Open floating diagnostic message')
+				map('K', vim.lsp.buf.hover, 'Display Hover Information')
 
 				---@module 'snacks'
 				-- Jump to the definition of the word under your cursor.
