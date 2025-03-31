@@ -207,7 +207,7 @@ return { -- LSP Configuration & Plugins
 				if check_client('gopls') then
 					map('<leader>ct', function() require("gopher").tags.add "json" end, 'Add JSON Tags to struct')
 					map('<leader>cc', '<cmd>GoCmt<cr>', 'Generate boilerplate for doc comments')
-					map('<leader>cD', '<cmd>GoDoc<cr>', 'Search Go Docs')
+					map('<leader>so', '<cmd>GoDoc<cr>', 'Go Docs')
 				end
 			end,
 		})
