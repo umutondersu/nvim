@@ -13,7 +13,7 @@ local ensure_installed = {
 	'flake8',
 	'shellcheck',
 	-- DAP
-	'debugpy',
+	'debugpy'
 }
 
 local function add_tool(command, tools)
@@ -32,14 +32,14 @@ add_tool('go', {
 	'gofumpt',
 	'goimports',
 	-- Linters
-	'golangci-lint',
+	{ 'golangci-lint', version = 'v1.64.8' },
 	-- DAP
 	'delve',
 	-- Gopher.nvim
 	'gomodifytags',
 	'gotests',
 	'iferr',
-	'impl',
+	'impl'
 })
 
 return ensure_installed

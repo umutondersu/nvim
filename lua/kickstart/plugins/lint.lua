@@ -14,7 +14,7 @@ return {
       python = { "flake8" },
       go = { "golangcilint" },
       fish = { "fish" },
-      sh = { "shellcheck" },
+      sh = { "shellcheck" }
     }
   },
   config = function(_, opts)
