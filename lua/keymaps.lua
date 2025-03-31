@@ -40,6 +40,12 @@ map("n", "<C-u>", "<C-u>zz")
 
 map("n", "<M-u>", ":e!<CR>", { desc = 'Undo all unsaved writes' })
 
+-- Resize window using <ctrl> arrow keys
+map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
+map("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
+map("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
+map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
+
 -- Shortcuts for save and exit
 map('n', '<leader>w', '<cmd>w<CR>', { desc = 'Save Buffer' })
 map('n', '<leader>x', '<cmd>wqa<CR>', { desc = 'Save and Exit All Windows' })
