@@ -4,5 +4,6 @@ return {
     require('kickstart.plugins.ui.dropbar'),
     require('kickstart.plugins.ui.lightbulb'),
     require('kickstart.plugins.ui.noice'),
+    require('kickstart.plugins.ui.rainbow-delimeter'),
     require('kickstart.plugins.ui.tiny-inline-diagnostic'),
 }
