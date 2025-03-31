@@ -1,6 +1,5 @@
 return {
 	'Bekaboo/dropbar.nvim',
-	priority = 1000,
 	dependencies = {
 		'nvim-telescope/telescope-fzf-native.nvim',
 		'nvim-web-devicons'

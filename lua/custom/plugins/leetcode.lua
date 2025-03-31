@@ -3,7 +3,7 @@ return {
     'kawre/leetcode.nvim',
     build = ':TSUpdate html',
     dependencies = {
-        { 'nvim-telescope/telescope.nvim', dependencies = 'nvim-lua/plenary.nvim' },
+        { 'nvim-telescope/telescope.nvim', lazy = true, dependencies = 'nvim-lua/plenary.nvim' },
         -- optional
         'nvim-treesitter/nvim-treesitter',
         'nvim-tree/nvim-web-devicons',
