@@ -10,6 +10,7 @@ return {
     'disrupted/blink-cmp-conventional-commits',
     {
       'fang2hou/blink-copilot',
+      commit = '991b2eb',
       dependencies = {
         'zbirenbaum/copilot.lua',
         build = ':Copilot auth',

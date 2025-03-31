@@ -10,6 +10,7 @@ return {
           sidebars = "transparent",
           floats = "transparent",
         },
+        hide_inactive_statusline = true,
         on_highlights = function(hl)
           local line_number_color = "#898da0"
           local line_number_groups = { "LineNr", "LineNrAbove", "LineNrBelow" }
