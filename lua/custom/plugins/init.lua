@@ -5,7 +5,7 @@ return {
     { 'anuvyklack/help-vsplit.nvim',                 opts = {} },
     { 'numToStr/Comment.nvim',                       opts = {} },
     { 'JoosepAlviste/nvim-ts-context-commentstring', dependencies = 'numToStr/Comment.nvim' },
-    'danitrap/cheatsh.nvim',
-    { 'aliqyan-21/wit.nvim',      opts = {} },
-    { 'max397574/colortils.nvim', cmd = 'Colortils', opts = {} },
+    { 'danitrap/cheatsh.nvim',                       cmd = { 'CheatSh' } },
+    { 'aliqyan-21/wit.nvim',                         cmd = { 'WitSearch', 'WitSearchWiki' }, opts = {} },
+    { 'max397574/colortils.nvim',                    cmd = 'Colortils',                      opts = {} },
 }
