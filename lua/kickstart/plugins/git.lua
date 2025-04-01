@@ -11,6 +11,21 @@ return {
             vim.cmd('G')
           end
         end, { desc = 'Toggle Git Fugitive Window' })
+      vim.api.nvim_create_user_command('Gc', function(args)
+        local vimCmd = 'Git commit -m'
+        if args['args'] then
+          vimCmd = vimCmd .. ' ' .. args['args']
+        end
+        vim.cmd(vimCmd)
+      end, { desc = 'Commit with a message', nargs = '*' })
+
+      vim.api.nvim_create_user_command('Gp', function(args)
+        local vimCmd = 'Git push'
+        if args['args'] then
+          vimCmd = vimCmd .. ' ' .. args['args']
+        end
+        vim.cmd(vimCmd)
+      end, { desc = 'Git push', nargs = '*' })
     end
   },
   {
