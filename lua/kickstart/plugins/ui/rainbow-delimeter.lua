@@ -18,10 +18,11 @@ return {
                 "RainbowDelimiterWhite",
                 "RainbowDelimiterYellow",
                 "RainbowDelimiterBlue",
-                "RainbowDelimiterGreen",
+                "RainbowDelimiterCyan",
                 "RainbowDelimiterViolet",
                 "RainbowDelimiterOrange",
-                "RainbowDelimiterCyan",
+                "RainbowDelimiterRed",
+                "RainbowDelimiterGreen",
             },
             blacklist = {},
         })
