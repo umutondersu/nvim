@@ -40,12 +40,6 @@ map("n", "<C-u>", "<C-u>zz")
 
 map("n", "<M-u>", ":e!<CR>", { desc = 'Undo all unsaved writes' })
 
--- Resize window using <ctrl> arrow keys
-map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
-map("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
-map("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
-map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
-
 -- Shortcuts for save and exit
 map('n', '<leader>w', '<cmd>w<CR>', { desc = 'Save Buffer' })
 map('n', '<leader>x', '<cmd>wqa<CR>', { desc = 'Save and Exit All Windows' })
@@ -56,28 +50,64 @@ map("n", "<leader>rw", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gcI<Left><Left><Left><Lef
 map('v', '<leader>rv', function()
 	-- Yank the visual selection into register z
 	vim.cmd('normal! "zy')
-	-- Get the yanked text from register z
 	local selection = vim.fn.getreg("z")
 
-	-- return if selection is empty
 	if selection == "" then
 		print("No text selected")
 		return
 	end
 	vim.fn.setreg("z", "")
 
-	-- Trim trailing whitespace from the selection
+	-- Sanitize the selection
 	selection = selection:gsub("%s+$", "")
-
-	-- Escape special characters in the selection
 	selection = vim.fn.escape(selection, '/\\')
-
-	-- Replace newlines with a pattern that matches newlines in the buffer
 	selection = selection:gsub("\n", "\\n")
 
-	-- Construct the substitution command
 	local cmd = string.format(':%s/%s/%s/gcI<Left><Left><Left><Left>', '%s', selection, selection)
-
-	-- Set the command line to the constructed substitution command
 	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(cmd, true, false, true), 'n', true)
 end, { desc = 'Replace the visual selection' })
+
+-- Resize window using <ctrl> arrow keys with smart behavior
+map("n", "<C-Up>", function()
+	local win_id = vim.fn.winnr()
+	local above_win = vim.fn.winnr('k')
+
+	if above_win == win_id then
+		vim.cmd('resize -2')
+	else
+		vim.cmd('resize +2')
+	end
+end, { desc = "Increase Window Height" })
+
+map("n", "<C-Down>", function()
+	local win_id = vim.fn.winnr()
+	local above_win = vim.fn.winnr('k')
+
+	if above_win == win_id then
+		vim.cmd('resize +2')
+	else
+		vim.cmd('resize -2')
+	end
+end, { desc = "Decrease Window Height" })
+
+map("n", "<C-Right>", function()
+	local win_id = vim.fn.winnr()
+	local left_win = vim.fn.winnr('h')
+
+	if left_win == win_id then
+		vim.cmd('vertical resize +2')
+	else
+		vim.cmd('vertical resize -2')
+	end
+end, { desc = "Increase Window Width" })
+
+map("n", "<C-Left>", function()
+	local win_id = vim.fn.winnr()
+	local left_win = vim.fn.winnr('h')
+
+	if left_win == win_id then
+		vim.cmd('vertical resize -2')
+	else
+		vim.cmd('vertical resize +2')
+	end
+end, { desc = "Decrease Window Width" })
