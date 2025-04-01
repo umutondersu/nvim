@@ -21,6 +21,11 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- [[ Configuration ]]
+require 'options'
+require 'keymaps'
+require 'commands'
+
 -- [[ Configure plugins ]]
 require('lazy').setup({
   { import = 'kickstart.plugins' },
@@ -47,10 +52,7 @@ require('lazy').setup({
   },
 })
 
--- [[ Custom Modules ]]
-require 'options'
-require 'keymaps'
-require 'commands'
+-- [[ Add snippets ]]
 require 'snippets'
 
 -- The line beneath this is called `modeline`. See `:help modeline`
