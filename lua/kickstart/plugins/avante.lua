@@ -6,15 +6,13 @@ return
     version = false, -- set this if you want to always pull the latest change
     opts = {
         provider = 'claude',
-        claude = { disable_tools = true },
-        gemini = { model = 'gemini-2.5-pro-exp-03-25', disable_tools = true },
+        gemini = { model = 'gemini-2.5-pro-exp-03-25' },
         vendors = {
             groq = {
                 __inherited_from = "openai",
                 api_key_name = "GROQ_API_KEY",
                 endpoint = "https://api.groq.com/openai/v1/",
-                model = "deepseek-r1-distill-llama-70b",
-                disable_tools = true
+                model = "deepseek-r1-distill-llama-70b"
             },
         },
         file_selector = { provider = 'snacks' },
@@ -25,10 +23,21 @@ return
         end,
         -- The custom_tools type supports both a list and a function that returns a list. Using a function here prevents requiring mcphub before it's loaded
         custom_tools = function()
-            return {
-                require("mcphub.extensions.avante").mcp_tool(),
-            }
+            return { require("mcphub.extensions.avante").mcp_tool() }
         end,
+        disabled_tools = { -- To prevent conflicts with the built-in neovim server of MCP Hub
+            "list_files",
+            "search_files",
+            "read_file",
+            "create_file",
+            "rename_file",
+            "delete_file",
+            "create_dir",
+            "rename_dir",
+            "delete_dir",
+            "bash",
+        },
+
     },
     -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
     build = 'make',
@@ -42,16 +51,12 @@ return
             "ravitemer/mcphub.nvim",
             dependencies = "nvim-lua/plenary.nvim",                      -- Required for Job and HTTP requests
             build = "npm install -g mcp-hub@latest",                     -- Installs required mcp-hub npm module
+            cmd = "MCPHub",                                              -- lazy load by default
             opts = {
-                port = 3000,                                             -- Port for MCP Hub server
+                port = 37373,                                            -- Default port for MCP Hub
                 config = vim.fn.stdpath("config") .. "/mcpservers.json", -- Path to config file in Neovim config directory
-                shutdown_delay = 0,                                      -- Wait 0ms before shutting down server after last client exits
-                log = {
-                    level = vim.log.levels.WARN,
-                    to_file = false,
-                    file_path = nil,
-                    prefix = "MCPHub"
-                },
+                auto_approve = true,                                     -- Auto approve mcp tool calls
+                extensions = { avante = {} }                             -- Enable avante extension
             }
         },
         --- The below dependencies are optional,
