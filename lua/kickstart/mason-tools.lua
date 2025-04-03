@@ -32,7 +32,7 @@ add_tool('go', {
 	'gofumpt',
 	'goimports',
 	-- Linters
-	{ 'golangci-lint', version = 'v1.64.8' },
+	'golangci-lint',
 	-- DAP
 	'delve',
 	-- Gopher.nvim
