@@ -14,7 +14,7 @@ My configuration targets _only_ the latest ['stable'](https://github.com/neovim/
 Distribution Alternatives:
 
 - [LazyVim](https://www.lazyvim.org/): A delightful distribution maintained by @folke (the author of lazy.nvim, the package manager used here)
-- [Kickstart.nvim]('https://github.com/nvim-lua/kickstart.nvim'): The original configuration
+- [Kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim): The original configuration
 
 ## Installation
 

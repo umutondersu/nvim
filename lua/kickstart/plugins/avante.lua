@@ -35,8 +35,8 @@ return
             "create_dir",
             "rename_dir",
             "delete_dir",
-            "bash",
-        },
+            "bash"
+        }
 
     },
     -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
