@@ -59,9 +59,9 @@ return {
             desc = "Find Buffers"
         },
         { "<leader>sh", function() Snacks.picker.command_history() end, desc = "Command History" },
-        { "<leader>sd", function() Snacks.picker.diagnostics() end,     desc = "Diagnostics" },
+        { "<leader>sD", function() Snacks.picker.diagnostics() end,     desc = "Diagnostics" },
         {
-            "<leader>sD",
+            "<leader>sd",
             function() Snacks.picker.diagnostics_buffer({ layout = 'ivy' }) end,
             desc = "Diagnostics on Buffer"
         },
