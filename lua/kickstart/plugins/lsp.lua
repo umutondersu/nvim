@@ -2,20 +2,15 @@ return { -- LSP Configuration & Plugins
 	'neovim/nvim-lspconfig',
 	dependencies = {
 		-- Automatically install LSPs and related tools to stdpath for neovim
-		'williamboman/mason.nvim',
+		{ 'williamboman/mason.nvim',      opts = {} },
 		'williamboman/mason-lspconfig.nvim',
 		'WhoIsSethDaniel/mason-tool-installer.nvim',
 
 		-- For LSP actions preview
-		{
-			'aznhe21/actions-preview.nvim',
-			opts = {
-				backend = { "snacks", "nui" },
-			}
-		},
+		{ 'aznhe21/actions-preview.nvim', opts = { backend = { "snacks", "nui" } } },
 
 		-- Preview for go to methods
-		{ 'rmagatti/goto-preview', opts = { default_mappings = true, references = { provider = 'snacks' } }, event = 'VeryLazy', },
+		{ 'rmagatti/goto-preview',        opts = { default_mappings = true, references = { provider = 'snacks' } }, event = 'VeryLazy', },
 
 		-- Populates project-wide lsp diagnostcs
 		'artemave/workspace-diagnostics.nvim',
@@ -23,78 +18,8 @@ return { -- LSP Configuration & Plugins
 		-- Provides keymaps for LSP actions
 		'folke/snacks.nvim',
 
-		-- [[Language specific dependencies]]
-		-- Typescript
-		'dmmulroy/ts-error-translator.nvim',
-		{
-			'dmmulroy/tsc.nvim',
-			event = 'VeryLazy',
-			opts = {},
-		},
-		{
-			"pmizio/typescript-tools.nvim",
-			dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-			opts = {
-				settings = {
-					tsserver_file_preferences = {
-						includeInlayEnumMemberValueHints = true,
-						includeInlayFunctionLikeReturnTypeHints = false,
-						includeInlayFunctionParameterTypeHints = true,
-						includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
-						includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-						includeInlayPropertyDeclarationTypeHints = true,
-						includeInlayVariableTypeHints = true,
-					}
-				},
-			},
-		},
-		-- C#
-		{
-			'Hoffs/omnisharp-extended-lsp.nvim',
-			enabled = vim.fn.executable 'dotnet' == 1
-		},
-		-- Java
-		{
-			'nvim-java/nvim-java',
-			enabled = vim.fn.executable 'java' == 1
-		},
-		-- Lua
-		{
-			-- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
-			-- used for completion, annotations and signatures of Neovim apis
-			'folke/lazydev.nvim',
-			ft = 'lua',
-			opts = {
-				library = {
-					-- Load luvit types when the `vim.uv` word is found
-					{ path = '${3rd}/luv/library', words = { 'vim%.uv' } },
-				},
-			},
-		},
-		-- Go
-		{
-			"olexsmir/gopher.nvim",
-			ft = "go",
-			dependencies = { -- dependencies
-				"nvim-lua/plenary.nvim",
-				"nvim-treesitter/nvim-treesitter",
-			},
-			build = function()
-				vim.cmd.GoInstallDeps()
-			end,
-			opts = {},
-		},
-		{
-			"fredrikaverpil/godoc.nvim",
-			ft = "go",
-			version = "*",
-			dependencies = { "folke/snacks.nvim" },
-			build = "go install github.com/lotusirous/gostdsym/stdsym@latest",
-			cmd = { "GoDoc" },
-			opts = {
-				picker = { type = "snacks" }
-			},
-		}
+		-- Completion Plugin
+		'saghen/blink.cmp',
 	},
 	config = function()
 		vim.api.nvim_create_autocmd('LspAttach', {
@@ -295,14 +220,6 @@ return { -- LSP Configuration & Plugins
 			require('java').setup()
 		end
 		add_lsp('java', 'jdtls')
-
-		-- Ensure the servers and tools above are installed
-		--  To check the current status of installed tools and/or manually install
-		--  other tools, you can run
-		--    :Mason
-		--
-		--  You can press `g?` for help in this menu
-		require('mason').setup()
 
 		-- Grab the tools from the mason-tools.lua file and add them to the list of tools to install
 		local ensure_installed = vim.tbl_keys(servers or {})
