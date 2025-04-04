@@ -59,11 +59,11 @@ return {
             desc = "Find Buffers"
         },
         { "<leader>sh", function() Snacks.picker.command_history() end, desc = "Command History" },
-        { "<leader>sD", function() Snacks.picker.diagnostics() end,     desc = "Diagnostics" },
+        { "<leader>sD", function() Snacks.picker.diagnostics() end,     desc = "Workspace Diagnostics" },
         {
             "<leader>sd",
             function() Snacks.picker.diagnostics_buffer({ layout = 'ivy' }) end,
-            desc = "Diagnostics on Buffer"
+            desc = "Diagnostics"
         },
         { "<leader>sp",  function() Snacks.picker.pickers() end,       desc = "Pickers" },
         ---@diagnostic disable-next-line: undefined-field
