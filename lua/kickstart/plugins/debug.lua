@@ -14,16 +14,16 @@ return {
   },
   keys = {
     -- Basic debugging keymaps, feel free to change to your liking!
-    { '<leader>cdr', function() require('dap').continue() end,                                            desc = 'Run/Continue',               ft = ft },
-    { '<leader>cdi', function() require('dap').step_into() end,                                           desc = 'Step Into',                  ft = ft },
-    { '<leader>cdo', function() require('dap').step_over() end,                                           desc = 'Step Over',                  ft = ft },
-    { '<leader>cdO', function() require('dap').step_out() end,                                            desc = 'Step Out',                   ft = ft },
-    { '<leader>cdb', function() require('dap').toggle_breakpoint() end,                                   desc = 'Toggle Breakpoint',          ft = ft },
-    { '<leader>cdB', function() require('dap').set_breakpoint(vim.fn.input 'Breakpoint condition: ') end, desc = 'Set Breakpoint w/condition', ft = ft },
-    { '<Leader>cdp', function() require('dap').pause() end,                                               desc = 'Pause',                      ft = ft },
-    { '<leader>cdt', function() require('dap').terminate() end,                                           desc = 'Terminate',                  ft = ft },
-    { '<Leader>cdR', function() require('dapui').toggle() end,                                            desc = 'Last Session Results',       ft = ft },
-    { '<leader>cde', function() require('dapui').eval() end,                                              desc = 'Eval',                       ft = ft, mode = { "n", "v" } },
+    { '<leader>dr', function() require('dap').continue() end,                                            desc = 'Run/Continue',               ft = ft },
+    { '<leader>di', function() require('dap').step_into() end,                                           desc = 'Step Into',                  ft = ft },
+    { '<leader>do', function() require('dap').step_over() end,                                           desc = 'Step Over',                  ft = ft },
+    { '<leader>dO', function() require('dap').step_out() end,                                            desc = 'Step Out',                   ft = ft },
+    { '<leader>db', function() require('dap').toggle_breakpoint() end,                                   desc = 'Toggle Breakpoint',          ft = ft },
+    { '<leader>dB', function() require('dap').set_breakpoint(vim.fn.input 'Breakpoint condition: ') end, desc = 'Set Breakpoint w/condition', ft = ft },
+    { '<Leader>dp', function() require('dap').pause() end,                                               desc = 'Pause',                      ft = ft },
+    { '<leader>dt', function() require('dap').terminate() end,                                           desc = 'Terminate',                  ft = ft },
+    { '<Leader>dR', function() require('dapui').toggle() end,                                            desc = 'Last Session Results',       ft = ft },
+    { '<leader>de', function() require('dapui').eval() end,                                              desc = 'Eval',                       ft = ft, mode = { "n", "v" } },
   },
   config = function()
     local dap = require 'dap'
