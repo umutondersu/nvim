@@ -13,6 +13,7 @@ vim.keymap.del('n', 'gra')
 vim.keymap.del('n', 'gri')
 vim.keymap.del('n', 'grn')
 vim.keymap.del('n', 'grr')
+vim.keymap.del('n', 'gO')
 
 -- Remap for dealing with word wrap
 map('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
