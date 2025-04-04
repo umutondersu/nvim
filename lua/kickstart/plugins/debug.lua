@@ -28,22 +28,20 @@ return {
   config = function()
     local dap = require 'dap'
     local dapui = require 'dapui'
+    local icons = require('kickstart.icons')
 
     require("nvim-dap-virtual-text").setup({})
 
     -- Dap UI setup
-    -- For more information, see |:help nvim-dap-ui|
-    local dapui_icons = require('kickstart.icons').dapui
+    local dapui_icons = icons.dapui
     dapui.setup {
-      -- Set icons to characters that are more likely to work in every terminal.
-      --    Feel free to remove or use ones that you like more! :)
       icons = dapui_icons.icons,
       controls = {
         icons = dapui_icons.control_icons
       },
     }
 
-    local dap_icons = require('kickstart.icons').dap
+    local dap_icons = icons.dap
     for name, sign in pairs(dap_icons) do
       sign = type(sign) == "table" and sign or { sign }
       vim.fn.sign_define(
@@ -71,7 +69,7 @@ return {
       delve = {
         -- On Windows delve must be run attached or it crashes.
         -- See https://github.com/leoluz/nvim-dap-go/blob/main/README.md#configuring
-        detached = is_windows == 0,
+        detached = not is_windows,
       },
     }
   end,
