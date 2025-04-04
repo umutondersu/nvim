@@ -53,6 +53,7 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 
 -- Custom diagnostic config
+local diag_icons = require('kickstart.icons').diagnostics
 vim.diagnostic.config(
 	{
 		underline = false,
@@ -72,10 +73,10 @@ vim.diagnostic.config(
 		severity_sort = true,
 		signs = {
 			text = {
-				[vim.diagnostic.severity.ERROR] = require('kickstart.icons').diagnostics.Error,
-				[vim.diagnostic.severity.WARN] = require('kickstart.icons').diagnostics.Warn,
-				[vim.diagnostic.severity.HINT] = require('kickstart.icons').diagnostics.Hint,
-				[vim.diagnostic.severity.INFO] = require('kickstart.icons').diagnostics.Info,
+				[vim.diagnostic.severity.ERROR] = diag_icons.Error,
+				[vim.diagnostic.severity.WARN] = diag_icons.Warn,
+				[vim.diagnostic.severity.HINT] = diag_icons.Hint,
+				[vim.diagnostic.severity.INFO] = diag_icons.Info,
 			},
 		},
 	}

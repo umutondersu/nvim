@@ -327,29 +327,7 @@ return { -- LSP Configuration & Plugins
 					end
 					require('lspconfig')[server_name].setup(server)
 				end,
-			},
-			diagnostics = {
-				float = { border = 'rounded', source = 'if_many' },
-				underline = { severity = vim.diagnostic.severity.ERROR },
-				update_in_insert = false,
-				virtual_text = {
-					spacing = 4,
-					source = "if_many",
-					prefix = "●",
-					-- this will set set the prefix to a function that returns the diagnostics icon based on the severity
-					-- this only works on a recent 0.10.0 build. Will be set to "●" when not supported
-					-- prefix = "icons",
-				},
-				severity_sort = true,
-				signs = {
-					text = {
-						[vim.diagnostic.severity.ERROR] = icons.Error,
-						[vim.diagnostic.severity.WARN] = icons.Warn,
-						[vim.diagnostic.severity.HINT] = icons.Hint,
-						[vim.diagnostic.severity.INFO] = icons.Info,
-					},
-				},
-			},
+			}
 		}
 	end,
 }
