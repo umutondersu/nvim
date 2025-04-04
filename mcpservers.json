@@ -1,40 +1,28 @@
 {
   "mcpServers": {
-    "filesystem": {
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-filesystem",
-        "/home/qorcialwolf"
-      ],
-      "command": "npx"
-    },
-    "browser-tools": {
-      "args": ["-y", "@agentdeskai/browser-tools-mcp@1.2.0"],
-      "command": "npx"
-    },
-    "package-docs": {
-      "command": "npx",
-      "args": ["-y", "mcp-package-docs"],
+    "brave-search": {
+      "args": ["-y", "@modelcontextprotocol/server-brave-search"],
       "env": {
-        "ENABLE_LSP": "true"
-      }
-    },
-    "fetch": {
-      "args": ["mcp-server-fetch"],
-      "command": "uvx"
+        "BRAVE_API_KEY": null
+      },
+      "command": "npx"
     },
     "sequential-thinking": {
       "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
       "command": "npx"
     },
-    "git": {
-      "args": ["mcp-server-git", "--repository", "$PWD"],
+    "package-docs": {
+      "args": ["-y", "mcp-package-docs"],
+      "env": {
+        "ENABLE_LSP": "true"
+      },
+      "command": "npx"
+    },
+    "fetch": {
+      "args": ["mcp-server-fetch"],
       "command": "uvx"
     },
     "github": {
-      "env": {
-        "GITHUB_PERSONAL_ACCESS_TOKEN": null
-      },
       "args": [
         "run",
         "-i",
@@ -43,14 +31,24 @@
         "GITHUB_PERSONAL_ACCESS_TOKEN",
         "mcp/github"
       ],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": null
+      },
       "command": "docker"
     },
-    "brave-search": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-brave-search"],
-      "env": {
-        "BRAVE_API_KEY": null
-      }
+    "browser-tools": {
+      "args": ["-y", "@agentdeskai/browser-tools-mcp@1.2.0"],
+      "command": "npx"
+    },
+    "git": {
+      "args": ["mcp-server-git", "--repository", "$PWD"],
+      "command": "uvx"
+    }
+  },
+  "nativeMCPServers": {
+    "neovim": {
+      "disabled_tools": ["replace_in_file"]
     }
   }
 }
+
