@@ -14,11 +14,16 @@ return {
             { "<leader>sn", group = "Search Neovim" },
             { "<leader>t",  group = "Test" },
             { "gp",         group = "Preview" },
-            { "<leader>a",  group = "Avante",          mode = { 'n', 'v' } },
             { "<leader>ap", group = "avante: prompts", mode = { 'n', 'v' } },
             { "<leader>u",  group = "Ui" },
             { "<leader>c",  group = "Code" },
             { "<leader>d",  group = "Debug" },
+            {
+                "<leader>a",
+                group = "Avante",
+                mode = { 'n', 'v' },
+                icon = { icon = '', color = 'yellow' },
+            }
         },
     },
 }
