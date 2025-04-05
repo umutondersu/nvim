@@ -228,7 +228,6 @@ return { -- LSP Configuration & Plugins
 
 		require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
-		local icons = require('kickstart.icons').diagnostics
 		require('mason-lspconfig').setup {
 			handlers = {
 				function(server_name)
