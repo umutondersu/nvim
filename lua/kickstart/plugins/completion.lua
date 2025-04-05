@@ -116,10 +116,12 @@ return {
     sources = {
       default = { 'copilot', 'lsp', 'path', 'buffer', 'dadbod', 'snippets', 'lazydev', 'avante', 'go_pkgs', 'git', 'markdown', 'conventional_commits', 'spell' },
       providers = {
+        snippets = { score_offset = 4 },
         copilot = {
           name = "copilot",
           module = "blink-copilot",
           async = true,
+          score_offset = -2,
           opts = {
             max_completions = 3,
             max_attempts = 4,
