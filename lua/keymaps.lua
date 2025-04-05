@@ -38,7 +38,7 @@ map('n', '<M-O>', 'O<Esc>', { desc = 'New Line Up' })
 map('n', '<C-r>', 'r', { silent = true }) -- replace a single character
 map('n', 'r', '<C-r>', { silent = true }) -- redo
 
--- Append line to bottom line while keeping cursor position
+-- Append line from bottom line while keeping cursor position
 map("n", "J", "mzJ`z")
 
 -- keep cursor centered while jumping around
@@ -52,8 +52,10 @@ map('n', '<leader>w', '<cmd>w<CR>', { desc = 'Save Buffer' })
 map('n', '<leader>x', '<cmd>wqa<CR>', { desc = 'Save and Exit All Windows' })
 map('n', '<leader>q', '<cmd>q<CR>', { desc = 'Quit a Window' })
 
+-- Refactor Keymaps
+map("n", "<leader>rF", [[<cmd>call delete(expand(' % ')) | bdelete!<cr>]], { desc = 'Remove File' })
 map("n", "<leader>rw", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gcI<Left><Left><Left><Left>]],
-	{ desc = 'Replace the word under cursor' })
+	{ desc = 'Replace Word' }) -- Replace the word under the cursor
 map('v', '<leader>rv', function()
 	-- Yank the visual selection into register z
 	vim.cmd('normal! "zy')
@@ -72,7 +74,7 @@ map('v', '<leader>rv', function()
 
 	local cmd = string.format(':%s/%s/%s/gcI<Left><Left><Left><Left>', '%s', selection, selection)
 	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(cmd, true, false, true), 'n', true)
-end, { desc = 'Replace the visual selection' })
+end, { desc = 'Replace Visual' })
 
 -- Resize window using <ctrl> arrow keys with smart behavior
 map("n", "<C-Up>", function()
