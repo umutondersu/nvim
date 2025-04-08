@@ -6,6 +6,13 @@ return
     version = false, -- set this if you want to always pull the latest change
     opts = {
         provider = 'claude',
+        claude = {
+            endpoint = "https://api.anthropic.com",
+            model = "claude-3-5-sonnet-20241022",
+            timeout = 30000,
+            temperature = 0,
+            max_tokens = 4096,
+        },
         gemini = { model = 'gemini-2.5-pro-exp-03-25' },
         vendors = {
             groq = {
@@ -56,7 +63,6 @@ return
             opts = {
                 port = 37373,                                            -- Default port for MCP Hub
                 config = vim.fn.stdpath("config") .. "/mcpservers.json", -- Path to config file in Neovim config directory
-                auto_approve = true,                                     -- Auto approve mcp tool calls
                 extensions = { avante = {} }                             -- Enable avante extension
             }
         },
