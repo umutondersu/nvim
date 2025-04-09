@@ -20,7 +20,7 @@ end
 
 -- [[ GO ]] --
 ls.add_snippets("go", {
-  s({ trig = "errn", desc = "Create an if statement that checks if err is nil" }, fmt(
+  s({ trig = "ern", desc = "Create an if statement that checks if err is nil" }, fmt(
     [[
     if err != nil {
     <t><>
@@ -29,7 +29,7 @@ ls.add_snippets("go", {
       i(1), t = t("\t")
     })),
 
-  s({ trig = "errv", desc = "Create an if statement to check the value of err" }, fmt(
+  s({ trig = "erv", desc = "Create an if statement to check the value of err" }, fmt(
     [[
     if err == <> {
     <t><>
@@ -38,7 +38,7 @@ ls.add_snippets("go", {
       i(1), i(2), t = t("\t")
     })),
 
-  s({ trig = "err_", desc = "Create an if statement initilazing with the err value of a variable" }, fmt(
+  s({ trig = "er_", desc = "Create an if statement initilazing with the err value of a variable" }, fmt(
     [[
     if _, err := <>; err != nil {
     <t><>
