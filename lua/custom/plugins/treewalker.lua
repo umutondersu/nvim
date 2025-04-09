@@ -1,5 +1,7 @@
 return {
     'aaronik/treewalker.nvim',
+    cmd = 'Treewalker',
+    dependencies = 'nvim-treesitter/nvim-treesitter',
     keys = {
         { '{',     '<cmd>Treewalker Up<cr>',        mode = { 'n', 'v' }, silent = true },
         { '}',     '<cmd>Treewalker Down<cr>',      mode = { 'n', 'v' }, silent = true },
