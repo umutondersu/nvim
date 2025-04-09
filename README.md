@@ -25,6 +25,7 @@ Since this is for my personal use I use this configuration in conjunction with m
 My dotfiles have all the necessary requirements to work with this configuration. However If you just want to use this configuration or have a non Ubuntu-based distribution/Windows the requirements should be like below:
 
 - A nerd font
+- curl
 - gcc
 - ripgrep
 - unzip
@@ -32,13 +33,14 @@ My dotfiles have all the necessary requirements to work with this configuration.
 - xclip
 - python3.11-venv
 - fd-find
-- ripgrep
-- node
+- NodeJS v20 or higher
+- npm
 - A terminal that supports
   - truecolor
   - images (optional)
+- deno (optional for [peek.nvim](https://github.com/toppair/peek.nvim))
 - Tmux (optional)
-- gh (optional)
+- gh (optional for `autocompletion`)
 
 See [Windows Installation](#Windows-Installation) if you have trouble with `telescope-fzf-native`
 
