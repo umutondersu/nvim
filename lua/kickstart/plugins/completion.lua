@@ -112,7 +112,7 @@ return {
     },
     snippets = { preset = 'luasnip' },
     sources = {
-      default = { 'copilot', 'lsp', 'path', 'buffer', 'dadbod', 'snippets', 'lazydev', 'avante', 'go_pkgs', 'git', 'markdown', 'conventional_commits', 'spell' },
+      default = { 'copilot', 'lsp', 'path', 'buffer', 'dadbod', 'snippets', 'lazydev', 'avante', 'go_pkgs', 'git', 'conventional_commits', 'spell' },
       providers = {
         snippets = { score_offset = 4 },
         copilot = {
@@ -151,11 +151,6 @@ return {
           end,
           opts = {},
         },
-        markdown = {
-          name = 'RenderMarkdown',
-          module = 'render-markdown.integ.blink',
-          fallbacks = { 'lsp' },
-        },
         avante = {
           module = 'blink-cmp-avante',
           name = 'Avante',
@@ -190,7 +185,7 @@ return {
           name = "go_pkgs",
           module = "blink.compat.source",
           enabled = function()
-            return vim.fn.executable 'go' == 1
+            return vim.bo.filetype == 'go' and vim.fn.executable 'go' == 1
           end,
           opts = {}
         },
