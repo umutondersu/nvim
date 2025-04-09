@@ -5,7 +5,7 @@ return
     lazy = false,
     version = false, -- set this if you want to always pull the latest change
     opts = {
-        provider = 'claude',
+        provider = 'copilot',
         claude = {
             endpoint = "https://api.anthropic.com",
             model = "claude-3-5-sonnet-20241022",
@@ -13,6 +13,7 @@ return
             temperature = 0,
             max_tokens = 4096,
         },
+        copilot = { model = 'claude-3.5-sonnet' },
         gemini = { model = 'gemini-2.5-pro-exp-03-25' },
         vendors = {
             groq = {
