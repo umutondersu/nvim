@@ -32,14 +32,14 @@ return {
     vim.cmd.colorscheme 'tokyonight-night'
     vim.api.nvim_create_autocmd({ 'ColorScheme', 'BufAdd' }, {
       callback = vim.schedule_wrap(function()
+        vim.api.nvim_set_hl(0, "WinBar", { bg = "NONE" })
+        vim.api.nvim_set_hl(0, "WinBarNC", { bg = "NONE" })
         if not vim.g.transparent then
           return
         end
         vim.api.nvim_set_hl(0, "TreesitterContext", { bg = "None" })
         vim.api.nvim_set_hl(0, "TreesitterContextLineNumber", { sp = "red" })
         vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#232735", bg = "None" })
-        vim.api.nvim_set_hl(0, "WinBar", { bg = "NONE" })
-        vim.api.nvim_set_hl(0, "WinBarNC", { bg = "NONE" })
         vim.api.nvim_set_hl(0, "RenderMarkdownCode", { bg = "#1C1C23" })
       end),
       group = vim.api.nvim_create_augroup('Transparency', {}),
