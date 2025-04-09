@@ -64,7 +64,15 @@ return {
             function() Snacks.picker.diagnostics_buffer({ layout = 'ivy' }) end,
             desc = "Diagnostics"
         },
-        { "<leader>sp",  function() Snacks.picker.pickers() end,       desc = "Pickers" },
+        {
+            "<leader>sp",
+            function()
+                Snacks.picker.pickers({
+                    layout = 'select',
+                })
+            end,
+            desc = "Pickers"
+        },
         ---@diagnostic disable-next-line: undefined-field
         { "<leader>st",  function() Snacks.picker.todo_comments() end, desc = "Todo Comments" },
         { "<leader>sr",  function() Snacks.picker.resume() end,        desc = "Resume" },
