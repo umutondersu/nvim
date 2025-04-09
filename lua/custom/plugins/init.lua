@@ -9,4 +9,16 @@ return {
     { 'aliqyan-21/wit.nvim',                         cmd = { 'WitSearch', 'WitSearchWiki' }, opts = {} },
     { 'max397574/colortils.nvim',                    cmd = 'Colortils',                      opts = {} },
     { 'windwp/nvim-ts-autotag',                      opts = {},                              dependencies = 'nvim-treesitter/nvim-treesitter' },
+    {
+        -- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
+        -- used for completion, annotations and signatures of Neovim apis
+        'folke/lazydev.nvim',
+        ft = 'lua',
+        opts = {
+            library = {
+                -- Load luvit types when the `vim.uv` word is found
+                { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
+            },
+        },
+    }
 }
