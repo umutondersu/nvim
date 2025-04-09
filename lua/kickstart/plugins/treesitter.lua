@@ -10,7 +10,9 @@ return {
     { '<C-A-space>', desc = 'Increment Selection' },
     { '<bs>',        desc = 'Decrement Selection', mode = 'x' },
   },
+  dependencies = 'nvim-treesitter/nvim-treesitter-textobjects',
   opts = {
+    auto_install = true,
     ensure_installed = {
       'c',
       'cpp',
@@ -32,9 +34,6 @@ return {
       'regex',           -- noice.nvim
       'diff',
     },
-
-    auto_install = true,
-
     highlight = { enable = true },
     indent = { enable = true },
     incremental_selection = {
@@ -67,20 +66,5 @@ return {
   },
   config = function(_, opts)
     require('nvim-treesitter.configs').setup(opts)
-  end,
-  dependencies = {
-    'nvim-treesitter/nvim-treesitter-textobjects',
-    { 'windwp/nvim-ts-autotag', opts = {} },
-    {
-      'nvim-treesitter/nvim-treesitter-context',
-      keys = {
-        {
-          'gC',
-          function() require('treesitter-context').go_to_context(vim.v.count1) end,
-          mode = 'n',
-          desc = 'Jump to context',
-        },
-      },
-    }
-  },
+  end
 }

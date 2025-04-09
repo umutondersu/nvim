@@ -8,4 +8,5 @@ return {
     { 'danitrap/cheatsh.nvim',                       cmd = { 'CheatSh' } },
     { 'aliqyan-21/wit.nvim',                         cmd = { 'WitSearch', 'WitSearchWiki' }, opts = {} },
     { 'max397574/colortils.nvim',                    cmd = 'Colortils',                      opts = {} },
+    { 'windwp/nvim-ts-autotag',                      opts = {},                              dependencies = 'nvim-treesitter/nvim-treesitter' },
 }
