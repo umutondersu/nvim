@@ -3,11 +3,12 @@ return {
   lazy = true,
   priority = 1000,
   opts = function()
-    if not vim.g.Transparent then
+    local transparent = vim.g.transparent
+    if not transparent then
       return {}
     end
     return {
-      transparent = true,
+      transparent = transparent, -- NOTE: transparency is set in init
       styles = {
         sidebars = "transparent",
         floats = "transparent",
@@ -15,23 +16,23 @@ return {
       hide_inactive_statusline = true,
       on_highlights = function(hl, c)
         local line_number_color = "#898da0"
-        local transparent = c.none
+        local none = c.none
         local line_number_groups = { "LineNr", "LineNrAbove", "LineNrBelow" }
         for _, group in ipairs(line_number_groups) do
           hl[group] = { fg = line_number_color }
         end
         hl.TabLineFill = {
-          bg = transparent,
+          bg = none,
         }
       end,
     }
   end,
   init = function()
-    vim.g.Transparent = true
+    vim.g.transparent = true
     vim.cmd.colorscheme 'tokyonight-night'
     vim.api.nvim_create_autocmd({ 'ColorScheme', 'BufAdd' }, {
       callback = vim.schedule_wrap(function()
-        if not vim.g.Transparent then
+        if not vim.g.transparent then
           return
         end
         vim.api.nvim_set_hl(0, "TreesitterContext", { bg = "None" })
@@ -39,13 +40,14 @@ return {
         vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#232735", bg = "None" })
         vim.api.nvim_set_hl(0, "WinBar", { bg = "NONE" })
         vim.api.nvim_set_hl(0, "WinBarNC", { bg = "NONE" })
+        vim.api.nvim_set_hl(0, "RenderMarkdownCode", { bg = "#1C1C23" })
       end),
       group = vim.api.nvim_create_augroup('Transparency', {}),
     })
     -- Autocmd for getting rid of statuslines in Avante for Transparent mode
     vim.api.nvim_create_autocmd('BufEnter', {
       callback = function()
-        if not vim.g.Transparent then
+        if not vim.g.transparent then
           return
         end
         vim.api.nvim_set_hl(0, "AvanteSideBarWinSeparator", { fg = "#232735", bg = "None" })
