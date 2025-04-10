@@ -37,10 +37,10 @@ My dotfiles have all the necessary requirements to work with this configuration.
 - npm
 - A terminal that supports
   - truecolor
-  - images (optional)
+  - images (optional, if not snacks.image should be disabled)
 - deno (optional for [peek.nvim](https://github.com/toppair/peek.nvim))
 - Tmux (optional)
-- gh (optional for `autocompletion`)
+- gh (optional for `github autocompletion` and [octo.nvim](https://github.com/pwntester/octo.nvim))
 
 See [Windows Installation](#Windows-Installation) if you have trouble with `telescope-fzf-native`
 

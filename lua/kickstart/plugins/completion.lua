@@ -9,6 +9,7 @@ return {
     'Kaiser-Yang/blink-cmp-avante',
     'disrupted/blink-cmp-conventional-commits',
     'ribru17/blink-cmp-spell',
+    'moyiz/blink-emoji.nvim',
     {
       'fang2hou/blink-copilot',
       dependencies = {
@@ -112,7 +113,7 @@ return {
     },
     snippets = { preset = 'luasnip' },
     sources = {
-      default = { 'copilot', 'lsp', 'path', 'buffer', 'dadbod', 'snippets', 'lazydev', 'avante', 'go_pkgs', 'git', 'conventional_commits', 'spell' },
+      default = { 'copilot', 'lsp', 'path', 'buffer', 'dadbod', 'snippets', 'lazydev', 'avante', 'go_pkgs', 'git', 'conventional_commits', 'spell', 'emoji' },
       providers = {
         snippets = { score_offset = 4 },
         copilot = {
@@ -141,7 +142,7 @@ return {
           enabled = function()
             return vim.tbl_contains({ 'octo', 'gitcommit', 'markdown' }, vim.bo.filetype) and vim.fn.executable 'gh' == 1
           end,
-          opts = {},
+          opts = { commit = { triggers = { ';' } } },
         },
         conventional_commits = {
           name = 'Conventional Commits',
@@ -180,6 +181,13 @@ return {
               return in_spell_capture
             end,
           }
+        },
+        emoji = {
+          module = "blink-emoji",
+          name = "Emoji",
+          score_offset = 15,        -- Tune by preference
+          opts = { insert = true }, -- Insert emoji (default) or complete its name
+          enabled = function() return vim.tbl_contains({ "gitcommit", "markdown", "octo" }, vim.o.filetype) end,
         },
         go_pkgs = {
           name = "go_pkgs",
