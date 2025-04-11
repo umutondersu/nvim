@@ -42,9 +42,7 @@ return
             "delete_file",
             "create_dir",
             "rename_dir",
-            "delete_dir",
-            "bash",
-            "view"
+            "delete_dir"
         }
 
     },
