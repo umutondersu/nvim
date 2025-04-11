@@ -36,7 +36,7 @@ return
       css = { "prettier" },
       python = { "isort", "black" },
       go = { "gofumpt", "goimports" },
-      cshart = { "csharpier" },
+      csharp = { "csharpier" },
       sh = { "shellharden" }
     },
   },
@@ -57,8 +57,16 @@ return
       desc = "Format buffer or range",
     },
     {
+      "<M-f>",
+      function()
+        require("conform").format({ async = true, lsp_format = 'fallback' })
+      end,
+      mode = "i",
+      desc = "Format in insert mode",
+    },
+    {
       "<leader>ft",
-      "<cmd>Ftoggle<cr>",
+      "<cmd>FormatToggle<cr>",
       mode = "n",
       desc = "Toggle autoformatting",
     }, {
@@ -70,7 +78,7 @@ return
   },
   init = function()
     -- [[ Toggle Autoformatting with Conform.nvim ]]
-    vim.api.nvim_create_user_command("Ftoggle", function()
+    vim.api.nvim_create_user_command("FormatToggle", function()
       vim.g.disable_autoformat = not vim.g.disable_autoformat
       vim.b.disable_autoformat = vim.g.disable_autoformat
       print("Auto Formatting is " .. (vim.g.disable_autoformat and "Disabled" or "Enabled"))
