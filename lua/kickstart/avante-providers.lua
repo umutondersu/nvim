@@ -16,5 +16,4 @@ return {
 			model = "deepseek-r1-distill-llama-70b"
 		},
 	},
-
 }
