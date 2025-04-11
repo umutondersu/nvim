@@ -1,4 +1,4 @@
-local ft = { 'go', 'python' }
+local ft = { 'go', 'python', 'lua' }
 return {
   'mfussenegger/nvim-dap',
   dependencies = {
@@ -6,11 +6,12 @@ return {
     'rcarriga/nvim-dap-ui',
 
     -- Inline virtual text for debugging
-    'theHamsta/nvim-dap-virtual-text',
+    { 'theHamsta/nvim-dap-virtual-text', opts = {} },
 
     -- Debuggers for different languages
     'mfussenegger/nvim-dap-python',
     'leoluz/nvim-dap-go',
+    'jbyuki/one-small-step-for-vimkind', -- Neovim
   },
   keys = {
     -- Basic debugging keymaps, feel free to change to your liking!
@@ -29,8 +30,6 @@ return {
     local dap = require 'dap'
     local dapui = require 'dapui'
     local icons = require('kickstart.icons')
-
-    require("nvim-dap-virtual-text").setup({})
 
     -- Dap UI setup
     local dapui_icons = icons.dapui
@@ -72,5 +71,18 @@ return {
         detached = not is_windows,
       },
     }
+
+    -- Neovim
+    dap.configurations.lua = {
+      {
+        type = 'nlua',
+        request = 'attach',
+        name = "Attach to running Neovim instance",
+      }
+    }
+    dap.adapters.nlua = function(callback, config)
+      callback({ type = 'server', host = config.host or "127.0.0.1", port = config.port or 8086 })
+    end
+    vim.api.nvim_create_user_command('NeovimDebugStart', function() require "osv".launch({ port = 8086 }) end, {})
   end,
 }
