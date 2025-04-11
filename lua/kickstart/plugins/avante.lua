@@ -4,25 +4,8 @@ return
     event = 'VeryLazy',
     lazy = false,
     version = false, -- set this if you want to always pull the latest change
-    opts = {
+    opts = vim.tbl_deep_extend("keep", {
         provider = 'copilot',
-        claude = {
-            endpoint = "https://api.anthropic.com",
-            model = "claude-3-5-sonnet-20241022",
-            timeout = 30000,
-            temperature = 0,
-            max_tokens = 4096,
-        },
-        copilot = { model = 'claude-3.5-sonnet' },
-        gemini = { model = 'gemini-2.5-pro-exp-03-25' },
-        vendors = {
-            groq = {
-                __inherited_from = "openai",
-                api_key_name = "GROQ_API_KEY",
-                endpoint = "https://api.groq.com/openai/v1/",
-                model = "deepseek-r1-distill-llama-70b"
-            },
-        },
         file_selector = { provider = 'snacks' },
         system_prompt = function()
             local hub = require("mcphub").get_hub_instance()
@@ -44,8 +27,7 @@ return
             "rename_dir",
             "delete_dir"
         }
-
-    },
+    }, require("kickstart.avante-providers")),
     -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
     build = 'make',
     -- build = 'powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false' -- for windows
