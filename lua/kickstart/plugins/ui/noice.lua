@@ -60,6 +60,14 @@ return {
                 },
                 skip = true,
             },
+            {
+                filter = {
+                    event = "notify",
+                    find = "Content is not an image.",
+                },
+                skip = true
+            }
+
         },
     },
     dependencies = {
