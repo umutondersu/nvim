@@ -31,6 +31,7 @@ My dotfiles have all the necessary requirements to work with this configuration.
 - unzip
 - git
 - xclip
+- uvx
 - python3.11-venv
 - fd-find
 - NodeJS v20 or higher
