@@ -20,6 +20,34 @@ return {
         scope = { enabled = true }, -- Jumps: ]i [i textobjects: ii(inner scope) ai(full scope)
         picker = {
             matcher = { frecency = true },
+            win = {
+                input = {
+                    keys = {
+                        ["S"] = { "flash", mode = { "n", "i" } },
+                        ["s"] = { "flash" },
+                    },
+                },
+            },
+            actions = {
+                flash = function(picker)
+                    require("flash").jump({
+                        pattern = "^",
+                        label = { after = { 0, 0 } },
+                        search = {
+                            mode = "search",
+                            exclude = {
+                                function(win)
+                                    return vim.bo[vim.api.nvim_win_get_buf(win)].filetype ~= "snacks_picker_list"
+                                end,
+                            },
+                        },
+                        action = function(match)
+                            local idx = picker.list:row2idx(match.pos[1])
+                            picker.list:_move(idx, true, true)
+                        end,
+                    })
+                end,
+            },
         },
         input = { enabled = true },
         image = { enabled = true, force = true },
@@ -73,6 +101,20 @@ return {
             end,
             desc = "Pickers"
         },
+        {
+            "<leader>sP",
+            function()
+                Snacks.picker.files {
+                    ft = { "jpg", "jpeg", "png", "webp" },
+                    confirm = function(self, item, _)
+                        self:close()
+                        require("img-clip").paste_image({}, "./" .. item.file)
+                    end,
+                    layout = 'telescope'
+                }
+            end,
+            desc = 'Pictures'
+        },
         ---@diagnostic disable-next-line: undefined-field
         { "<leader>st",  function() Snacks.picker.todo_comments() end, desc = "Todo Comments" },
         { "<leader>sr",  function() Snacks.picker.resume() end,        desc = "Resume" },
@@ -84,7 +126,7 @@ return {
         -- Git
         -- - `<Tab>`: stages or unstages the currently selected file
         -- - `<cr>`: opens the currently selected file
-        { "<leader>sF",  function() Snacks.picker.git_files() end,     desc = "Git Files" },
+        { "<leader>gf",  function() Snacks.picker.git_files() end,     desc = "Git Files" },
         { "<leader>gs",  function() Snacks.picker.git_status() end,    desc = "Git Status" },
         -- LazyGit
         { "<leader>gF",  function() Snacks.lazygit.log_file() end,     desc = "Lazygit Current File History" },
@@ -166,6 +208,6 @@ return {
         end, { nargs = 0 })
     end,
     dependencies = {
-        { 'folke/todo-comments.nvim', event = 'VeryLazy', dependencies = { 'nvim-lua/plenary.nvim' }, opts = {} },
+        { 'folke/todo-comments.nvim', lazy = true, dependencies = { 'nvim-lua/plenary.nvim' }, opts = {} },
     },
 }
