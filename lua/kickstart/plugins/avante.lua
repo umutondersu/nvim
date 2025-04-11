@@ -296,31 +296,6 @@ Include test scenarios to verify the fixes if appropriate.
             mode = { 'n', 'v' },
             desc = 'Fix Bugs',
         },
-
-        {
-            '<leader>apb',
-            function()
-                require('avante.api').ask { question = [[
-Analyze the code for potential bugs and issues:
-1. Check for logical errors and edge cases
-2. Identify potential runtime errors
-3. Look for common pitfalls in the language/framework
-4. Analyze error handling and validation
-5. Review type safety and data validation
-
-For each issue found:
-- Explain the bug's impact and potential risks
-- Provide a clear fix that follows best practices
-- Verify the fix doesn't introduce new issues
-- Consider performance and side effects
-- Suggest preventive measures for similar bugs
-
-Include test scenarios to verify the fixes if appropriate.
-]] }
-            end,
-            mode = { 'n', 'v' },
-            desc = 'Fix Bugs',
-        },
         {
             '<leader>apt',
             function()
