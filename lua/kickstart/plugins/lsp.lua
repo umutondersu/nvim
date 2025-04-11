@@ -117,7 +117,7 @@ return { -- LSP Configuration & Plugins
 					map('<leader>cf', '<cmd>TSToolsFixAll<cr>', 'Fix all fixable errors')
 					map('<leader>cr', '<cmd>TSToolsRemoveUnused<cr>', 'Remove all unused statements')
 					map('<leader>rf', '<cmd>TSToolsRenameFile<cr>', 'Rename File')
-					-- Organize and Add Missing Import automatically
+					-- Organize and Add Missing Imports with autoformat
 					vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
 						pattern = { "*.ts", "*.js", "*.tsx", "*.jsx" },
 						callback = vim.schedule_wrap(function()
@@ -154,6 +154,7 @@ return { -- LSP Configuration & Plugins
 			-- rust_analyzer = {},
 			-- html = { filetypes = { 'html', 'twig', 'hbs'} },
 
+			-- NOTE: These servers do not use add_lsp because the following tools are required: npm, node, python3
 			bashls = {},
 
 			pyright = {},
@@ -181,13 +182,28 @@ return { -- LSP Configuration & Plugins
 
 		}
 
-		---@param command string
+		---@param command string|table
 		---@param server_name string
 		---@param server_config table?
 		local function add_lsp(command, server_name, server_config)
 			server_config = server_config or {}
-			if vim.fn.executable(command) == 1 then
-				servers[server_name] = server_config
+			if type(command) == 'string' then
+				-- Single requirement
+				if vim.fn.executable(command) == 1 then
+					servers[server_name] = server_config
+				end
+			elseif type(command) == 'table' then
+				-- Multiple requirements - all must be present
+				local all_available = true
+				for _, cmd in ipairs(command) do
+					if vim.fn.executable(cmd) ~= 1 then
+						all_available = false
+						break
+					end
+				end
+				if all_available then
+					servers[server_name] = server_config
+				end
 			end
 		end
 
