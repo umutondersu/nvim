@@ -10,7 +10,8 @@ return
         system_prompt = function()
             local hub = require("mcphub").get_hub_instance()
             ---@diagnostic disable-next-line: need-check-nil
-            return hub:get_active_servers_prompt()
+            return hub:get_active_servers_prompt() ..
+                "\nYou have to only use *SEARCH/REPLACE* blocks to replace text, write text, remove text or edit files unless the prompt contains the word YOLO. Otherwise you are fired!"
         end,
         -- The custom_tools type supports both a list and a function that returns a list. Using a function here prevents requiring mcphub before it's loaded
         custom_tools = function()
@@ -58,7 +59,7 @@ return
             opts = {
                 -- recommended settings
                 default = {
-                    embed_image_as_base64 = false,
+                    embed_image_as_base64s = false,
                     prompt_for_file_name = false,
                     drag_and_drop = {
                         insert_mode = true,
@@ -228,7 +229,7 @@ Follow the language's standard docstring format and style conventions.
             '<leader>apd',
             function()
                 require('avante.api').ask { question = [[
-Use available diagnostic tools to analyze and fix any diagnostic issues.
+Analyze and fix any diagnostic issues.
 
 For each diagnostic found:
 1. Group related issues across files
@@ -239,6 +240,7 @@ For each diagnostic found:
 6. Do not overreach, only fix what is necessary
 
 Prioritize fixes that resolve multiple related issues.
+@diagnostics
 ]] }
             end,
             mode = { 'n', 'v' },

@@ -1,26 +1,12 @@
 {
   "mcpServers": {
-    "brave-search": {
-      "args": ["-y", "@modelcontextprotocol/server-brave-search"],
-      "env": {
-        "BRAVE_API_KEY": null
-      },
+    "browser-tools": {
+      "args": ["-y", "@agentdeskai/browser-tools-mcp@1.2.0"],
       "command": "npx"
     },
     "sequential-thinking": {
       "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
       "command": "npx"
-    },
-    "package-docs": {
-      "args": ["-y", "mcp-package-docs"],
-      "env": {
-        "ENABLE_LSP": "true"
-      },
-      "command": "npx"
-    },
-    "fetch": {
-      "args": ["mcp-server-fetch"],
-      "command": "uvx"
     },
     "github": {
       "args": [
@@ -31,23 +17,17 @@
         "GITHUB_PERSONAL_ACCESS_TOKEN",
         "mcp/github"
       ],
+      "command": "docker",
       "env": {
         "GITHUB_PERSONAL_ACCESS_TOKEN": null
-      },
-      "command": "docker"
+      }
     },
-    "browser-tools": {
-      "args": ["-y", "@agentdeskai/browser-tools-mcp@1.2.0"],
-      "command": "npx"
-    },
-    "git": {
-      "args": ["mcp-server-git", "--repository", "$PWD"],
-      "command": "uvx"
-    }
-  },
-  "nativeMCPServers": {
-    "neovim": {
-      "disabled_tools": ["replace_in_file"]
+    "package-docs": {
+      "args": ["-y", "mcp-package-docs"],
+      "command": "npx",
+      "env": {
+        "ENABLE_LSP": "true"
+      }
     }
   }
 }
