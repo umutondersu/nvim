@@ -1,5 +1,6 @@
 return { -- LSP Configuration & Plugins
 	'neovim/nvim-lspconfig',
+	commit = '4ea9083', -- NOTE: Temporary commit until adapting to new lspconfig with vim.lsp.config
 	dependencies = {
 		-- Automatically install LSPs and related tools to stdpath for neovim
 		{ 'williamboman/mason.nvim',      opts = {} },
