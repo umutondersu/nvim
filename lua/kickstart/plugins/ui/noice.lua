@@ -66,6 +66,13 @@ return {
                     find = "Content is not an image.",
                 },
                 skip = true
+            },
+            {
+                filter = {
+                    event = "notify",
+                    find = "not attached to buffer",
+                },
+                skip = true
             }
 
         },
