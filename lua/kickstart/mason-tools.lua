@@ -13,7 +13,8 @@ local ensure_installed = {
 	'flake8',
 	'shellcheck',
 	-- DAP
-	'debugpy'
+	'debugpy',
+	'js-debug-adapter'
 }
 
 local function add_tool(command, tools)

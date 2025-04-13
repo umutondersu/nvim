@@ -1,4 +1,4 @@
-local ft = { 'go', 'python', 'lua' }
+local ft = { 'go', 'python', 'lua', 'javascript', 'typescript', 'javascriptreact', 'typescriptreact' }
 return {
   'mfussenegger/nvim-dap',
   dependencies = {
@@ -9,9 +9,22 @@ return {
     { 'theHamsta/nvim-dap-virtual-text', opts = {} },
 
     -- Debuggers for different languages
+    --NOTE: add the debuggers to ensure_installed in mason-tools.lua
     'mfussenegger/nvim-dap-python',
     'leoluz/nvim-dap-go',
     'jbyuki/one-small-step-for-vimkind', -- Neovim
+    {
+      "microsoft/vscode-js-debug",
+      build = "npm install --legacy-peer-deps --no-save && npx gulp vsDebugServerBundle && rm -rf out && mv dist out",
+      version = "1.*"
+    },
+    {
+      "mxsdev/nvim-dap-vscode-js",
+      opts = {
+        debugger_path = vim.fn.resolve(vim.fn.stdpath("data") .. "/lazy/vscode-js-debug"),
+        adapters = { "chrome", "pwa-node", "pwa-chrome", "pwa-msedge", "pwa-extensionHost", "node-terminal" }
+      }
+    }
   },
   keys = {
     -- Basic debugging keymaps, feel free to change to your liking!
@@ -29,7 +42,7 @@ return {
   config = function()
     local dap = require 'dap'
     local dapui = require 'dapui'
-    local icons = require('kickstart.icons')
+    local icons = require 'kickstart.icons'
 
     -- Dap UI setup
     local dapui_icons = icons.dapui
@@ -55,20 +68,17 @@ return {
     dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
     -- Install language specific configurations
-    local is_windows = vim.fn.has('win32') == 1
-    local nvim_data_path = is_windows
-        and vim.fn.expand('%LOCALAPPDATA%/nvim-data')
-        or vim.fn.expand('~/.local/share/nvim')
+    local mason_packages = vim.fn.stdpath('data') .. '/mason/packages/'
 
     -- Python
-    require('dap-python').setup(nvim_data_path .. '/mason/packages/debugpy/venv/bin/python')
+    require('dap-python').setup(mason_packages .. 'debugpy/venv/bin/python')
 
     -- Go
     require('dap-go').setup {
       delve = {
         -- On Windows delve must be run attached or it crashes.
         -- See https://github.com/leoluz/nvim-dap-go/blob/main/README.md#configuring
-        detached = not is_windows,
+        detached = vim.fn.has('win32') == 0
       },
     }
 
@@ -84,5 +94,83 @@ return {
       callback({ type = 'server', host = config.host or "127.0.0.1", port = config.port or 8086 })
     end
     vim.api.nvim_create_user_command('NeovimDebugStart', function() require "osv".launch({ port = 8086 }) end, {})
+
+    -- JavaScript/TypeScript
+    -- First set up the adapter
+    dap.adapters["pwa-node"] = {
+      type = "server",
+      host = "localhost",
+      port = "${port}",
+      executable = {
+        command = "js-debug-adapter",
+        args = {
+          "${port}",
+        },
+      },
+    }
+
+    for _, language in ipairs { "typescript", "javascript", "javascriptreact", "typescriptreact" } do
+      require("dap").configurations[language] = {
+        {
+          type = "pwa-node",
+          request = "launch",
+          name = "Launch file",
+          program = "${file}",
+          cwd = "${workspaceFolder}",
+        },
+        {
+          type = "pwa-node",
+          request = "attach",
+          name = "Attach",
+          processId = require("dap.utils").pick_process,
+          cwd = "${workspaceFolder}",
+        },
+        -- {
+        --   type = "pwa-node",
+        --   request = "launch",
+        --   name = "Debug Jest Tests",
+        --   -- trace = true, -- include debugger info
+        --   runtimeExecutable = "node",
+        --   runtimeArgs = {
+        --     "./node_modules/jest/bin/jest.js",
+        --     "--runInBand",
+        --   },
+        --   rootPath = "${workspaceFolder}",
+        --   cwd = "${workspaceFolder}",
+        --   console = "integratedTerminal",
+        --   internalConsoleOptions = "neverOpen",
+        -- },
+        {
+          type = "pwa-chrome",
+          request = "launch",
+          name = "Launch & Debug Chrome",
+          url = function()
+            local co = coroutine.running()
+            return coroutine.create(function()
+              vim.ui.input({
+                prompt = "Enter URL: ",
+                default = "http://localhost:3000",
+              }, function(url)
+                if url == nil or url == "" then
+                  return
+                else
+                  coroutine.resume(co, url)
+                end
+              end)
+            end)
+          end,
+          webRoot = vim.fn.getcwd(),
+          protocol = "inspector",
+          sourceMaps = true,
+          userDataDir = false,
+        },
+        -- Divider for the launch.json derived configs
+        {
+          name = "----- ↓ launch.json configs ↓ -----",
+          type = "",
+          request = "launch",
+        },
+      }
+    end
   end,
 }
