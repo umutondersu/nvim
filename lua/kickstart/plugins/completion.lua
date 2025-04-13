@@ -53,14 +53,16 @@ return {
     {
       'L3MON4D3/LuaSnip',
       version = 'v2.*',
+      dependencies = {
+        -- Snippets
+        'solidjs-community/solid-snippets',
+        'rafamadriz/friendly-snippets',
+      },
       config = function()
+        require('luasnip.loaders.from_vscode').lazy_load()
         require('snippets')
       end,
     },
-
-    -- Snippets
-    'rafamadriz/friendly-snippets',
-    'solidjs-community/solid-snippets',
 
     -- Visual
     { 'xzbdmw/colorful-menu.nvim', opts = {} }
@@ -115,7 +117,7 @@ return {
     sources = {
       default = { 'copilot', 'lsp', 'path', 'buffer', 'dadbod', 'snippets', 'lazydev', 'avante', 'go_pkgs', 'git', 'conventional_commits', 'spell', 'emoji' },
       providers = {
-        snippets = { score_offset = 4 },
+        snippets = { score_offset = 3 },
         copilot = {
           name = "copilot",
           module = "blink-copilot",
