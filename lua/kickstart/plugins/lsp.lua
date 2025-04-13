@@ -1,6 +1,5 @@
 return { -- LSP Configuration & Plugins
 	'neovim/nvim-lspconfig',
-	commit = '4ea9083', -- NOTE: Temporary commit until adapting to new lspconfig with vim.lsp.config
 	dependencies = {
 		-- Automatically install LSPs and related tools to stdpath for neovim
 		{ 'williamboman/mason.nvim',      opts = {} },
@@ -18,9 +17,6 @@ return { -- LSP Configuration & Plugins
 
 		-- Provides keymaps for LSP actions
 		'folke/snacks.nvim',
-
-		-- Completion Plugin
-		'saghen/blink.cmp',
 	},
 	config = function()
 		vim.api.nvim_create_autocmd('LspAttach', {
@@ -145,6 +141,7 @@ return { -- LSP Configuration & Plugins
 		--  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
 		--
 		--  Add any additional override configuration in the following tables. Available keys are:
+		--	- command (string?): This is an optinal key I added. If the command is not an executable, that LSP will be skipped.
 		--  - cmd (table): Override the default command used to start the server
 		--  - filetypes (table): Override the default list of associated filetypes for the server
 		--  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
@@ -155,7 +152,6 @@ return { -- LSP Configuration & Plugins
 			-- rust_analyzer = {},
 			-- html = { filetypes = { 'html', 'twig', 'hbs'} },
 
-			-- NOTE: These servers do not use add_lsp because the following tools are required: npm, node, python3
 			bashls = {},
 
 			pyright = {},
@@ -179,81 +175,62 @@ return { -- LSP Configuration & Plugins
 						},
 					},
 				},
-			}
+			},
 
+			omnisharp = { command = 'dotnet' },
+
+			gopls = {
+				command = 'go',
+				settings = {
+					gopls = {
+						hints = {
+							assignVariableTypes = true,
+							compositeLiteralFields = true,
+							compositeLiteralTypes = true,
+							constantValues = true,
+							functionTypeParameters = true,
+							parameterNames = true,
+							rangeVariableTypes = true,
+						},
+					},
+				}
+			},
+
+			jdtls = { command = 'java' }
 		}
 
-		---@param command string|table
-		---@param server_name string
-		---@param server_config table?
-		local function add_lsp(command, server_name, server_config)
-			server_config = server_config or {}
-			if type(command) == 'string' then
-				-- Single requirement
-				if vim.fn.executable(command) == 1 then
-					servers[server_name] = server_config
-				end
-			elseif type(command) == 'table' then
-				-- Multiple requirements - all must be present
-				local all_available = true
-				for _, cmd in ipairs(command) do
-					if vim.fn.executable(cmd) ~= 1 then
-						all_available = false
-						break
-					end
-				end
-				if all_available then
-					servers[server_name] = server_config
-				end
-			end
+		---@param command string?
+		local function skip_lsp(command)
+			return command and vim.fn.executable(command) == 0
 		end
 
-		add_lsp('dotnet', 'omnisharp')
+		-- Grab the list of servers to install from the servers table
+		local ensure_installed = vim.tbl_filter(function(server_name)
+			local config = servers[server_name]
+			return not skip_lsp(config.command)
+		end, vim.tbl_keys(servers or {}))
 
-		add_lsp('go', 'gopls', {
-			settings = {
-				gopls = {
-					hints = {
-						assignVariableTypes = true,
-						compositeLiteralFields = true,
-						compositeLiteralTypes = true,
-						constantValues = true,
-						functionTypeParameters = true,
-						parameterNames = true,
-						rangeVariableTypes = true,
-					},
-				},
-			},
-		})
-
-		if vim.fn.executable('java') == 1 then
-			require('java').setup()
-		end
-		add_lsp('java', 'jdtls')
-
-		-- Grab the tools from the mason-tools.lua file and add them to the list of tools to install
-		local ensure_installed = vim.tbl_keys(servers or {})
+		-- Grab the tools from the mason-tools.lua file and add them to ensure_installed
 		local tools = require('kickstart.mason-tools')
 		vim.list_extend(ensure_installed, tools)
-
 		require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
-		require('mason-lspconfig').setup {
-			handlers = {
-				function(server_name)
-					-- Do not set up ts_ls since typescript-tools is used
-					if server_name == 'ts_ls' then return end
-					local server = servers[server_name] or {}
-					-- This handles overriding only values explicitly passed
-					-- by the server configuration above. Useful when disabling
-					-- certain features of an LSP (for example, turning off formatting for tsserver)
-					server.capabilities = require('blink.cmp').get_lsp_capabilities(server.capabilities or {})
-					server.on_attach = function(client, bufnr)
-						require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
-					end
-					require('lspconfig')[server_name].setup(server)
-				end,
-			}
-		}
+		---@param name string
+		---@param config table
+		local function setup_lsp(name, config)
+			if name == 'ts_ls' then return end -- Do not setup ts_ls since typescript-tools is used instead
+			local enabled = true
+			if skip_lsp(config.command) then enabled = false end
+			config.command = nil
+			config.on_attach = function(client, bufnr)
+				require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
+			end
+			vim.lsp.config(name, config)
+			vim.lsp.enable(name, enabled)
+		end
+
+		for server_name, config in pairs(servers) do
+			setup_lsp(server_name, config)
+		end
 	end,
 }
