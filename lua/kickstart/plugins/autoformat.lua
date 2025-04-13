@@ -23,7 +23,7 @@ return
         }
       end
     end,
-    --NOTE: add the formatters to ensure_installed with add_tools function
+    --NOTE: add the formatters to ensure_installed in mason-tools.lua
     formatters_by_ft = {
       javascript = { "prettier" },
       typescript = { "prettier" },
@@ -66,7 +66,7 @@ return
     },
     {
       "<leader>ft",
-      "<cmd>FormatToggle<cr>",
+      "<cmd>AutoFormatToggle<cr>",
       mode = "n",
       desc = "Toggle autoformatting",
     }, {
@@ -78,7 +78,7 @@ return
   },
   init = function()
     -- [[ Toggle Autoformatting with Conform.nvim ]]
-    vim.api.nvim_create_user_command("FormatToggle", function()
+    vim.api.nvim_create_user_command("AutoFormatToggle", function()
       vim.g.disable_autoformat = not vim.g.disable_autoformat
       vim.b.disable_autoformat = vim.g.disable_autoformat
       print("Auto Formatting is " .. (vim.g.disable_autoformat and "Disabled" or "Enabled"))
