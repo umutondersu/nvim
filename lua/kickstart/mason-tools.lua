@@ -5,7 +5,6 @@
 local ensure_installed = {
 	-- Formatters
 	'prettier',
-	'shellharden',
 	-- Linters
 	'eslint_d',
 	'shellcheck',
@@ -19,6 +18,8 @@ local function add_tool(command, tools)
 		vim.list_extend(ensure_installed, tools)
 	end
 end
+
+add_tool('cargo', { 'shellharden' })
 
 add_tool('python3', {
 	-- Formatters
