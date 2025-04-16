@@ -1,8 +1,8 @@
 return
 {
   "stevearc/conform.nvim",
-  event = { "BufWritePre" },
-  cmd = { "ConformInfo" },
+  event = "BufWritePre",
+  cmd = "ConformInfo",
   opts = {
     notify_on_error = false,
     format_on_save = function(bufnr)
@@ -19,7 +19,7 @@ return
       else
         return {
           timeout_ms = 500,
-          lsp_format = 'fallback',
+          lsp_format = 'fallback'
         }
       end
     end,
@@ -38,7 +38,7 @@ return
       go = { "gofumpt", "goimports" },
       csharp = { "csharpier" },
       sh = { "shellharden" }
-    },
+    }
   },
   keys = {
     {
@@ -54,7 +54,7 @@ return
         end)
       end,
       mode = { "n", "v" },
-      desc = "Format buffer or range",
+      desc = "Format buffer or range"
     },
     {
       "<M-f>",
@@ -62,19 +62,20 @@ return
         require("conform").format({ async = true, lsp_format = 'fallback' })
       end,
       mode = "i",
-      desc = "Format in insert mode",
+      desc = "Format in insert mode"
     },
     {
       "<leader>ft",
       "<cmd>AutoFormatToggle<cr>",
       mode = "n",
-      desc = "Toggle autoformatting",
-    }, {
-    "<leader>fi",
-    "<cmd>ConformInfo<cr>",
-    mode = "n",
-    desc = "Conform Info",
-  },
+      desc = "Toggle autoformatting"
+    },
+    {
+      "<leader>fi",
+      "<cmd>ConformInfo<cr>",
+      mode = "n",
+      desc = "Conform Info"
+    },
   },
   init = function()
     -- [[ Toggle Autoformatting with Conform.nvim ]]
