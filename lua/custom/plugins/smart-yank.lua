@@ -1,5 +1,6 @@
 return {
     'ibhagwan/smartyank.nvim',
+    event = 'TextYankPost',
     opts = { highlight = { enabled = false } },
     init = function()
         local map = function(lhs, rhs)

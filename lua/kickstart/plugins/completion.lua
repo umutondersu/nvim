@@ -1,5 +1,6 @@
 return {
   'saghen/blink.cmp',
+  event = { 'InsertEnter', 'CmdlineEnter' },
   dependencies = {
     -- Integrate Nvim-cmp completion sources
     { 'saghen/blink.compat',       version = '*', lazy = true, opts = {} },

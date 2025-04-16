@@ -1,6 +1,8 @@
 return {
     'rmagatti/auto-session',
-    lazy = false,
+    event = 'VimEnter',
+    ---@module "auto-session"
+    ---@type AutoSession.Config
     opts = {
         suppress_dirs = { '~/', '~/Projects', '~/Downloads', '/' },
     },

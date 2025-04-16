@@ -2,6 +2,7 @@ return {
   'tpope/vim-rhubarb',
   {
     'tpope/vim-fugitive',
+    cmd = { 'G', 'Git' },
     init = function()
       vim.keymap.set('n', '<leader>gw',
         function()
@@ -36,6 +37,7 @@ return {
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
+    event = 'BufReadPost',
     opts = {
       signs = {
         add = { text = "▎" },
