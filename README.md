@@ -40,7 +40,6 @@ My dotfiles have all the necessary requirements to work with this configuration.
 - deno (optional for [peek.nvim](https://github.com/toppair/peek.nvim))
 - Tmux (optional)
 - uvx (optional for MCP Servers)
-- python3.11-venv (optional if you want to use python)
 - gh (optional for `github autocompletion` and [octo.nvim](https://github.com/pwntester/octo.nvim))
 
 See [Windows Installation](#Windows-Installation) if you have trouble with `telescope-fzf-native`

@@ -21,6 +21,9 @@ end
 
 add_tool('cargo', { 'shellharden' })
 
+if vim.fn.executable('python3') == 1 then
+	vim.fn.system('command -v python3-venv || sudo apt-get install -y python3-venv')
+end
 add_tool('python3', {
 	-- Formatters
 	'black',
