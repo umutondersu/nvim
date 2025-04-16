@@ -1,5 +1,5 @@
-return
-{
+local config = require('kickstart.avante-config')
+return {
     'yetone/avante.nvim',
     event = 'VeryLazy',
     lazy = false,
@@ -10,8 +10,7 @@ return
         system_prompt = function()
             local hub = require("mcphub").get_hub_instance()
             ---@diagnostic disable-next-line: need-check-nil
-            return hub:get_active_servers_prompt() ..
-                "\nYou have to only use *SEARCH/REPLACE* blocks to replace text, write text, remove text or edit files unless the prompt contains the word YOLO. Otherwise you are fired!"
+            return hub:get_active_servers_prompt() .. config.custom_prompt
         end,
         -- The custom_tools type supports both a list and a function that returns a list. Using a function here prevents requiring mcphub before it's loaded
         custom_tools = function()
@@ -28,7 +27,7 @@ return
             "rename_dir",
             "delete_dir"
         }
-    }, require("kickstart.avante-config").opts),
+    }, config.opts),
     -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
     build = 'make',
     -- build = 'powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false' -- for windows
@@ -70,5 +69,5 @@ return
             },
         },
     },
-    keys = require("kickstart.avante-config").keys,
+    keys = config.keys,
 }

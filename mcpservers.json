@@ -22,13 +22,9 @@
         "GITHUB_PERSONAL_ACCESS_TOKEN": null
       }
     },
-    "package-docs": {
-      "args": ["-y", "mcp-package-docs"],
+    "context7": {
       "command": "npx",
-      "env": {
-        "ENABLE_LSP": "true"
-      }
+      "args": ["-y", "@upstash/context7-mcp"]
     }
   }
 }
-

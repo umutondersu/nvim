@@ -1,4 +1,8 @@
 return {
+	custom_prompt = [[
+You have to only use *SEARCH/REPLACE* blocks to replace text, write text, remove text or edit files unless the prompt contains the word YOLO. Otherwise you are fired!
+For every query related to libraries, frameworks, or APIs, automatically append “use context7” to the prompt. Otherwise you are fired!
+]],
 	opts = {
 		claude = {
 			endpoint = "https://api.anthropic.com",
