@@ -4,13 +4,10 @@
 
 local ensure_installed = {
 	-- Formatters
-	'black',
-	'isort',
 	'prettier',
 	'shellharden',
 	-- Linters
 	'eslint_d',
-	'flake8',
 	'shellcheck',
 	-- DAP
 	'debugpy',
@@ -22,6 +19,16 @@ local function add_tool(command, tools)
 		vim.list_extend(ensure_installed, tools)
 	end
 end
+
+add_tool('python3', {
+	-- Formatters
+	'black',
+	'isort',
+	-- DAP
+	'debugpy',
+	-- Linters
+	'flake8'
+})
 
 add_tool('dotnet', {
 	-- Formatters

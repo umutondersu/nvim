@@ -154,8 +154,6 @@ return { -- LSP Configuration & Plugins
 
 			bashls = {},
 
-			pyright = {},
-
 			ts_ls = {},
 
 			tailwindcss = {},
@@ -176,6 +174,8 @@ return { -- LSP Configuration & Plugins
 					},
 				},
 			},
+
+			pyright = { command = 'python3' },
 
 			omnisharp = { command = 'dotnet' },
 
