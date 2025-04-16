@@ -6,7 +6,7 @@ return {
     version = false, -- set this if you want to always pull the latest change
     opts = vim.tbl_deep_extend("keep", {
         provider = 'copilot',
-        file_selector = { provider = 'snacks' },
+        selector = { provider = 'snacks' },
         system_prompt = function()
             local hub = require("mcphub").get_hub_instance()
             ---@diagnostic disable-next-line: need-check-nil
