@@ -24,72 +24,52 @@ For every query related to libraries, frameworks, or APIs, automatically append 
 	},
 	keys = {
 		{
-			'<leader>apT',
-			function()
-				require('avante.api').ask { question = 'Translate this into Spanish, but keep any code blocks inside intact' }
-			end,
-			mode = { 'n', 'v' },
-			desc = 'Translate text',
-		},
-		{
 			'<leader>apc',
 			function()
-				require('avante.api').ask { question = 'Complete the following codes written in ' .. vim.bo.filetype }
-			end,
-			mode = { 'n', 'v' },
-			desc = 'Complete Code',
-		},
-		{
-			'<leader>apc',
-			function()
-				require('avante.api').ask { question = 'Create a commit message for the following staged changes, while keeping it consise and not too verbose. If there are no staged changes, create the message for the unstaged changes' }
+				require('avante.api').ask { question = 'Create a commit message for the staged changes while keeping it consise and not too verbose. If there are no staged changes, create the message for differences against index (unstaged changes)' }
 			end,
 			mode = { 'n', 'v' },
 			desc = 'Create Commit Message',
-			ft = { 'fugitive', 'gitcommit' },
 		},
 		{
 			'<leader>apr',
 			function()
-				require('avante.api').ask { question = 'Update the README.md with the staged changes. If there are no staged changes, create the message for the unstaged changes' }
+				require('avante.api').ask { question = 'Update the README.md with the staged changes while keeping it consise and not too verbose. If there are no staged changes, create the message for differences against index (unstaged changes)' }
 			end,
 			mode = { 'n', 'v' },
 			desc = 'Update README',
-			ft = { 'fugitive', 'gitcommit' },
 		},
 		{
-			'<leader>apg',
+			'<leader>apR',
 			function()
 				require('avante.api').ask { question = [[
-Please improve the English in this text while:
-1. Preserving all code blocks and technical terms exactly as they are
-2. Maintaining the original meaning and tone
-3. Following standard English grammar and style conventions
-4. Keeping formatting (lists, paragraphs, etc.) intact
-]] }
-			end,
-			mode = { 'n', 'v' },
-			desc = 'Grammar Correction',
-		},
-		{
-			'<leader>apm',
-			function()
-				require('avante.api').ask { question = [[
-Identify and extract:
-1. Key technical terms and concepts
-2. Important function/class names
-3. Significant variable names
-4. Core topics and themes
-5. Domain-specific terminology
+Please generate a comprehensive README for my project in Markdown format in the root folder of the project. Use the tools in your disposal the have context about the project. Below are the details I’d like included:
 
-Present keywords in categories with brief context for each.
+1. **Overview:**
+   - A brief description of the project, its purpose, and the problems it solves.
+   - The intended audience and key benefits.
+
+2. **Features:**
+   - A bullet list of the main features and functionalities.
+
+3. **Installation:**
+   - Detailed setup instructions including prerequisites.
+   - Step-by-step commands or guidelines required to install dependencies and run the project.
+
+4. **Usage:**
+   - Examples of common use cases with code snippets.
+   - Instructions on how to run tests (if applicable).
+
+If necessary, add other sections that you think could be important for the README.
+
+Ensure the README is written in a clear, friendly tone while remaining professional. The structure should be logical and include headings, bullet points, and code blocks where appropriate. Adjust any specifics if my project details change.
 ]] }
 			end,
 			mode = { 'n', 'v' },
-			desc = 'Extract Main Keywords',
+			desc = 'Create README',
 		},
 		{
-			'<leader>apr',
+			'<leader>apa',
 			function()
 				require('avante.api').ask { question = [[
 You must identify any readability issues in the code snippet.
@@ -140,7 +120,7 @@ Present the summary in bullet points if the text is technical or instructional.
 ]] }
 			end,
 			mode = { 'n', 'v' },
-			desc = 'Summarize text',
+			desc = 'Summarize Code',
 		},
 		{
 			'<leader>ape',
@@ -159,9 +139,8 @@ Focus on explanation only - do not suggest modifications or improvements.
 			mode = { 'n', 'v' },
 			desc = 'Explain Code',
 		},
-
 		{
-			'<leader>apD',
+			'<leader>apO',
 			function()
 				require('avante.api').ask { question = [[
 Add comprehensive docstrings that include:
@@ -234,6 +213,7 @@ Analyze the code for potential bugs and issues:
 3. Look for common pitfalls in the language/framework
 4. Analyze error handling and validation
 5. Review type safety and data validation
+6. Review security vulnerabilities
 
 For each issue found:
 - Explain the bug's impact and potential risks
@@ -254,10 +234,12 @@ Include test scenarios to verify the fixes if appropriate.
 				require('avante.api').ask { question = [[
 Generate comprehensive tests that:
 1. Cover core functionality
-   - Happy path scenarios
-   - Edge cases and error conditions
-   - Input validation
-   - Expected outputs
+   - Happy path scenarios with realistic input data
+   - Edge cases (empty, null, maximum values)
+   - Error conditions and exception handling
+   - Boundary value analysis
+   - Input validation across all data types
+   - Expected outputs with detailed assertions
 
 2. Follow testing best practices
    - Clear test descriptions
@@ -284,7 +266,7 @@ Follow the project's existing testing patterns and frameworks.
 			desc = 'Add Tests',
 		},
 		{
-			'<leader>apt',
+			'<leader>apf',
 			function()
 				require('avante.api').ask { question = [[
 Analyze the test results and provide structured feedback with fixes:
@@ -317,7 +299,32 @@ Prioritize fixes based on severity and provide complete, working code solutions.
 			end,
 			mode = { 'n', 'v' },
 			desc = 'Test Feedback',
-			ft = 'neotest-output-panel'
 		},
+		{
+			'<leader>apF',
+			function()
+				require('avante.api').ask { question = [[
+YOLO
+Automate the following workflow:
+
+1. Run the tests in this file for the project.
+2. If any tests fail:
+   a. Analyze the failure details.
+   b. Update the code as needed to address the issues.
+   c. Optionally, modify the tests if there's a good reason to improve them.
+3. Repeat the process until all tests pass.
+
+Follow these guidelines:
+- Provide detailed explanations for any changes made to the code or tests.
+- Work iteratively, applying one set of modifications at a time.
+- Validate that each set of changes results in passing tests before continuing.
+- Clearly reason about why any test changes are necessary.
+
+Proceed with this iterative process until all the tests pass reliably.
+]] }
+			end,
+			mode = { 'n', 'v' },
+			desc = 'Test Feedback YOLO',
+		}
 	}
 }
