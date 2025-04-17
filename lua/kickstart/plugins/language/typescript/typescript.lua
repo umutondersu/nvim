@@ -4,6 +4,7 @@ return {
         'dmmulroy/tsc.nvim',
         ft = ts_ft,
         opts = {
+            auto_open_qflist = false,
             auto_start_watch_mode = true,
             flags = { watch = true },
             use_diagnostics = true,
@@ -27,8 +28,7 @@ return {
                     includeInlayPropertyDeclarationTypeHints = true,
                     includeInlayVariableTypeHints = true,
                 }
-            },
-        },
-
+            }
+        }
     }
 }
