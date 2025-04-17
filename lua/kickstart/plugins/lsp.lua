@@ -217,20 +217,25 @@ return { -- LSP Configuration & Plugins
 
 		---@param name string
 		---@param config table
-		local function setup_lsp(name, config)
+		---@param enabled boolean?
+		local function setup_lsp(name, config, enabled)
 			if name == 'ts_ls' then return end -- Do not setup ts_ls since typescript-tools is used instead
-			local enabled = true
-			if skip_lsp(config.command) then enabled = false end
 			config.command = nil
 			config.on_attach = function(client, bufnr)
 				require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
 			end
+			if name == 'tailwindcss' then -- Temporary fix for servers that need lspconfig setup
+				config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
+				require('lspconfig')[name].setup(config)
+				return
+			end
 			vim.lsp.config(name, config)
-			vim.lsp.enable(name, enabled)
+			vim.lsp.enable(name, enabled ~= false) -- Enable by default unless explicitly disabled
 		end
 
-		for server_name, config in pairs(servers) do
-			setup_lsp(server_name, config)
+		for server, config in pairs(servers) do
+			local enabled = not skip_lsp(config.command)
+			setup_lsp(server, config, enabled)
 		end
 	end,
 }
