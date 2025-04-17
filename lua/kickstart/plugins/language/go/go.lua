@@ -6,7 +6,13 @@ return {
             'nvim-lua/plenary.nvim',
             'nvim-treesitter/nvim-treesitter',
         },
-        build = function() vim.cmd.GoInstallDeps() end,
+        build = function()
+            if vim.fn.executable(':GoInstallDeps') then
+                vim.cmd.GoInstallDeps()
+            else
+                vim.notify('Gopher.nvim could not install dependencies, build again in a go file', vim.log.levels.WARN)
+            end
+        end,
         opts = {},
     },
     {
