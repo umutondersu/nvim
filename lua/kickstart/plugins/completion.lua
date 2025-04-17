@@ -116,6 +116,7 @@ return {
           function(cmp)
             if cmp.is_ghost_text_visible() and not cmp.is_menu_visible() then return cmp.accept() end
           end,
+          'fallback'
         }
       }
     },
