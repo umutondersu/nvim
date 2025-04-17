@@ -1,15 +1,17 @@
 -- [[Language specific plugins]]
-
+local module_prefix = 'kickstart.plugins.language.'
 local language_requirements = {
-  ['kickstart.plugins.language.go'] = 'go',
-  ['kickstart.plugins.language.typescript'] = { 'node', 'npm' },
-  ['kickstart.plugins.language.java'] = 'java',
-  ['kickstart.plugins.language.csharp'] = 'dotnet',
+  go = 'go',
+  typescript = { 'node', 'npm' },
+  tailwind = { 'node', 'npm' },
+  java = 'java',
+  csharp = 'dotnet',
 }
 local specs = { { import = 'kickstart.plugins.language.lua' } }
 
 -- Filter modules based on available executables
-for module, req in pairs(language_requirements) do
+for lang, req in pairs(language_requirements) do
+  local module = module_prefix .. lang
   if type(req) == 'string' then
     -- Single requirement
     if vim.fn.executable(req) == 1 then

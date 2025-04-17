@@ -68,7 +68,7 @@ return { -- LSP Configuration & Plugins
 
 				-- Execute a code action, usually your cursor needs to be on top of an error
 				-- or a suggestion from your LSP for this to activate.
-				map('<leader>ca', require("actions-preview").code_actions, 'Code action')
+				map('<leader>ca', require("actions-preview").code_actions, 'Code action', { 'n', 'v' })
 				-- map('<leader>a', vim.lsp.buf.code_action, 'Code [A]ction')
 
 				-- Language specific configurations and keymaps
@@ -232,15 +232,10 @@ return { -- LSP Configuration & Plugins
 		---@param config table
 		---@param enabled boolean?
 		local function setup_lsp(name, config, enabled)
-			if name == 'ts_ls' then return end -- Do not setup ts_ls since typescript-tools is used instead
+			if name == 'ts_ls' or name == 'tailwindcss' then return end -- Do not setup these servers since external plugins are used
 			config.command = nil
 			config.on_attach = function(client, bufnr)
 				require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
-			end
-			if name == 'tailwindcss' then -- Temporary fix for servers that need lspconfig setup
-				config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
-				require('lspconfig')[name].setup(config)
-				return
 			end
 			vim.lsp.config(name, config)
 			vim.lsp.enable(name, enabled ~= false) -- Enable by default unless explicitly disabled
