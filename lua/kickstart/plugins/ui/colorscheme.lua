@@ -30,7 +30,7 @@ return {
   init = function()
     vim.g.transparent = true
     vim.cmd.colorscheme 'tokyonight-night'
-    vim.api.nvim_create_autocmd({ 'ColorScheme', 'BufAdd' }, {
+    vim.api.nvim_create_autocmd({ 'ColorScheme', 'BufAdd', 'VimEnter' }, {
       callback = vim.schedule_wrap(function()
         vim.api.nvim_set_hl(0, "WinBar", { bg = "NONE" })
         vim.api.nvim_set_hl(0, "WinBarNC", { bg = "NONE" })
