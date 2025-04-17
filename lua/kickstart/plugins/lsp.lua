@@ -121,9 +121,22 @@ return { -- LSP Configuration & Plugins
 							if vim.g.disable_autoformat or vim.b[event.buf].disable_autoformat then
 								return
 							end
+							-- Set a flag to prevent recursion
+							if vim.b[event.buf].ts_tools_formatting then
+								return
+							end
+							vim.b[event.buf].ts_tools_formatting = true
+
 							vim.cmd('TSToolsAddMissingImports')
+							vim.fn.wait(100, function() return false end) -- Add a small delay between commands with condition
 							vim.cmd('TSToolsOrganizeImports')
+							vim.fn.wait(100, function() return false end) -- Wait for organize imports to complete
+
+							-- Write the buffer after all TypeScript operations are complete
 							vim.cmd('write')
+
+							-- Reset the flag after formatting is done
+							vim.b[event.buf].ts_tools_formatting = false
 						end),
 						group = vim.api.nvim_create_augroup('ts-tools', {}),
 					})
