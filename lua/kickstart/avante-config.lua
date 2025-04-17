@@ -1,8 +1,7 @@
 return {
 	custom_prompt = [[
 You have to only use *SEARCH/REPLACE* blocks to replace text, write text, remove text or edit files unless the prompt contains the word YOLO. Otherwise you are fired!
-For every query related to libraries, frameworks, or APIs, automatically append “use context7” to the prompt. Otherwise you are fired!
-]],
+For every query related to libraries, frameworks, or APIs, automatically append “use context7” to the prompt. Otherwise you are fired!]],
 	opts = {
 		claude = {
 			endpoint = "https://api.anthropic.com",
@@ -26,7 +25,19 @@ For every query related to libraries, frameworks, or APIs, automatically append 
 		{
 			'<leader>apc',
 			function()
-				require('avante.api').ask { question = 'Create a commit message for the staged changes while keeping it consise and not too verbose. If there are no staged changes, create the message for differences against index (unstaged changes)' }
+				require('avante.api').ask { question = [[
+Create a meaningful commit message by:
+1. Analyzing staged changes (or unstaged if none staged)
+2. Following conventional commit format (feat/fix/docs/style/refactor/perf/test/chore)
+3. Summarizing the changes in 50 chars or less
+4. Including the scope of changes in parentheses if applicable
+5. Focusing on WHY the change was made, not just WHAT changed
+6. Using imperative mood ("add" not "added")
+
+After you create the message
+8. Commit the changes with the tools available to you
+
+Format: <type>(<scope>): <description>]] }
 			end,
 			mode = { 'n', 'v' },
 			desc = 'Create Commit Message',
@@ -34,7 +45,20 @@ For every query related to libraries, frameworks, or APIs, automatically append 
 		{
 			'<leader>apr',
 			function()
-				require('avante.api').ask { question = 'Update the README.md with the staged changes while keeping it consise and not too verbose. If there are no staged changes, create the message for differences against index (unstaged changes)' }
+				require('avante.api').ask { question = [[
+Update README.md based on the latest changes:
+1. Analyze staged changes (or unstaged if none staged)
+2. Identify sections that need updating based on changes:
+   - New features or functionality
+   - Changed behaviors or interfaces
+   - Updated dependencies or requirements
+   - Modified configuration options
+3. Maintain existing README structure and style
+4. Keep updates concise but informative
+5. Include any new code examples if relevant
+6. Update version numbers if applicable
+
+Do not rewrite unaffected sections.]] }
 			end,
 			mode = { 'n', 'v' },
 			desc = 'Update README',
@@ -62,8 +86,7 @@ Please generate a comprehensive README for my project in Markdown format in the 
 
 If necessary, add other sections that you think could be important for the README.
 
-Ensure the README is written in a clear, friendly tone while remaining professional. The structure should be logical and include headings, bullet points, and code blocks where appropriate. Adjust any specifics if my project details change.
-]] }
+Ensure the README is written in a clear, friendly tone while remaining professional. The structure should be logical and include headings, bullet points, and code blocks where appropriate. Adjust any specifics if my project details change.]] }
 			end,
 			mode = { 'n', 'v' },
 			desc = 'Create README',
@@ -86,8 +109,7 @@ Some readability issues to consider:
 
 You may identify additional problems. The user submits a small section of code from a larger file.
 Only list lines with readability issues, in the format <line_num>|<issue and proposed solution>
-If there's no issues with code respond with only: <OK>
-]] }
+If there's no issues with code respond with only: <OK>]] }
 			end,
 			mode = { 'n', 'v' },
 			desc = 'Code Readability Analysis',
@@ -101,8 +123,7 @@ Analyze and optimize this code for:
 2. Better readability
 3. Memory efficiency
 4. Best practices in the language
-Explain each optimization and its benefits.
-]] }
+Explain each optimization and its benefits.]] }
 			end,
 			mode = { 'n', 'v' },
 			desc = 'Optimize Code',
@@ -116,8 +137,7 @@ Create a concise summary that:
 2. Preserves essential technical details
 3. Maintains the logical flow of information
 4. Keeps any critical code references intact
-Present the summary in bullet points if the text is technical or instructional.
-]] }
+Present the summary in bullet points if the text is technical or instructional.]] }
 			end,
 			mode = { 'n', 'v' },
 			desc = 'Summarize Code',
@@ -133,8 +153,7 @@ Provide a clear explanation of this code by:
 4. Highlighting important functions/methods
 5. Noting any significant dependencies or assumptions
 
-Focus on explanation only - do not suggest modifications or improvements.
-]] }
+Focus on explanation only - do not suggest modifications or improvements.]] }
 			end,
 			mode = { 'n', 'v' },
 			desc = 'Explain Code',
@@ -150,8 +169,7 @@ Add comprehensive docstrings that include:
 4. Usage examples where appropriate
 5. Any important notes or exceptions
 
-Follow the language's standard docstring format and style conventions.
-]] }
+Follow the language's standard docstring format and style conventions.]] }
 			end,
 			mode = { 'n', 'v' },
 			desc = 'Add Docstring',
@@ -171,8 +189,7 @@ For each diagnostic found:
 6. Do not overreach, only fix what is necessary
 
 Prioritize fixes that resolve multiple related issues.
-@diagnostics
-]] }
+@diagnostics]] }
 			end,
 			mode = { 'n', 'v' },
 			desc = 'Fix Diagnostics',
@@ -197,8 +214,7 @@ Be autonomous, change the code without user input by using the tools available t
 After suggesting fixes, verify that no new diagnostics would be introduced by checking the diagnostics again.
 If diagnostics are still present, repeat the process until all are resolved.
 
-Prioritize fixes that resolve multiple related issues.
-]] }
+Prioritize fixes that resolve multiple related issues.]] }
 			end,
 			mode = { 'n', 'v' },
 			desc = 'Fix Diagnostics YOLO',
@@ -222,8 +238,7 @@ For each issue found:
 - Consider performance and side effects
 - Suggest preventive measures for similar bugs
 
-Include test scenarios to verify the fixes if appropriate.
-]] }
+Include test scenarios to verify the fixes if appropriate.]] }
 			end,
 			mode = { 'n', 'v' },
 			desc = 'Fix Bugs',
@@ -259,8 +274,7 @@ Generate comprehensive tests that:
    - Error conditions
    - Common use cases
 
-Follow the project's existing testing patterns and frameworks.
-]] }
+Follow the project's existing testing patterns and frameworks.]] }
 			end,
 			mode = { 'n', 'v' },
 			desc = 'Add Tests',
@@ -294,8 +308,7 @@ Analyze the test results and provide structured feedback with fixes:
    - Add missing edge case handling
    - Implement test suite enhancements
 
-Prioritize fixes based on severity and provide complete, working code solutions.
-]] }
+Prioritize fixes based on severity and provide complete, working code solutions.]] }
 			end,
 			mode = { 'n', 'v' },
 			desc = 'Test Feedback',
@@ -320,8 +333,7 @@ Follow these guidelines:
 - Validate that each set of changes results in passing tests before continuing.
 - Clearly reason about why any test changes are necessary.
 
-Proceed with this iterative process until all the tests pass reliably.
-]] }
+Proceed with this iterative process until all the tests pass reliably.]] }
 			end,
 			mode = { 'n', 'v' },
 			desc = 'Test Feedback YOLO',
