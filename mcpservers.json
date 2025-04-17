@@ -1,13 +1,8 @@
 {
+  "nativeMCPServers": [
+    
+  ],
   "mcpServers": {
-    "browser-tools": {
-      "args": ["-y", "@agentdeskai/browser-tools-mcp@1.2.0"],
-      "command": "npx"
-    },
-    "sequential-thinking": {
-      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
-      "command": "npx"
-    },
     "github": {
       "args": [
         "run",
@@ -17,14 +12,31 @@
         "GITHUB_PERSONAL_ACCESS_TOKEN",
         "mcp/github"
       ],
-      "command": "docker",
       "env": {
         "GITHUB_PERSONAL_ACCESS_TOKEN": null
-      }
+      },
+      "command": "docker"
     },
     "context7": {
+      "args": [
+        "-y",
+        "@upstash/context7-mcp"
+      ],
+      "command": "npx"
+    },
+    "sequential-thinking": {
       "command": "npx",
-      "args": ["-y", "@upstash/context7-mcp"]
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ]
+    },
+    "browser-tools": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@agentdeskai/browser-tools-mcp@1.2.0"
+      ]
     }
   }
 }
