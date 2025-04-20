@@ -7,6 +7,7 @@ return {
     opts = vim.tbl_deep_extend("keep", {
         provider = 'copilot',
         selector = { provider = 'snacks' },
+        hints = { enabled = false },
         system_prompt = function()
             local hub = require("mcphub").get_hub_instance()
             ---@diagnostic disable-next-line: need-check-nil
