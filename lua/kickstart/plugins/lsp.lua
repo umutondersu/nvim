@@ -81,11 +81,11 @@ return { -- LSP Configuration & Plugins
 					end, 'Toggle Inlay Hints')
 				end
 
-				local function check_client(client_name)
+				local function is_lsp_active(client_name)
 					return client and client.name == client_name
 				end
 
-				if check_client('omnisharp') then
+				if is_lsp_active('omnisharp') then
 					map('gd', require('omnisharp_extended').lsp_definition, 'Goto Definition')
 					map('gy', require('omnisharp_extended').lsp_type_definition,
 						'Goto T[Y]pe Definition')
@@ -95,7 +95,7 @@ return { -- LSP Configuration & Plugins
 						'Goto Implementation')
 				end
 
-				if check_client('jdtls') then
+				if is_lsp_active('jdtls') then
 					map('<leader>tc', require('java').test.run_current_class, 'Run Current Class')
 					map('<leader>tm', require('java').test.run_current_method, 'Run Current Method')
 					map('<leader>tr', require('java').test.view_last_report, 'View Last Report')
@@ -108,7 +108,7 @@ return { -- LSP Configuration & Plugins
 					map('<leader>cf', require('java').refactor.extract_field, 'Extract Field')
 				end
 
-				if check_client('typescript-tools') then
+				if is_lsp_active('typescript-tools') then
 					map('<leader>cm', '<cmd>TSToolsAddMissingImports<cr>', 'Add Missing Imports')
 					map('<leader>co', '<cmd>TSToolsOrganizeImports<cr>', 'Sort and Remove Unused Imports')
 					map('<leader>cf', '<cmd>TSToolsFixAll<cr>', 'Fix all fixable errors')
@@ -142,7 +142,7 @@ return { -- LSP Configuration & Plugins
 					})
 				end
 
-				if check_client('gopls') then
+				if is_lsp_active('gopls') then
 					map('<leader>ct', function() require("gopher").tags.add "json" end, 'Add JSON Tags to struct')
 					map('<leader>cc', '<cmd>GoCmt<cr>', 'Generate boilerplate for doc comments')
 					map('<leader>so', '<cmd>GoDoc<cr>', 'Go Docs')
@@ -213,14 +213,14 @@ return { -- LSP Configuration & Plugins
 		}
 
 		---@param command string?
-		local function skip_lsp(command)
-			return command and vim.fn.executable(command) == 0
+		local function add_lsp(command)
+			return command == nil or vim.fn.executable(command) == 1
 		end
 
 		-- Grab the list of servers to install from the servers table
 		local ensure_installed = vim.tbl_filter(function(server_name)
 			local config = servers[server_name]
-			return not skip_lsp(config.command)
+			return add_lsp(config.command)
 		end, vim.tbl_keys(servers or {}))
 
 		-- Grab the tools from the mason-tools.lua file and add them to ensure_installed
@@ -228,22 +228,22 @@ return { -- LSP Configuration & Plugins
 		vim.list_extend(ensure_installed, tools)
 		require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
-		---@param name string
-		---@param config table
-		---@param enabled boolean?
-		local function setup_lsp(name, config, enabled)
-			if name == 'ts_ls' or name == 'tailwindcss' then return end -- Do not setup these servers since external plugins are used
-			config.command = nil
-			config.on_attach = function(client, bufnr)
-				require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
-			end
-			vim.lsp.config(name, config)
-			vim.lsp.enable(name, enabled ~= false) -- Enable by default unless explicitly disabled
-		end
-
-		for server, config in pairs(servers) do
-			local enabled = not skip_lsp(config.command)
-			setup_lsp(server, config, enabled)
-		end
+		require('mason-lspconfig').setup {
+			ensure_installed = {},
+			automatic_installation = true,
+			handlers = {
+				function(server_name)
+					if server_name == 'ts_ls' or server_name == 'tailwindcss' then return end -- Do not setup these servers since external plugins are used
+					local config = servers[server_name] or {}
+					local enabled = add_lsp(config.command)
+					config.command = nil
+					config.on_attach = function(client, bufnr)
+						require('workspace-diagnostics').populate_workspace_diagnostics(client, bufnr)
+					end
+					vim.lsp.config(server_name, config)
+					vim.lsp.enable(server_name, enabled)
+				end,
+			},
+		}
 	end,
 }
