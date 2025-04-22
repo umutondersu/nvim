@@ -1,6 +1,6 @@
 return {
     'rmagatti/auto-session',
-    event = 'VimEnter',
+    lazy = false,
     ---@module "auto-session"
     ---@type AutoSession.Config
     opts = {
