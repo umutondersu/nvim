@@ -124,7 +124,6 @@ return {
     sources = {
       default = { 'copilot', 'lsp', 'path', 'buffer', 'dadbod', 'snippets', 'lazydev', 'avante', 'go_pkgs', 'git', 'conventional_commits', 'spell', 'emoji' },
       providers = {
-        snippets = { score_offset = 3 },
         copilot = {
           name = "copilot",
           module = "blink-copilot",
