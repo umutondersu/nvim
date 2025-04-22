@@ -6,7 +6,7 @@ return {
         preset = "modern",
         delay = 0,
         spec = {
-            { "<leader>f",  group = "Format",          mode = { 'n', 'v' } },
+            { "<leader>f",  group = "Format" },
             { "<leader>g",  group = "Git" },
             { "<leader>h",  group = "Git Hunk",        mode = { 'n', 'v' } },
             { "<leader>r",  group = "Refactor",        mode = { 'n', 'v' } },
@@ -18,6 +18,11 @@ return {
             { "<leader>u",  group = "Ui" },
             { "<leader>c",  group = "Code",            mode = { 'n', 'v' } },
             { "<leader>d",  group = "Debug" },
+            {
+                "<leader>S",
+                group = "Scratch",
+                icon = { icon = '󱓧', color = 'red' },
+            },
             {
                 "<leader>a",
                 group = "Avante",

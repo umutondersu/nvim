@@ -34,8 +34,7 @@ Create a meaningful commit message by:
 5. Focusing on WHY the change was made, not just WHAT changed
 6. Using imperative mood ("add" not "added")
 
-After you create the message
-8. Commit the changes with the tools available to you
+After you create the message, commit the changes with the tools available to you
 
 Format: <type>(<scope>): <description>]] }
 			end,

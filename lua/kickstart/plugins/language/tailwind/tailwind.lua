@@ -25,8 +25,8 @@ return {
 		}
 	},
 	keys = {
-		-- Conceal toggles
 		{ "<leader>ct",  "<Nop>",                              desc = "Tailwind",                ft = ft },
+		-- Conceal toggles
 		{ "<leader>ctc", "<cmd>TailwindConcealToggle<CR>",     desc = "Toggle Tailwind conceal", ft = ft },
 		-- Color hints toggles
 		{ "<leader>ctC", "<cmd>TailwindColorToggle<CR>",       desc = "Toggle Tailwind colors",  ft = ft },

@@ -37,7 +37,7 @@ return {
     { '<Leader>dp', function() require('dap').pause() end,                                               desc = 'Pause',                      ft = ft },
     { '<leader>dt', function() require('dap').terminate() end,                                           desc = 'Terminate',                  ft = ft },
     { '<Leader>dR', function() require('dapui').toggle() end,                                            desc = 'Last Session Results',       ft = ft },
-    { '<leader>de', function() require('dapui').eval() end,                                              desc = 'Eval',                       ft = ft, mode = { "n", "v" } },
+    { '<leader>de', function() require('dapui').eval() end,                                              desc = 'Eval',                       ft = ft },
   },
   config = function()
     local dap = require 'dap'

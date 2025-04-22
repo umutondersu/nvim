@@ -48,8 +48,23 @@ map("n", "<C-u>", "<C-u>zz")
 map("n", "<M-u>", ":e!<CR>", { desc = 'Undo all unsaved writes' })
 
 -- Shortcuts for save and exit
-map('n', '<leader>w', '<cmd>w<CR>', { desc = 'Save Buffer' })
-map('n', '<leader>x', '<cmd>wqa<CR>', { desc = 'Save and Exit All Windows' })
+map('n', '<leader>w', function()
+	local bufname = vim.api.nvim_buf_get_name(0)
+	if bufname == '' then
+		-- Buffer has no name, prompt for one
+		vim.ui.input({
+			prompt = 'Enter file name: ',
+		}, function(name)
+			if name and name ~= '' then
+				vim.cmd('write ' .. vim.fn.fnameescape(name))
+			end
+		end)
+		return
+	end
+	-- Buffer has a name, save normally
+	vim.cmd('write')
+end, { desc = 'Save Buffer' })
+map('n', '<leader>x', '<cmd>wqa<CR>', { desc = 'Save and Exit' })
 map('n', '<leader>q', '<cmd>q<CR>', { desc = 'Quit Window' })
 
 -- Refactor Keymaps
@@ -72,15 +87,15 @@ end, { desc = 'Remove File' })
 map("n", "<leader>rw", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gcI<Left><Left><Left><Left>]],
 	{ desc = 'Replace Word' }) -- Replace the word under the cursor
 map('v', '<leader>rv', function()
-	-- Yank the visual selection into register z
-	vim.cmd('normal! "zy')
-	local selection = vim.fn.getreg("z")
+	-- Yank the visual selection into register v
+	vim.cmd('normal! "vy')
+	local selection = vim.fn.getreg("v")
 
 	if selection == "" then
 		print("No text selected")
 		return
 	end
-	vim.fn.setreg("z", "")
+	vim.fn.setreg("v", "")
 
 	-- Sanitize the selection
 	selection = selection:gsub("%s+$", "")

@@ -23,7 +23,7 @@ return {
             win = {
                 input = {
                     keys = {
-                        ["S"] = { "flash", mode = { "n", "i" } },
+                        ["<C-s>"] = { "flash", mode = { "n", "i" } },
                         ["s"] = { "flash" },
                     },
                 },
@@ -55,8 +55,8 @@ return {
     },
     keys = {
         { "<leader>e",  function() Snacks.explorer.open() end,           desc = "Toggle File Explorer" },
-        { "<M-S>",      function() Snacks.scratch() end,                 desc = "Toggle Scratch Buffer" },
-        { "<leader>sc", function() Snacks.scratch.select() end,          desc = "Scratch Buffer" },
+        { "<leader>Ss", function() Snacks.scratch() end,                 desc = "Toggle Scratch Buffer" },
+        { "<leader>SS", function() Snacks.scratch.select() end,          desc = "Select Scratch Buffer" },
         { "<leader>un", function() Snacks.notifier.show_history() end,   desc = "Notification History" },
         { "<leader>uN", function() Snacks.notifier.hide() end,           desc = "Dismiss All Notifications" },
         { "<A-c>",      function() Snacks.bufdelete() end,               desc = "Delete Buffer" },
@@ -102,7 +102,7 @@ return {
             desc = "Pickers"
         },
         {
-            "<leader>sP",
+            "<leader>si",
             function()
                 Snacks.picker.files {
                     ft = { "jpg", "jpeg", "png", "webp" },
@@ -115,14 +115,17 @@ return {
             end,
             desc = 'Pictures'
         },
+        { "<leader>sP",  function() Snacks.picker.projects() end,      desc = "Projects" },
         ---@diagnostic disable-next-line: undefined-field
         { "<leader>st",  function() Snacks.picker.todo_comments() end, desc = "Todo Comments" },
         { "<leader>sr",  function() Snacks.picker.resume() end,        desc = "Resume" },
+        { "<leader>sR",  function() Snacks.picker.recent() end,        desc = "Recent" },
         -- Grep
-        { "<leader>s/",  function() Snacks.picker.lines() end,         desc = "Grep Buffer Lines" },
+        { "<leader>/",   function() Snacks.picker.lines() end,         desc = "Grep Lines" },
         { "<leader>sG",  function() Snacks.picker.grep_buffers() end,  desc = "Grep Open Buffers" },
         { "<leader>sg",  function() Snacks.picker.grep() end,          desc = "Grep" },
-        { "<leader>sw",  function() Snacks.picker.grep_word() end,     desc = "Grep Visual or Word",         mode = { "n", "x" } },
+        { "<leader>sw",  function() Snacks.picker.grep_word() end,     desc = "Grep Word" },
+        { "<leader>g",   function() Snacks.picker.grep_word() end,     desc = "Grep Search Visual",          mode = "x" },
         -- Git
         -- - `<Tab>`: stages or unstages the currently selected file
         -- - `<cr>`: opens the currently selected file
