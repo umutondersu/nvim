@@ -8,8 +8,8 @@ return {
         ui = {
             position = "center",
             open_win_override = {
-                title = "Snipe Menu",
-                border = "rounded", -- use "rounded" for rounded border
+                title = "",
+                border = "rounded"
             },
             text_align = 'file-first'
         },
