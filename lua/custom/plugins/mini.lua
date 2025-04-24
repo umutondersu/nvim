@@ -8,7 +8,7 @@ return { -- Collection of various small independent plugins/modules
         --  - va)  - [V]isually select [A]round [)]paren
         --  - yinq - [Y]ank [I]nside [N]ext [Q]uote
         --  - ci'  - [C]hange [I]nside [']quote
-        require('mini.ai').setup { n_lines = 500, mappings = { around_last = 'ap', inside_last = 'ip' }, }
+        require('mini.ai').setup { n_lines = 500, mappings = { around_last = 'ap', inside_last = 'ip', search_method = 'cover' } }
 
         -- Add/delete/replace surroundings (brackets, quotes, etc.)
         --
@@ -25,7 +25,7 @@ return { -- Collection of various small independent plugins/modules
                 replace = 'gsc',        -- Replace surrounding
                 update_n_lines = 'gsn', -- Update `n_lines`
 
-                suffix_last = 'l',      -- Suffix to search with "prev" method
+                suffix_last = 'p',      -- Suffix to search with "prev" method
                 suffix_next = 'n',      -- Suffix to search with "next" method
             },
         })
