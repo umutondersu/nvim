@@ -1,3 +1,4 @@
+local git_signs = require('kickstart.icons').git.signs
 return {
   'tpope/vim-rhubarb',
   {
@@ -40,19 +41,19 @@ return {
     event = 'BufReadPost',
     opts = {
       signs = {
-        add = { text = "▎" },
-        change = { text = "▎" },
-        delete = { text = "" },
-        topdelete = { text = "" },
-        changedelete = { text = "▎" },
-        untracked = { text = "▎" }
+        add = { text = git_signs.add },
+        change = { text = git_signs.modified },
+        delete = { text = git_signs.delete },
+        topdelete = { text = git_signs.delete },
+        changedelete = { text = git_signs.modified },
+        untracked = { text = git_signs.add }
       },
       signs_staged = {
-        add = { text = "▎" },
-        change = { text = "▎" },
-        delete = { text = "" },
-        topdelete = { text = "" },
-        changedelete = { text = "▎" },
+        add = { text = git_signs.add },
+        change = { text = git_signs.modified },
+        delete = { text = git_signs.delete },
+        topdelete = { text = git_signs.delete },
+        changedelete = { text = git_signs.modified },
       },
       on_attach = function(bufnr)
         local gs = require 'gitsigns'

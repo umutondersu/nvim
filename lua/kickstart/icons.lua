@@ -40,6 +40,11 @@ return {
 		added    = " ",
 		modified = " ",
 		removed  = " ",
+		signs    = {
+			add = "▎",
+			delete = "",
+			modified = "▎",
+		}
 	},
 	kind_icons = {
 		Array         = " ",
