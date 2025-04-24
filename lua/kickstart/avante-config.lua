@@ -27,14 +27,14 @@ For every query related to libraries, frameworks, or APIs, automatically append 
 			function()
 				require('avante.api').ask { question = [[
 Create a meaningful commit message by:
-1. Analyzing staged changes (or unstaged if none staged)
+1. Analyzing staged changes
 2. Following conventional commit format (feat/fix/docs/style/refactor/perf/test/chore)
 3. Summarizing the changes in 50 chars or less
 4. Including the scope of changes in parentheses if applicable
 5. Focusing on WHY the change was made, not just WHAT changed
 6. Using imperative mood ("add" not "added")
 
-After you create the message, commit the changes with the tools available to you
+After creating the message, commit the changes with the tools available to you
 
 Format: <type>(<scope>): <description>]] }
 			end,
