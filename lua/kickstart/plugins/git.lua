@@ -33,6 +33,11 @@ return {
         local vimCmd = 'Git push --force'
         vim.cmd(vimCmd)
       end, { desc = 'Git push --force', nargs = '*' })
+
+      vim.api.nvim_create_user_command('Grc', function()
+        local vimCmd = 'Git recommit'
+        vim.cmd(vimCmd)
+      end, { desc = 'Git recommit', nargs = '*' })
     end
   },
   {
