@@ -2,7 +2,7 @@ return {
 	custom_prompt = [[
 You have to only use *SEARCH/REPLACE* blocks to replace text, write text, remove text or edit files unless the prompt contains the word YOLO. Otherwise you are fired!
 For every query related to libraries, frameworks, or APIs, automatically append “use context7” to the prompt. Otherwise you are fired!]],
-	opts = {
+	providers = {
 		claude = {
 			endpoint = "https://api.anthropic.com",
 			model = "claude-3-5-sonnet-20241022",
@@ -21,6 +21,19 @@ For every query related to libraries, frameworks, or APIs, automatically append 
 			},
 		}
 	},
+	init = function()
+		-- Create an autocmd to switch to normal mode when entering avante buffers
+		vim.api.nvim_create_autocmd("BufEnter", {
+			pattern = "*",
+			callback = function(ev)
+				local ft = vim.bo[ev.buf].filetype
+				if ft and ft == 'Avante' then
+					vim.cmd("stopinsert")
+				end
+			end,
+			desc = "Switch to normal mode when entering the Avante buffer",
+		})
+	end,
 	keys = {
 		{
 			'<leader>apc',

@@ -8,6 +8,10 @@ return {
         provider = 'copilot',
         selector = { provider = 'snacks' },
         hints = { enabled = false },
+        behaviour = {
+            enable_token_counting = false,
+            jump_result_buffer_on_finish = true
+        },
         system_prompt = function()
             local hub = require("mcphub").get_hub_instance()
             ---@diagnostic disable-next-line: need-check-nil
@@ -28,7 +32,7 @@ return {
             "rename_dir",
             "delete_dir"
         }
-    }, config.opts),
+    }, config.providers),
     -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
     build = 'make',
     -- build = 'powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false' -- for windows
@@ -70,5 +74,6 @@ return {
             },
         },
     },
+    init = config.init,
     keys = config.keys,
 }
