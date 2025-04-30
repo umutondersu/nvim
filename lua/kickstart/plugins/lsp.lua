@@ -100,12 +100,12 @@ return { -- LSP Configuration & Plugins
 					map('<leader>tm', require('java').test.run_current_method, 'Run Current Method')
 					map('<leader>tr', require('java').test.view_last_report, 'View Last Report')
 					map('<leader>ct', require('java').runner.built_in.toggle_logs, 'Toggle Logs')
-					map('<leader>cv', require('java').refactor.extract_variable, 'Extract Variable')
-					map('<leader>cV', require('java').refactor.extract_variable_all_occurrence,
+					map('<leader>re', require('java').refactor.extract_variable, 'Extract Variable')
+					map('<leader>ra', require('java').refactor.extract_variable_all_occurrence,
 						'Extract Variable All Occurrences')
-					map('<leader>cc', require('java').refactor.extract_constant, 'Extract Constant')
-					map('<leader>cm', require('java').refactor.extract_method, 'Extract Method')
-					map('<leader>cf', require('java').refactor.extract_field, 'Extract Field')
+					map('<leader>rc', require('java').refactor.extract_constant, 'Extract Constant')
+					map('<leader>rm', require('java').refactor.extract_method, 'Extract Method')
+					map('<leader>rl', require('java').refactor.extract_field, 'Extract Field')
 				end
 
 				if is_lsp_active('typescript-tools') then
