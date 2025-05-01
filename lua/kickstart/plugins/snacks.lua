@@ -18,6 +18,9 @@ return {
             }
         },
         scope = { enabled = true }, -- Jumps: ]i [i textobjects: ii(inner scope) ai(full scope)
+        input = { enabled = true },
+        image = { enabled = true, force = true },
+        dashboard = { enabled = true },
         picker = {
             matcher = { frecency = true },
             win = {
@@ -48,10 +51,7 @@ return {
                     })
                 end,
             },
-        },
-        input = { enabled = true },
-        image = { enabled = true, force = true },
-        dashboard = { enabled = true },
+        }
     },
     keys = {
         { "<leader>e",  function() Snacks.explorer.open() end,           desc = "Toggle File Explorer" },
@@ -125,14 +125,14 @@ return {
         { "<leader>sG",  function() Snacks.picker.grep_buffers() end,  desc = "Grep Open Buffers" },
         { "<leader>sg",  function() Snacks.picker.grep() end,          desc = "Grep" },
         { "<leader>sw",  function() Snacks.picker.grep_word() end,     desc = "Grep Word" },
-        { "<leader>g",   function() Snacks.picker.grep_word() end,     desc = "Grep Search Visual",          mode = "x" },
+        { "<leader>g",   function() Snacks.picker.grep_word() end,     desc = "Grep Search Visual",   mode = "x" },
         -- Git
         -- - `<Tab>`: stages or unstages the currently selected file
         -- - `<cr>`: opens the currently selected file
         { "<leader>gf",  function() Snacks.picker.git_files() end,     desc = "Git Files" },
         { "<leader>gs",  function() Snacks.picker.git_status() end,    desc = "Git Status" },
         -- LazyGit
-        { "<leader>gF",  function() Snacks.lazygit.log_file() end,     desc = "Lazygit Current File History" },
+        { "<leader>gh",  function() Snacks.lazygit.log_file() end,     desc = "Git File History" },
         { "<leader>gg",  function() Snacks.lazygit.open() end,         desc = "Lazygit" },
         { "<leader>gl",  function() Snacks.lazygit.log() end,          desc = "Git Log" },
         -- Neovim
