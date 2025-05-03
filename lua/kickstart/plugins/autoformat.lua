@@ -69,12 +69,6 @@ return
       desc = "Format Buffer"
     },
     {
-      "<leader>ft",
-      "<cmd>AutoFormatToggle<cr>",
-      mode = "n",
-      desc = "Toggle autoformatting"
-    },
-    {
       "<leader>fi",
       "<cmd>ConformInfo<cr>",
       mode = "n",
@@ -83,10 +77,26 @@ return
   },
   init = function()
     -- [[ Toggle Autoformatting with Conform.nvim ]]
-    vim.api.nvim_create_user_command("AutoFormatToggle", function()
-      vim.g.disable_autoformat = not vim.g.disable_autoformat
-      vim.b.disable_autoformat = vim.g.disable_autoformat
-      print("Auto Formatting is " .. (vim.g.disable_autoformat and "Disabled" or "Enabled"))
-    end, { desc = "Toggle autoformatting" })
+    local function toggle_autoformatting()
+      local enabled = not vim.g.disable_autoformat
+      require("which-key").add({
+        {
+          '<leader>ft',
+          function()
+            vim.g.disable_autoformat = not vim.g.disable_autoformat
+            vim.b.disable_autoformat = vim.g.disable_autoformat
+            print("Auto Formatting is " .. (enabled and "Disabled" or "Enabled"))
+            toggle_autoformatting()
+          end,
+          desc = (enabled and 'Disable' or 'Enable') .. ' Formatting',
+          icon = {
+            icon = enabled and '' or '',
+            color = enabled and 'green' or 'yellow'
+          }
+        }
+      })
+    end
+    -- Initialize the mapping for the first time
+    toggle_autoformatting()
   end
 }

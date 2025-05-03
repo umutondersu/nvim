@@ -17,13 +17,6 @@ return {
       sh = { "shellcheck" }
     }
   },
-  keys = {
-    {
-      "<leader>ul",
-      "<cmd>LintToggle<cr>",
-      desc = "Toggle Linting"
-    }
-  },
   config = function(_, opts)
     vim.g.disable_lint = false
     local lint = require("lint")
@@ -51,20 +44,36 @@ return {
       end)
     })
 
-    vim.api.nvim_create_user_command('LintToggle', function()
-      vim.g.disable_lint = not vim.g.disable_lint
-      local current_linters = opts.linters_by_ft[vim.bo.filetype]
+    -- [[ Toggle Linting with nvim-lint ]]
+    local function toggle_linting(enabled)
+      require("which-key").add({
+        {
+          '<leader>ul',
+          function()
+            local new_state = not enabled
+            vim.g.disable_lint = new_state
 
-      if vim.g.disable_lint and current_linters then
-        for _, linter in ipairs(current_linters) do
-          local ns = lint.get_namespace(linter)
-          vim.diagnostic.reset(ns)
-        end
-      else
-        lint.try_lint()
-      end
-
-      print('Linting is ' .. (vim.g.disable_lint and 'disabled' or 'enabled'))
-    end, {})
+            local current_linters = opts.linters_by_ft[vim.bo.filetype]
+            if not new_state and current_linters then
+              for _, linter in ipairs(current_linters) do
+                local ns = lint.get_namespace(linter)
+                vim.diagnostic.reset(ns)
+              end
+            else
+              lint.try_lint()
+            end
+            print('Linting is ' .. (not vim.g.disable_lint and 'disabled' or 'enabled'))
+            toggle_linting(new_state)
+          end,
+          desc = (enabled and 'Disable' or 'Enable') .. ' Linting',
+          icon = {
+            icon = enabled and '' or '',
+            color = enabled and 'green' or 'yellow'
+          }
+        }
+      })
+    end
+    -- Initialize the mapping for the first time
+    toggle_linting(not vim.g.disable_lint)
   end,
 }
