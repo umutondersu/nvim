@@ -197,35 +197,31 @@ return {
                     :map("<leader>uc")
                 Snacks.toggle.animate():map("<leader>ua")
                 Snacks.toggle.line_number():map("<leader>uL")
-
                 -- Toggle Inlay Hints
                 vim.api.nvim_create_autocmd('LspAttach', {
                     group = vim.api.nvim_create_augroup('InlayHintsToggle', {}),
                     callback = function(event)
                         local client = vim.lsp.get_client_by_id(event.data.client_id)
                         if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
-                            local function toggle_inlay_hints()
-                                local enabled = vim.lsp.inlay_hint.is_enabled { bufnr = event.buf }
-                                vim.lsp.inlay_hint.enable(not enabled)
-                                -- Update the mapping description and which-key icon after toggling
-                                local desc = (not enabled and 'Disable' or 'Enable') .. ' Inlay Hints'
-                                -- Update which-key icon
+                            local function toggle_inlay_hints(enabled)
                                 require("which-key").add({
                                     {
-                                        "<leader>uh",
-                                        toggle_inlay_hints,
-                                        name = desc,
-                                        -- Use different icons based on state
+                                        '<leader>uh',
+                                        function()
+                                            local new_state = not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf }
+                                            vim.lsp.inlay_hint.enable(new_state)
+                                            toggle_inlay_hints(new_state)
+                                        end,
+                                        desc = (enabled and 'Disable' or 'Enable') .. ' Inlay Hints',
                                         icon = {
-                                            icon = enabled and '' or '',
-                                            color = enabled and 'yellow' or 'green'
+                                            icon = enabled and '' or '',
+                                            color = enabled and 'green' or 'yellow'
                                         }
                                     }
                                 })
                             end
-                            -- HACK: Find a way to not have to call this twice
-                            toggle_inlay_hints()
-                            toggle_inlay_hints()
+                            local initial_state = false
+                            toggle_inlay_hints(initial_state)
                         end
                     end
                 })
