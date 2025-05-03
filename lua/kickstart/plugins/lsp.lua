@@ -74,13 +74,6 @@ return { -- LSP Configuration & Plugins
 				-- Language specific configurations and keymaps
 				local client = vim.lsp.get_client_by_id(event.data.client_id)
 
-				-- Toggle Inlay Hints
-				if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
-					map('<leader>uh', function()
-						vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
-					end, 'Toggle Inlay Hints')
-				end
-
 				local function is_lsp_active(client_name)
 					return client and client.name == client_name
 				end

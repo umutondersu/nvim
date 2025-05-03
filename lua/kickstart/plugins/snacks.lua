@@ -198,6 +198,38 @@ return {
                 Snacks.toggle.animate():map("<leader>ua")
                 Snacks.toggle.line_number():map("<leader>uL")
 
+                -- Toggle Inlay Hints
+                vim.api.nvim_create_autocmd('LspAttach', {
+                    group = vim.api.nvim_create_augroup('InlayHintsToggle', {}),
+                    callback = function(event)
+                        local client = vim.lsp.get_client_by_id(event.data.client_id)
+                        if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
+                            local function toggle_inlay_hints()
+                                local enabled = vim.lsp.inlay_hint.is_enabled { bufnr = event.buf }
+                                vim.lsp.inlay_hint.enable(not enabled)
+                                -- Update the mapping description and which-key icon after toggling
+                                local desc = (not enabled and 'Disable' or 'Enable') .. ' Inlay Hints'
+                                -- Update which-key icon
+                                require("which-key").add({
+                                    {
+                                        "<leader>uh",
+                                        toggle_inlay_hints,
+                                        name = desc,
+                                        -- Use different icons based on state
+                                        icon = {
+                                            icon = enabled and '' or '',
+                                            color = enabled and 'yellow' or 'green'
+                                        }
+                                    }
+                                })
+                            end
+                            -- HACK: Find a way to not have to call this twice
+                            toggle_inlay_hints()
+                            toggle_inlay_hints()
+                        end
+                    end
+                })
+
                 -- Snacks.toggle.inlay_hints():map("<leader>uh")
                 -- Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
                 -- Snacks.toggle.treesitter():map("<leader>uT")
