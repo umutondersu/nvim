@@ -19,7 +19,7 @@ return {
   },
   keys = {
     {
-      "<leader>fl",
+      "<leader>ul",
       "<cmd>LintToggle<cr>",
       desc = "Toggle Linting"
     }
