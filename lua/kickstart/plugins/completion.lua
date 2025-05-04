@@ -11,6 +11,7 @@ return {
     'disrupted/blink-cmp-conventional-commits',
     'ribru17/blink-cmp-spell',
     'moyiz/blink-emoji.nvim',
+    'Kaiser-Yang/blink-cmp-git',
     {
       'fang2hou/blink-copilot',
       dependencies = {
@@ -32,10 +33,6 @@ return {
         }
       },
 
-    },
-    {
-      'Kaiser-Yang/blink-cmp-git',
-      dependencies = 'nvim-lua/plenary.nvim'
     },
     {
       "Yu-Leo/cmp-go-pkgs",
