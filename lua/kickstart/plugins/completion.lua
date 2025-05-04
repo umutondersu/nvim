@@ -14,25 +14,7 @@ return {
     'Kaiser-Yang/blink-cmp-git',
     {
       'fang2hou/blink-copilot',
-      dependencies = {
-        'zbirenbaum/copilot.lua',
-        build = ':Copilot auth',
-        cmd = 'Copilot',
-        event = 'InsertEnter',
-        opts = {
-          panel = { enabled = false },
-          suggestion = { enabled = false },
-          filetypes = {
-            help = false,
-            gitrebase = false,
-            hgcommit = false,
-            svn = false,
-            cvs = false,
-            ['.'] = false,
-          },
-        }
-      },
-
+      dependencies = 'zbirenbaum/copilot.lua'
     },
     {
       "Yu-Leo/cmp-go-pkgs",
