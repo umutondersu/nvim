@@ -14,7 +14,7 @@ return {
         system_prompt = function()
             local hub = require("mcphub").get_hub_instance()
             ---@diagnostic disable-next-line: need-check-nil
-            return hub:get_active_servers_prompt() .. config.custom_prompt
+            return hub:get_active_servers_prompt() .. config.system_prompt
         end,
         -- The custom_tools type supports both a list and a function that returns a list. Using a function here prevents requiring mcphub before it's loaded
         custom_tools = function()
@@ -39,7 +39,8 @@ return {
         'stevearc/dressing.nvim',
         'nvim-lua/plenary.nvim',
         'MunifTanjim/nui.nvim',
-        'folke/snacks.nvim',                                             -- file selector provider
+        'zbirenbaum/copilot.lua',                                        -- Copilot Provider
+        'folke/snacks.nvim',                                             -- Selector Provider
         {                                                                -- MCP Integration
             "ravitemer/mcphub.nvim",
             dependencies = "nvim-lua/plenary.nvim",                      -- Required for Job and HTTP requests
@@ -73,6 +74,5 @@ return {
             },
         },
     },
-    init = config.init,
-    keys = config.keys,
+    keys = config.prompts,
 }
