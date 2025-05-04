@@ -30,7 +30,7 @@ return {
             "delete_file",
             "create_dir",
             "rename_dir",
-            "delete_dir"
+            "delete_dir",
         }
     }, config.providers),
     -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`

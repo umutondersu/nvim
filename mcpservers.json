@@ -1,9 +1,17 @@
 {
-  "nativeMCPServers": [
-    
-  ],
+  "nativeMCPServers": {
+    "neovim": {
+      "disabled_tools": [
+        "execute_command"
+      ]
+    }
+  },
   "mcpServers": {
     "github": {
+      "command": "docker",
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": null
+      },
       "args": [
         "run",
         "-i",
@@ -11,18 +19,7 @@
         "-e",
         "GITHUB_PERSONAL_ACCESS_TOKEN",
         "mcp/github"
-      ],
-      "env": {
-        "GITHUB_PERSONAL_ACCESS_TOKEN": null
-      },
-      "command": "docker"
-    },
-    "context7": {
-      "args": [
-        "-y",
-        "@upstash/context7-mcp"
-      ],
-      "command": "npx"
+      ]
     },
     "sequential-thinking": {
       "command": "npx",
@@ -36,6 +33,13 @@
       "args": [
         "-y",
         "@agentdeskai/browser-tools-mcp@1.2.0"
+      ]
+    },
+    "context7": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@upstash/context7-mcp"
       ]
     },
     "puppeteer": {
