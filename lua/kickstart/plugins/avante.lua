@@ -10,7 +10,6 @@ return {
         hints = { enabled = false },
         behaviour = {
             enable_token_counting = false,
-            jump_result_buffer_on_finish = true
         },
         system_prompt = function()
             local hub = require("mcphub").get_hub_instance()
