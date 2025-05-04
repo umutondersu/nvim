@@ -19,6 +19,10 @@ For every query related to libraries, frameworks, or APIs, automatically append 
 				endpoint = "https://api.groq.com/openai/v1/",
 				model = "deepseek-r1-distill-llama-70b"
 			},
+			copilot_gemini = {
+				__inherited_from = 'copilot',
+				model = 'gemini-2.5-pro',
+			}
 		}
 	},
 	init = function()

@@ -5,7 +5,7 @@ return {
     lazy = false,
     version = false, -- set this if you want to always pull the latest change
     opts = vim.tbl_deep_extend("keep", {
-        provider = 'copilot',
+        provider = 'copilot_gemini',
         selector = { provider = 'snacks' },
         hints = { enabled = false },
         behaviour = {
