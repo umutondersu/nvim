@@ -45,16 +45,16 @@ return {
     })
 
     -- [[ Toggle Linting with nvim-lint ]]
-    local function toggle_linting(enabled)
+    local function toggle_linting()
+      local enabled = not vim.g.disable_lint
       require("which-key").add({
         {
           '<leader>ul',
           function()
-            local new_state = not enabled
-            vim.g.disable_lint = new_state
+            vim.g.disable_lint = not vim.g.disable_lint
 
             local current_linters = opts.linters_by_ft[vim.bo.filetype]
-            if not new_state and current_linters then
+            if vim.g.disable_lint and current_linters then
               for _, linter in ipairs(current_linters) do
                 local ns = lint.get_namespace(linter)
                 vim.diagnostic.reset(ns)
@@ -62,8 +62,8 @@ return {
             else
               lint.try_lint()
             end
-            print('Linting is ' .. (not vim.g.disable_lint and 'disabled' or 'enabled'))
-            toggle_linting(new_state)
+            print('Linting is ' .. (vim.g.disable_lint and 'disabled' or 'enabled'))
+            toggle_linting()
           end,
           desc = (enabled and 'Disable' or 'Enable') .. ' Linting',
           icon = {
@@ -73,7 +73,6 @@ return {
         }
       })
     end
-    -- Initialize the mapping for the first time
-    toggle_linting(not vim.g.disable_lint)
+    toggle_linting()
   end,
 }
