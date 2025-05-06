@@ -3,12 +3,9 @@ return {
   lazy = true,
   priority = 1000,
   opts = function()
-    local transparent = vim.g.transparent
-    if not transparent then
-      return {}
-    end
+    if not vim.g.transparent then return {} end -- NOTE: transparency is set in init
     return {
-      transparent = transparent, -- NOTE: transparency is set in init
+      transparent = true,
       styles = {
         sidebars = "transparent",
         floats = "transparent",
@@ -28,15 +25,14 @@ return {
     }
   end,
   init = function()
-    vim.g.transparent = true
+    vim.g.transparent = os.getenv("NVIM_TRANSPARENT") == "false" and false or true
     vim.cmd.colorscheme 'tokyonight-night'
     vim.api.nvim_create_autocmd({ 'ColorScheme', 'BufAdd', 'VimEnter' }, {
       callback = vim.schedule_wrap(function()
         vim.api.nvim_set_hl(0, "WinBar", { bg = "NONE" })
         vim.api.nvim_set_hl(0, "WinBarNC", { bg = "NONE" })
-        if not vim.g.transparent then
-          return
-        end
+        if not vim.g.transparent then return end
+
         vim.api.nvim_set_hl(0, "TreesitterContext", { bg = "None" })
         vim.api.nvim_set_hl(0, "TreesitterContextLineNumber", { sp = "red" })
         vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#232735", bg = "None" })
@@ -47,9 +43,7 @@ return {
     -- Autocmd for getting rid of statuslines in Avante for Transparent mode
     vim.api.nvim_create_autocmd('BufEnter', {
       callback = function()
-        if not vim.g.transparent then
-          return
-        end
+        if not vim.g.transparent then return end
         vim.api.nvim_set_hl(0, "AvanteSideBarWinSeparator", { fg = "#232735", bg = "None" })
         vim.api.nvim_set_hl(0, "InvisibleStatusLine",
           { bg = "none", fg = "none", ctermbg = "none", ctermfg = "none" })
@@ -67,5 +61,4 @@ return {
       group = vim.api.nvim_create_augroup('Transparency', { clear = false }),
     })
   end,
-
 }
