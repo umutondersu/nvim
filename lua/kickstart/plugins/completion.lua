@@ -107,7 +107,7 @@ return {
           name = "copilot",
           module = "blink-copilot",
           async = true,
-          score_offset = -2,
+          score_offset = -4,
           opts = {
             max_completions = 3,
             max_attempts = 4,
