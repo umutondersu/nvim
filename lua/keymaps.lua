@@ -45,6 +45,9 @@ map("n", "J", "mzJ`z")
 map("n", "<C-d>", "<C-d>zz")
 map("n", "<C-u>", "<C-u>zz")
 
+map('v', '<', '<gv', { desc = 'Shift Left' })
+map('v', '>', '>gv', { desc = 'Shift Right' })
+
 map("n", "<M-u>", ":e!<CR>", { desc = 'Undo all unsaved writes' })
 
 -- Shortcuts for save and exit
@@ -62,7 +65,7 @@ map('n', '<leader>w', function()
 		return
 	end
 	-- Buffer has a name, save normally
-	vim.cmd('write')
+	vim.cmd.write()
 end, { desc = 'Save Buffer' })
 map('n', '<leader>x', '<cmd>wqa<CR>', { desc = 'Save and Exit' })
 map('n', '<leader>q', '<cmd>q<CR>', { desc = 'Quit Window' })

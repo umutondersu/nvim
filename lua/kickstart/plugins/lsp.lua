@@ -126,7 +126,7 @@ return { -- LSP Configuration & Plugins
 							vim.fn.wait(100, function() return false end) -- Wait for organize imports to complete
 
 							-- Write the buffer after all TypeScript operations are complete
-							vim.cmd('write')
+							vim.cmd.write()
 
 							-- Reset the flag after formatting is done
 							vim.b[event.buf].ts_tools_formatting = false
