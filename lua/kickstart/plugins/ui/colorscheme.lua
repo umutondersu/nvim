@@ -24,7 +24,7 @@ return {
     }
   end,
   init = function()
-    vim.g.transparent = os.getenv("NVIM_TRANSPARENT") == "false" and false or true
+    vim.g.transparent = not (os.getenv("NVIM_TRANSPARENT") == "false")
     vim.cmd.colorscheme 'tokyonight-night'
     vim.api.nvim_create_autocmd({ 'ColorScheme', 'BufAdd', 'VimEnter' }, {
       callback = vim.schedule_wrap(function()
