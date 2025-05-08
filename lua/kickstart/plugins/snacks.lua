@@ -199,18 +199,18 @@ return {
                 Snacks.toggle.line_number():map("<leader>uL")
                 -- Toggle Inlay Hints
                 vim.api.nvim_create_autocmd('LspAttach', {
-                    group = vim.api.nvim_create_augroup('InlayHintsToggle', {}),
+                    group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = false }),
                     callback = function(event)
                         local client = vim.lsp.get_client_by_id(event.data.client_id)
                         if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
-                            local function toggle_inlay_hints(enabled)
+                            local function toggle_inlay_hints()
+                                local enabled = vim.lsp.inlay_hint.is_enabled { bufnr = event.buf }
                                 require("which-key").add({
                                     {
                                         '<leader>uh',
                                         function()
-                                            local new_state = not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf }
-                                            vim.lsp.inlay_hint.enable(new_state)
-                                            toggle_inlay_hints(new_state)
+                                            vim.lsp.inlay_hint.enable(not enabled)
+                                            toggle_inlay_hints()
                                         end,
                                         desc = (enabled and 'Disable' or 'Enable') .. ' Inlay Hints',
                                         icon = {
@@ -220,8 +220,7 @@ return {
                                     }
                                 })
                             end
-                            local initial_state = false
-                            toggle_inlay_hints(initial_state)
+                            toggle_inlay_hints()
                         end
                     end
                 })
