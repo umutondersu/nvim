@@ -2,8 +2,8 @@ return { -- LSP Configuration & Plugins
 	'neovim/nvim-lspconfig',
 	dependencies = {
 		-- Automatically install LSPs and related tools to stdpath for neovim
-		{ 'williamboman/mason.nvim',      opts = {} },
-		'williamboman/mason-lspconfig.nvim',
+		{ 'mason-org/mason.nvim',           version = 'v1.*', opts = {} },
+		{ 'mason-org/mason-lspconfig.nvim', version = 'v1.*' },
 		'WhoIsSethDaniel/mason-tool-installer.nvim',
 
 		-- For LSP actions preview
@@ -226,7 +226,7 @@ return { -- LSP Configuration & Plugins
 			automatic_installation = true,
 			handlers = {
 				function(server_name)
-					if server_name == 'ts_ls' or server_name == 'tailwindcss' then return end -- Do not setup these servers since external plugins are used
+					if server_name == 'ts_ls' then return end -- Do not setup these servers since external plugins are used
 					local config = servers[server_name] or {}
 					local enabled = add_lsp(config.command)
 					config.command = nil
