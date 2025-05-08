@@ -15,6 +15,20 @@ return {
       go = { "golangcilint" },
       fish = { "fish" },
       sh = { "shellcheck" }
+    },
+    linters = {
+      eslint_d = {
+        args = {
+          '--no-warn-ignored',
+          '--format',
+          'json',
+          'stdin',
+          '--stdin-filename',
+          function()
+            return vim.fn.expand('%:p')
+          end
+        }
+      }
     }
   },
   config = function(_, opts)
