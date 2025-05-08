@@ -13,13 +13,12 @@ return {
       hide_inactive_statusline = true,
       on_highlights = function(hl, c)
         local line_number_color = "#898da0"
-        local none = c.none
-        local line_number_groups = { "LineNr", "LineNrAbove", "LineNrBelow" }
-        for _, group in ipairs(line_number_groups) do
+        local LineNr_hl_groups = { "LineNr", "LineNrAbove", "LineNrBelow" }
+        for _, group in ipairs(LineNr_hl_groups) do
           hl[group] = { fg = line_number_color }
         end
         hl.TabLineFill = {
-          bg = none,
+          bg = c.none,
         }
       end,
     }
@@ -45,10 +44,6 @@ return {
       callback = function()
         if not vim.g.transparent then return end
         vim.api.nvim_set_hl(0, "AvanteSideBarWinSeparator", { fg = "#232735", bg = "None" })
-        vim.api.nvim_set_hl(0, "InvisibleStatusLine",
-          { bg = "none", fg = "none", ctermbg = "none", ctermfg = "none" })
-        vim.api.nvim_set_hl(0, "InvisibleStatusLineNC",
-          { bg = "none", fg = "none", ctermbg = "none", ctermfg = "none" })
 
         for _, win in ipairs(vim.api.nvim_list_wins()) do
           local filetype = vim.api.nvim_get_option_value("filetype", { buf = vim.api.nvim_win_get_buf(win) })
