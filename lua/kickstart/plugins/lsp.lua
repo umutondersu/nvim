@@ -181,7 +181,7 @@ return { -- LSP Configuration & Plugins
 				},
 			},
 
-			pyright = { command = 'python3' },
+			basedpyright = { command = 'python3' },
 
 			omnisharp = { command = 'dotnet' },
 
