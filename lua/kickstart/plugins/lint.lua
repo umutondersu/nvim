@@ -38,7 +38,7 @@ return {
     vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePost", "InsertLeave" }, {
       group = vim.api.nvim_create_augroup("lint", { clear = true }),
       callback = debounce(100, function()
-        if vim.opt_local.modifiable:get() and not vim.g.disable_lint then
+        if vim.bo.modifiable and not vim.g.disable_lint then
           lint.try_lint()
         end
       end)

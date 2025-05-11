@@ -3,10 +3,10 @@
 -- NOTE: You can change these options as you wish!
 
 -- Set scrolloff
-vim.opt.scrolloff = 15
+vim.o.scrolloff = 15
 
 -- Set tab width
-vim.opt.tabstop = 4
+vim.o.tabstop = 4
 
 -- Set highlight on search
 vim.o.hlsearch = false
@@ -44,13 +44,13 @@ vim.wo.relativenumber = true
 vim.o.termguicolors = true
 
 -- Disable Statusline
-vim.opt.laststatus = 0
-vim.opt.ruler = false
+vim.o.laststatus = 0
+vim.o.ruler = false
 vim.o.statusline = " "
 
 -- Set default splits
-vim.opt.splitright = true
-vim.opt.splitbelow = true
+vim.o.splitright = true
+vim.o.splitbelow = true
 
 -- Custom diagnostic config
 local diag_icons = require('kickstart.icons').diagnostics

@@ -22,8 +22,8 @@ vim.api.nvim_create_autocmd("FileType", {
   group = vim.api.nvim_create_augroup('wrap_spell', { clear = true }),
   pattern = { "text", "plaintex", "typst", "gitcommit", "markdown" },
   callback = function()
-    vim.opt_local.wrap = true
-    vim.opt_local.spell = true
+    vim.bo.wrap = true
+    vim.bo.spell = true
   end,
 })
 
@@ -32,6 +32,6 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
   group = vim.api.nvim_create_augroup('json_conceal', { clear = true }),
   pattern = { "json", "jsonc", "json5" },
   callback = function()
-    vim.opt_local.conceallevel = 0
+    vim.bo.conceallevel = 0
   end,
 })
