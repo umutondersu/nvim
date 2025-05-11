@@ -73,8 +73,14 @@ return {
                     find = "not attached to buffer",
                 },
                 skip = true
-            }
-
+            },
+            -- {
+            --     filter = {
+            --         event = "notify",
+            --         find = "No information available",
+            --     },
+            --     skip = true
+            -- }
         },
     },
     dependencies = {
