@@ -170,6 +170,8 @@ return { -- LSP Configuration & Plugins
 
 			jsonls = {},
 
+			emmet_language_server = {},
+
 			lua_ls = {
 				settings = {
 					Lua = {
