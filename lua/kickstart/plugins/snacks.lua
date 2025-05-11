@@ -119,7 +119,7 @@ return {
         ---@diagnostic disable-next-line: undefined-field
         { "<leader>st",  function() Snacks.picker.todo_comments() end, desc = "Todo Comments" },
         { "<leader>sr",  function() Snacks.picker.resume() end,        desc = "Resume" },
-        { "<leader>sR",  function() Snacks.picker.recent() end,        desc = "Recent" },
+        { "<leader>s.",  function() Snacks.picker.recent() end,        desc = "Recent Files" },
         -- Grep
         { "<leader>/",   function() Snacks.picker.lines() end,         desc = "Grep Lines" },
         { "<leader>sG",  function() Snacks.picker.grep_buffers() end,  desc = "Grep Open Buffers" },
