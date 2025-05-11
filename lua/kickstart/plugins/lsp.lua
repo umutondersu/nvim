@@ -2,8 +2,8 @@ return { -- LSP Configuration & Plugins
 	'neovim/nvim-lspconfig',
 	dependencies = {
 		-- Automatically install LSPs and related tools to stdpath for neovim
-		{ 'mason-org/mason.nvim',           version = 'v1.*', opts = {} },
-		{ 'mason-org/mason-lspconfig.nvim', version = 'v1.*' },
+		{ 'mason-org/mason.nvim',           opts = {} },
+		{ 'mason-org/mason-lspconfig.nvim', opts = {} },
 		'WhoIsSethDaniel/mason-tool-installer.nvim',
 
 		-- For LSP actions preview
@@ -206,14 +206,16 @@ return { -- LSP Configuration & Plugins
 		}
 
 		---@param command string?
-		local function add_lsp(command)
+		local function install_lsp(command)
 			return command == nil or vim.fn.executable(command) == 1
 		end
 
 		-- Grab the list of servers to install from the servers table
 		local ensure_installed = vim.tbl_filter(function(server_name)
 			local config = servers[server_name]
-			return add_lsp(config.command)
+			local command = config.command
+			config.command = nil
+			return install_lsp(command)
 		end, vim.tbl_keys(servers or {}))
 
 		-- Grab the tools from the mason-tools.lua file and add them to ensure_installed
@@ -221,22 +223,14 @@ return { -- LSP Configuration & Plugins
 		vim.list_extend(ensure_installed, tools)
 		require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
-		require('mason-lspconfig').setup {
-			ensure_installed = {},
-			automatic_installation = true,
-			handlers = {
-				function(server_name)
-					if server_name == 'ts_ls' then return end -- Do not setup these servers since external plugins are used
-					local config = servers[server_name] or {}
-					local enabled = add_lsp(config.command)
-					config.command = nil
-					config.on_attach = function(client, bufnr)
-						require('workspace-diagnostics').populate_workspace_diagnostics(client, bufnr)
-					end
-					vim.lsp.config(server_name, config)
-					vim.lsp.enable(server_name, enabled)
-				end,
-			},
-		}
+		vim.lsp.enable('ts_ls', false) -- typescript-tools is used instead
+		for server, config in pairs(servers) do
+			vim.lsp.config(server, config) -- Apply the custom configs in servers
+		end
+		vim.lsp.config('*', {     -- add workspace-diagnostics to all LSPs
+			on_attach = function(client, bufnr)
+				require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
+			end
+		})
 	end,
 }
