@@ -226,10 +226,12 @@ return { -- LSP Configuration & Plugins
 		require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
 		vim.lsp.enable('ts_ls', false) -- typescript-tools is used instead
+		-- Apply the custom configs in servers
 		for server, config in pairs(servers) do
-			vim.lsp.config(server, config) -- Apply the custom configs in servers
+			vim.lsp.config(server, config)
 		end
-		vim.lsp.config('*', {     -- add workspace-diagnostics to all LSPs
+		-- add workspace-diagnostics to all LSPs
+		vim.lsp.config('*', {
 			on_attach = function(client, bufnr)
 				require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
 			end
