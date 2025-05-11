@@ -19,6 +19,8 @@ return { -- LSP Configuration & Plugins
 		'folke/snacks.nvim',
 	},
 	config = function()
+		-- Define the augroup for TypeScript tools
+		local ts_tools_augroup = vim.api.nvim_create_augroup('ts-tools', { clear = true })
 		vim.api.nvim_create_autocmd('LspAttach', {
 			group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
 			callback = function(event)
@@ -109,7 +111,8 @@ return { -- LSP Configuration & Plugins
 					map('<leader>rf', '<cmd>TSToolsRenameFile<cr>', 'Rename File')
 					-- Organize and Add Missing Imports with autoformat
 					vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
-						pattern = { "*.ts", "*.js", "*.tsx", "*.jsx" },
+						buffer = event.buf, -- Make the autocommand buffer-local
+						group = ts_tools_augroup,
 						callback = vim.schedule_wrap(function()
 							if vim.g.disable_autoformat or vim.b[event.buf].disable_autoformat then
 								return
@@ -131,7 +134,6 @@ return { -- LSP Configuration & Plugins
 							-- Reset the flag after formatting is done
 							vim.b[event.buf].ts_tools_formatting = false
 						end),
-						group = vim.api.nvim_create_augroup('ts-tools', {}),
 					})
 				end
 
