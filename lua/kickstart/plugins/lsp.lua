@@ -149,7 +149,7 @@ return { -- LSP Configuration & Plugins
 		--  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
 		--
 		--  Add any additional override configuration in the following tables. Available keys are:
-		--	- command (string?): This is an optinal key I added. If the command is not an executable, that LSP will be skipped.
+		--	- command (string?): This is an optinal key I added. If this key is not an executable, the LSP will be disabled.
 		--  - cmd (table): Override the default command used to start the server
 		--  - filetypes (table): Override the default list of associated filetypes for the server
 		--  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
@@ -210,33 +210,34 @@ return { -- LSP Configuration & Plugins
 		}
 
 		---@param command string?
-		local function install_lsp(command)
-			return command == nil or vim.fn.executable(command) == 1
+		local function skip_lsp(command)
+			return not (command == nil or vim.fn.executable(command) == 1)
 		end
 
-		-- Grab the list of servers to install from the servers table
-		local ensure_installed = vim.tbl_filter(function(server_name)
-			local config = servers[server_name]
-			local command = config.command
-			config.command = nil
-			return install_lsp(command)
-		end, vim.tbl_keys(servers or {}))
-
-		-- Grab the tools from the mason-tools.lua file and add them to ensure_installed
-		local tools = require('kickstart.mason-tools')
-		vim.list_extend(ensure_installed, tools)
-		require('mason-tool-installer').setup { ensure_installed = ensure_installed }
-
-		vim.lsp.enable('ts_ls', false) -- typescript-tools is used instead
-		-- Apply the custom configs in servers
+		-- Configure Servers
+		-- disable ts_ls, typescript-tools is used instead
+		vim.lsp.enable('ts_ls', false)
 		for server, config in pairs(servers) do
-			vim.lsp.config(server, config)
+			if skip_lsp(config.command) then
+				-- Filter unavailable servers
+				servers[server] = nil
+			else
+				-- Apply the custom configs in servers
+				vim.lsp.config(server, config)
+			end
 		end
+
 		-- add workspace-diagnostics to all LSPs
 		vim.lsp.config('*', {
 			on_attach = function(client, bufnr)
 				require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
 			end
 		})
+
+		-- Grab the list of servers and tools to install and add them to ensure_installed
+		local ensure_installed = vim.tbl_keys(servers or {})
+		local tools = require('kickstart.mason-tools')
+		vim.list_extend(ensure_installed, tools)
+		require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 	end,
 }
