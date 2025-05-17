@@ -32,6 +32,7 @@ return {
         vim.api.nvim_set_hl(0, "WinBarNC", { bg = "NONE" })
         if not vim.g.transparent then return end
 
+        vim.api.nvim_set_hl(0, "LspInlayHint", { bg = "none", fg = "#545C7E" })
         vim.api.nvim_set_hl(0, "TreesitterContext", { bg = "None" })
         vim.api.nvim_set_hl(0, "TreesitterContextLineNumber", { sp = "red" })
         vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#232735", bg = "None" })
