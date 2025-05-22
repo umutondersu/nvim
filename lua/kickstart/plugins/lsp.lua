@@ -219,10 +219,8 @@ return { -- LSP Configuration & Plugins
 		vim.lsp.enable('ts_ls', false)
 		for server, config in pairs(servers) do
 			if skip_lsp(config.command) then
-				-- Filter unavailable servers
 				servers[server] = nil
 			else
-				-- Apply the custom configs in servers
 				vim.lsp.config(server, config)
 			end
 		end
