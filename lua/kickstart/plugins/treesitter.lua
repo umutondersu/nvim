@@ -14,6 +14,9 @@ return {
   opts = {
     auto_install = true,
     ensure_installed = {
+      'html',
+      'css',
+      'scss',
       'c',
       'cpp',
       'go',
