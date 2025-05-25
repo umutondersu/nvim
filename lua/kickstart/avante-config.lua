@@ -10,7 +10,7 @@ For every query related to libraries, frameworks, or APIs, automatically append 
 			temperature = 0,
 			max_tokens = 4096,
 		},
-		copilot = { model = 'claude-3.5-sonnet' },
+		copilot = { model = 'claude-sonnet-4' },
 		gemini = { model = 'gemini-2.5-pro-exp-03-25' },
 		vendors = {
 			groq = {
