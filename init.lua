@@ -1,4 +1,7 @@
+-- [[ Enable experimental lua module loader for faster startup ]]
+-- `:help vim.loader` for more info
 vim.loader.enable()
+
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
@@ -9,25 +12,24 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
     'clone',
     '--filter=blob:none',
     'https://github.com/folke/lazy.nvim.git',
-    '--branch=stable', -- latest stable release
+    '--branch=stable',
     lazypath,
   }
 end
 vim.opt.rtp:prepend(lazypath)
 
--- [[ Configuration ]]
+-- [[ Base Configuration ]]
 require 'options'
 require 'keymaps'
 require 'autocmds'
 
--- [[ Configure plugins ]]
+-- [[ Configure and install plugins ]]
 require('lazy').setup({
   { import = 'kickstart.plugins' },
   { import = 'custom.plugins' }
 }, {
   rocks = { enabled = false },
   ui = {
-    -- define a unicode icons table
     icons = {
       cmd = '⌘',
       config = '🛠',
