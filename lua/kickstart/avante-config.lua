@@ -1,7 +1,8 @@
 return {
 	system_prompt = [[
 You have to only use *SEARCH/REPLACE* blocks to replace text, write text, remove text or edit files unless the prompt contains the word YOLO. Otherwise you are fired!
-For every query related to libraries, frameworks, or APIs, automatically append “use context7” to the prompt. Otherwise you are fired!]],
+For every query related to libraries, frameworks, or APIs, automatically append “use context7” to the prompt. Otherwise you are fired!
+Whenever you use an MCP Tool, you have to clearly state which tool you are going to use beforehand. Otherwise You are fired!]],
 	providers = {
 		claude = {
 			endpoint = "https://api.anthropic.com",
@@ -181,18 +182,16 @@ Follow the language's standard docstring format and style conventions.]] }
 			'<leader>apd',
 			function()
 				require('avante.api').ask { question = [[
-Analyze and fix any diagnostic issues.
+Analyze diagnostics and selectively fix important issues.
 
-For each diagnostic found:
-1. Group related issues across files
-2. Explain each error/warning in plain language
-3. Provide and apply a solution that follows language best practices
-4. Ensure the fix maintains existing functionality
-5. Address any type safety and compatibility concerns
-6. Do not overreach, only fix what is necessary
+Skip: stylistic warnings, minor linting, intentional patterns (unused vars in prototypes)
+Fix: genuine errors, critical warnings, functionality issues, type safety problems
 
-Prioritize fixes that resolve multiple related issues.
-@diagnostics]] }
+For selected fixes:
+1. Group related issues, explain in plain language
+2. Apply best practices while maintaining functionality
+3. Address type safety concerns without overreaching
+4. Prioritize fixes that resolve multiple issues meaningfully]] }
 			end,
 			mode = { 'n', 'v' },
 			desc = 'Fix Diagnostics',
@@ -202,22 +201,16 @@ Prioritize fixes that resolve multiple related issues.
 			function()
 				require('avante.api').ask { question = [[
 YOLO
-Use available diagnostic tools to analyze and fix any diagnostic issues.
+Autonomously fix diagnostics using available tools. Be selective - skip minor styling issues, focus on errors and critical warnings.
 
-For each diagnostic found:
-1. Group related issues across files
-2. Explain each error/warning in plain language
-3. Provide and apply a solution that follows language best practices
-4. Ensure the fix maintains existing functionality
-5. Address any type safety and compatibility concerns
-6. Do not overreach, only fix what is necessary
+Process:
+1. Analyze diagnostics, group related issues
+2. Fix important problems (errors, functionality issues, type safety)
+3. Apply best practices, maintain functionality
+4. Verify fixes don't introduce new diagnostics
+5. Repeat until selected diagnostics are resolved
 
-Be autonomous, change the code without user input by using the tools available to you.
-
-After suggesting fixes, verify that no new diagnostics would be introduced by checking the diagnostics again.
-If diagnostics are still present, repeat the process until all are resolved.
-
-Prioritize fixes that resolve multiple related issues.]] }
+Work autonomously without user input.]] }
 			end,
 			mode = { 'n', 'v' },
 			desc = 'Fix Diagnostics YOLO',
