@@ -36,6 +36,7 @@ return {
       'markdown_inline', -- noice.nvim
       'regex',           -- noice.nvim
       'diff',
+      'gitcommit'
     },
     highlight = { enable = true },
     indent = { enable = true },
