@@ -110,6 +110,7 @@ return { -- LSP Configuration & Plugins
 					map('<leader>cr', '<cmd>TSToolsRemoveUnused<cr>', 'Remove all unused statements')
 					map('<leader>rf', '<cmd>TSToolsRenameFile<cr>', 'Rename File')
 					-- Organize and Add Missing Imports with autoformat
+					-- TODO: This does not work consistently
 					vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
 						buffer = event.buf, -- Make the autocommand buffer-local
 						group = ts_tools_augroup,
