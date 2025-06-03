@@ -185,7 +185,11 @@ return { -- LSP Configuration & Plugins
 				},
 			},
 
-			basedpyright = { command = 'python3' },
+			basedpyright = {
+				command = 'uv',
+				cmd = { "uv", "run", "basedpyright-langserver", "--stdio" },
+				settings = { python = {} }
+			},
 
 			omnisharp = { command = 'dotnet' },
 

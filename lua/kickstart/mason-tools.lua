@@ -28,7 +28,7 @@ add_tool('cargo', {
 	'shellharden',
 })
 
-add_tool('python3', {
+add_tool('uv', {
 	-- Formatters
 	'black',
 	'isort',

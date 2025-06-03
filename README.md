@@ -38,8 +38,9 @@ My dotfiles have all the necessary requirements to work with this configuration.
   - truecolor
   - images (optional, if not snacks.image should be disabled)
 - deno (optional for [peek.nvim](https://github.com/toppair/peek.nvim))
-- Tmux (optional)
+- tmux (optional)
 - gh (optional for `github autocompletion` and [octo.nvim](https://github.com/pwntester/octo.nvim))
+- uv (optional for python dev tooling)
 
 See [Windows Installation](#Windows-Installation) if you have trouble with `telescope-fzf-native`
 
