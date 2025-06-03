@@ -186,7 +186,7 @@ return { -- LSP Configuration & Plugins
 			},
 
 			basedpyright = {
-				command = 'uv',
+				command = 'python3',
 				cmd = { "uv", "run", "basedpyright-langserver", "--stdio" },
 				settings = { python = {} }
 			},
