@@ -225,6 +225,7 @@ return { -- LSP Configuration & Plugins
 			if skip_lsp(config.command) then
 				servers[server] = nil
 			else
+				config.command = nil
 				vim.lsp.config(server, config)
 			end
 		end
