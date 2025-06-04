@@ -150,7 +150,7 @@ return { -- LSP Configuration & Plugins
 		--  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
 		--
 		--  Add any additional override configuration in the following tables. Available keys are:
-		--	- command (string?): This is an optinal key I added. If this key is not an executable, the LSP will be disabled.
+		--	- command (string?): This is an optinal key I added. If this key is not an executable, the LSP will be ignored.
 		--  - cmd (table): Override the default command used to start the server
 		--  - filetypes (table): Override the default list of associated filetypes for the server
 		--  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
