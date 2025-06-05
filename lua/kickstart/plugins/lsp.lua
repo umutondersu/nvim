@@ -216,8 +216,8 @@ return { -- LSP Configuration & Plugins
 		end
 
 		-- Configure Servers
-		-- disable ts_ls, typescript-tools is used instead
-		vim.lsp.enable('ts_ls', false)
+		vim.lsp.enable('ts_ls', false) -- typescript-tools is used instead
+		vim.lsp.enable('fish_lsp') -- Is not supported by mason
 		for server, config in pairs(servers) do
 			if skip_lsp(config.command) then
 				servers[server] = nil
