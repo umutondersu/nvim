@@ -7,6 +7,13 @@ return {
     opts = {
         provider = 'copilot',
         selector = { provider = 'snacks' },
+        input = {
+            provider = 'snacks',
+            provider_opts = {
+                title = 'Avante Input',
+                icon = ' ',
+            },
+        },
         hints = { enabled = false },
         behaviour = {
             enable_token_counting = false,
@@ -37,11 +44,10 @@ return {
     build = 'make',
     -- build = 'powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false' -- for windows
     dependencies = {
-        'stevearc/dressing.nvim',
         'nvim-lua/plenary.nvim',
         'MunifTanjim/nui.nvim',
         'zbirenbaum/copilot.lua',                                        -- Copilot Provider
-        'folke/snacks.nvim',                                             -- Selector Provider
+        'folke/snacks.nvim',                                             -- Selector and Input Provider
         {                                                                -- MCP Integration
             "ravitemer/mcphub.nvim",
             dependencies = "nvim-lua/plenary.nvim",                      -- Required for Job and HTTP requests
