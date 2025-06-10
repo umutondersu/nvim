@@ -32,6 +32,6 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
   group = vim.api.nvim_create_augroup('json_conceal', { clear = true }),
   pattern = { "json", "jsonc", "json5" },
   callback = function()
-    vim.bo.conceallevel = 0
+    vim.wo.conceallevel = 0
   end,
 })
