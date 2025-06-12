@@ -157,57 +157,66 @@ return { -- LSP Configuration & Plugins
 		--  - settings (table): Override the default settings passed when initializing the server.
 		--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 		local servers = {
-			-- clangd = {},
-			-- rust_analyzer = {},
-			-- html = { filetypes = { 'html', 'twig', 'hbs'} },
+			-- Feel free to add/remove any LSPs here that you want to install via Mason. They will automatically be installed and setup.
+			mason = {
+				-- clangd = {},
+				-- rust_analyzer = {},
+				-- html = { filetypes = { 'html', 'twig', 'hbs'} },
 
-			bashls = {},
+				bashls = {},
 
-			ts_ls = {},
+				ts_ls = {},
 
-			tailwindcss = {},
+				tailwindcss = {},
 
-			dockerls = {},
+				dockerls = {},
 
-			jsonls = {},
+				jsonls = {},
 
-			emmet_language_server = {},
+				emmet_language_server = {},
 
-			lua_ls = {
-				settings = {
-					Lua = {
-						hint = { enable = true },
-						telemetry = { enable = false },
-						diagnostics = { disable = { 'missing-fields' } },
-						completion = {
-							callSnippet = 'Replace',
+				lua_ls = {
+					settings = {
+						Lua = {
+							hint = { enable = true },
+							telemetry = { enable = false },
+							diagnostics = { disable = { 'missing-fields' } },
+							completion = {
+								callSnippet = 'Replace',
+							},
 						},
 					},
 				},
-			},
 
-			basedpyright = { command = 'python3' },
+				basedpyright = { command = 'python3' },
 
-			omnisharp = { command = 'dotnet' },
+				omnisharp = { command = 'dotnet' },
 
-			gopls = {
-				command = 'go',
-				settings = {
-					gopls = {
-						hints = {
-							assignVariableTypes = true,
-							compositeLiteralFields = true,
-							compositeLiteralTypes = true,
-							constantValues = true,
-							functionTypeParameters = true,
-							parameterNames = true,
-							rangeVariableTypes = true,
+				gopls = {
+					command = 'go',
+					settings = {
+						gopls = {
+							hints = {
+								assignVariableTypes = true,
+								compositeLiteralFields = true,
+								compositeLiteralTypes = true,
+								constantValues = true,
+								functionTypeParameters = true,
+								parameterNames = true,
+								rangeVariableTypes = true,
+							},
 						},
-					},
-				}
-			},
+					}
+				},
 
-			jdtls = { command = 'java' }
+				jdtls = { command = 'java' }
+			},
+			-- This table contains config for all language servers that are *not* installed via Mason.
+			-- Structure is identical to the mason table from above.
+			others = {
+				-- dartls = {},
+				fish_lsp = { command = 'fish-lsp' },
+			},
 		}
 
 		---@param command string?
@@ -217,14 +226,21 @@ return { -- LSP Configuration & Plugins
 
 		-- Configure Servers
 		vim.lsp.enable('ts_ls', false) -- typescript-tools is used instead
-		vim.lsp.enable('fish_lsp') -- Is not supported by mason
-		for server, config in pairs(servers) do
-			if skip_lsp(config.command) then
-				servers[server] = nil
-			else
-				config.command = nil
+		for server, config in pairs(vim.tbl_extend('keep', servers.mason, servers.others)) do
+			local command = config.command
+			config.command = nil
+			if skip_lsp(command) then
+				for cat, _ in pairs(servers) do
+					servers[cat][server] = nil
+				end
+			elseif not vim.tbl_isempty(config) then
 				vim.lsp.config(server, config)
 			end
+		end
+
+		-- Manually run vim.lsp.enable for all language servers that are *not* installed via Mason
+		if not vim.tbl_isempty(servers.others) then
+			vim.lsp.enable(vim.tbl_keys(servers.others))
 		end
 
 		-- add workspace-diagnostics to all LSPs
@@ -235,7 +251,7 @@ return { -- LSP Configuration & Plugins
 		})
 
 		-- Grab the list of servers and tools to install and add them to ensure_installed
-		local ensure_installed = vim.tbl_keys(servers or {})
+		local ensure_installed = vim.tbl_keys(servers.mason or {})
 		local tools = require('kickstart.mason-tools')
 		vim.list_extend(ensure_installed, tools)
 		require('mason-tool-installer').setup { ensure_installed = ensure_installed }
