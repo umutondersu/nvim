@@ -7,10 +7,11 @@ return {
             'nvim-treesitter/nvim-treesitter',
         },
         build = function()
-            if vim.fn.executable(':GoInstallDeps') then
+            if vim.bo.filetype == 'go' then
                 vim.cmd.GoInstallDeps()
             else
-                vim.notify('Gopher.nvim could not install dependencies, build again in a go file', vim.log.levels.WARN)
+                vim.notify('Gopher.nvim could not install dependencies, Try running GoInstallDeps in a go file',
+                    vim.log.levels.WARN)
             end
         end,
         opts = {},
