@@ -75,73 +75,74 @@ return { -- LSP Configuration & Plugins
 
 				-- Language specific configurations and keymaps
 				local client = vim.lsp.get_client_by_id(event.data.client_id)
+				if not client then return end
 
-				local function is_lsp_active(client_name)
-					return client and client.name == client_name
-				end
+				local server_config = {
+					omnisharp = function()
+						map('gd', require('omnisharp_extended').lsp_definition, 'Goto Definition')
+						map('gy', require('omnisharp_extended').lsp_type_definition, 'Goto T[Y]pe Definition')
+						map('gr', require('omnisharp_extended').lsp_references, 'Goto References')
+						map('gI', require('omnisharp_extended').lsp_implementation, 'Goto Implementation')
+					end,
 
-				if is_lsp_active('omnisharp') then
-					map('gd', require('omnisharp_extended').lsp_definition, 'Goto Definition')
-					map('gy', require('omnisharp_extended').lsp_type_definition,
-						'Goto T[Y]pe Definition')
-					map('gr', require('omnisharp_extended').lsp_references,
-						'Goto References')
-					map('gI', require('omnisharp_extended').lsp_implementation,
-						'Goto Implementation')
-				end
+					jdtls = function()
+						map('<leader>tc', require('java').test.run_current_class, 'Run Current Class')
+						map('<leader>tm', require('java').test.run_current_method, 'Run Current Method')
+						map('<leader>tr', require('java').test.view_last_report, 'View Last Report')
+						map('<leader>ct', require('java').runner.built_in.toggle_logs, 'Toggle Logs')
+						map('<leader>re', require('java').refactor.extract_variable, 'Extract Variable')
+						map('<leader>ra', require('java').refactor.extract_variable_all_occurrence,
+							'Extract Variable All Occurrences')
+						map('<leader>rc', require('java').refactor.extract_constant, 'Extract Constant')
+						map('<leader>rm', require('java').refactor.extract_method, 'Extract Method')
+						map('<leader>rl', require('java').refactor.extract_field, 'Extract Field')
+					end,
 
-				if is_lsp_active('jdtls') then
-					map('<leader>tc', require('java').test.run_current_class, 'Run Current Class')
-					map('<leader>tm', require('java').test.run_current_method, 'Run Current Method')
-					map('<leader>tr', require('java').test.view_last_report, 'View Last Report')
-					map('<leader>ct', require('java').runner.built_in.toggle_logs, 'Toggle Logs')
-					map('<leader>re', require('java').refactor.extract_variable, 'Extract Variable')
-					map('<leader>ra', require('java').refactor.extract_variable_all_occurrence,
-						'Extract Variable All Occurrences')
-					map('<leader>rc', require('java').refactor.extract_constant, 'Extract Constant')
-					map('<leader>rm', require('java').refactor.extract_method, 'Extract Method')
-					map('<leader>rl', require('java').refactor.extract_field, 'Extract Field')
-				end
+					['typescript-tools'] = function()
+						map('<leader>cm', '<cmd>TSToolsAddMissingImports<cr>', 'Add Missing Imports')
+						map('<leader>co', '<cmd>TSToolsOrganizeImports<cr>', 'Sort and Remove Unused Imports')
+						map('<leader>cf', '<cmd>TSToolsFixAll<cr>', 'Fix all fixable errors')
+						map('<leader>cr', '<cmd>TSToolsRemoveUnused<cr>', 'Remove all unused statements')
+						map('<leader>rf', '<cmd>TSToolsRenameFile<cr>', 'Rename File')
+						-- Organize and Add Missing Imports with autoformat
+						-- TODO: This does not work consistently
+						vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
+							buffer = event.buf, -- Make the autocommand buffer-local
+							group = ts_tools_augroup,
+							callback = vim.schedule_wrap(function()
+								if vim.g.disable_autoformat or vim.b[event.buf].disable_autoformat then
+									return
+								end
+								-- Set a flag to prevent recursion
+								if vim.b[event.buf].ts_tools_formatting then
+									return
+								end
+								vim.b[event.buf].ts_tools_formatting = true
 
-				if is_lsp_active('typescript-tools') then
-					map('<leader>cm', '<cmd>TSToolsAddMissingImports<cr>', 'Add Missing Imports')
-					map('<leader>co', '<cmd>TSToolsOrganizeImports<cr>', 'Sort and Remove Unused Imports')
-					map('<leader>cf', '<cmd>TSToolsFixAll<cr>', 'Fix all fixable errors')
-					map('<leader>cr', '<cmd>TSToolsRemoveUnused<cr>', 'Remove all unused statements')
-					map('<leader>rf', '<cmd>TSToolsRenameFile<cr>', 'Rename File')
-					-- Organize and Add Missing Imports with autoformat
-					-- TODO: This does not work consistently
-					vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
-						buffer = event.buf, -- Make the autocommand buffer-local
-						group = ts_tools_augroup,
-						callback = vim.schedule_wrap(function()
-							if vim.g.disable_autoformat or vim.b[event.buf].disable_autoformat then
-								return
-							end
-							-- Set a flag to prevent recursion
-							if vim.b[event.buf].ts_tools_formatting then
-								return
-							end
-							vim.b[event.buf].ts_tools_formatting = true
+								vim.cmd('TSToolsAddMissingImports')
+								vim.fn.wait(100, function() return false end) -- Add a small delay between commands with condition
+								vim.cmd('TSToolsOrganizeImports')
+								vim.fn.wait(100, function() return false end) -- Wait for organize imports to complete
 
-							vim.cmd('TSToolsAddMissingImports')
-							vim.fn.wait(100, function() return false end) -- Add a small delay between commands with condition
-							vim.cmd('TSToolsOrganizeImports')
-							vim.fn.wait(100, function() return false end) -- Wait for organize imports to complete
+								-- Write the buffer after all TypeScript operations are complete
+								vim.cmd.write()
 
-							-- Write the buffer after all TypeScript operations are complete
-							vim.cmd.write()
+								-- Reset the flag after formatting is done
+								vim.b[event.buf].ts_tools_formatting = false
+							end),
+						})
+					end,
 
-							-- Reset the flag after formatting is done
-							vim.b[event.buf].ts_tools_formatting = false
-						end),
-					})
-				end
+					gopls = function()
+						map('<leader>ct', function() require("gopher").tags.add "json" end, 'Add JSON Tags to struct')
+						map('<leader>cc', '<cmd>GoCmt<cr>', 'Generate boilerplate for doc comments')
+						map('<leader>so', '<cmd>GoDoc<cr>', 'Go Docs')
+					end,
+				}
 
-				if is_lsp_active('gopls') then
-					map('<leader>ct', function() require("gopher").tags.add "json" end, 'Add JSON Tags to struct')
-					map('<leader>cc', '<cmd>GoCmt<cr>', 'Generate boilerplate for doc comments')
-					map('<leader>so', '<cmd>GoDoc<cr>', 'Go Docs')
+				local setup_config = server_config[client.name]
+				if setup_config then
+					setup_config()
 				end
 			end,
 		})
