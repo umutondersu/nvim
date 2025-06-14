@@ -77,7 +77,7 @@ return { -- LSP Configuration & Plugins
 				local client = vim.lsp.get_client_by_id(event.data.client_id)
 				if not client then return end
 
-				local server_config = {
+				local lsp_config = {
 					omnisharp = function()
 						map('gd', require('omnisharp_extended').lsp_definition, 'Goto Definition')
 						map('gy', require('omnisharp_extended').lsp_type_definition, 'Goto T[Y]pe Definition')
@@ -140,9 +140,8 @@ return { -- LSP Configuration & Plugins
 					end,
 				}
 
-				local setup_config = server_config[client.name]
-				if setup_config then
-					setup_config()
+				if lsp_config[client.name] then
+					lsp_config[client.name]()
 				end
 			end,
 		})
