@@ -105,11 +105,11 @@ return { -- LSP Configuration & Plugins
 						map('<leader>cr', '<cmd>TSToolsRemoveUnused<cr>', 'Remove all unused statements')
 						map('<leader>rf', '<cmd>TSToolsRenameFile<cr>', 'Rename File')
 						-- Organize and Add Missing Imports with autoformat
-						-- TODO: This does not work consistently
-						vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
-							buffer = event.buf, -- Make the autocommand buffer-local
+						-- Use BufWritePost to avoid blocking the save operation
+						vim.api.nvim_create_autocmd({ 'BufWritePost' }, {
+							buffer = event.buf,
 							group = ts_tools_augroup,
-							callback = vim.schedule_wrap(function()
+							callback = function()
 								if vim.g.disable_autoformat or vim.b[event.buf].disable_autoformat then
 									return
 								end
@@ -119,17 +119,18 @@ return { -- LSP Configuration & Plugins
 								end
 								vim.b[event.buf].ts_tools_formatting = true
 
-								vim.cmd('TSToolsAddMissingImports')
-								vim.fn.wait(100, function() return false end) -- Add a small delay between commands with condition
-								vim.cmd('TSToolsOrganizeImports')
-								vim.fn.wait(100, function() return false end) -- Wait for organize imports to complete
-
-								-- Write the buffer after all TypeScript operations are complete
-								vim.cmd.write()
-
-								-- Reset the flag after formatting is done
-								vim.b[event.buf].ts_tools_formatting = false
-							end),
+								-- Schedule the TypeScript tools operations to run asynchronously
+								vim.schedule(function()
+									vim.cmd('TSToolsAddMissingImports')
+									vim.defer_fn(function()
+										vim.cmd('TSToolsOrganizeImports')
+										vim.defer_fn(function()
+											-- Reset the flag after operations complete
+											vim.b[event.buf].ts_tools_formatting = false
+										end, 100)
+									end, 100)
+								end)
+							end,
 						})
 					end,
 
