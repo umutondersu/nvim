@@ -74,13 +74,13 @@ return {
                 },
                 skip = true
             },
-            -- {
-            --     filter = {
-            --         event = "notify",
-            --         find = "No information available",
-            --     },
-            --     skip = true
-            -- }
+            {
+                filter = {
+                    event = "notify",
+                    find = "# Conversion failed at step `convert`",
+                },
+                skip = true
+            }
         },
     },
     dependencies = {
