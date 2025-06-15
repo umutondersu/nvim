@@ -24,12 +24,14 @@ return { -- LSP Configuration & Plugins
 		vim.api.nvim_create_autocmd('LspAttach', {
 			group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
 			callback = function(event)
-				local map = function(keys, func, desc, mode)
+				local map = function(keys, func, desc, mode, lsp)
 					mode = mode or 'n'
-					vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
+					lsp = lsp == nil and true or lsp
+					vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = lsp and 'LSP: ' .. desc or desc })
 				end
 
-				map('gq', vim.diagnostic.open_float, 'Open floating diagnostic message')
+				-- Opens a floating window showing hover information about the symbol under the cursor.
+				--  This includes documentation, type information, and other details provided by the LSP.
 				map('K', vim.lsp.buf.hover, 'Display Hover Information')
 
 				---@module 'snacks'
@@ -49,7 +51,7 @@ return { -- LSP Configuration & Plugins
 				-- Jump to the type of the word under your cursor.
 				--  Useful when you're not sure what type a variable is and you want to see
 				--  the definition of its *type*, not where it was *defined*.
-				map('gy', Snacks.picker.lsp_type_definitions, 'Goto T[y]pe Definition')
+				map('gy', Snacks.picker.lsp_type_definitions, 'Goto Type Definition')
 
 				-- This is not Goto Definition, this is Goto Declaration.
 				-- For example, in C this would take you to the header
@@ -59,14 +61,15 @@ return { -- LSP Configuration & Plugins
 				-- Fuzzy find all the symbols.
 				--  Symbols are things like variables, functions, types, etc.
 				local kind_filter = { filter = require('kickstart.icons').kind_filter }
-				map('<leader>ss', function() Snacks.picker.lsp_symbols(kind_filter) end, 'Symbols')
+				map('<leader>ss', function() Snacks.picker.lsp_symbols(kind_filter) end, 'Symbols', 'n', false)
 
 				-- Fuzzy find symbols in the workspace
-				map('<leader>sS', function() Snacks.picker.lsp_workspace_symbols(kind_filter) end, 'Workspace Symbols')
+				map('<leader>sS', function() Snacks.picker.lsp_workspace_symbols(kind_filter) end, 'Workspace Symbols',
+					'n', false)
 
 				-- Rename the variable under your cursor
 				--  Most Language Servers support renaming across files, etc.
-				map('<leader>rv', vim.lsp.buf.rename, 'Rename Variable')
+				map('<leader>rv', vim.lsp.buf.rename, 'Rename Variable', 'n', false)
 
 				-- Execute a code action, usually your cursor needs to be on top of an error
 				-- or a suggestion from your LSP for this to activate.
@@ -137,7 +140,7 @@ return { -- LSP Configuration & Plugins
 					gopls = function()
 						map('<leader>ct', function() require("gopher").tags.add "json" end, 'Add JSON Tags to struct')
 						map('<leader>cc', '<cmd>GoCmt<cr>', 'Generate boilerplate for doc comments')
-						map('<leader>so', '<cmd>GoDoc<cr>', 'Go Docs')
+						map('<leader>so', '<cmd>GoDoc<cr>', 'Go Docs', 'n', false)
 					end,
 				}
 

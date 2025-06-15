@@ -15,6 +15,8 @@ vim.keymap.del('n', 'grn')
 vim.keymap.del('n', 'grr')
 vim.keymap.del('n', 'gO')
 
+map('n', 'gq', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
+
 -- Remap for dealing with word wrap
 map('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 map('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
@@ -52,9 +54,7 @@ map("n", "<M-u>", ":e!<CR>", { desc = 'Undo all unsaved writes' })
 
 -- Shortcuts for save and exit
 map('n', '<leader>w', function()
-	local bufname = vim.api.nvim_buf_get_name(0)
-	if bufname == '' then
-		-- Buffer has no name, prompt for one
+	if vim.api.nvim_buf_get_name(0) == '' then
 		vim.ui.input({
 			prompt = 'Enter file name: ',
 		}, function(name)
@@ -62,10 +62,9 @@ map('n', '<leader>w', function()
 				vim.cmd('write ' .. vim.fn.fnameescape(name))
 			end
 		end)
-		return
+	else
+		vim.cmd.write()
 	end
-	-- Buffer has a name, save normally
-	vim.cmd.write()
 end, { desc = 'Save Buffer' })
 map('n', '<leader>x', '<cmd>wqa<CR>', { desc = 'Save and Exit' })
 map('n', '<leader>q', '<cmd>q<CR>', { desc = 'Quit Window' })
