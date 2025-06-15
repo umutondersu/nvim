@@ -24,15 +24,9 @@ return {
 
     -- Create a custom uv_flake8 linter
     local flake8 = lint.linters.flake8
-    lint.linters.uv_flake8 = {
-      cmd = 'uv',
-      stdin = flake8.stdin,
-      args = vim.list_extend({ 'run', 'flake8' }, flake8.args or {}),
-      stream = flake8.stream,
-      ignore_exitcode = flake8.ignore_exitcode,
-      env = flake8.env,
-      parser = flake8.parser,
-    }
+    lint.linters.uv_flake8 = flake8
+    lint.linters.uv_flake8.cmd = 'uv'
+    lint.linters.uv_flake8.args = vim.list_extend({ 'run', 'flake8' }, flake8.args or {})
 
     local function debounce(ms, fn)
       local timer = vim.uv.new_timer()
