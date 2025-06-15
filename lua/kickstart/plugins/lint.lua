@@ -86,5 +86,34 @@ return {
       })
     end
     toggle_linting()
+
+    -- [[ Disable formatting for eslint_d on startup if no config file is found ]]
+    vim.api.nvim_create_autocmd({ 'FileType' }, {
+      group = vim.api.nvim_create_augroup("eslint_d-startup", { clear = true }),
+      pattern = { 'javascript', 'typescript', 'javascriptreact', 'typescriptreact' },
+      once = true,
+      callback = function()
+        local config_files = {
+          'eslint.config.js',
+          'eslint.config.mjs',
+          'eslint.config.cjs'
+        }
+        local has_config = false
+        -- Check for config files
+        for _, config_file in ipairs(config_files) do
+          if vim.fn.filereadable(vim.fn.getcwd() .. "/" .. config_file) == 1 then
+            has_config = true
+            break
+          end
+        end
+        -- If no config found, disable linting
+        if not has_config then
+          vim.g.disable_lint = true
+          local ns = lint.get_namespace("eslint_d")
+          vim.diagnostic.reset(ns)
+          toggle_linting()
+        end
+      end
+    })
   end,
 }
