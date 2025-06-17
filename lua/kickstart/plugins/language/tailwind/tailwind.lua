@@ -16,14 +16,7 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		"neovim/nvim-lspconfig",
 	},
-	opts = {
-		server = {
-			settings = { capabilties = require('blink.cmp').get_lsp_capabilities() },
-			on_attach = function(client, bufnr)
-				require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
-			end,
-		}
-	},
+	opts = {},
 	keys = {
 		{ "<leader>ct",  "<Nop>",                              desc = "Tailwind",                ft = ft },
 		-- Conceal toggles
