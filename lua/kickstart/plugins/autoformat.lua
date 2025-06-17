@@ -119,7 +119,7 @@ return
             print("Auto Formatting is " .. (enabled and "Disabled" or "Enabled"))
             toggle_autoformatting()
           end,
-          desc = (enabled and 'Disable' or 'Enable') .. ' Formatting',
+          desc = (enabled and 'Disable' or 'Enable') .. ' Auto Format',
           icon = {
             icon = enabled and '' or '',
             color = enabled and 'green' or 'yellow'

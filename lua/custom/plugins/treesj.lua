@@ -5,7 +5,7 @@ return {
             "<leader>fs",
             "<cmd>TSJToggle<cr>",
             mode = "n",
-            desc = "Join or Split Code Block",
+            desc = " Join/Split Code Block",
         },
     },
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
