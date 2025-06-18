@@ -106,7 +106,7 @@ return { -- LSP Configuration & Plugins
 						map('<leader>co', '<cmd>TSToolsOrganizeImports<cr>', 'Sort and Remove Unused Imports')
 						map('<leader>cf', '<cmd>TSToolsFixAll<cr>', 'Fix all fixable errors')
 						map('<leader>cr', '<cmd>TSToolsRemoveUnused<cr>', 'Remove all unused statements')
-						map('<leader>rf', '<cmd>TSToolsRenameFile<cr>', 'Rename File')
+						map('<leader>rf', '<cmd>TSToolsRenameFile<cr>', 'Rename File', 'n', false)
 						-- Organize and add missing imports on save
 						vim.api.nvim_create_autocmd({ 'BufWritePost' }, {
 							buffer = event.buf,
@@ -115,10 +115,6 @@ return { -- LSP Configuration & Plugins
 								if vim.g.disable_autoformat or vim.b[event.buf].disable_autoformat or vim.g.disable_tsautoformat then
 									return
 								end
-								if vim.b[event.buf].ts_tools_formatting then
-									return
-								end
-								vim.b[event.buf].ts_tools_formatting = true
 
 								vim.cmd('TSToolsAddMissingImports')
 								vim.cmd('TSToolsOrganizeImports')
