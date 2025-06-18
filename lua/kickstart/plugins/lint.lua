@@ -57,10 +57,14 @@ return {
         {
           '<leader>ul',
           function()
-            vim.g.disable_lint = not vim.g.disable_lint
-
             local current_linters = opts.linters_by_ft[vim.bo.filetype]
-            if vim.g.disable_lint and current_linters then
+            if vim.g.disable_lint and not current_linters then
+              vim.notify('No linters available for ' .. vim.bo.filetype, 3)
+              return
+            end
+
+            vim.g.disable_lint = not vim.g.disable_lint
+            if vim.g.disable_lint then
               for _, linter in ipairs(current_linters) do
                 local ns = lint.get_namespace(linter)
                 vim.diagnostic.reset(ns)
@@ -81,16 +85,43 @@ return {
     end
     toggle_linting()
 
+    -- [[ Disable linting if no linters are available ]]
+    local linter_init_done = false
+    vim.api.nvim_create_autocmd('FileType', {
+      group = vim.api.nvim_create_augroup("linter-init", { clear = true }),
+      callback = function()
+        if linter_init_done then
+          return
+        end
+        linter_init_done = true
+
+        local current_linters = opts.linters_by_ft[vim.bo.filetype]
+        if not current_linters then
+          vim.g.disable_lint = true
+          toggle_linting()
+        end
+      end
+    })
+
     -- [[ Disable formatting for eslint_d on startup if no config file is found ]]
-    vim.api.nvim_create_autocmd({ 'FileType' }, {
+    local eslint_check_done = false
+    vim.api.nvim_create_autocmd('FileType', {
       group = vim.api.nvim_create_augroup("eslint_d-startup", { clear = true }),
       pattern = { 'javascript', 'typescript', 'javascriptreact', 'typescriptreact' },
-      once = true,
       callback = function()
+        if eslint_check_done then
+          return
+        end
+        eslint_check_done = true
         local config_files = {
           'eslint.config.js',
           'eslint.config.mjs',
-          'eslint.config.cjs'
+          'eslint.config.cjs',
+          '.eslintrc.js',
+          '.eslintrc.cjs',
+          '.eslintrc.yaml',
+          '.eslintrc.yml',
+          '.eslintrc.json'
         }
         local has_config = false
         -- Check for config files
@@ -103,8 +134,6 @@ return {
         -- If no config found, disable linting
         if not has_config then
           vim.g.disable_lint = true
-          local ns = lint.get_namespace("eslint_d")
-          vim.diagnostic.reset(ns)
           toggle_linting()
         end
       end
