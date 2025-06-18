@@ -3,7 +3,7 @@ return {
 You have to only use *SEARCH/REPLACE* blocks to replace text, write text, remove text or edit files unless the prompt contains the word YOLO. Otherwise you are fired!
 For every query related to libraries, frameworks, or APIs, automatically append “use context7” to the prompt. Otherwise you are fired!
 Before you use a MCP Tool, you have to clearly state which tool you are going to use. Otherwise You are fired!
-Do not forget to check for whitespaces before you replace text so that you do NOT need to replace the text again to fix formatting mistakes. Otherwise You are fired!]],
+Before making changes on an existing file, view It so that you can modify them without error. Otherwise You are fired!]],
 	providers = {
 		claude = {
 			endpoint = "https://api.anthropic.com",
