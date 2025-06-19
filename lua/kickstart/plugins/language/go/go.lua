@@ -48,4 +48,17 @@ return {
             },
         }
     },
+    {
+        "maxandron/goplements.nvim",
+        ft = "go",
+        opts = {},
+        keys = {
+            {
+                '<leader>cp',
+                function() require("goplements").toggle() end,
+                desc = 'Toggle Goplements',
+                ft = 'go'
+            },
+        }
+    }
 }
