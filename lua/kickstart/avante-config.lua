@@ -1,6 +1,5 @@
 return {
 	system_prompt = [[
-You have to only use *SEARCH/REPLACE* blocks to replace text, write text, remove text or edit files unless the prompt contains the word YOLO. Otherwise you are fired!
 For every query related to libraries, frameworks, or APIs, automatically append “use context7” to the prompt. Otherwise you are fired!
 Before you use a MCP Tool, you have to clearly state which tool you are going to use. Otherwise You are fired!
 Before making changes on an existing file, view It so that you can modify them without error. Otherwise You are fired!]],
@@ -198,25 +197,6 @@ For selected fixes:
 			desc = 'Fix Diagnostics',
 		},
 		{
-			'<leader>apD',
-			function()
-				require('avante.api').ask { question = [[
-YOLO
-Autonomously fix diagnostics using available tools. Be selective - skip minor styling issues, focus on errors and critical warnings.
-
-Process:
-1. Analyze diagnostics, group related issues
-2. Fix important problems (errors, functionality issues, type safety)
-3. Apply best practices, maintain functionality
-4. Verify fixes don't introduce new diagnostics
-5. Repeat until selected diagnostics are resolved
-
-Work autonomously without user input.]] }
-			end,
-			mode = { 'n', 'v' },
-			desc = 'Fix Diagnostics YOLO',
-		},
-		{
 			'<leader>apb',
 			function()
 				require('avante.api').ask { question = [[
@@ -309,31 +289,6 @@ Prioritize fixes based on severity and provide complete, working code solutions.
 			end,
 			mode = { 'n', 'v' },
 			desc = 'Test Feedback',
-		},
-		{
-			'<leader>apF',
-			function()
-				require('avante.api').ask { question = [[
-YOLO
-Automate the following workflow:
-
-1. Run the tests in this file for the project.
-2. If any tests fail:
-   a. Analyze the failure details.
-   b. Update the code as needed to address the issues.
-   c. Optionally, modify the tests if there's a good reason to improve them.
-3. Repeat the process until all tests pass.
-
-Follow these guidelines:
-- Provide detailed explanations for any changes made to the code or tests.
-- Work iteratively, applying one set of modifications at a time.
-- Validate that each set of changes results in passing tests before continuing.
-- Clearly reason about why any test changes are necessary.
-
-Proceed with this iterative process until all the tests pass reliably.]] }
-			end,
-			mode = { 'n', 'v' },
-			desc = 'Test Feedback YOLO',
 		}
 	}
 }
