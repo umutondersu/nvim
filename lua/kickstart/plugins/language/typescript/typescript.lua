@@ -31,9 +31,16 @@ return {
             }
         },
         init = function()
+            vim.api.nvim_create_autocmd('FileType', {
+                pattern = ts_ft,
+                group = vim.api.nvim_create_augroup('disable-ts_ls', { clear = true }),
+                callback = function()
+                    vim.lsp.enable('ts_ls', false)
+                end
+            })
             vim.api.nvim_create_autocmd({ 'BufWritePost' }, {
                 pattern = { '*.ts', '*.tsx', '*.js', '*.jsx' },
-                group = vim.api.nvim_create_augroup('ts-tools', { clear = true }),
+                group = vim.api.nvim_create_augroup('ts-autoformat', { clear = true }),
                 callback = function(event)
                     if vim.g.disable_autoformat or vim.b[event.buf].disable_autoformat or vim.g.disable_tsautoformat then
                         return

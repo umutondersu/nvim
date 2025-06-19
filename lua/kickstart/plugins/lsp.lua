@@ -148,17 +148,16 @@ return { -- LSP Configuration & Plugins
 			},
 		}
 
-		---@param command string?
-		local function skip_lsp(command)
+		---@param config table
+		local function skip_lsp(config)
+			local command = config.command
+			config.command = nil
 			return not (command == nil or vim.fn.executable(command) == 1)
 		end
 
 		-- Configure Servers
-		vim.lsp.enable('ts_ls', false) -- typescript-tools is used instead
 		for server, config in pairs(vim.tbl_extend('keep', servers.mason, servers.others)) do
-			local command = config.command
-			config.command = nil
-			if skip_lsp(command) then
+			if skip_lsp(config) then
 				for cat, _ in pairs(servers) do
 					servers[cat][server] = nil
 				end
