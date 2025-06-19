@@ -15,6 +15,20 @@ return {
             end
         end,
         opts = {},
+        keys = {
+            {
+                '<leader>ct',
+                function() require("gopher").tags.add "json" end,
+                desc = 'LSP: Add JSON Tags to struct',
+                ft = 'go'
+            },
+            {
+                '<leader>cc',
+                function() vim.cmd.GoCmt() end,
+                desc = 'LSP: Generate boilerplate for doc comments',
+                ft = 'go'
+            },
+        },
     },
     {
         'fredrikaverpil/godoc.nvim',
@@ -23,6 +37,15 @@ return {
         dependencies = { 'folke/snacks.nvim' },
         build = 'go install github.com/lotusirous/gostdsym/stdsym@latest',
         cmd = { 'GoDoc' },
-        opts = { picker = { type = 'snacks' } }
-    }
+        opts = { picker = { type = 'snacks' } },
+        keys = {
+            {
+                '<leader>so',
+                function() vim.cmd.GoDoc() end,
+                desc = 'Go Docs',
+                ft = 'go'
+
+            },
+        }
+    },
 }

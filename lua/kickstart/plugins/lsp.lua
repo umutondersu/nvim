@@ -19,8 +19,6 @@ return { -- LSP Configuration & Plugins
 		'folke/snacks.nvim',
 	},
 	config = function()
-		-- Define the augroup for TypeScript tools
-		local ts_tools_augroup = vim.api.nvim_create_augroup('ts-tools', { clear = true })
 		vim.api.nvim_create_autocmd('LspAttach', {
 			group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
 			callback = function(event)
@@ -73,81 +71,7 @@ return { -- LSP Configuration & Plugins
 
 				-- Execute a code action, usually your cursor needs to be on top of an error
 				-- or a suggestion from your LSP for this to activate.
-				map('<leader>ca', require("actions-preview").code_actions, 'Code action', { 'n', 'v' })
-				-- map('<leader>a', vim.lsp.buf.code_action, 'Code [A]ction')
-
-				-- Language specific configurations and keymaps
-				local client = vim.lsp.get_client_by_id(event.data.client_id)
-				if not client then return end
-
-				local lsp_config = {
-					omnisharp = function()
-						map('gd', require('omnisharp_extended').lsp_definition, 'Goto Definition')
-						map('gy', require('omnisharp_extended').lsp_type_definition, 'Goto T[Y]pe Definition')
-						map('gr', require('omnisharp_extended').lsp_references, 'Goto References')
-						map('gI', require('omnisharp_extended').lsp_implementation, 'Goto Implementation')
-					end,
-
-					jdtls = function()
-						map('<leader>tc', require('java').test.run_current_class, 'Run Current Class')
-						map('<leader>tm', require('java').test.run_current_method, 'Run Current Method')
-						map('<leader>tr', require('java').test.view_last_report, 'View Last Report')
-						map('<leader>ct', require('java').runner.built_in.toggle_logs, 'Toggle Logs')
-						map('<leader>re', require('java').refactor.extract_variable, 'Extract Variable')
-						map('<leader>ra', require('java').refactor.extract_variable_all_occurrence,
-							'Extract Variable All Occurrences')
-						map('<leader>rc', require('java').refactor.extract_constant, 'Extract Constant')
-						map('<leader>rm', require('java').refactor.extract_method, 'Extract Method')
-						map('<leader>rl', require('java').refactor.extract_field, 'Extract Field')
-					end,
-
-					['typescript-tools'] = function()
-						map('<leader>cm', '<cmd>TSToolsAddMissingImports<cr>', 'Add Missing Imports')
-						map('<leader>co', '<cmd>TSToolsOrganizeImports<cr>', 'Sort and Remove Unused Imports')
-						map('<leader>cf', '<cmd>TSToolsFixAll<cr>', 'Fix all fixable errors')
-						map('<leader>cr', '<cmd>TSToolsRemoveUnused<cr>', 'Remove all unused statements')
-						map('<leader>rf', '<cmd>TSToolsRenameFile<cr>', 'Rename File', 'n', false)
-						-- Organize and add missing imports on save
-						vim.api.nvim_create_autocmd({ 'BufWritePost' }, {
-							buffer = event.buf,
-							group = ts_tools_augroup,
-							callback = function()
-								if vim.g.disable_autoformat or vim.b[event.buf].disable_autoformat or vim.g.disable_tsautoformat then
-									return
-								end
-
-								vim.cmd('TSToolsAddMissingImports')
-								vim.cmd('TSToolsOrganizeImports')
-
-								-- Wait up to a second for commands to complete. Retry every 10ms
-								local success = vim.wait(1000, function()
-									return vim.bo[event.buf].modified
-								end, 10)
-
-								if success and vim.bo[event.buf].modified then
-									vim.api.nvim_buf_call(event.buf, function()
-										vim.cmd('silent! write')
-									end)
-								end
-							end,
-						})
-						map('<leader>fT', function()
-							vim.g.disable_tsautoformat = not vim.g.disable_tsautoformat
-							print('TS Auto Formatting is ' ..
-								(vim.g.disable_tsautoformat and 'Disabled' or 'Enabled'))
-						end, 'Toggle TS Auto Formatting')
-					end,
-
-					gopls = function()
-						map('<leader>ct', function() require("gopher").tags.add "json" end, 'Add JSON Tags to struct')
-						map('<leader>cc', '<cmd>GoCmt<cr>', 'Generate boilerplate for doc comments')
-						map('<leader>so', '<cmd>GoDoc<cr>', 'Go Docs', 'n', false)
-					end,
-				}
-
-				if lsp_config[client.name] then
-					lsp_config[client.name]()
-				end
+				map('<leader>ca', require("actions-preview").code_actions, 'Code Action', { 'n', 'v' }) -- vim.lsp.buf.code_action
 			end,
 		})
 
