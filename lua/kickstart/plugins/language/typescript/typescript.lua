@@ -31,31 +31,29 @@ return {
             }
         },
         init = function()
-            vim.api.nvim_create_autocmd({ 'BufWritePost' },
-                {
-                    group = vim.api.nvim_create_augroup('ts-tools', { clear = true }),
-                    callback = function(event)
-                        if vim.g.disable_autoformat or vim.b[event.buf].disable_autoformat or vim.g.disable_tsautoformat then
-                            return
-                        end
-
-                        vim.cmd('TSToolsAddMissingImports')
-                        vim.cmd('TSToolsOrganizeImports')
-
-                        -- Wait up to a second for commands to complete. Retry every 10ms
-                        local success = vim.wait(1000, function()
-                            return vim.bo[event.buf].modified
-                        end, 10)
-
-                        if success and vim.bo[event.buf].modified then
-                            vim.api.nvim_buf_call(event.buf, function()
-                                vim.cmd('silent! write')
-                            end)
-                        end
+            vim.api.nvim_create_autocmd({ 'BufWritePost' }, {
+                pattern = { '*.ts', '*.tsx', '*.js', '*.jsx' },
+                group = vim.api.nvim_create_augroup('ts-tools', { clear = true }),
+                callback = function(event)
+                    if vim.g.disable_autoformat or vim.b[event.buf].disable_autoformat or vim.g.disable_tsautoformat then
+                        return
                     end
-                }
 
-            )
+                    vim.cmd('TSToolsAddMissingImports')
+                    vim.cmd('TSToolsOrganizeImports')
+
+                    -- Wait up to a second for commands to complete. Retry every 10ms
+                    local success = vim.wait(1000, function()
+                        return vim.bo[event.buf].modified
+                    end, 10)
+
+                    if success and vim.bo[event.buf].modified then
+                        vim.api.nvim_buf_call(event.buf, function()
+                            vim.cmd('silent! write')
+                        end)
+                    end
+                end
+            })
         end,
         keys = {
             {

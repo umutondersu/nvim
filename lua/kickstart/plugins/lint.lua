@@ -89,13 +89,9 @@ return {
     local linter_init_done = false
     vim.api.nvim_create_autocmd('FileType', {
       group = vim.api.nvim_create_augroup("linter-init", { clear = true }),
-      callback = function()
-        if linter_init_done then
-          return
-        end
-        linter_init_done = true
-
-        local current_linters = opts.linters_by_ft[vim.bo.filetype]
+      once = true,
+      callback = function(e)
+        local current_linters = opts.linters_by_ft[e.match]
         if not current_linters then
           vim.g.disable_lint = true
           toggle_linting()
@@ -103,16 +99,12 @@ return {
       end
     })
 
-    -- [[ Disable formatting for eslint_d on startup if no config file is found ]]
-    local eslint_check_done = false
+    -- [[ Disable linting for eslint_d on startup if no config file is found ]]
     vim.api.nvim_create_autocmd('FileType', {
       group = vim.api.nvim_create_augroup("eslint_d-startup", { clear = true }),
-      pattern = { 'javascript', 'typescript', 'javascriptreact', 'typescriptreact' },
+      pattern = { 'typescript', 'typescriptreact', 'javascript', 'javascriptreact' },
+      once = true,
       callback = function()
-        if eslint_check_done then
-          return
-        end
-        eslint_check_done = true
         local config_files = {
           'eslint.config.js',
           'eslint.config.mjs',
