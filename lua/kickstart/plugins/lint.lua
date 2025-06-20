@@ -18,7 +18,6 @@ return {
     }
   },
   config = function(_, opts)
-    vim.g.disable_lint = false
     local lint = require("lint")
     lint.linters_by_ft = opts.linters_by_ft
 
@@ -86,7 +85,6 @@ return {
     toggle_linting()
 
     -- [[ Disable linting if no linters are available ]]
-    local linter_init_done = false
     vim.api.nvim_create_autocmd('FileType', {
       group = vim.api.nvim_create_augroup("linter-init", { clear = true }),
       once = true,
