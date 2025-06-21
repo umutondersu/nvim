@@ -11,7 +11,7 @@ return {
       typescript = { "eslint_d" },
       javascriptreact = { "eslint_d" },
       typescriptreact = { "eslint_d" },
-      python = { "uv_flake8" },
+      python = { "flake8" },
       go = { "golangcilint" },
       fish = { "fish" },
       sh = { "shellcheck" }
@@ -21,11 +21,10 @@ return {
     local lint = require("lint")
     lint.linters_by_ft = opts.linters_by_ft
 
-    -- Create a custom uv_flake8 linter
+    -- Create a custom flake8 linter for uv
     local flake8 = lint.linters.flake8
-    lint.linters.uv_flake8 = flake8
-    lint.linters.uv_flake8.cmd = 'uv'
-    lint.linters.uv_flake8.args = vim.list_extend({ 'run', 'flake8' }, flake8.args or {})
+    flake8.cmd = 'uv'
+    flake8.args = vim.list_extend({ 'run', 'flake8' }, flake8.args)
 
     local function debounce(ms, fn)
       local timer = vim.uv.new_timer()
