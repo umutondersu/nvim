@@ -145,6 +145,7 @@ return { -- LSP Configuration & Plugins
 			others = {
 				-- dartls = {},
 				fish_lsp = { command = 'fish-lsp' },
+				ruby_lsp = { command = 'ruby-lsp' },
 			},
 		}
 

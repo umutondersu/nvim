@@ -14,7 +14,8 @@ return {
       python = { "flake8" },
       go = { "golangcilint" },
       fish = { "fish" },
-      sh = { "shellcheck" }
+      sh = { "shellcheck" },
+      ruby = { "rubocop" }, --NOTE: Install with gems
     }
   },
   config = function(_, opts)

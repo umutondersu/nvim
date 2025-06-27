@@ -37,7 +37,8 @@ return
       python = { "isort", "black" },
       go = { "gofumpt", "goimports" },
       csharp = { "csharpier" },
-      sh = { "shellharden" }
+      sh = { "shellharden" },
+      ruby = { "rufo", "rubocop" }, --NOTE: Install with gems
     },
     formatters = {
       black = {
