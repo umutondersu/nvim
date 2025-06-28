@@ -36,6 +36,37 @@ map({ 'n', 'v' }, '+', '$', { silent = true }) -- move to end of line
 map('n', '<M-o>', 'o<Esc>', { desc = 'New Line Down' })
 map('n', '<M-O>', 'O<Esc>', { desc = 'New Line Up' })
 
+-- Smart New Line for HTML Tags
+map('n', 'o', function()
+	local line = vim.api.nvim_get_current_line()
+	local cursor = vim.api.nvim_win_get_cursor(0)
+	local col = cursor[2] + 1
+
+	local char_at_cursor = line:sub(col, col)
+	local context_after = line:sub(col, col + 15)
+	local context_before = line:sub(math.max(1, col - 10), col - 1)
+
+	local is_at_tag_end = false
+
+	-- Check for tag patterns
+	if char_at_cursor == ">" and context_after:match("^></[%w%-:%.]+>") then
+		is_at_tag_end = true
+	elseif col > 1 and line:sub(col - 1, col - 1) == ">" and context_after:match("^</[%w%-:%.]+>") then
+		is_at_tag_end = true
+	elseif context_before:match(">[%s]*$") and context_after:match("^[%s]*</[%w%-:%.]+>") then
+		is_at_tag_end = true
+	end
+
+	if is_at_tag_end then
+		if char_at_cursor == ">" then
+			vim.cmd("normal! l")
+		end
+		vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("i<CR><CR><Esc>kA<BS><CR>", true, false, true), "n", false)
+	else
+		vim.api.nvim_feedkeys("o", "n", false)
+	end
+end, { desc = 'Smart New Line' })
+
 -- Swap r and ctrl+r
 map('n', '<C-r>', 'r', { silent = true }) -- replace a single character
 map('n', 'r', '<C-r>', { silent = true }) -- redo
