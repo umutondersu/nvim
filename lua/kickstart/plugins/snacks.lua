@@ -57,8 +57,8 @@ return {
         { "<leader>e",  function() Snacks.explorer.open() end,           desc = "Toggle File Explorer" },
         { "<leader>Ss", function() Snacks.scratch() end,                 desc = "Toggle Scratch Buffer" },
         { "<leader>SS", function() Snacks.scratch.select() end,          desc = "Select Scratch Buffer" },
-        { "<leader>uN", function() Snacks.notifier.show_history() end,   desc = "Notification History" },
-        { "<leader>un", function() Snacks.notifier.hide() end,           desc = "Dismiss All Notifications" },
+        { "<leader>un", function() Snacks.notifier.show_history() end,   desc = "Notification History" },
+        { "<leader>uN", function() Snacks.notifier.hide() end,           desc = "Dismiss All Notifications" },
         { "<A-c>",      function() Snacks.bufdelete() end,               desc = "Delete Buffer" },
         { "<leader>rf", function() Snacks.rename.rename_file() end,      desc = "Rename File" },
         { "<c-/>",      function() Snacks.terminal() end,                desc = "Toggle Terminal" },
@@ -78,6 +78,7 @@ return {
                             keys = {
                                 ["d"] = "bufdelete",
                                 ["<c-d>"] = { "bufdelete", mode = { "n", "i" } },
+                                ["<m-c>"] = { "bufdelete", mode = { "n", "i" } },
                             },
                         },
                         list = { keys = { ["d"] = "bufdelete" } },
