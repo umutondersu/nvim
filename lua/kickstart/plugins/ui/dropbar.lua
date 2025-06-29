@@ -15,7 +15,8 @@ return {
 					})
 				end
 			}
-		}
+		},
+		menu = { preview = false }
 	},
 	keys = {
 		{
