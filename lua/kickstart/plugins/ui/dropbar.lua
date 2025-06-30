@@ -16,7 +16,12 @@ return {
 				end
 			}
 		},
-		menu = { preview = false }
+		menu = {
+			preview = false,
+			keymaps = {
+				['<BS>'] = '<C-w>q'
+			}
+		}
 	},
 	keys = {
 		{
