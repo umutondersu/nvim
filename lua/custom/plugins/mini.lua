@@ -69,9 +69,11 @@ return { -- Collection of various small independent plugins/modules
                 vim.keymap.set('n', '<leader>x', 'V"+d', { desc = 'Cut File', buffer = true })
                 vim.keymap.set('n', '<leader>y', 'Vy', { desc = 'Copy File', buffer = true })
                 vim.keymap.set('n', '<leader>d', 'Vd', { desc = 'Delete File', buffer = true })
+                vim.keymap.set('n', '<M-e>', '<cmd>q<cr>', { desc = 'Close', buffer = true })
+                vim.keymap.set('n', '<Esc>', '<cmd>q<cr>', { desc = 'Close', buffer = true })
             end,
         })
-        vim.keymap.set('n', '<M-e>', MiniFiles.open, { desc = 'File Navigation' })
+        vim.keymap.set('n', '<M-e>', MiniFiles.open, { desc = 'Toggle File Explorer' })
 
         require('mini.pairs').setup()
         require('mini.bracketed').setup()
