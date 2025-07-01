@@ -138,14 +138,15 @@ return { -- LSP Configuration & Plugins
 					}
 				},
 
-				jdtls = { command = 'java' }
+				jdtls = { command = 'java' },
+
+				ruby_lsp = { command = 'gem' },
 			},
 			-- This table contains config for all language servers that are *not* installed via Mason.
 			-- Structure is identical to the mason table from above.
 			others = {
 				-- dartls = {},
 				fish_lsp = { command = 'fish-lsp' },
-				ruby_lsp = { command = 'ruby-lsp' },
 			},
 		}
 

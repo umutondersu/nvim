@@ -40,7 +40,6 @@ My dotfiles have all the necessary requirements to work with this configuration.
 - deno (optional for [peek.nvim](https://github.com/toppair/peek.nvim))
 - tmux (optional)
 - gh (optional for `github autocompletion` and [octo.nvim](https://github.com/pwntester/octo.nvim))
-- uv (optional for python dev tooling)
 
 Neovim's configurations are located under the following paths, depending on your OS:
 

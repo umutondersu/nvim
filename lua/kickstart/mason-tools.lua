@@ -58,4 +58,9 @@ add_tool('go', {
 	'impl'
 })
 
+add_tool('gem', {
+	'rufo',
+	'rubocop'
+})
+
 return ensure_installed
