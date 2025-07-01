@@ -87,7 +87,7 @@ return {
             end,
             desc = "Find Buffers"
         },
-        { "<leader>sD",  function() Snacks.picker.diagnostics() end,   desc = "Workspace Diagnostics" },
+        { "<leader>sD", function() Snacks.picker.diagnostics() end,   desc = "Workspace Diagnostics" },
         {
             "<leader>sd",
             function() Snacks.picker.diagnostics_buffer({ layout = 'ivy_split' }) end,
@@ -116,28 +116,78 @@ return {
             end,
             desc = 'Pictures'
         },
-        { "<leader>sP",  function() Snacks.picker.projects() end,      desc = "Projects" },
+        { "<leader>sP", function() Snacks.picker.projects() end,      desc = "Projects" },
         ---@diagnostic disable-next-line: undefined-field
-        { "<leader>st",  function() Snacks.picker.todo_comments() end, desc = "Todo Comments" },
-        { "<leader>sr",  function() Snacks.picker.resume() end,        desc = "Resume" },
-        { "<leader>s.",  function() Snacks.picker.recent() end,        desc = "Recent Files" },
+        { "<leader>st", function() Snacks.picker.todo_comments() end, desc = "Todo Comments" },
+        { "<leader>sr", function() Snacks.picker.resume() end,        desc = "Resume" },
+        { "<leader>s.", function() Snacks.picker.recent() end,        desc = "Recent Files" },
         -- Grep
-        { "<leader>/",   function() Snacks.picker.lines() end,         desc = "Grep Lines" },
-        { "<leader>sG",  function() Snacks.picker.grep_buffers() end,  desc = "Grep Open Buffers" },
-        { "<leader>sg",  function() Snacks.picker.grep() end,          desc = "Grep" },
-        { "<leader>sw",  function() Snacks.picker.grep_word() end,     desc = "Grep Word" },
-        { "<leader>g",   function() Snacks.picker.grep_word() end,     desc = "Grep Search Visual",   mode = "x" },
+        { "<leader>/",  function() Snacks.picker.lines() end,         desc = "Grep Lines" },
+        { "<leader>sG", function() Snacks.picker.grep_buffers() end,  desc = "Grep Open Buffers" },
+        { "<leader>sg", function() Snacks.picker.grep() end,          desc = "Grep" },
+        { "<leader>sw", function() Snacks.picker.grep_word() end,     desc = "Grep Word" },
+        { "<leader>g",  function() Snacks.picker.grep_word() end,     desc = "Grep Search Visual",   mode = "x" },
         -- Git
-        -- - `<Tab>`: stages or unstages the currently selected file
-        -- - `<cr>`: opens the currently selected file
-        { "<leader>gf",  function() Snacks.picker.git_files() end,     desc = "Git Files" },
-        { "<leader>gs",  function() Snacks.picker.git_status() end,    desc = "Git Status" },
+        { "<leader>gf", function() Snacks.picker.git_files() end,     desc = "Git Files" },
+        {
+            "<leader>gs",
+            -- - `<Tab>`: stages or unstages the currently selected file
+            -- - `<cr>`: opens the currently selected file
+            -- - `<C-d>`: discard the changes on currently selected file
+            function()
+                Snacks.picker.git_status({
+                    layout = 'left',
+                    focus = 'list',
+                    win = {
+                        input = {
+                            keys = {
+                                ["<Tab>"] = { "git_stage", mode = { "n", "i" } },
+                                ["d"] = { "git_discard", mode = { "n", "i" } },
+                                ["<c-d>"] = { "git_discard", mode = { "n", "i" } },
+                            },
+                        },
+                    },
+                    actions = {
+                        git_discard = function(picker, item)
+                            if not item then return end
+
+                            local file = item.file or item.text
+                            if not file then return end
+
+                            local current_idx = picker.list.cursor
+
+                            if item.status and (item.status:match("^%?") or item.status:match("^A")) then
+                                vim.fn.system({ "git", "clean", "-fd", file })
+                                if item.status:match("^A") then
+                                    vim.fn.system({ "git", "reset", "HEAD", file })
+                                end
+                            else
+                                vim.fn.system({ "git", "checkout", "HEAD", "--", file })
+                            end
+
+                            picker:find({
+                                refresh = true,
+                                on_done = function()
+                                    local new_count = picker:count()
+                                    if new_count > 0 then
+                                        local target_idx = math.min(current_idx, new_count)
+                                        picker.list:view(target_idx)
+                                    end
+                                end
+                            })
+                            vim.notify("Discarded changes for: " .. file, 'warn')
+                        end,
+                    },
+                })
+            end,
+            desc = "Git Status"
+        },
         -- LazyGit
-        { "<leader>gh",  function() Snacks.lazygit.log_file() end,     desc = "Git File History" },
-        { "<leader>gg",  function() Snacks.lazygit.open() end,         desc = "Lazygit" },
-        { "<leader>gl",  function() Snacks.lazygit.log() end,          desc = "Git Log" },
+        { "<leader>gh",  function() Snacks.lazygit.log_file() end, desc = "Git File History" },
+        { "<leader>gg",  function() Snacks.lazygit.open() end,     desc = "Lazygit" },
+        { "<leader>gl",  function() Snacks.lazygit.log() end,      desc = "Git Log" },
         -- Neovim
-        { "<leader>snh", function() Snacks.picker.help() end,          desc = "Help" },
+        { "<leader>snh", function() Snacks.picker.help() end,      desc = "Help" },
         {
             "<leader>snk",
             function() Snacks.picker.keymaps({ layout = 'vertical' }) end,
