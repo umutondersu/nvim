@@ -42,8 +42,6 @@ My dotfiles have all the necessary requirements to work with this configuration.
 - gh (optional for `github autocompletion` and [octo.nvim](https://github.com/pwntester/octo.nvim))
 - uv (optional for python dev tooling)
 
-See [Windows Installation](#Windows-Installation) if you have trouble with `telescope-fzf-native`
-
 Neovim's configurations are located under the following paths, depending on your OS:
 
 | OS                   | PATH                                      |
@@ -106,10 +104,6 @@ nvim --headless "+Lazy! sync" +qa
 
 You can also merge updates/changes from the repo back into your fork, to keep up-to-date with any changes for the default configuration.
 
-## Contribution
-
-This configuration is mainly for my personal use but Pull-requests are welcome.
-
 ## FAQ
 
 - What should I do if I already have a pre-existing neovim configuration?
@@ -125,18 +119,6 @@ This configuration is mainly for my personal use but Pull-requests are welcome.
 - What if I want to "uninstall" this configuration:
   - See [lazy.nvim uninstall](https://github.com/folke/lazy.nvim#-uninstalling) information
 
-## Windows Installation
+## Contribution
 
-I do not use windows so It might not work perfectly. I think the only problematic plugin is telescope-fzf-native used by dropbar.nvim plugin. You can either disable it or follow the steps below:
-
-Installation may require installing build tools, and updating the run command for `telescope-fzf-native`
-
-See `telescope-fzf-native` documentation for [more details](https://github.com/nvim-telescope/telescope-fzf-native.nvim#installation)
-
-This requires:
-
-- Install CMake, and the Microsoft C++ Build Tools on Windows
-
-```lua
-{'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
-```
+This configuration is mainly for my personal use but PRs are welcome.
