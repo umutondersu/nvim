@@ -106,7 +106,6 @@ return {
         map('n', '<leader>ga', function()
           gs.blame_line { full = false }
         end, { desc = 'Git Blame' })
-        map('n', '<leader>gd', gs.diffthis, { desc = 'git diff against index' })
         -- Toggles
         map('n', '<leader>gA', gs.toggle_current_line_blame, { desc = 'Toggle Line Blame' })
       end,

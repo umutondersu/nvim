@@ -27,6 +27,7 @@ return {
                 input = {
                     keys = {
                         ["<C-s>"] = { "flash", mode = { "n", "i" } },
+                        ["<C-y>"] = { "yank", mode = { "n", "i" } },
                         ["s"] = { "flash" },
                     },
                 },
@@ -50,15 +51,42 @@ return {
                         end,
                     })
                 end,
+                yank = function(_, item)
+                    if not item then return end
+                    local text = item.text
+                    if item.text then
+                        vim.fn.setreg("+", text)
+                    else
+                        vim.notify("No text to yank", "warn")
+                    end
+                end
             },
+            layouts = {
+                widedefault = {
+                    layout = {
+                        box = "horizontal",
+                        width = 0.9,
+                        min_width = 200,
+                        height = 0.9,
+                        {
+                            box = "vertical",
+                            border = "rounded",
+                            title = "{title} {live} {flags}",
+                            { win = "input", height = 1,     border = "bottom" },
+                            { win = "list",  border = "none" },
+                        },
+                        { win = "preview", title = "{preview}", border = "rounded", width = 0.7 },
+                    },
+                }
+            }
         }
     },
     keys = {
         { "<leader>e",  function() Snacks.explorer.open() end,           desc = "Toggle File Explorer" },
         { "<leader>Ss", function() Snacks.scratch() end,                 desc = "Toggle Scratch Buffer" },
         { "<leader>SS", function() Snacks.scratch.select() end,          desc = "Select Scratch Buffer" },
-        { "<leader>un", function() Snacks.notifier.show_history() end,   desc = "Notification History" },
         { "<leader>uN", function() Snacks.notifier.hide() end,           desc = "Dismiss All Notifications" },
+        { "<M-n>",      function() Snacks.notifier.hide() end,           desc = "Dismiss All Notifications" },
         { "<A-c>",      function() Snacks.bufdelete() end,               desc = "Delete Buffer" },
         { "<leader>rf", function() Snacks.rename.rename_file() end,      desc = "Rename File" },
         { "<c-/>",      function() Snacks.terminal() end,                desc = "Toggle Terminal" },
@@ -68,7 +96,33 @@ return {
         { "<leader>gx", function() Snacks.gitbrowse() end,               desc = "Git Browse" },
         -- [[ Picker ]]
         -- Search
-        { "<leader>sf", function() Snacks.picker.files() end,            desc = "Files" },
+        {
+            "<leader>un",
+            function()
+                Snacks.picker.notifications({
+                    win = {
+                        input = {
+                            keys = {
+                                ["<CR>"] = { 'yank_close', mode = { 'n', 'i' } }
+                            }
+                        }
+                    },
+                    actions = {
+                        yank_close = function(picker, item)
+                            if item.text then
+                                vim.fn.setreg("+", item.text)
+                            else
+                                vim.notify("No text to yank", "warn")
+                            end
+                            picker:close()
+                        end
+                    }
+                })
+            end,
+            desc = "Notifications"
+        },
+        { "<leader>sf", function() Snacks.picker.files() end, desc = "Files" },
+        { "<leader>si", function() Snacks.picker.icons() end, desc = "Icons" },
         {
             "<leader><space>",
             function()
@@ -103,7 +157,7 @@ return {
             desc = "Pickers"
         },
         {
-            "<leader>si",
+            "<leader>sj",
             function()
                 Snacks.picker.files {
                     ft = { "jpg", "jpeg", "png", "webp" },
@@ -111,12 +165,13 @@ return {
                         self:close()
                         require("img-clip").paste_image({}, "./" .. item.file)
                     end,
-                    layout = 'telescope'
+                    layout = 'widedefault',
                 }
             end,
             desc = 'Pictures'
         },
         { "<leader>sP", function() Snacks.picker.projects() end,      desc = "Projects" },
+        { "<leader>su", function() Snacks.picker.undo() end,          desc = "Undo Tree" },
         ---@diagnostic disable-next-line: undefined-field
         { "<leader>st", function() Snacks.picker.todo_comments() end, desc = "Todo Comments" },
         { "<leader>sr", function() Snacks.picker.resume() end,        desc = "Resume" },
@@ -126,9 +181,10 @@ return {
         { "<leader>sG", function() Snacks.picker.grep_buffers() end,  desc = "Grep Open Buffers" },
         { "<leader>sg", function() Snacks.picker.grep() end,          desc = "Grep" },
         { "<leader>sw", function() Snacks.picker.grep_word() end,     desc = "Grep Word" },
-        { "<leader>g",  function() Snacks.picker.grep_word() end,     desc = "Grep Search Visual",   mode = "x" },
+        { "<leader>g",  function() Snacks.picker.grep_word() end,     desc = "Grep Search",          mode = "x" },
         -- Git
         { "<leader>gf", function() Snacks.picker.git_files() end,     desc = "Git Files" },
+        { "<leader>gd", function() Snacks.picker.git_diff() end,      desc = "Git Diff" },
         {
             "<leader>gs",
             -- - `<Tab>`: stages or unstages the currently selected file
@@ -136,7 +192,7 @@ return {
             -- - `<C-d>`: discard the changes on currently selected file
             function()
                 Snacks.picker.git_status({
-                    layout = 'left',
+                    layout = 'widedefault',
                     focus = 'list',
                     win = {
                         input = {
@@ -182,10 +238,6 @@ return {
             end,
             desc = "Git Status"
         },
-        -- LazyGit
-        { "<leader>gh",  function() Snacks.lazygit.log_file() end, desc = "Git File History" },
-        { "<leader>gg",  function() Snacks.lazygit.open() end,     desc = "Lazygit" },
-        { "<leader>gl",  function() Snacks.lazygit.log() end,      desc = "Git Log" },
         -- Neovim
         { "<leader>snh", function() Snacks.picker.help() end,      desc = "Help" },
         {
@@ -213,7 +265,11 @@ return {
                     wo = { spell = false, wrap = false, signcolumn = "yes", statuscolumn = " ", conceallevel = 3, },
                 })
             end,
-        }
+        },
+        -- LazyGit
+        { "<leader>gh",  function() Snacks.lazygit.log_file() end, desc = "Git File History" },
+        { "<leader>gg",  function() Snacks.lazygit.open() end,     desc = "Lazygit" },
+        { "<leader>gl",  function() Snacks.lazygit.log() end,      desc = "Git Log" }
     },
     init = function()
         -- Terminal keymaps
@@ -290,6 +346,6 @@ return {
     end,
     dependencies = {
         { 'folke/todo-comments.nvim', lazy = true, dependencies = { 'nvim-lua/plenary.nvim' }, opts = {} },
-        "folke/flash.nvim"
+        'folke/flash.nvim'
     },
 }
