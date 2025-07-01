@@ -1,10 +1,7 @@
 return {
 	'Bekaboo/dropbar.nvim',
 	event = { "BufReadPost", "BufNewFile" },
-	dependencies = {
-		{ 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
-		'nvim-web-devicons'
-	},
+	dependencies = 'nvim-web-devicons',
 	opts = {
 		sources = {
 			path = {
@@ -23,11 +20,7 @@ return {
 			}
 		}
 	},
-	keys = {
-		{
-			'<m-d>',
-			function() require('dropbar.api').pick() end,
-			desc = 'Pick symbols in winbar'
-		}
-	}
+	init = function()
+		vim.keymap.set('n', '<m-d>', [[<cmd>lua require('dropbar.api').pick()<cr>]], { desc = 'Pick symbols in winbar' })
+	end,
 }
