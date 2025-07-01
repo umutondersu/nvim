@@ -90,7 +90,7 @@ return {
         { "<leader>sD",  function() Snacks.picker.diagnostics() end,   desc = "Workspace Diagnostics" },
         {
             "<leader>sd",
-            function() Snacks.picker.diagnostics_buffer({ layout = 'ivy' }) end,
+            function() Snacks.picker.diagnostics_buffer({ layout = 'ivy_split' }) end,
             desc = "Diagnostics"
         },
         {
