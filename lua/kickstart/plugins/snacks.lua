@@ -100,23 +100,14 @@ return {
             "<leader>un",
             function()
                 Snacks.picker.notifications({
-                    win = {
-                        input = {
-                            keys = {
-                                ["<CR>"] = { 'yank_close', mode = { 'n', 'i' } }
-                            }
-                        }
-                    },
-                    actions = {
-                        yank_close = function(picker, item)
-                            if item.text then
-                                vim.fn.setreg("+", item.text)
-                            else
-                                vim.notify("No text to yank", "warn")
-                            end
-                            picker:close()
+                    confirm = function(self, item, _)
+                        if item.text then
+                            vim.fn.setreg("+", item.text)
+                        else
+                            vim.notify("No text to yank", "warn")
                         end
-                    }
+                        self:close()
+                    end
                 })
             end,
             desc = "Notifications"
