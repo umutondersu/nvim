@@ -52,10 +52,8 @@ return {
                     })
                 end,
                 yank = function(_, item)
-                    if not item then return end
-                    local text = item.text
                     if item.text then
-                        vim.fn.setreg("+", text)
+                        vim.fn.setreg("+", item.text)
                     else
                         vim.notify("No text to yank", "warn")
                     end
