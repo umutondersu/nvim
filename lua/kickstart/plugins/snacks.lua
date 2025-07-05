@@ -182,11 +182,12 @@ return {
             function()
                 Snacks.picker.git_status({
                     layout = 'widedefault',
-                    focus = 'list',
+                    on_show = function()
+                        vim.cmd.stopinsert()
+                    end,
                     win = {
                         input = {
                             keys = {
-                                ["<Tab>"] = { "git_stage", mode = { "n", "i" } },
                                 ["d"] = { "git_discard", mode = { "n", "i" } },
                                 ["<c-d>"] = { "git_discard", mode = { "n", "i" } },
                             },
