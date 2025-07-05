@@ -110,8 +110,8 @@ return {
             end,
             desc = "Notifications"
         },
-        { "<leader>sf", function() Snacks.picker.files() end, desc = "Files" },
-        { "<leader>si", function() Snacks.picker.icons() end, desc = "Icons" },
+        { "<leader>sf", function() Snacks.picker.files() end,                      desc = "Files" },
+        { "<leader>si", function() Snacks.picker.icons({ layout = 'select' }) end, desc = "Icons" },
         {
             "<leader><space>",
             function()
