@@ -103,19 +103,20 @@ map('n', '<leader>q', '<cmd>q<CR>', { desc = 'Quit Window' })
 -- Refactor Keymaps
 map("n", "<leader>rF", function()
 	local filepath = vim.fn.expand('%')
-	vim.ui.input({
-		prompt = string.format("Delete %s? [y/n] ", vim.fn.fnamemodify(filepath, ":t")),
-	}, function(confirm)
-		if confirm and confirm:lower() == 'y' then
-			local success, err = os.remove(filepath)
-			if success then
-				vim.cmd('bdelete!')
-				vim.notify(string.format("Deleted %s", filepath), vim.log.levels.INFO)
-			else
-				vim.notify(string.format("Failed to delete %s: %s", filepath, err), vim.log.levels.ERROR)
-			end
+	local choice = vim.fn.confirm(
+		"Delete " .. vim.fn.fnamemodify(filepath, ":t") .. "?",
+		"&Yes\n&No",
+		2
+	)
+	if choice == 1 then
+		local success, err = os.remove(filepath)
+		if success then
+			vim.cmd('bdelete!')
+			vim.notify(string.format("Deleted %s", filepath), vim.log.levels.INFO)
+		else
+			vim.notify(string.format("Failed to delete %s: %s", filepath, err), vim.log.levels.ERROR)
 		end
-	end)
+	end
 end, { desc = 'Remove File' })
 map("n", "<leader>rw", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gcI<Left><Left><Left><Left>]],
 	{ desc = 'Replace Word' }) -- Replace the word under the cursor
