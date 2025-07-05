@@ -11,26 +11,31 @@ return {
     },
     {
         "toppair/peek.nvim",
-        event = { "VeryLazy" },
         build = "deno task --quiet build:fast",
         enabled = vim.fn.executable 'deno' == 1,
-        opts = function()
-            if vim.fn.getenv("REMOTE_CONTAINERS") == 'true' then
-                return { app = "browser" }
-            end
-            return {}
-        end,
-        init = function()
-            local peek = require('peek')
-            vim.api.nvim_create_user_command("PeekOpen", peek.open, {})
-            vim.api.nvim_create_user_command("PeekClose", peek.close, {})
-            vim.api.nvim_create_user_command("Peek", function()
-                if peek.is_open() then
-                    peek.close()
-                    return
-                end
-                peek.open()
-            end, {})
+        ft = 'markdown',
+        config = function()
+            require('peek').setup()
+            vim.api.nvim_create_autocmd("FileType", {
+                pattern = "markdown",
+                callback = function()
+                    vim.api.nvim_buf_create_user_command(0, "PeekOpen", function()
+                        require('peek').open()
+                    end, {})
+
+                    vim.api.nvim_buf_create_user_command(0, "PeekClose", function()
+                        require('peek').close()
+                    end, {})
+
+                    vim.api.nvim_buf_create_user_command(0, "Peek", function()
+                        if require('peek').is_open() then
+                            require('peek').close()
+                        else
+                            require('peek').open()
+                        end
+                    end, {})
+                end,
+            })
         end,
     }
 }
