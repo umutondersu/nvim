@@ -52,11 +52,7 @@ return {
                     })
                 end,
                 yank = function(_, item)
-                    if item.text then
-                        vim.fn.setreg("+", item.text)
-                    else
-                        vim.notify("No text to yank", "warn")
-                    end
+                    vim.fn.setreg("+", item.text or '')
                 end
             },
             layouts = {
@@ -99,11 +95,7 @@ return {
             function()
                 Snacks.picker.notifications({
                     confirm = function(self, item, _)
-                        if item.text then
-                            vim.fn.setreg("+", item.text)
-                        else
-                            vim.notify("No text to yank", "warn")
-                        end
+                        vim.fn.setreg("+", item.text or '')
                         self:close()
                     end
                 })
@@ -139,9 +131,7 @@ return {
         {
             "<leader>sp",
             function()
-                Snacks.picker.pickers({
-                    layout = 'select',
-                })
+                Snacks.picker.pickers()
             end,
             desc = "Pickers"
         },
@@ -195,14 +185,9 @@ return {
                     },
                     actions = {
                         git_discard = function(picker, item)
-                            if not item then return end
+                            local file = item.file
 
-                            local file = item.file or item.text
-                            if not file then return end
-
-                            local current_idx = picker.list.cursor
-
-                            if item.status and (item.status:match("^%?") or item.status:match("^A")) then
+                            if item.status:match("^%?") or item.status:match("^A") then
                                 vim.fn.system({ "git", "clean", "-fd", file })
                                 if item.status:match("^A") then
                                     vim.fn.system({ "git", "reset", "HEAD", file })
@@ -214,11 +199,7 @@ return {
                             picker:find({
                                 refresh = true,
                                 on_done = function()
-                                    local new_count = picker:count()
-                                    if new_count > 0 then
-                                        local target_idx = math.min(current_idx, new_count)
-                                        picker.list:view(target_idx)
-                                    end
+                                    picker.list:view(item.idx)
                                 end
                             })
                             vim.notify("Discarded changes for: " .. file, 'warn')
