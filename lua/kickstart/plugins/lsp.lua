@@ -59,7 +59,16 @@ return { -- LSP Configuration & Plugins
 				-- Fuzzy find all the symbols.
 				--  Symbols are things like variables, functions, types, etc.
 				local filter = require('kickstart.icons').kind_filter
-				map('<leader>ss', function() Snacks.picker.lsp_symbols({ filter = filter, layout = 'right' }) end,
+				map('<leader>ss',
+					function()
+						Snacks.picker.lsp_symbols({
+							filter = filter,
+							layout = 'right',
+							on_show = function()
+								vim.cmd.stopinsert()
+							end,
+						})
+					end,
 					'Symbols', 'n', false)
 
 				-- Fuzzy find symbols in the workspace
