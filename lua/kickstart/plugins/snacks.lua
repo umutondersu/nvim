@@ -87,7 +87,6 @@ return {
         { "<c-_>",      function() Snacks.terminal() end,                desc = "which_key_ignore" },
         { "]]",         function() Snacks.words.jump(vim.v.count1) end,  desc = "Next Reference",           mode = { "n", "t" } },
         { "[[",         function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference",           mode = { "n", "t" } },
-        { "<leader>gx", function() Snacks.gitbrowse() end,               desc = "Git Browse" },
         -- [[ Picker ]]
         -- Search
         {
@@ -162,6 +161,7 @@ return {
         { "<leader>sw", function() Snacks.picker.grep_word() end,     desc = "Grep Word" },
         { "<leader>g",  function() Snacks.picker.grep_word() end,     desc = "Grep Search",          mode = "x" },
         -- Git
+        { "<leader>gx", function() Snacks.gitbrowse() end,            desc = "Git Browse" },
         { "<leader>gf", function() Snacks.picker.git_files() end,     desc = "Git Files" },
         { "<leader>gd", function() Snacks.picker.git_diff() end,      desc = "Git Diff" },
         {

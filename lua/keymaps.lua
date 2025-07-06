@@ -32,6 +32,9 @@ map({ 'n', 'v' }, 'Ğ', '{', { silent = true })
 map({ 'n', 'v' }, 'Ü', '}', { silent = true })
 map({ 'n', 'v' }, '+', '$', { silent = true }) -- move to end of line
 
+-- <C-t> for <Tab>
+map('i', '<C-t>', '<Tab>', { silent = true })
+
 -- New line without insert mode
 map('n', '<M-o>', 'o<Esc>', { desc = 'New Line Down' })
 map('n', '<M-O>', 'O<Esc>', { desc = 'New Line Up' })
