@@ -1,6 +1,3 @@
-local Kicons = require 'kickstart.icons'
-local Dicons = Kicons.diagnostics
-local Gicons = Kicons.git
 return {
   'b0o/incline.nvim',
   event = 'VeryLazy',
@@ -11,8 +8,9 @@ return {
       margin = { horizontal = 1, vertical = 2 },
     },
     render = function(props)
+      local Kicons = require 'kickstart.icons'
       local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ':t')
-      local seperator = { '| ' }
+      local Lseperator = { '| ' }
       if filename == '' then
         filename = '[No Name]'
       end
@@ -24,6 +22,7 @@ return {
       local ft_color = hl_def.fg and string.format('#%06x', hl_def.fg) or nil
 
       local function get_git_diff()
+        local Gicons = Kicons.git
         local icons = { removed = Gicons.removed, changed = Gicons.modified, added = Gicons.added }
         local signs = vim.b[props.buf].gitsigns_status_dict
         local labels = {}
@@ -39,12 +38,13 @@ return {
           end
         end
         if #labels > 0 then
-          table.insert(labels, seperator)
+          table.insert(labels, Lseperator)
         end
         return labels
       end
 
       local function get_diagnostic_label()
+        local Dicons = Kicons.diagnostics
         local icons = {
           error = Dicons.Error,
           warn = Dicons.Warn,
@@ -61,7 +61,7 @@ return {
           end
         end
         if #label > 0 then
-          table.insert(label, seperator)
+          table.insert(label, Lseperator)
         end
         return label
       end
@@ -69,18 +69,18 @@ return {
       local function breadcrumbs()
         local filepath = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ':~:.')
         local path_parts = {}
-        if filename == '' or filepath == filename then
+        if filename == '[No Name]' or filepath == filename then
           return {}
         end
 
         for part in string.gmatch(filepath, '[^/]+') do
           table.insert(path_parts, part)
         end
-        -- Remove the filename from path parts (we display it separately)
+        -- Remove the filename
         table.remove(path_parts)
 
         if #path_parts > 0 then
-          return { table.concat(path_parts, ' > ') .. ' > ', group = '@comment' }
+          return { ' < ' .. table.concat(path_parts, ' < '), group = '@comment' }
         end
       end
 
@@ -101,11 +101,11 @@ return {
       return {
         { get_diagnostic_label() },
         { get_git_diff() },
-        { breadcrumbs() },
         { ft_icon,               guifg = ft_color, guibg = 'none' },
         { filename,              gui = 'bold',     group = modified and '@comment.warning' or nil },
         modified_icon,
         pinned_icon,
+        { breadcrumbs() }
       }
     end,
   }
