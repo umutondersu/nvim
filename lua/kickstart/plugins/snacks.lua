@@ -107,16 +107,47 @@ return {
             "<leader><space>",
             function()
                 Snacks.picker.buffers({
+                    format = function(item, picker)
+                        local default_format = Snacks.picker.format.buffer(item, picker)
+                        -- Check if buffer is pinned
+                        local bufnr = item.buf
+                        if bufnr > 0 and vim.b[bufnr].pinned == 1 then
+                            table.insert(default_format, { "📌", "DiagnosticHint" })
+                        end
+                        return default_format
+                    end,
                     win = {
                         input = {
                             keys = {
                                 ["d"] = "bufdelete",
                                 ["<c-d>"] = { "bufdelete", mode = { "n", "i" } },
                                 ["<m-c>"] = { "bufdelete", mode = { "n", "i" } },
+                                ["x"] = "pin",
+                                ["<c-x>"] = { "pin", mode = { "n", "i" } },
                             },
                         },
-                        list = { keys = { ["d"] = "bufdelete" } },
                     },
+                    actions = {
+                        pin = function(picker, item)
+                            local bufnr = item.buf
+                            if bufnr <= 0 then
+                                return
+                            end
+                            -- Toggle the pinned state
+                            if vim.b[bufnr].pinned == 1 then
+                                vim.b[bufnr].pinned = nil
+                            else
+                                vim.b[bufnr].pinned = 1
+                            end
+
+                            picker:find({
+                                refresh = true,
+                                on_done = function()
+                                    picker.list:_move(item.idx, true, true)
+                                end
+                            })
+                        end
+                    }
                 })
             end,
             desc = "Find Buffers"
