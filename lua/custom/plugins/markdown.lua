@@ -3,7 +3,7 @@ return {
     {
         'MeanderingProgrammer/render-markdown.nvim',
         ft = ft,
-        dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' },
+        dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' },
         opts = {
             file_types = ft,
             completions = { lsp = { enabled = true } }
