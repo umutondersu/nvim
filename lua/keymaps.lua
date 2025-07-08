@@ -39,12 +39,6 @@ map('i', '<C-t>', '<Tab>', { silent = true })
 map('n', '<M-o>', 'o<Esc>', { desc = 'New Line Down' })
 map('n', '<M-O>', 'O<Esc>', { desc = 'New Line Up' })
 
--- Buffer Navigation
-map('n', '<M-.>', vim.cmd.bnext, { desc = 'Next Buffer' })
-map('n', '<M-,>', vim.cmd.bprev, { desc = 'Prev Buffer' })
-map('n', '<M-l>', vim.cmd.bnext, { desc = 'Next Buffer' })
-map('n', '<M-h>', vim.cmd.bprev, { desc = 'Prev Buffer' })
-
 -- Smart New Line for HTML Tags
 map('n', 'o', function()
 	local line = vim.api.nvim_get_current_line()
