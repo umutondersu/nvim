@@ -93,13 +93,7 @@ map("n", "<M-u>", ":e!<CR>", { desc = 'Undo all unsaved writes' })
 -- Shortcuts for save and exit
 map('n', '<leader>w', function()
 	if vim.api.nvim_buf_get_name(0) == '' then
-		vim.ui.input({
-			prompt = 'Enter file name: ',
-		}, function(name)
-			if name and name ~= '' then
-				vim.cmd('write ' .. vim.fn.fnameescape(name))
-			end
-		end)
+		vim.api.nvim_feedkeys(":w ", "n", false)
 	else
 		vim.cmd.write()
 	end
