@@ -1,6 +1,6 @@
 return {
   'b0o/incline.nvim',
-  event = 'VeryLazy',
+  event = { "BufReadPost", "BufNewFile" },
   dependencies = 'echasnovski/mini.icons',
   opts = {
     window = {
@@ -10,7 +10,7 @@ return {
     render = function(props)
       local Kicons = require 'kickstart.icons'
       local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ':t')
-      local Lseperator = { '| ' }
+      local seperator = { '| ' }
       if filename == '' then
         filename = '[No Name]'
       end
@@ -21,9 +21,13 @@ return {
       local hl_def = vim.api.nvim_get_hl(0, { name = ft_hl or '' })
       local ft_color = hl_def.fg and string.format('#%06x', hl_def.fg) or nil
 
-      local function get_git_diff()
+      local function git_diff()
         local Gicons = Kicons.git
-        local icons = { removed = Gicons.removed, changed = Gicons.modified, added = Gicons.added }
+        local icons = {
+          removed = Gicons.removed,
+          changed = Gicons.modified,
+          added = Gicons.added
+        }
         local signs = vim.b[props.buf].gitsigns_status_dict
         local labels = {}
         if signs == nil then
@@ -38,18 +42,17 @@ return {
           end
         end
         if #labels > 0 then
-          table.insert(labels, Lseperator)
+          table.insert(labels, seperator)
         end
         return labels
       end
 
-      local function get_diagnostic_label()
+      local function diagnostic_labels()
         local Dicons = Kicons.diagnostics
         local icons = {
           error = Dicons.Error,
           warn = Dicons.Warn,
-          info = Dicons
-              .Info,
+          info = Dicons.Info,
           hint = Dicons.Hint
         }
         local label = {}
@@ -61,7 +64,7 @@ return {
           end
         end
         if #label > 0 then
-          table.insert(label, Lseperator)
+          table.insert(label, seperator)
         end
         return label
       end
@@ -79,32 +82,39 @@ return {
         -- Remove the filename
         table.remove(path_parts)
 
+        -- Reverse the table
+        for i = 1, math.floor(#path_parts / 2) do
+          path_parts[i], path_parts[#path_parts - i + 1] = path_parts[#path_parts - i + 1], path_parts[i]
+        end
+
         if #path_parts > 0 then
           return { ' < ' .. table.concat(path_parts, ' < '), group = '@comment' }
         end
       end
 
-      -- pinned indicator
-      local pinned_icon = {}
-      if vim.b[props.buf].pinned == 1 then
-        pinned_icon = { ' 󰤱', group = '@comment.note' }
+      local function pinned_icon()
+        if vim.b[props.buf].pinned == 1 then
+          return { ' 󰤱', group = '@comment.note' }
+        end
+        return {}
       end
 
-      -- modified indicator
       local modified = vim.bo[props.buf].modified
-      local modified_icon = {}
-      if modified then
-        modified_icon = { ' ●', group = '@comment.warning' }
+      local function modified_icon()
+        if modified then
+          return { ' ●', group = '@comment.warning' }
+        end
+        return {}
       end
 
 
       return {
-        { get_diagnostic_label() },
-        { get_git_diff() },
-        { ft_icon,               guifg = ft_color, guibg = 'none' },
-        { filename,              gui = 'bold',     group = modified and '@comment.warning' or nil },
-        modified_icon,
-        pinned_icon,
+        { diagnostic_labels() },
+        { git_diff() },
+        { ft_icon,            guifg = ft_color },
+        { filename,           gui = 'bold',    group = modified and '@comment.warning' or nil },
+        { modified_icon() },
+        { pinned_icon() },
         { breadcrumbs() }
       }
     end,
