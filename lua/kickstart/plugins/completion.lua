@@ -76,11 +76,13 @@ return {
         }
       }
     },
+    signature = { enabled = true, window = { border = 'rounded' } },
     keymap = {
       preset = 'default',
       ['<C-a>'] = { 'select_and_accept' },
       ['<C-x>'] = { 'show', 'hide' },
-      ['<C-k>'] = { 'show_documentation', 'hide_documentation' },
+      -- ['<C-k>'] = { 'show_signature', 'hide_signature', 'fallback' },
+      ['<C-l>'] = { 'show_documentation', 'hide_documentation', 'fallback' },
       ['<C-space>'] = {},
       ['<Up>'] = {},
       ['<Down>'] = {}
