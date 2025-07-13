@@ -102,8 +102,8 @@ return {
             end,
             desc = "Notifications"
         },
-        { "<leader>sf", function() Snacks.picker.files() end,                      desc = "Files" },
-        { "<leader>si", function() Snacks.picker.icons({ layout = 'select' }) end, desc = "Icons" },
+        { "<leader><Tab>", function() Snacks.picker.files() end,                      desc = "Find Files" },
+        { "<leader>si",    function() Snacks.picker.icons({ layout = 'select' }) end, desc = "Icons" },
         {
             "<leader><space>",
             function()
