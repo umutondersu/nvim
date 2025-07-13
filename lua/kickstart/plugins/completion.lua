@@ -107,7 +107,7 @@ return {
       providers = {
         snippets = {
           module = 'blink.cmp.sources.snippets',
-          score_offset = 3,
+          score_offset = 2,
         },
         copilot = {
           name = "copilot",
