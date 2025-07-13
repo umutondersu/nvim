@@ -1,5 +1,6 @@
 return {
   'saghen/blink.cmp',
+  version = '1.*',
   event = { 'InsertEnter', 'CmdlineEnter' },
   dependencies = {
     -- Integrate Nvim-cmp completion sources
@@ -47,7 +48,6 @@ return {
     -- Visual
     { 'xzbdmw/colorful-menu.nvim', opts = {} }
   },
-  version = '*',
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
   opts = {
