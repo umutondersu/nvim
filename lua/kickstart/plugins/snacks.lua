@@ -193,9 +193,9 @@ return {
         { "<leader>sw", function() Snacks.picker.grep_word() end,     desc = "Grep Word" },
         { "<leader>g",  function() Snacks.picker.grep_word() end,     desc = "Grep Search",          mode = "x" },
         -- Git
-        { "<leader>gx", function() Snacks.gitbrowse() end,            desc = "Git Browse" },
-        { "<leader>gf", function() Snacks.picker.git_files() end,     desc = "Git Files" },
-        { "<leader>gd", function() Snacks.picker.git_diff() end,      desc = "Git Diff" },
+        { "<leader>gx", function() Snacks.gitbrowse() end,            desc = "Browse" },
+        { "<leader>gf", function() Snacks.picker.git_files() end,     desc = "Files" },
+        { "<leader>gd", function() Snacks.picker.git_diff() end,      desc = "Diff" },
         {
             "<leader>gs",
             -- - `<Tab>`: stages or unstages the currently selected file
@@ -210,7 +210,7 @@ return {
                     win = {
                         input = {
                             keys = {
-                                ["d"] = { "git_discard", mode = { "n", "i" } },
+                                ["d"] = { "git_discard", },
                                 ["<c-d>"] = { "git_discard", mode = { "n", "i" } },
                             },
                         },
@@ -239,7 +239,7 @@ return {
                     },
                 })
             end,
-            desc = "Git Status"
+            desc = "Status"
         },
         -- Neovim
         { "<leader>snh", function() Snacks.picker.help() end,      desc = "Help" },
@@ -270,9 +270,9 @@ return {
             end,
         },
         -- LazyGit
-        { "<leader>gh",  function() Snacks.lazygit.log_file() end, desc = "Git File History" },
+        { "<leader>gh",  function() Snacks.lazygit.log_file() end, desc = "File History" },
         { "<leader>gg",  function() Snacks.lazygit.open() end,     desc = "Lazygit" },
-        { "<leader>gl",  function() Snacks.lazygit.log() end,      desc = "Git Log" }
+        { "<leader>gl",  function() Snacks.lazygit.log() end,      desc = "Log" }
     },
     init = function()
         -- Terminal keymaps

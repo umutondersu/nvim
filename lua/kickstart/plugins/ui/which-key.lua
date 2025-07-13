@@ -10,7 +10,7 @@ return {
             { "<leader>g",  group = "Git" },
             { "<leader>h",  group = "Git Hunk",        mode = { 'n', 'v' } },
             { "<leader>r",  group = "Refactor",        mode = { 'n', 'v' } },
-            { "<leader>s",  group = "Search",          mode = { 'n', 'v' } },
+            { "<leader>s",  group = "Search" },
             { "<leader>sn", group = "Search Neovim" },
             { "<leader>t",  group = "Test" },
             { "gp",         group = "Preview" },

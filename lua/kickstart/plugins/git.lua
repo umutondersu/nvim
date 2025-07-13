@@ -12,7 +12,7 @@ return {
           else
             vim.cmd('G')
           end
-        end, { desc = 'Toggle Git Fugitive Window' })
+        end, { desc = 'Fugitive' })
       vim.api.nvim_create_user_command('Gc', function(args)
         local vimCmd = 'Git commit'
         if args['args'] then
@@ -105,7 +105,7 @@ return {
 
         map('n', '<leader>ga', function()
           gs.blame_line { full = false }
-        end, { desc = 'Git Blame' })
+        end, { desc = 'Blame' })
         -- Toggles
         map('n', '<leader>gA', gs.toggle_current_line_blame, { desc = 'Toggle Line Blame' })
       end,
