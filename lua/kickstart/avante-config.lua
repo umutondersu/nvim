@@ -13,7 +13,7 @@ Before making changes on an existing file, view It so that you can modify them w
 				max_tokens = 4096
 			}
 		},
-		gemini = { model = 'gemini-2.5-flash' },
+		gemini = { model = 'gemini-2.5-pro' },
 		groq = {
 			__inherited_from = "openai",
 			api_key_name = "GROQ_API_KEY",
