@@ -104,6 +104,7 @@ map('n', '<leader>w', function()
 		vim.cmd.write()
 	end
 end, { desc = 'Save Buffer' })
+map('n', '<C-M-x>', '<cmd>wqa<CR>', { desc = 'Save and Exit' })
 map('n', '<leader>q', '<cmd>q<CR>', { desc = 'Quit Window' })
 
 -- Refactor Keymaps
