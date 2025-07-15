@@ -140,8 +140,8 @@ map('v', '<leader>rv', function()
 
 	-- Sanitize the selection
 	selection = selection:gsub("%s+$", "")
-	selection = vim.fn.escape(selection, '/\\')
-	selection = selection:gsub("\n", "\\n")
+	selection = selection:gsub("\n", "")
+	selection = vim.fn.escape(selection, '/\\.*$^~[]')
 
 	local cmd = string.format(':%s/%s/%s/gcI<Left><Left><Left><Left>', '%s', selection, selection)
 	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(cmd, true, false, true), 'n', true)
