@@ -348,7 +348,6 @@ return {
         end, { nargs = 0 })
     end,
     dependencies = {
-        { 'folke/todo-comments.nvim', lazy = true, dependencies = { 'nvim-lua/plenary.nvim' }, opts = {} },
-        'folke/flash.nvim'
+        { 'folke/todo-comments.nvim', lazy = true, dependencies = 'nvim-lua/plenary.nvim', opts = {} }
     },
 }
