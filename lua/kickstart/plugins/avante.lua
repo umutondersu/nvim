@@ -6,7 +6,6 @@ return {
     version = false, -- set this if you want to always pull the latest change
     opts = {
         provider = vim.fn.getenv('AVANTE_PROVIDER') or 'copilot_claude',
-        selector = { provider = 'snacks' },
         input = {
             provider = 'snacks',
             provider_opts = {
@@ -47,7 +46,7 @@ return {
         'nvim-lua/plenary.nvim',
         'MunifTanjim/nui.nvim',
         'zbirenbaum/copilot.lua',                                        -- Copilot Provider
-        'folke/snacks.nvim',                                             -- Selector and Input Provider
+        'folke/snacks.nvim',                                             -- Input Provider
         {                                                                -- MCP Integration
             "ravitemer/mcphub.nvim",
             dependencies = "nvim-lua/plenary.nvim",                      -- Required for Job and HTTP requests
