@@ -25,20 +25,20 @@ return
     end,
     --NOTE: add the formatters to ensure_installed in mason-tools.lua
     formatters_by_ft = {
-      javascript = { "prettier" },
-      typescript = { "prettier" },
-      javascriptreact = { "prettier" },
-      typescriptreact = { "prettier" },
-      json = { "prettier" },
-      yaml = { "prettier" },
-      markdown = { "prettier" },
-      html = { "prettier" },
-      css = { "prettier" },
-      python = { "isort", "black" },
-      go = { "gofumpt", "goimports" },
-      csharp = { "csharpier" },
-      sh = { "shellharden" },
-      ruby = { "rufo", "rubocop" }
+      javascript = { 'biome-check' },
+      typescript = { 'biome-check' },
+      javascriptreact = { 'biome-check' },
+      typescriptreact = { 'biome-check' },
+      json = { 'biome-check' },
+      css = { 'biome-check' },
+      html = { 'prettier' },
+      yaml = { 'prettier' },
+      markdown = { 'prettier' },
+      python = { 'isort', 'black' },
+      go = { 'gofumpt', 'goimports' },
+      csharp = { 'csharpier' },
+      sh = { 'shellharden' },
+      ruby = { 'rufo', 'rubocop' }
     }
   },
   keys = {

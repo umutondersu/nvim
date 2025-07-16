@@ -14,10 +14,9 @@ add_tool('bash', {
 })
 
 add_tool('npm', {
-	-- Formatters
+	-- Formatters & Linters
 	'prettier',
-	-- Linters
-	'eslint_d',
+	'biome',
 	'shellcheck',
 	-- DAP
 	'js-debug-adapter'

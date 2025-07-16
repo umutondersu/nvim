@@ -1,16 +1,13 @@
 return {
   "mfussenegger/nvim-lint",
-  event = {
-    "BufReadPre",
-    "BufNewFile",
-  },
+  event = { "BufReadPre", "BufNewFile" },
   opts = {
     --NOTE: add the linters to ensure_installed with inside mason-tools.lua
     linters_by_ft = {
-      javascript = { "eslint_d" },
-      typescript = { "eslint_d" },
-      javascriptreact = { "eslint_d" },
-      typescriptreact = { "eslint_d" },
+      javascript = { 'biomejs' },
+      typescript = { 'biomejs' },
+      javascriptreact = { 'biomejs' },
+      typescriptreact = { 'biomejs' },
       python = { "flake8" },
       go = { "golangcilint" },
       fish = { "fish" },
@@ -86,38 +83,6 @@ return {
       callback = function(e)
         local current_linters = opts.linters_by_ft[e.match]
         if not current_linters then
-          vim.g.disable_lint = true
-          toggle_linting()
-        end
-      end
-    })
-
-    -- [[ Disable linting for eslint_d on startup if no config file is found ]]
-    vim.api.nvim_create_autocmd('FileType', {
-      group = vim.api.nvim_create_augroup("eslint_d-startup", { clear = true }),
-      pattern = { 'typescript', 'typescriptreact', 'javascript', 'javascriptreact' },
-      once = true,
-      callback = function()
-        local config_files = {
-          'eslint.config.js',
-          'eslint.config.mjs',
-          'eslint.config.cjs',
-          '.eslintrc.js',
-          '.eslintrc.cjs',
-          '.eslintrc.yaml',
-          '.eslintrc.yml',
-          '.eslintrc.json'
-        }
-        local has_config = false
-        -- Check for config files
-        for _, config_file in ipairs(config_files) do
-          if vim.fn.filereadable(vim.fn.getcwd() .. "/" .. config_file) == 1 then
-            has_config = true
-            break
-          end
-        end
-        -- If no config found, disable linting
-        if not has_config then
           vim.g.disable_lint = true
           toggle_linting()
         end
