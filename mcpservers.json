@@ -1,17 +1,36 @@
 {
   "mcpServers": {
+    "aws_docs": {
+      "args": [
+        "awslabs.aws-documentation-mcp-server@latest"
+      ],
+      "autoApprove": [],
+      "command": "uvx",
+      "disabled": false,
+      "env": {
+        "AWS_DOCUMENTATION_PARTITION": "aws",
+        "FASTMCP_LOG_LEVEL": "ERROR"
+      }
+    },
     "browser-tools": {
-      "command": "npx",
       "args": [
         "-y",
         "@agentdeskai/browser-tools-mcp@1.2.0"
-      ]
+      ],
+      "command": "npx"
+    },
+    "context7": {
+      "args": [
+        "-y",
+        "@upstash/context7-mcp"
+      ],
+      "autoApprove": [
+        "resolve-library-id",
+        "get-library-docs"
+      ],
+      "command": "npx"
     },
     "github": {
-      "command": "docker",
-      "env": {
-        "GITHUB_PERSONAL_ACCESS_TOKEN": null
-      },
       "args": [
         "run",
         "-i",
@@ -19,28 +38,27 @@
         "-e",
         "GITHUB_PERSONAL_ACCESS_TOKEN",
         "mcp/github"
-      ]
-    },
-    "context7": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@upstash/context7-mcp"
-      ]
+      ],
+      "command": "docker",
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": null
+      }
     },
     "puppeteer": {
-      "command": "npx",
       "args": [
         "-y",
         "@modelcontextprotocol/server-puppeteer"
-      ]
+      ],
+      "autoApprove": [],
+      "command": "npx",
+      "disabled": false
     },
     "sequential-thinking": {
-      "command": "npx",
       "args": [
         "-y",
         "@modelcontextprotocol/server-sequential-thinking"
-      ]
+      ],
+      "command": "npx"
     }
   },
   "nativeMCPServers": {
