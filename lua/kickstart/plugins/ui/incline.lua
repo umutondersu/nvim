@@ -1,3 +1,4 @@
+local Kicons = require 'kickstart.icons'
 return {
   'b0o/incline.nvim',
   event = { "BufReadPost", "BufNewFile" },
@@ -8,7 +9,6 @@ return {
       margin = { horizontal = 1, vertical = 2 },
     },
     render = function(props)
-      local Kicons = require 'kickstart.icons'
       local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ':t')
       local seperator = { '| ' }
       if filename == '' then
@@ -115,7 +115,8 @@ return {
         { filename,           gui = 'bold',    group = modified and '@comment.warning' or nil },
         { modified_icon() },
         { pinned_icon() },
-        { breadcrumbs() }
+        { breadcrumbs() },
+        guibg = 'background'
       }
     end,
   }
