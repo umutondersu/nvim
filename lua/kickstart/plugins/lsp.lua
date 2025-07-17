@@ -106,6 +106,8 @@ return { -- LSP Configuration & Plugins
 
 				ts_ls = {},
 
+				biome = {},
+
 				tailwindcss = {},
 
 				dockerls = {},
