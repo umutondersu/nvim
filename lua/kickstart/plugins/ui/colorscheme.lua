@@ -26,7 +26,7 @@ return {
   init = function()
     vim.g.transparent = not (os.getenv("NVIM_TRANSPARENT") == "false")
     vim.cmd.colorscheme 'tokyonight-night'
-    vim.api.nvim_create_autocmd({ 'ColorScheme', 'BufAdd', 'VimEnter' }, {
+    vim.api.nvim_create_autocmd({ 'ColorScheme', 'VimEnter' }, {
       callback = vim.schedule_wrap(function()
         vim.api.nvim_set_hl(0, "WinBar", { bg = "NONE" })
         vim.api.nvim_set_hl(0, "WinBarNC", { bg = "NONE" })
@@ -38,7 +38,7 @@ return {
         vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#232735", bg = "None" })
         vim.api.nvim_set_hl(0, "RenderMarkdownCode", { bg = "#1C1C23" })
       end),
-      group = vim.api.nvim_create_augroup('Transparency', {}),
+      group = vim.api.nvim_create_augroup('CustomHls', {}),
     })
     -- Autocmd for getting rid of statuslines in Avante for Transparent mode
     vim.api.nvim_create_autocmd('BufEnter', {
