@@ -8,6 +8,7 @@ return {
       typescript = { 'biomejs' },
       javascriptreact = { 'biomejs' },
       typescriptreact = { 'biomejs' },
+      json = { 'biomejs' },
       python = { "flake8" },
       go = { "golangcilint" },
       fish = { "fish" },
