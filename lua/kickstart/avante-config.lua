@@ -29,6 +29,12 @@ Before making changes on an existing file, view It so that you can modify them w
 			__inherited_from = 'copilot',
 			model = 'gemini-2.5-pro',
 			context_window = 1000000,
+		},
+		moonshot = {
+			__inherited_from = 'openai',
+			api_key_name = 'MOONSHOT_API_KEY',
+			endpoint = 'https://api.moonshot.ai/v1',
+			model = 'kimi-k2-0711-preview'
 		}
 	},
 	prompts = {
