@@ -34,7 +34,8 @@ Before making changes on an existing file, view It so that you can modify them w
 			__inherited_from = 'openai',
 			api_key_name = 'MOONSHOT_API_KEY',
 			endpoint = 'https://api.moonshot.ai/v1',
-			model = 'kimi-k2-0711-preview'
+			model = 'kimi-k2-0711-preview',
+			context_window = 131072
 		}
 	},
 	prompts = {
