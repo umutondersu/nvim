@@ -14,6 +14,7 @@ add_tool('bash', {
 })
 
 add_tool('npm', {
+	'biome',
 	-- Formatters
 	'prettier',
 	-- Linters
@@ -21,6 +22,7 @@ add_tool('npm', {
 	-- DAP
 	'js-debug-adapter'
 })
+vim.lsp.enable('biome', false)
 
 add_tool('cargo', {
 	-- Formatters
