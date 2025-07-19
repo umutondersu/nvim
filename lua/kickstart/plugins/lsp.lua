@@ -3,7 +3,7 @@ return { -- LSP Configuration & Plugins
 	dependencies = {
 		-- Automatically install LSPs and related tools to stdpath for neovim
 		{ 'mason-org/mason.nvim',           opts = {} },
-		{ 'mason-org/mason-lspconfig.nvim', opts = {} },
+		{ 'mason-org/mason-lspconfig.nvim', opts = { automatic_enable = false } },
 		'WhoIsSethDaniel/mason-tool-installer.nvim',
 
 		-- For LSP actions preview
@@ -173,14 +173,12 @@ return { -- LSP Configuration & Plugins
 				for cat, _ in pairs(servers) do
 					servers[cat][server] = nil
 				end
-			elseif not vim.tbl_isempty(config) then
-				vim.lsp.config(server, config)
+			else
+				if not vim.tbl_isempty(config) then
+					vim.lsp.config(server, config)
+				end
+				vim.lsp.enable(server)
 			end
-		end
-
-		-- Manually run vim.lsp.enable for all language servers that are *not* installed via Mason
-		if not vim.tbl_isempty(servers.others) then
-			vim.lsp.enable(vim.tbl_keys(servers.others))
 		end
 
 		-- add workspace-diagnostics to all LSPs
