@@ -1,5 +1,6 @@
 return {
     "leath-dub/snipe.nvim",
+    dependencies = 'echasnovski/mini.icons',
     keys = {
         { "<M-s>",      function() require("snipe").open_buffer_menu() end, desc = "Open Snipe buffer menu" },
         { "<leader>sb", function() require("snipe").open_buffer_menu() end, desc = "Snipe Buffers" }
@@ -12,11 +13,15 @@ return {
                 title = "",
                 border = "rounded"
             },
-            text_align = 'file-first'
+            text_align = 'file-first',
+
+            buffer_format = { "icon", " ", "filename", function(buf)
+                if vim.b[buf.id].pinned == 1 then return "📌" end
+            end, " ", "directory" }
         },
         hints = {
             -- Charaters to use for hints (NOTE: make sure they don't collide with the navigation keymaps)
-            dictionary = "sauflewcmpghio",
+            dictionary = "sadflewcmpghio",
         },
         navigate = {
             -- When the list is too long it is split into pages
@@ -32,12 +37,12 @@ return {
 
             -- In case you changed your mind, provide a keybind that lets you
             -- cancel the snipe and close the window.
-            cancel_snipe = "q",
+            cancel_snipe = { "<C-c>", "q" },
 
             -- Close the buffer under the cursor
             -- Remove "j" and "k" from your dictionary to navigate easier to delete
             -- NOTE: Make sure you don't use the character below on your dictionary
-            close_buffer = "d",
+            close_buffer = "<C-d>",
 
             -- Open buffer in vertical split
             open_vsplit = "v",
