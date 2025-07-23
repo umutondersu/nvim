@@ -1,9 +1,8 @@
 return {
-    "leath-dub/snipe.nvim",
+    'leath-dub/snipe.nvim',
     dependencies = 'echasnovski/mini.icons',
     keys = {
-        { "<M-s>",      function() require("snipe").open_buffer_menu() end, desc = "Open Snipe buffer menu" },
-        { "<leader>sb", function() require("snipe").open_buffer_menu() end, desc = "Snipe Buffers" }
+        { "<leader><space>", function() require("snipe").open_buffer_menu() end, desc = "Find Buffers" }
     },
     opts = {
         sort = "last",
@@ -37,7 +36,7 @@ return {
 
             -- In case you changed your mind, provide a keybind that lets you
             -- cancel the snipe and close the window.
-            cancel_snipe = { "<C-c>", "q" },
+            cancel_snipe = { "<C-c>", "q", "<leader><space>" },
 
             -- Close the buffer under the cursor
             -- Remove "j" and "k" from your dictionary to navigate easier to delete

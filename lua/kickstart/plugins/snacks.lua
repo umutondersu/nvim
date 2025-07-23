@@ -126,12 +126,9 @@ return {
         { "<leader>si", function() Snacks.picker.icons({ layout = 'select' }) end, desc = "Icons" },
         { "<leader>sf", function() Snacks.picker.files() end,                      desc = "Files" },
         {
-            "<leader><space>",
+            "<leader>sb",
             function()
                 Snacks.picker.buffers({
-                    on_show = function()
-                        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<M-s>", true, false, true), "m", false)
-                    end,
                     format = function(item, picker)
                         local default_format = Snacks.picker.format.buffer(item, picker)
                         -- Check if buffer is pinned
@@ -175,7 +172,7 @@ return {
                     }
                 })
             end,
-            desc = "Find Buffers"
+            desc = "Buffers"
         },
         { "<leader>sD", function() Snacks.picker.diagnostics() end,                desc = "Workspace Diagnostics" },
         {
