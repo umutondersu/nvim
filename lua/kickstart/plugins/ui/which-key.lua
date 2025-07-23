@@ -8,15 +8,14 @@ return {
         spec = {
             { "<leader>f",  group = "Format" },
             { "<leader>g",  group = "Git" },
-            { "<leader>h",  group = "Git Hunk",        mode = { 'n', 'v' } },
-            { "<leader>r",  group = "Refactor",        mode = { 'n', 'v' } },
+            { "<leader>h",  group = "Git Hunk",     mode = { 'n', 'v' } },
+            { "<leader>r",  group = "Refactor",     mode = { 'n', 'v' } },
             { "<leader>s",  group = "Search" },
             { "<leader>sn", group = "Search Neovim" },
             { "<leader>t",  group = "Test" },
             { "gp",         group = "Preview" },
-            { "<leader>ap", group = "avante: prompts", mode = { 'n', 'v' } },
             { "<leader>u",  group = "Ui" },
-            { "<leader>c",  group = "Code",            mode = { 'n', 'v' } },
+            { "<leader>c",  group = "Code",         mode = { 'n', 'v' } },
             { "<leader>d",  group = "Debug" },
             {
                 "<leader>S",

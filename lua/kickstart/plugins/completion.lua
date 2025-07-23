@@ -109,7 +109,7 @@ return {
     },
     snippets = { preset = 'luasnip' },
     sources = {
-      default = { 'copilot', 'lsp', 'path', 'buffer', 'dadbod', 'snippets', 'lazydev', 'avante', 'go_pkgs', 'git', 'conventional_commits', 'spell', 'emoji' },
+      default = { 'copilot', 'lsp', 'path', 'buffer', 'dadbod', 'snippets', 'lazydev', 'avante', 'avante_shortcuts', 'go_pkgs', 'git', 'conventional_commits', 'spell', 'emoji' },
       providers = {
         snippets = {
           module = 'blink.cmp.sources.snippets',
@@ -155,6 +155,12 @@ return {
           module = 'blink-cmp-avante',
           name = 'Avante',
           opts = {}
+        },
+        --TODO: Remove when blink-cmp-avante is updated
+        avante_shortcuts = {
+          name = "avante_shortcuts",
+          module = "blink.compat.source",
+          opts = {},
         },
         spell = {
           name = 'Spell',
