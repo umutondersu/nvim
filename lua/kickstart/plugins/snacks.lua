@@ -28,7 +28,9 @@ return {
                     keys = {
                         ["<C-s>"] = { "flash", mode = { "n", "i" } },
                         ["<C-y>"] = { "yank", mode = { "n", "i" } },
+                        ["<M-s>"] = { "flash_select", mode = { "n", "i" } },
                         ["s"] = { "flash" },
+                        ["S"] = { "flash_select" },
                     },
                 },
             },
@@ -48,6 +50,25 @@ return {
                         action = function(match)
                             local idx = picker.list:row2idx(match.pos[1])
                             picker.list:_move(idx, true, true)
+                        end,
+                    })
+                end,
+                flash_select = function(picker)
+                    require("flash").jump({
+                        pattern = "^",
+                        label = { after = { 0, 0 } },
+                        search = {
+                            mode = "search",
+                            exclude = {
+                                function(win)
+                                    return vim.bo[vim.api.nvim_win_get_buf(win)].filetype ~= "snacks_picker_list"
+                                end,
+                            },
+                        },
+                        action = function(match)
+                            local idx = picker.list:row2idx(match.pos[1])
+                            picker.list:_move(idx, true, true)
+                            picker:action('confirm')
                         end,
                     })
                 end,
@@ -108,6 +129,9 @@ return {
             "<leader><space>",
             function()
                 Snacks.picker.buffers({
+                    on_show = function()
+                        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<M-s>", true, false, true), "m", false)
+                    end,
                     format = function(item, picker)
                         local default_format = Snacks.picker.format.buffer(item, picker)
                         -- Check if buffer is pinned
