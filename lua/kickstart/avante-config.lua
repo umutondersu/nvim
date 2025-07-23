@@ -3,15 +3,6 @@ return {
 For every query related to libraries, frameworks, or APIs, automatically append “use context7” to the prompt. Otherwise you are fired!
 Before making changes on an existing file, view It so that you can modify them without error. Otherwise You are fired!]],
 	providers = {
-		claude = {
-			endpoint = "https://api.anthropic.com",
-			model = "claude-3-5-sonnet-20241022",
-			timeout = 30000,
-			extra_request_body = {
-				temperature = 0,
-				max_tokens = 4096
-			}
-		},
 		gemini = { model = 'gemini-2.5-pro' },
 		groq = {
 			__inherited_from = "openai",
