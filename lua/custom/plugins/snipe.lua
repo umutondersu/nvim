@@ -20,7 +20,7 @@ return {
         },
         hints = {
             -- Charaters to use for hints (NOTE: make sure they don't collide with the navigation keymaps)
-            dictionary = "sadflewcmpghio",
+            dictionary = "sadflewcmpgjion",
         },
         navigate = {
             -- When the list is too long it is split into pages
@@ -36,7 +36,7 @@ return {
 
             -- In case you changed your mind, provide a keybind that lets you
             -- cancel the snipe and close the window.
-            cancel_snipe = { "<C-c>", "q", "<leader><space>" },
+            cancel_snipe = { "<C-c>", "q", "<leader>", "<esc>" },
 
             -- Close the buffer under the cursor
             -- Remove "j" and "k" from your dictionary to navigate easier to delete
@@ -47,7 +47,7 @@ return {
             open_vsplit = "v",
 
             -- Open buffer in split, based on `vim.opt.splitbelow`
-            open_split = "H",
+            open_split = "h",
 
             -- Change tag manually
             change_tag = "C",
