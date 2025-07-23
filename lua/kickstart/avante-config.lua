@@ -1,7 +1,6 @@
 return {
 	system_prompt = [[
 For every query related to libraries, frameworks, or APIs, automatically append “use context7” to the prompt. Otherwise you are fired!
-Before you use a MCP Tool, you have to clearly state which tool you are going to use. Otherwise You are fired!
 Before making changes on an existing file, view It so that you can modify them without error. Otherwise You are fired!]],
 	providers = {
 		claude = {
