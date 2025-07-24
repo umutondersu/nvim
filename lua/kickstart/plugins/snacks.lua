@@ -29,11 +29,11 @@ return {
             win = {
                 input = {
                     keys = {
-                        ["<C-s>"] = { "flash", mode = { "n", "i" } },
+                        ["<M-s>"] = { "flash", mode = { "n", "i" } },
                         ["<C-y>"] = { "yank", mode = { "n", "i" } },
-                        ["<M-s>"] = { "flash_select", mode = { "n", "i" } },
-                        ["s"] = { "flash" },
-                        ["S"] = { "flash_select" },
+                        ["<C-s>"] = { "flash_select", mode = { "n", "i" } },
+                        ["S"] = { "flash" },
+                        ["s"] = { "flash_select" },
                     },
                 },
             },
@@ -153,6 +153,11 @@ return {
             "<leader>sb",
             function()
                 Snacks.picker.buffers({
+                    -- on_show = function()
+                    --     vim.schedule(function()
+                    --         vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-s>', true, false, true), 'm', false)
+                    --     end)
+                    -- end,
                     format = function(item, picker)
                         local default_format = Snacks.picker.format.buffer(item, picker)
                         -- Check if buffer is pinned
