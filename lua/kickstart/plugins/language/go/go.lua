@@ -22,6 +22,18 @@ return {
                 desc = 'Generate boilerplate for doc comments',
                 ft = 'go'
             },
+            {
+                "<leader>ta",
+                function() require("gopher").test.add() end,
+                desc = "Add test for the function under cursor",
+                ft = 'go',
+            },
+            {
+                "<leader>tA",
+                function() require("gopher").test.exported() end,
+                desc = "Add tests for exported functions",
+                ft = 'go',
+            },
         },
     },
     {
