@@ -23,9 +23,6 @@ return {
         dashboard = { enabled = true },
         picker = {
             matcher = { frecency = true },
-            on_show = function()
-                vim.cmd.stopinsert()
-            end,
             win = {
                 input = {
                     keys = {
@@ -118,6 +115,9 @@ return {
             "<leader>un",
             function()
                 Snacks.picker.notifications({
+                    on_show = function()
+                        vim.cmd.stopinsert()
+                    end,
                     confirm = function(self, item, _)
                         vim.fn.setreg("+", item.text or '')
                         self:close()
@@ -127,37 +127,15 @@ return {
             desc = "Notifications"
         },
         {
-            "<leader>si",
-            function()
-                Snacks.picker.icons({
-                    layout = 'select',
-                    on_show = function()
-                        vim.cmd.startinsert()
-                    end
-                })
-            end,
-            desc = "Icons"
-        },
-        {
-            "<leader>sf",
-            function()
-                Snacks.picker.files({
-                    on_show = function()
-                        vim.cmd.startinsert()
-                    end,
-                })
-            end,
-            desc = "Files"
-        },
-        {
             "<leader>sb",
             function()
                 Snacks.picker.buffers({
-                    -- on_show = function()
-                    --     vim.schedule(function()
-                    --         vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-s>', true, false, true), 'm', false)
-                    --     end)
-                    -- end,
+                    on_show = function()
+                        vim.cmd.stopinsert()
+                        --     vim.schedule(function()
+                        --         vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-s>', true, false, true), 'm', false)
+                        --     end)
+                    end,
                     format = function(item, picker)
                         local default_format = Snacks.picker.format.buffer(item, picker)
                         -- Check if buffer is pinned
@@ -202,30 +180,22 @@ return {
             end,
             desc = "Buffers"
         },
-        { "<leader>sD", function() Snacks.picker.diagnostics() end, desc = "Workspace Diagnostics" },
         {
             "<leader>sd",
-            function() Snacks.picker.diagnostics_buffer({ layout = 'ivy_split' }) end,
-            desc = "Diagnostics"
-        },
-        {
-            "<leader>sp",
             function()
-                Snacks.picker.pickers({
+                Snacks.picker.diagnostics_buffer({
+                    layout = 'ivy_split',
                     on_show = function()
-                        vim.cmd.startinsert()
+                        vim.cmd.stopinsert()
                     end,
                 })
             end,
-            desc = "Pickers"
+            desc = "Diagnostics"
         },
         {
             "<leader>sP",
             function()
                 Snacks.picker.files {
-                    on_show = function()
-                        vim.cmd.startinsert()
-                    end,
                     ft = { "jpg", "jpeg", "png", "webp" },
                     confirm = function(self, item, _)
                         self:close()
@@ -236,71 +206,55 @@ return {
             end,
             desc = 'Pictures'
         },
-        { "<leader>su", function() Snacks.picker.undo() end,        desc = "Undo Tree" },
+        {
+            "<leader>su",
+            function()
+                Snacks.picker.undo({
+                    on_show = function()
+                        vim.cmd.stopinsert()
+                    end,
+                })
+            end,
+            desc = "Undo Tree"
+        },
         {
             "<leader>st",
             function()
                 ---@diagnostic disable-next-line: undefined-field
                 Snacks.picker.todo_comments({
-                    on_show = function()
-                        vim.cmd.startinsert()
-                    end,
+                    on_show = function() vim.cmd.stopinsert() end,
                 })
             end,
             desc = "Todo Comments"
         },
-        { "<leader>sr", function() Snacks.picker.resume() end, desc = "Resume" },
         {
-            "<leader>s.",
-            function()
-                Snacks.picker.recent({
-                    on_show = function()
-                        vim.cmd.startinsert()
-                    end,
-                })
-            end,
-            desc = "Recent Files"
+            "<leader>si",
+            function() Snacks.picker.icons({ layout = 'select' }) end,
+            desc = "Icons"
         },
+        { "<leader>sf", function() Snacks.picker.files() end,        desc = "Files" },
+        { "<leader>sD", function() Snacks.picker.diagnostics() end,  desc = "Workspace Diagnostics" },
+        { "<leader>sp", function() Snacks.picker.pickers() end,      desc = "Pickers" },
+        { "<leader>sr", function() Snacks.picker.resume() end,       desc = "Resume" },
+        { "<leader>s.", function() Snacks.picker.recent() end,       desc = "Recent Files" },
         -- Grep
-        { "<leader>/",  function() Snacks.picker.lines() end,  desc = "Grep Lines" },
-        {
-            "<leader>sG",
-            function()
-                Snacks.picker.grep_buffers({
-                    on_show = function()
-                        vim.cmd.startinsert()
-                    end
-                })
-            end,
-            desc = "Grep Open Buffers"
-        },
-        {
-            "<leader>sg",
-            function()
-                Snacks.picker.grep({
-                    on_show = function()
-                        vim.cmd.startinsert()
-                    end
-                })
-            end,
-            desc = "Grep"
-        },
-        { "<leader>sw", function() Snacks.picker.grep_word() end, desc = "Grep Word" },
-        { "<leader>g",  function() Snacks.picker.grep_word() end, desc = "Grep Search", mode = "x" },
+        { "<leader>/",  function() Snacks.picker.lines() end,        desc = "Grep Lines" },
+        { "<leader>sG", function() Snacks.picker.grep_buffers() end, desc = "Grep Open Buffers" },
+        { "<leader>sg", function() Snacks.picker.grep() end,         desc = "Grep" },
+        { "<leader>sw", function() Snacks.picker.grep_word() end,    desc = "Grep Word" },
+        { "<leader>g",  function() Snacks.picker.grep_word() end,    desc = "Grep Search",          mode = "x" },
         -- Git
-        { "<leader>gx", function() Snacks.gitbrowse() end,        desc = "Browse" },
+        { "<leader>gx", function() Snacks.gitbrowse() end,           desc = "Browse" },
+        { "<leader>gf", function() Snacks.picker.git_files() end,    desc = "Files" },
         {
-            "<leader>gf",
+            "<leader>gd",
             function()
-                Snacks.picker.git_files({
-                    on_show = function()
-                        vim.cmd.startinsert()
-                    end,
+                Snacks.picker.git_diff({
+                    on_show = function() vim.cmd.stopinsert() end,
                 })
             end,
-            desc = "Files"
+            desc = "Diff"
         },
-        { "<leader>gd", function() Snacks.picker.git_diff() end,  desc = "Diff" },
         {
             "<leader>gs",
             -- - `<Tab>`: stages or unstages the currently selected file
@@ -347,25 +301,12 @@ return {
             desc = "Status"
         },
         -- Neovim
-        {
-            "<leader>snh",
-            function()
-                Snacks.picker.help({
-                    on_show = function()
-                        vim.cmd.startinsert()
-                    end,
-                })
-            end,
-            desc = "Help"
-        },
+        { "<leader>snh", function() Snacks.picker.help() end,      desc = "Help" },
         {
             "<leader>snk",
             function()
                 Snacks.picker.keymaps({
                     layout = 'vertical',
-                    on_show = function()
-                        vim.cmd.startinsert()
-                    end
                 })
             end,
             desc = "Keymaps"
@@ -375,9 +316,6 @@ return {
             function()
                 Snacks.picker.files({
                     cwd = vim.fn.stdpath("config"), --[[@as string]]
-                    on_show = function()
-                        vim.cmd.startinsert()
-                    end
                 })
             end,
             desc = "Files"
@@ -395,9 +333,9 @@ return {
             end,
         },
         -- LazyGit
-        { "<leader>gh", function() Snacks.lazygit.log_file() end, desc = "File History" },
-        { "<leader>gg", function() Snacks.lazygit.open() end,     desc = "Lazygit" },
-        { "<leader>gl", function() Snacks.lazygit.log() end,      desc = "Log" }
+        { "<leader>gh",  function() Snacks.lazygit.log_file() end, desc = "File History" },
+        { "<leader>gg",  function() Snacks.lazygit.open() end,     desc = "Lazygit" },
+        { "<leader>gl",  function() Snacks.lazygit.log() end,      desc = "Log" }
     },
     init = function()
         -- Terminal keymaps
