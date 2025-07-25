@@ -248,9 +248,68 @@ return {
         { "<leader>gf", function() Snacks.picker.git_files() end,    desc = "Files" },
         {
             "<leader>gd",
+            -- - `<Tab>`: stages the selected hunk
+            -- - `<cr>`: opens the selected hunk
+            -- - `<C-d>`: discards the selected hunk
             function()
                 Snacks.picker.git_diff({
-                    on_show = function() vim.cmd.stopinsert() end,
+                    layout = 'widedefault',
+                    on_show = function()
+                        vim.cmd.stopinsert()
+                    end,
+                    win = {
+                        input = {
+                            keys = {
+                                ["<C-d>"] = { "git_discard_hunk", mode = { "n", "i" } },
+                                ["d"] = { "git_discard_hunk" },
+                                ["<Tab>"] = { "git_stage_hunk", mode = { "n", "i" } },
+                            },
+                        },
+                    },
+                    actions = {
+                        git_discard_hunk = function(picker, item)
+                            local file = item.file
+                            local patch = item.diff
+                            local tmpfile = vim.fn.tempname()
+                            vim.fn.writefile(vim.split(patch, "\n"), tmpfile)
+
+                            vim.fn.system(string.format("git apply -R %s", tmpfile))
+                            os.remove(tmpfile)
+                            if vim.v.shell_error ~= 0 then
+                                vim.notify("Failed to discard hunk", vim.log.levels.ERROR)
+                                return
+                            end
+
+                            picker:find({
+                                refresh = true,
+                                on_done = function()
+                                    picker.list:view(item.idx)
+                                end,
+                            })
+                            vim.notify("Discarded hunk in: " .. vim.fn.fnamemodify(file, ":t"), vim.log.levels.WARN)
+                        end,
+                        git_stage_hunk = function(picker, item)
+                            local file = item.file
+                            local patch = item.diff
+
+                            local tmpfile = vim.fn.tempname()
+                            vim.fn.writefile(vim.split(patch, "\n"), tmpfile)
+                            vim.fn.system(string.format("git apply --cached %s", tmpfile))
+                            os.remove(tmpfile)
+                            if vim.v.shell_error ~= 0 then
+                                vim.notify("Failed to stage hunk", vim.log.levels.ERROR)
+                                return
+                            end
+
+                            picker:find({
+                                refresh = true,
+                                on_done = function()
+                                    picker.list:view(item.idx)
+                                end,
+                            })
+                            vim.notify("Staged hunk in: " .. vim.fn.fnamemodify(file, ":t"), vim.log.levels.INFO)
+                        end
+                    },
                 })
             end,
             desc = "Diff"
@@ -293,7 +352,7 @@ return {
                                     picker.list:view(item.idx)
                                 end
                             })
-                            vim.notify("Discarded changes for: " .. file, 'warn')
+                            vim.notify("Discarded changes for: " .. vim.fn.fnamemodify(file, ":t"), 'warn')
                         end,
                     },
                 })
