@@ -7,5 +7,5 @@ return {
     { 'JoosepAlviste/nvim-ts-context-commentstring', event = 'InsertEnter' },
     { 'danitrap/cheatsh.nvim',                       cmd = 'CheatSh' },
     { 'max397574/colortils.nvim',                    cmd = 'Colortils',     opts = {} },
-    { 'mluders/comfy-line-numbers.nvim',             opts = {} }
+    { 'mluders/comfy-line-numbers.nvim',             opts = {},             event = 'VimEnter' }
 }
