@@ -5,7 +5,6 @@ return {
         { "<leader><space>", function() require("snipe").open_buffer_menu() end, desc = "Find Buffers" }
     },
     opts = {
-        sort = "last",
         ui = {
             position = "center",
             open_win_override = {
@@ -13,7 +12,6 @@ return {
                 border = "rounded"
             },
             text_align = 'file-first',
-
             buffer_format = { "icon", " ", "filename", function(buf)
                 if vim.b[buf.id].pinned == 1 then return "📌" end
             end, " ", "directory" }
@@ -48,9 +46,6 @@ return {
 
             -- Open buffer in split, based on `vim.opt.splitbelow`
             open_split = "h",
-
-            -- Change tag manually
-            change_tag = "C",
         },
     }
 }
