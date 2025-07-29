@@ -11,11 +11,6 @@ return {
             '<C-x>',
             '<cmd>BufferVacuumPinBuffer<CR>',
             desc = 'Pin/Unpin Buffer',
-        },
-        {
-            '<M-x>',
-            '<cmd>BufferVacuumPinBuffer<CR>',
-            desc = 'Pin/Unpin Buffer',
         }
     }
 }

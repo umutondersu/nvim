@@ -21,6 +21,10 @@ map('n', 'gq', vim.diagnostic.open_float, { desc = 'Open floating diagnostic mes
 map('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 map('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
+-- Buffer Navigation
+map('n', '<tab>', vim.cmd.bnext, { desc = 'Next Buffer' })
+map('n', '<S-Tab>', vim.cmd.bprev, { desc = 'Prev Buffer' })
+
 -- Buffer Management
 map("n", "<C-a>", '<cmd>enew<cr>', { desc = 'Open a New Buffer' })
 map("n", "<bs>", '<cmd>b#<cr>', { desc = 'Reopen Previous Buffer' })
@@ -42,12 +46,6 @@ map('i', '<C-t>', '<Tab>', { silent = true })
 -- New line without insert mode
 map('n', '<M-o>', 'o<Esc>', { desc = 'New Line Down' })
 map('n', '<M-O>', 'O<Esc>', { desc = 'New Line Up' })
-
--- Buffer Navigation
-map('n', '<M-.>', vim.cmd.bnext, { desc = 'Next Buffer' })
-map('n', '<M-,>', vim.cmd.bprev, { desc = 'Prev Buffer' })
-map('n', '<M-l>', vim.cmd.bnext, { desc = 'Next Buffer' })
-map('n', '<M-h>', vim.cmd.bprev, { desc = 'Prev Buffer' })
 
 -- Smart New Line for HTML Tags
 map('n', 'o', function()
@@ -105,7 +103,6 @@ map('n', '<leader>w', function()
 	end
 end, { desc = 'Save Buffer' })
 map('n', '<leader>x', '<cmd>wqa<CR>', { desc = 'Save and Exit' })
-map('n', '<leader>q', '<cmd>q<CR>', { desc = 'Quit Window' })
 
 -- Refactor Keymaps
 map("n", "<leader>rF", function()
