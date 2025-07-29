@@ -130,12 +130,12 @@ return {
             "<leader>sb",
             function()
                 Snacks.picker.buffers({
-                    on_show = function()
-                        vim.cmd.stopinsert()
-                        --     vim.schedule(function()
-                        --         vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-s>', true, false, true), 'm', false)
-                        --     end)
-                    end,
+                    -- on_show = function()
+                    -- vim.cmd.stopinsert()
+                    --     vim.schedule(function()
+                    --         vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-s>', true, false, true), 'm', false)
+                    --     end)
+                    -- end,
                     format = function(item, picker)
                         local default_format = Snacks.picker.format.buffer(item, picker)
                         -- Check if buffer is pinned
