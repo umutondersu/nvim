@@ -2,7 +2,22 @@ return {
     'leath-dub/snipe.nvim',
     dependencies = 'echasnovski/mini.icons',
     keys = {
-        { "<leader><space>", function() require("snipe").open_buffer_menu() end, desc = "Find Buffers" }
+        { "<leader><space>", function() require("snipe").open_buffer_menu() end, desc = "Find Buffers" },
+        {
+            '<C-x>',
+            function()
+                local menu = require('snipe').global_menu
+                local bufnr = menu.items[menu:hovered()].id
+                if vim.b[bufnr].pinned == 1 then
+                    vim.b[bufnr].pinned = nil
+                else
+                    vim.b[bufnr].pinned = 1
+                end
+                menu:reopen()
+            end,
+            desc = 'Pin/Unpin Buffer',
+            ft = 'snipe-menu'
+        }
     },
     opts = {
         ui = {
