@@ -80,7 +80,7 @@ return { -- Collection of various small independent plugins/modules
             },
         },
         keys = {
-            { '<M-e>', function() require('mini.files').open() end, desc = 'Toggle File Explorer' },
+            { '<C-e>', function() require('mini.files').open() end, desc = 'Toggle File Explorer' },
         },
         init = function()
             vim.api.nvim_create_autocmd('FileType', {
@@ -90,7 +90,9 @@ return { -- Collection of various small independent plugins/modules
                     vim.keymap.set('n', '<leader>x', 'V"+d', { desc = 'Cut File', buffer = true })
                     vim.keymap.set('n', '<leader>y', 'Vy', { desc = 'Copy File', buffer = true })
                     vim.keymap.set('n', '<leader>d', 'Vd', { desc = 'Delete File', buffer = true })
-                    vim.keymap.set('n', '<M-e>', '<cmd>q<cr>', { desc = 'Close', buffer = true })
+                    vim.keymap.set('n', '<leader>q', '<cmd>q<cr>', { desc = 'Close', buffer = true })
+                    vim.keymap.set('n', '<C-c>', '<cmd>q<cr>', { desc = 'Close', buffer = true })
+                    vim.keymap.set('n', '<C-e>', '<cmd>q<cr>', { desc = 'Close', buffer = true })
                     vim.keymap.set('n', '<Esc>', '<cmd>q<cr>', { desc = 'Close', buffer = true })
                 end,
             })

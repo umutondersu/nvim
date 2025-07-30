@@ -210,6 +210,7 @@ return {
             "<leader>su",
             function()
                 Snacks.picker.undo({
+                    layout = 'widedefault',
                     on_show = function()
                         vim.cmd.stopinsert()
                     end,
