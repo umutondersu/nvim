@@ -4,7 +4,7 @@ return {
     ---@module "auto-session"
     ---@type AutoSession.Config
     opts = {
-        suppress_dirs = { '~/', '~/repos', '~/Downloads', '/' },
+        suppress_dirs = { '~/', '~/projects', '~/Downloads', '/' },
         save_extra_cmds = {
             function()
                 local commands = {}
