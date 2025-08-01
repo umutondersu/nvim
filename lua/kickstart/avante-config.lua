@@ -10,10 +10,8 @@ Before making changes on an existing file, view It so that you can modify them w
 			endpoint = "https://api.groq.com/openai/v1/",
 			model = "deepseek-r1-distill-llama-70b"
 		},
-		copilot_claude = {
-			__inherited_from = 'copilot',
-			model = 'claude-sonnet-4',
-			context_window = 200000,
+		copilot = {
+			model = 'claude-sonnet-4'
 		},
 		copilot_gemini = {
 			__inherited_from = 'copilot',
