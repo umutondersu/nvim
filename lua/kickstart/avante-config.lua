@@ -168,10 +168,10 @@ For each issue found:
 Follow the language's standard docstring format and style conventions.]]
 		},
 		{
-			name = 'diagnosticsfix',
+			name = 'diagfix',
 			description = 'Fix Diagnostics',
 			details = 'Analyzes diagnostics, selectively fixing important issues',
-			prompts = [[
+			prompt = [[
 Analyze diagnostics and selectively fix important issues.
 
 Skip: stylistic warnings, minor linting, intentional patterns (unused vars in prototypes)
