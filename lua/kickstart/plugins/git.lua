@@ -74,6 +74,7 @@ return {
           if vim.wo.diff then
             vim.cmd.normal { ']h', bang = true }
           else
+            ---@diagnostic disable-next-line: param-type-mismatch
             gs.nav_hunk('next')
           end
         end, { desc = 'Jump to next hunk' })
@@ -82,6 +83,7 @@ return {
           if vim.wo.diff then
             vim.cmd.normal { '[h', bang = true }
           else
+            ---@diagnostic disable-next-line: param-type-mismatch
             gs.nav_hunk('prev')
           end
         end, { desc = 'Jump to previous hunk' })
