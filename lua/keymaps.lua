@@ -21,6 +21,9 @@ map('n', 'gq', vim.diagnostic.open_float, { desc = 'Open floating diagnostic mes
 map('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 map('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
+-- Window Management
+map("n", '<C-c>', "<cmd>q<cr>", { desc = 'Quit Window' })
+
 -- Buffer Navigation
 map('n', '<tab>', vim.cmd.bnext, { desc = 'Next Buffer' })
 map('n', '<S-Tab>', vim.cmd.bprev, { desc = 'Prev Buffer' })

@@ -103,7 +103,6 @@ return {
         { "<leader>uN", function() Snacks.notifier.hide() end,           desc = "Dismiss All Notifications" },
         { "<M-n>",      function() Snacks.notifier.hide() end,           desc = "Dismiss All Notifications" },
         { "<leader>q",  function() Snacks.bufdelete() end,               desc = "Delete Buffer" },
-        { "<C-c>",      function() Snacks.bufdelete() end,               desc = "Delete Buffer" },
         { "<leader>rf", function() Snacks.rename.rename_file() end,      desc = "Rename File" },
         { "<c-/>",      function() Snacks.terminal() end,                desc = "Toggle Terminal" },
         { "<c-_>",      function() Snacks.terminal() end,                desc = "which_key_ignore" },
