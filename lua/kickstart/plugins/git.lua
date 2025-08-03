@@ -4,15 +4,25 @@ return {
   {
     'tpope/vim-fugitive',
     cmd = { 'G', 'Git' },
-    init = function()
-      vim.keymap.set('n', '<leader>gw',
+    keys = {
+      {
+        '<leader>gw',
         function()
           if vim.bo.filetype == 'fugitive' then
             vim.cmd('quit')
           else
             vim.cmd('G')
           end
-        end, { desc = 'Fugitive' })
+        end,
+        desc = 'Fugitive'
+      },
+      {
+        '<leader>gv',
+        '<cmd>Gvdiffsplit<cr>',
+        desc = 'Split Diff',
+      }
+    },
+    init = function()
       vim.api.nvim_create_user_command('Gc', function(args)
         local vimCmd = 'Git commit'
         if args['args'] then
