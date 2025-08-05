@@ -3,12 +3,12 @@ return {
     'kawre/leetcode.nvim',
     build = ':TSUpdate html',
     dependencies = {
-        { 'nvim-telescope/telescope.nvim', lazy = true, dependencies = 'nvim-lua/plenary.nvim' },
-        -- optional
-        'nvim-treesitter/nvim-treesitter',
-        'nvim-tree/nvim-web-devicons',
+        "folke/snacks.nvim",
+        "nvim-lua/plenary.nvim",
+        "MunifTanjim/nui.nvim",
+        "nvim-treesitter/nvim-treesitter",
     },
-    lazy = leet_arg ~= vim.fn.argv()[1],
+    lazy = leet_arg ~= vim.fn.argv(0, -1),
     opts = {
         arg = leet_arg,
         lang = 'python3',
@@ -18,48 +18,48 @@ return {
         '<leader>l',
         function()
         end,
-        desc = '+[L]eetcode',
-        ft = { 'leetcode.nvim' }
+        desc = '+Leetcode',
+        ft = 'leetcode.nvim'
     }, {
         '<leader>lc',
         '<cmd> Leet console<cr>',
-        desc = 'open [C]onsole popup',
-        ft = { 'leetcode.nvim' }
+        desc = 'Open Console',
+        ft = 'leetcode.nvim'
     }, {
         '<leader>li',
         '<cmd> Leet info<cr>',
-        desc = 'open pop-up containing [I]nfo',
-        ft = { 'leetcode.nvim' }
+        desc = 'Open Info',
+        ft = 'leetcode.nvim'
     }, {
         '<leader>ly',
         '<cmd> Leet yank<cr>',
-        desc = '[Y]ank current solution',
-        ft = { 'leetcode.nvim' }
+        desc = 'Yank solution',
+        ft = 'leetcode.nvim'
     }, {
         '<leader>ll',
         '<cmd> Leet lang<cr>',
-        desc = 'change [L]anguage',
-        ft = { 'leetcode.nvim' }
+        desc = 'Change Language',
+        ft = 'leetcode.nvim'
     }, {
         '<leader>lr',
         '<cmd> Leet run<cr>',
-        desc = '[R]un current solution',
-        ft = { 'leetcode.nvim' }
+        desc = 'Run Solution',
+        ft = 'leetcode.nvim'
     }, {
         '<leader>lt',
         '<cmd> Leet test<cr>',
-        desc = '[T]est current solution',
-        ft = { 'leetcode.nvim' }
+        desc = 'Test Solution',
+        ft = 'leetcode.nvim'
     }, {
         '<leader>ls',
         '<cmd> Leet submit<cr>',
-        desc = '[S]ubmit current solution',
-        ft = { 'leetcode.nvim' }
+        desc = 'Submit Solution',
+        ft = 'leetcode.nvim'
     }, {
         '<leader>ld',
         '<cmd> Leet desc<cr>',
-        desc = 'toggle question [D]escription',
-        ft = { 'leetcode.nvim' }
+        desc = 'Togle Description',
+        ft = 'leetcode.nvim'
     },
     },
 }
