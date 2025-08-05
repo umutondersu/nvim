@@ -49,7 +49,7 @@ return {
 
             -- In case you changed your mind, provide a keybind that lets you
             -- cancel the snipe and close the window.
-            cancel_snipe = { "<C-c>", "q", "<leader>", "<esc>" },
+            cancel_snipe = { "<C-c>", "q", "<leader>" },
 
             -- Close the buffer under the cursor
             -- Remove "j" and "k" from your dictionary to navigate easier to delete

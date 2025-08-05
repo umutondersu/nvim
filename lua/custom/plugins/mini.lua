@@ -58,46 +58,6 @@ return { -- Collection of various small independent plugins/modules
             },
         }
     },
-    -- File Navitagortion and Management
-    {
-        'echasnovski/mini.files',
-        version = false,
-        opts = {
-            mappings = {
-                close       = 'q',
-                go_in       = 'l',
-                go_in_plus  = '<cr>',
-                go_out      = 'h',
-                go_out_plus = '<BS>',
-                mark_goto   = '',
-                mark_set    = '',
-                reset       = 'r',
-                reveal_cwd  = '@',
-                show_help   = 'g?',
-                synchronize = '<leader>w',
-                trim_left   = '<',
-                trim_right  = '>',
-            },
-        },
-        keys = {
-            { '<C-e>', function() require('mini.files').open() end, desc = 'Toggle File Explorer' },
-        },
-        init = function()
-            vim.api.nvim_create_autocmd('FileType', {
-                pattern = 'minifiles',
-                callback = function()
-                    vim.keymap.set('n', '<leader>r', '^ct.', { desc = 'Change File Name w/o extension', buffer = true })
-                    vim.keymap.set('n', '<leader>x', 'V"+d', { desc = 'Cut File', buffer = true })
-                    vim.keymap.set('n', '<leader>y', 'Vy', { desc = 'Copy File', buffer = true })
-                    vim.keymap.set('n', '<leader>d', 'Vd', { desc = 'Delete File', buffer = true })
-                    vim.keymap.set('n', '<leader>q', '<cmd>q<cr>', { desc = 'Close', buffer = true })
-                    vim.keymap.set('n', '<C-c>', '<cmd>q<cr>', { desc = 'Close', buffer = true })
-                    vim.keymap.set('n', '<C-e>', '<cmd>q<cr>', { desc = 'Close', buffer = true })
-                    vim.keymap.set('n', '<Esc>', '<cmd>q<cr>', { desc = 'Close', buffer = true })
-                end,
-            })
-        end
-    },
     {
         'echasnovski/mini.pairs',
         version = false,
