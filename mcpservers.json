@@ -37,12 +37,15 @@
         "--rm",
         "-e",
         "GITHUB_PERSONAL_ACCESS_TOKEN",
-        "mcp/github"
+        "ghcr.io/github/github-mcp-server"
       ],
       "command": "docker",
       "env": {
-        "GITHUB_PERSONAL_ACCESS_TOKEN": null
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_PERSONAL_ACCESS_TOKEN}"
       }
+    },
+    "grep": {
+      "url": "https://mcp.grep.app"
     },
     "puppeteer": {
       "args": [
