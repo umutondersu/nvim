@@ -6,11 +6,9 @@ return {
         opts = {
             auto_open_qflist = false,
             auto_start_watch_mode = true,
-            bin_bath = 'npx tsc',
             flags = { watch = true },
             use_diagnostics = true,
             enable_progress_notifications = false,
-            enable_error_notifications = false
         }
     },
     { 'dmmulroy/ts-error-translator.nvim', ft = ts_ft },
