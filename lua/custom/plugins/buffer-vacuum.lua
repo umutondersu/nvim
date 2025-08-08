@@ -1,5 +1,5 @@
 return {
-    'ChuufMaster/buffer-vacuum',
+    'umutondersu/buffer-vacuum',
     lazy = false,
     opts = {
         max_buffers = 3,
@@ -11,6 +11,26 @@ return {
             '<C-x>',
             '<cmd>BufferVacuumPinBuffer<CR>',
             desc = 'Pin/Unpin Buffer',
+        },
+        {
+            ']p',
+            '<cmd>BufferVacuumNext<CR>',
+            desc = 'Next Pinned Buffer',
+        },
+        {
+            '[P',
+            '<cmd>BufferVacuumNext<CR>',
+            desc = 'Next Pinned Buffer',
+        },
+        {
+            '[p',
+            '<cmd>BufferVacuumPrev<CR>',
+            desc = 'Previous Pinned Buffer',
+        },
+        {
+            ']P',
+            '<cmd>BufferVacuumPrev<CR>',
+            desc = 'Previous Pinned Buffer',
         }
     }
 }
