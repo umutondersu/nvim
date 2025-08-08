@@ -29,6 +29,11 @@ return {
         })
       end
     },
+    {
+      "samiulsami/cmp-go-deep",
+      enabled = vim.fn.executable 'go' == 1,
+      dependencies = "kkharji/sqlite.lua",
+    },
 
     -- Snippet Engine
     {
@@ -109,7 +114,7 @@ return {
     },
     snippets = { preset = 'luasnip' },
     sources = {
-      default = { 'copilot', 'lsp', 'path', 'buffer', 'dadbod', 'snippets', 'lazydev', 'avante', 'go_pkgs', 'git', 'conventional_commits', 'spell', 'emoji' },
+      default = { 'copilot', 'lsp', 'path', 'buffer', 'dadbod', 'snippets', 'lazydev', 'avante', 'go_pkgs', 'git', 'conventional_commits', 'spell', 'emoji', 'go_deep' },
       providers = {
         snippets = {
           module = 'blink.cmp.sources.snippets',
@@ -195,6 +200,17 @@ return {
             return vim.bo.filetype == 'go' and vim.fn.executable 'go' == 1
           end,
           opts = {}
+        },
+        go_deep = {
+          name = "go_deep",
+          module = "blink.compat.source",
+          score_offset = 20,
+          enabled = function()
+            return vim.bo.filetype == 'go' and vim.fn.executable 'go' == 1
+          end,
+          min_keyword_length = 3,
+          max_items = 5,
+          opts = {},
         },
       },
     },
