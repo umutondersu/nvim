@@ -1,5 +1,5 @@
 return {
-    'umutondersu/buffer-vacuum',
+    'ChuufMaster/buffer-vacuum',
     lazy = false,
     opts = {
         max_buffers = 3,
