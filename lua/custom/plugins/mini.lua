@@ -1,4 +1,5 @@
-return { -- Collection of various small independent plugins/modules
+return {
+    -- Collection of various small independent plugins/modules
     -- Better Around/Inside textobjects
     --
     -- Examples:
@@ -6,7 +7,7 @@ return { -- Collection of various small independent plugins/modules
     --  - yinq - [Y]ank [I]nside [N]ext [Q]uote
     --  - ci'  - [C]hange [I]nside [']quote
     {
-        'echasnovski/mini.ai',
+        'nvim-mini/mini.ai',
         version = false,
         event = 'VeryLazy',
         opts = {
@@ -20,7 +21,7 @@ return { -- Collection of various small independent plugins/modules
     -- - gsd'   - [G]racefully [S]urround [D]elete [']quotes
     -- - gsc)'  - [G]loriously [S]urround [C]hange [)] [']
     {
-        'echasnovski/mini.surround',
+        'nvim-mini/mini.surround',
         version = false,
         event = 'VeryLazy',
         opts = {
@@ -40,7 +41,7 @@ return { -- Collection of various small independent plugins/modules
     },
     -- Move lines easily in visual and normal mode
     {
-        'echasnovski/mini.move',
+        'nvim-mini/mini.move',
         version = false,
         event = 'VeryLazy',
         opts = {
@@ -59,18 +60,18 @@ return { -- Collection of various small independent plugins/modules
         }
     },
     {
-        'echasnovski/mini.pairs',
+        'nvim-mini/mini.pairs',
         version = false,
         event = 'InsertEnter',
         opts = {}
     },
     {
-        'echasnovski/mini.bracketed',
+        'nvim-mini/mini.bracketed',
         version = false,
         event = 'VeryLazy',
         opts = {}
     },
-    { 'echasnovski/mini.icons', version = false, opts = {} },
+    { 'nvim-mini/mini.icons', version = false, opts = {} },
     -- ... and there is more!
-    --  Check out: https://github.com/echasnovski/mini.nvim
+    --  Check out: https://github.com/nvim-mini/mini.nvim
 }
