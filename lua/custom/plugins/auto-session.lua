@@ -4,6 +4,7 @@ return {
     ---@module "auto-session"
     ---@type AutoSession.Config
     opts = {
+        args_allow_single_directory = false,
         suppress_dirs = { '~/', '~/projects', '~/Downloads', '/' },
         save_extra_cmds = {
             function()

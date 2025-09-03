@@ -5,6 +5,7 @@ return {
     ---@module 'oil'
     ---@type oil.SetupOpts
     opts = {
+        default_file_explorer = not (#vim.fn.argv() == 1 and vim.fn.argv()[1] == "."),
         keymaps = {
             ["<bs>"] = { "actions.parent", mode = "n" },
             ["<esc>"] = { "actions.parent", mode = "n" },
