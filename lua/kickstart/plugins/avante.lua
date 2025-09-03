@@ -36,15 +36,19 @@ return {
             "rename_dir",
             "delete_dir",
         },
+        instructions_file = "AGENTS.md",
         providers = config.providers,
         shortcuts = config.shortcuts,
     },
     -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-    build = 'make',
+    build = vim.fn.has("win32") ~= 0
+        and "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false"
+        or "make",
     -- build = 'powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false' -- for windows
     dependencies = {
         'nvim-lua/plenary.nvim',
         'MunifTanjim/nui.nvim',
+        --- The below dependencies are optional,
         'zbirenbaum/copilot.lua',                                        -- Copilot Provider
         'folke/snacks.nvim',                                             -- Input Provider
         {                                                                -- MCP Integration
@@ -59,7 +63,6 @@ return {
                 extensions = { avante = { make_slash_commands = true } } -- Enable avante extension
             }
         },
-        --- The below dependencies are optional,
         'echasnovski/mini.icons',
         'MeanderingProgrammer/render-markdown.nvim',
         {
