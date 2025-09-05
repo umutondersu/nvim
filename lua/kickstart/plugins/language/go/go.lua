@@ -12,7 +12,7 @@ return {
         keys = {
             {
                 '<leader>ct',
-                function() require("gopher").tags.add "json" end,
+                function() vim.cmd("GoTagAdd json") end,
                 desc = 'Add JSON Tags to struct',
                 ft = 'go'
             },
