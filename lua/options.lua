@@ -82,6 +82,9 @@ vim.diagnostic.config(
 	}
 )
 
+-- Disable Python Provider Maps
+vim.g.no_python_maps = 1
+
 -- Disable Node Provider for windows
 if vim.fn.has('win32') == 1 then
 	vim.g.loaded_node_provider = 0
