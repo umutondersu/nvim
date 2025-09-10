@@ -41,7 +41,7 @@ return {
       group = vim.api.nvim_create_augroup('CustomHls', {}),
     })
     -- Autocmd for getting rid of statuslines in Avante for Transparent mode
-    vim.api.nvim_create_autocmd('BufEnter', {
+    vim.api.nvim_create_autocmd({ 'BufEnter', 'BufAdd' }, {
       callback = function()
         if not vim.g.transparent then return end
         vim.api.nvim_set_hl(0, "AvanteSideBarWinSeparator", { fg = "#232735", bg = "None" })
