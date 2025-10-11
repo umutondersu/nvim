@@ -11,7 +11,7 @@ return {
             ["<esc>"] = { "actions.parent", mode = "n" },
             ["q"] = { "actions.close", mode = "n" },
             ["<leader>e"] = { "actions.close", mode = "n" },
-            ["<M-e>"] = { "actions.close", mode = "n" },
+            ["<C-e>"] = { "actions.close", mode = "n" },
         },
         view_options = {
             show_hidden = true,
@@ -25,6 +25,6 @@ return {
     },
     keys = {
         { "<leader>e", "<cmd>Oil<cr>",   desc = "Toggle File Explorer" },
-        { "<M-e>",     "<cmd>Oil .<cr>", desc = "File Explorer (cwd)" }
+        { "<C-e>",     "<cmd>Oil .<cr>", desc = "File Explorer (cwd)" }
     }
 }

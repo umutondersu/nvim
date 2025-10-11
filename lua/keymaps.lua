@@ -44,6 +44,11 @@ map({ 'n', 'v' }, 'Ğ', '{', { silent = true })
 map({ 'n', 'v' }, 'Ü', '}', { silent = true })
 map({ 'n', 'v' }, '+', '$', { silent = true }) -- move to end of line
 
+map({ 'n', 'v' }, '<left>', '<Nop>')
+map({ 'n', 'v' }, '<right>', '<Nop>')
+map({ 'n', 'v' }, '<up>', '<Nop>')
+map({ 'n', 'v' }, '<down>', '<Nop>')
+
 -- <C-t> for <Tab>
 map('i', '<C-t>', '<Tab>', { silent = true })
 
