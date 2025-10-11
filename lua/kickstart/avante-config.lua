@@ -10,7 +10,7 @@ return {
 			model = "deepseek-r1-distill-llama-70b"
 		},
 		copilot = {
-			model = 'claude-sonnet-4'
+			model = 'claude-sonnet-4.5'
 		},
 		copilot_gemini = {
 			__inherited_from = 'copilot',
