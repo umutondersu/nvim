@@ -62,6 +62,13 @@
         "@modelcontextprotocol/server-sequential-thinking"
       ],
       "command": "npx"
+    },
+    "shadcn": {
+      "args": [
+        "shadcn@latest",
+        "mcp"
+      ],
+      "command": "npx"
     }
   },
   "nativeMCPServers": {
