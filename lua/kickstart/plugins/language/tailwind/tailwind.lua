@@ -16,7 +16,9 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		"neovim/nvim-lspconfig",
 	},
-	opts = {},
+	opts = {
+		server = { override = false },
+	},
 	keys = {
 		{ "<leader>ct",  function() end,                                 desc = "Tailwind",                ft = tw_ft },
 		-- Conceal toggles
