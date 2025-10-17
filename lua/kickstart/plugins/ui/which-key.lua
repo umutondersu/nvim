@@ -24,7 +24,7 @@ return {
             },
             {
                 "<leader>a",
-                group = "Avante",
+                group = "Open Code",
                 mode = { 'n', 'v' },
                 icon = { icon = '', color = 'yellow' },
             }
