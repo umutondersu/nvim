@@ -3,6 +3,7 @@ return {
   -- Recommended for `ask()` and `select()`.
   -- Required for `toggle()`.
   dependencies = "folke/snacks.nvim",
+  enabled = vim.fn.executable('opencode') == 1,
   config = function()
     -- Your configuration, if any — see `lua/opencode/config.lua`
     vim.g.opencode_opts = {}
