@@ -35,6 +35,8 @@ return {
                 group = vim.api.nvim_create_augroup('disable-ts_ls', { clear = true }),
                 callback = function()
                     vim.lsp.enable('ts_ls', false)
+                    -- For some reason buffer-vacuum keymap does not work in ts files unless set here
+                    vim.keymap.set('n', '<C-x>', '<cmd>BufferVacuumPinBuffer<CR>', { desc = "Pin/Unpin Buffer" })
                 end
             })
         end,
@@ -42,25 +44,25 @@ return {
             {
                 '<leader>cm',
                 function() vim.cmd('TSToolsAddMissingImports') end,
-                desc = 'LSP: Add Missing Imports',
+                desc = 'Add Missing Imports',
                 ft = ts_ft
             },
             {
                 '<leader>co',
                 function() vim.cmd('TSToolsOrganizeImports') end,
-                desc = 'LSP: Sort and Remove Unused Imports',
+                desc = 'Sort and Remove Unused Imports',
                 ft = ts_ft
             },
             {
                 '<leader>cf',
                 function() vim.cmd('TSToolsFixAll') end,
-                desc = 'LSP: Fix all fixable errors',
+                desc = 'Fix all fixable errors',
                 ft = ts_ft
             },
             {
                 '<leader>cr',
                 function() vim.cmd('TSToolsRemoveUnused') end,
-                desc = 'LSP: Remove all unused statements',
+                desc = 'Remove all unused statements',
                 ft = ts_ft
             },
             {
