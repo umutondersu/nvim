@@ -64,9 +64,6 @@ return { -- LSP Configuration & Plugins
 						Snacks.picker.lsp_symbols({
 							filter = filter,
 							layout = 'right',
-							on_show = function()
-								vim.cmd.stopinsert()
-							end,
 						})
 					end,
 					'Symbols', 'n', false)
