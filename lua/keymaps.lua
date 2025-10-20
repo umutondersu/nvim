@@ -78,7 +78,7 @@ end, { desc = 'Save Buffer' })
 map('n', '<leader>x', '<cmd>wqa<CR>', { desc = 'Save and Exit' })
 
 -- Refactor Keymaps
-map("n", "<leader>rF", function()
+map("n", "<leader>rd", function()
 	local filepath = vim.fn.expand('%')
 	local choice = vim.fn.confirm(
 		"Delete " .. vim.fn.fnamemodify(filepath, ":t") .. "?",
@@ -94,7 +94,7 @@ map("n", "<leader>rF", function()
 			vim.notify(string.format("Failed to delete %s: %s", filepath, err), vim.log.levels.ERROR)
 		end
 	end
-end, { desc = 'Remove File' })
+end, { desc = 'Delete File' })
 map("n", "<leader>rw", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gcI<Left><Left><Left><Left>]],
 	{ desc = 'Replace Word' }) -- Replace the word under the cursor
 map('v', '<leader>rv', function()

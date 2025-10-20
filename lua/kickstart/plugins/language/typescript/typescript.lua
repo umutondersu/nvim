@@ -42,13 +42,13 @@ return {
         end,
         keys = {
             {
-                '<leader>cm',
+                '<leader>cc',
                 function() vim.cmd('TSToolsAddMissingImports') end,
                 desc = 'Add Missing Imports',
                 ft = ts_ft
             },
             {
-                '<leader>co',
+                '<leader>cs',
                 function() vim.cmd('TSToolsOrganizeImports') end,
                 desc = 'Sort and Remove Unused Imports',
                 ft = ts_ft
@@ -66,7 +66,7 @@ return {
                 ft = ts_ft
             },
             {
-                '<leader>rf',
+                '<leader>rr',
                 function() vim.cmd('TSToolsRenameFile') end,
                 desc = 'Rename File',
                 ft = ts_ft
