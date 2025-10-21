@@ -65,12 +65,6 @@ return {
                 desc = 'Remove all unused statements',
                 ft = ts_ft
             },
-            {
-                '<leader>rr',
-                function() vim.cmd('TSToolsRenameFile') end,
-                desc = 'Rename File',
-                ft = ts_ft
-            },
         }
     }
 }
