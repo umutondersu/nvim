@@ -40,22 +40,5 @@ return {
       end),
       group = vim.api.nvim_create_augroup('CustomHls', {}),
     })
-    -- Autocmd for getting rid of statuslines in Avante for Transparent mode
-    vim.api.nvim_create_autocmd({ 'BufEnter', 'BufAdd' }, {
-      callback = function()
-        if not vim.g.transparent then return end
-        vim.api.nvim_set_hl(0, "AvanteSideBarWinSeparator", { fg = "#232735", bg = "None" })
-
-        for _, win in ipairs(vim.api.nvim_list_wins()) do
-          local filetype = vim.api.nvim_get_option_value("filetype", { buf = vim.api.nvim_win_get_buf(win) })
-          local AvanteFiletypes = { "Avante", "AvanteSelectedFiles", "AvanteTodos" }
-          if vim.tbl_contains(AvanteFiletypes, filetype) then
-            vim.api.nvim_set_option_value("winhl",
-              "StatusLine:InvisibleStatusLine,StatusLineNC:InvisibleStatusLineNC", { win = win })
-          end
-        end
-      end,
-      group = vim.api.nvim_create_augroup('Transparency', { clear = false }),
-    })
   end,
 }
