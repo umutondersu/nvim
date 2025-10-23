@@ -25,10 +25,10 @@ return
     end,
     --NOTE: add the formatters to ensure_installed in mason-tools.lua
     formatters_by_ft = {
-      javascript = { 'biome-check' },
-      typescript = { 'biome-check' },
-      javascriptreact = { 'biome-check' },
-      typescriptreact = { 'biome-check' },
+      javascript = { 'biome-check', 'biome-organize-imports' },
+      typescript = { 'biome-check', 'biome-organize-imports' },
+      javascriptreact = { 'biome-check', 'biome-organize-imports' },
+      typescriptreact = { 'biome-check', 'biome-organize-imports' },
       json = { 'biome-check' },
       css = { 'biome-check' },
       html = { 'prettier' },
