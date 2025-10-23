@@ -9,11 +9,12 @@ return {
       javascriptreact = { 'biomejs' },
       typescriptreact = { 'biomejs' },
       json = { 'biomejs' },
-      python = { "flake8" },
-      go = { "golangcilint" },
-      fish = { "fish" },
-      sh = { "shellcheck" },
-      ruby = { "rubocop" },
+      css = { 'biomejs' },
+      python = { 'flake8' },
+      go = { 'golangcilint' },
+      fish = { 'fish' },
+      sh = { 'shellcheck' },
+      ruby = { 'rubocop' },
     }
   },
   config = function(_, opts)
