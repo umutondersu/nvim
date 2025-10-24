@@ -97,7 +97,7 @@ return {
         }
     },
     keys = {
-        { "<C-e>",      function() Snacks.explorer.open() end,           desc = "Toggle File Explorer" },
+        { "<M-e>",      function() Snacks.explorer.open() end,           desc = "Toggle File Explorer" },
         { "<leader>Ss", function() Snacks.scratch() end,                 desc = "Toggle Scratch Buffer" },
         { "<leader>SS", function() Snacks.scratch.select() end,          desc = "Select Scratch Buffer" },
         { "<leader>uN", function() Snacks.notifier.hide() end,           desc = "Dismiss All Notifications" },
