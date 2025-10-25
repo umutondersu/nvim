@@ -8,7 +8,6 @@ return {
 
     -- Sources
     'kristijanhusak/vim-dadbod-completion',
-    'Kaiser-Yang/blink-cmp-avante',
     'disrupted/blink-cmp-conventional-commits',
     'ribru17/blink-cmp-spell',
     'moyiz/blink-emoji.nvim',
@@ -114,7 +113,7 @@ return {
     },
     snippets = { preset = 'luasnip' },
     sources = {
-      default = { 'copilot', 'lsp', 'path', 'buffer', 'dadbod', 'snippets', 'lazydev', 'avante', 'go_pkgs', 'git', 'conventional_commits', 'spell', 'emoji', 'go_deep' },
+      default = { 'copilot', 'lsp', 'path', 'buffer', 'dadbod', 'snippets', 'lazydev', 'go_pkgs', 'git', 'conventional_commits', 'spell', 'emoji', 'go_deep' },
       providers = {
         snippets = {
           module = 'blink.cmp.sources.snippets',
@@ -155,11 +154,6 @@ return {
             return vim.bo.filetype == 'gitcommit'
           end,
           opts = {},
-        },
-        avante = {
-          module = 'blink-cmp-avante',
-          name = 'Avante',
-          opts = {}
         },
         spell = {
           name = 'Spell',

@@ -1,4 +1,4 @@
-local ft = { 'markdown', 'avante', 'octo' }
+local ft = { 'markdown', 'octo' }
 return {
     {
         'MeanderingProgrammer/render-markdown.nvim',
