@@ -44,6 +44,11 @@ map({ 'n', 'v' }, 'Ğ', '{', { silent = true })
 map({ 'n', 'v' }, 'Ü', '}', { silent = true })
 map({ 'n', 'v' }, '+', '$', { silent = true }) -- move to end of line
 
+map({ 'n', 'v' }, '<left>', '<Nop>')
+map({ 'n', 'v' }, '<right>', '<Nop>')
+map({ 'n', 'v' }, '<up>', '<Nop>')
+map({ 'n', 'v' }, '<down>', '<Nop>')
+
 -- <C-t> for <Tab>
 map('i', '<C-t>', '<Tab>', { silent = true })
 
@@ -68,13 +73,7 @@ map('v', '>', '>gv', { desc = 'Shift Right' })
 map("n", "<M-u>", ":e!<CR>", { desc = 'Undo all unsaved writes' })
 
 -- Shortcuts for save and exit
-map('n', '<leader>w', function()
-	if vim.api.nvim_buf_get_name(0) == '' then
-		vim.api.nvim_feedkeys(":w ", "n", false)
-	else
-		vim.cmd.write()
-	end
-end, { desc = 'Save Buffer' })
+map('n', '<leader>w', '<cmd>:w<CR>', { desc = 'Save Buffer' })
 map('n', '<leader>x', '<cmd>wqa<CR>', { desc = 'Save and Exit' })
 
 -- Refactor Keymaps
