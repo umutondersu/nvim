@@ -21,6 +21,7 @@ return {
         input = { enabled = true },
         image = { enabled = true, doc = { enabled = true, inline = false, float = true } },
         dashboard = { enabled = true },
+        terminal = { enabled = true },
         picker = {
             matcher = { frecency = true },
             win = {
