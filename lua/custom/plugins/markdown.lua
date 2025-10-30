@@ -8,6 +8,13 @@ return {
             file_types = ft,
             completions = { lsp = { enabled = true } }
         },
+        keys = {
+            {
+                '<C-x>',
+                '<cmd>BufferVacuumPinBuffer<CR>',
+                desc = 'Pin/Unpin Buffer',
+            },
+        }
     },
     {
         "toppair/peek.nvim",
