@@ -249,7 +249,7 @@ return {
         { "<leader>gf", function() Snacks.picker.git_files() end,    desc = "Files" },
         {
             "<leader>gd",
-            -- - `<Tab>`: stages the selected hunk
+            -- - `<Tab>`: toggles staging the selected hunk
             -- - `<cr>`: opens the selected hunk
             -- - `<C-d>`: discards the selected hunk
             function()
@@ -284,7 +284,7 @@ return {
                             picker:find({
                                 refresh = true,
                                 on_done = function()
-                                    picker.list:view(item.idx)
+                                    picker.list:_move(item.idx, true, true)
                                 end,
                             })
                             vim.notify("Discarded hunk in: " .. vim.fn.fnamemodify(file, ":t"), vim.log.levels.WARN)
@@ -295,6 +295,23 @@ return {
 
                             local tmpfile = vim.fn.tempname()
                             vim.fn.writefile(vim.split(patch, "\n"), tmpfile)
+
+                            -- Try to unstage first (reverse apply from index)
+                            vim.fn.system(string.format("git apply -R --cached %s", tmpfile))
+                            if vim.v.shell_error == 0 then
+                                -- Successfully unstaged
+                                os.remove(tmpfile)
+                                picker:find({
+                                    refresh = true,
+                                    on_done = function()
+                                        picker.list:view(item.idx - 1)
+                                    end,
+                                })
+                                vim.notify("Unstaged hunk in: " .. vim.fn.fnamemodify(file, ":t"), vim.log.levels.INFO)
+                                return
+                            end
+
+                            -- If unstage failed, try to stage
                             vim.fn.system(string.format("git apply --cached %s", tmpfile))
                             os.remove(tmpfile)
                             if vim.v.shell_error ~= 0 then
@@ -305,7 +322,7 @@ return {
                             picker:find({
                                 refresh = true,
                                 on_done = function()
-                                    picker.list:view(item.idx)
+                                    picker.list:view(item.idx - 1)
                                 end,
                             })
                             vim.notify("Staged hunk in: " .. vim.fn.fnamemodify(file, ":t"), vim.log.levels.INFO)
@@ -337,23 +354,36 @@ return {
                     actions = {
                         git_discard = function(picker, item)
                             local file = item.file
+                            local success = true
 
-                            if item.status:match("^%?") or item.status:match("^A") then
-                                vim.fn.system({ "git", "clean", "-fd", file })
-                                if item.status:match("^A") then
-                                    vim.fn.system({ "git", "reset", "HEAD", file })
+                            if item.status:match("^%?") then
+                                vim.fn.system({ "git", "clean", "-f", file })
+                                success = vim.v.shell_error == 0
+                            elseif item.status:match("^A") then
+                                vim.fn.system({ "git", "reset", "HEAD", file })
+                                if vim.v.shell_error == 0 then
+                                    vim.fn.system({ "git", "clean", "-f", file })
+                                    success = vim.v.shell_error == 0
+                                else
+                                    success = false
                                 end
                             else
                                 vim.fn.system({ "git", "checkout", "HEAD", "--", file })
+                                success = vim.v.shell_error == 0
                             end
 
-                            picker:find({
-                                refresh = true,
-                                on_done = function()
-                                    picker.list:view(item.idx)
-                                end
-                            })
-                            vim.notify("Discarded changes for: " .. vim.fn.fnamemodify(file, ":t"), 'warn')
+                            if success then
+                                picker:find({
+                                    refresh = true,
+                                    on_done = function()
+                                        picker.list:view(item.idx)
+                                    end
+                                })
+                                vim.notify("Discarded changes for: " .. vim.fn.fnamemodify(file, ":t"), 'warn')
+                            else
+                                vim.notify("Failed to discard changes for: " .. vim.fn.fnamemodify(file, ":t"),
+                                    vim.log.levels.ERROR)
+                            end
                         end,
                     },
                 })
