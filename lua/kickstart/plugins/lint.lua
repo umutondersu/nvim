@@ -19,6 +19,7 @@ return {
   },
   config = function(_, opts)
     local lint = require("lint")
+    lint.linters_by_ft = opts.linters_by_ft
 
     -- Fix for biomejs parser to handle newer biome output format
     local biomejs = lint.linters.biomejs
@@ -52,22 +53,6 @@ return {
         return diagnostics
       end
     end
-
-    -- Fix golangcilint to work with single files
-    local golangcilint = lint.linters.golangcilint
-    if golangcilint then
-      golangcilint.append_fname = true
-      -- Remove the directory function from args since we're appending the filename
-      local new_args = {}
-      for _, arg in ipairs(golangcilint.args) do
-        if type(arg) ~= 'function' then
-          table.insert(new_args, arg)
-        end
-      end
-      golangcilint.args = new_args
-    end
-
-    lint.linters_by_ft = opts.linters_by_ft
 
     local function debounce(ms, fn)
       local timer = vim.uv.new_timer()
