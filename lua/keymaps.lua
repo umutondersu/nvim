@@ -16,8 +16,6 @@ vim.keymap.del('n', 'grr')
 vim.keymap.del('n', 'grt')
 vim.keymap.del('n', 'gO')
 
-map('n', 'gq', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
-
 -- Remap for dealing with word wrap
 map('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 map('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
@@ -30,7 +28,6 @@ map('n', '<tab>', vim.cmd.bnext, { desc = 'Next Buffer' })
 map('n', '<S-Tab>', vim.cmd.bprev, { desc = 'Prev Buffer' })
 
 -- Buffer Management
-map("n", "<C-a>", '<cmd>enew<cr>', { desc = 'Open a New Buffer' })
 map("n", "<bs>", '<cmd>b#<cr>', { desc = 'Reopen Previous Buffer' })
 
 -- jj for escaping insert mode

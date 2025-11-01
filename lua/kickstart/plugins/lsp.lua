@@ -28,6 +28,9 @@ return { -- LSP Configuration & Plugins
 					vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = lsp and 'LSP: ' .. desc or desc })
 				end
 
+				-- Show the diagnostic message in a floating window
+				map('gq', vim.diagnostic.open_float, 'Show Diagnostic Message')
+
 				-- Opens a floating window showing hover information about the symbol under the cursor.
 				--  This includes documentation, type information, and other details provided by the LSP.
 				map('K', vim.lsp.buf.hover, 'Display Hover Information')
