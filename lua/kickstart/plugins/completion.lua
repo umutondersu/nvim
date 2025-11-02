@@ -118,19 +118,21 @@ return {
         snippets = {
           module = 'blink.cmp.sources.snippets',
           score_offset = 2,
-          transform_items = function(ctx, items)
+          transform_items = function(_, items)
             local ft = vim.bo.filetype
             if not vim.tbl_contains({ "typescriptreact", "javascriptreact" }, ft) then
               return items
             end
-            ---@diagnostic disable-next-line: inject-field
-            ctx.seen = ctx.seen or {}
-            return vim.tbl_filter(function(item)
-              if not item.label then return true end
-              if ctx.seen[item.label] then return false end
-              ctx.seen[item.label] = true
-              return true
-            end, items)
+            local result = {}
+            local seen = {}
+            for i = #items, 1, -1 do
+              local item = items[i]
+              if not item.label or not seen[item.label] then
+                table.insert(result, 1, item)
+                if item.label then seen[item.label] = true end
+              end
+            end
+            return result
           end,
         },
         copilot = {
