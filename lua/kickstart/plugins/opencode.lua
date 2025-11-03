@@ -5,10 +5,12 @@ return {
   dependencies = "folke/snacks.nvim",
   enabled = vim.fn.executable('opencode') == 1,
   config = function()
-    -- Your configuration, if any — see `lua/opencode/config.lua`
-    vim.g.opencode_opts = {}
-    -- Required for `vim.g.opencode_opts.auto_reload`
-    vim.opt.autoread = true
+    ---@type opencode.Opts
+    vim.g.opencode_opts = {
+      -- Your configuration, if any — see `lua/opencode/config.lua`, or "goto definition".
+    }
+    -- Required for `opts.auto_reload`.
+    vim.o.autoread = true
 
     local map = function(keys, func, desc, mode)
       mode = mode or 'n'
@@ -22,7 +24,7 @@ return {
       end,
     })
 
-    -- Recommended/example keymaps
+    -- Keymaps
     map("<leader>at", function()
       require("opencode").toggle()
       vim.cmd('wincmd l')
