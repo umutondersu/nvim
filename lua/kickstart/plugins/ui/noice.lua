@@ -88,6 +88,13 @@ return {
                     find = "No information available",
                 },
                 skip = true
+            },
+            {
+                filter = {
+                    event = "notify",
+                    find = "opoencode Invalid 'end_col': out of range",
+                },
+                skip = true
             }
         },
     },

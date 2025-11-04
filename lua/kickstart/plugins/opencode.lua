@@ -4,6 +4,7 @@ return {
   -- Required for `toggle()`.
   dependencies = "folke/snacks.nvim",
   enabled = vim.fn.executable('opencode') == 1,
+  event = "VeryLazy",
   config = function()
     ---@type opencode.Opts
     vim.g.opencode_opts = {
@@ -35,27 +36,29 @@ return {
     map("<leader>aa", function() require("opencode").ask("@buffer: ", { submit = true }) end, "Ask Buffer")
     map("<leader>aA", function() require("opencode").ask("@buffers: ", { submit = true }) end, "Ask Open Buffers")
 
-    map("<leader>ab", function() require("opencode").prompt("@buffer") end, "Add Buffer")
-    map("<leader>aB", function()
-      require("opencode").prompt("@buffers")
-      vim.cmd('wincmd l')
-    end, "Add Open Buffers")
-
     map("<leader>ac", function() require("opencode").ask("@this: ", { submit = true }) end, "Ask Cursor Line", "n")
     map("<leader>av", function() require("opencode").ask("@this: ", { submit = true }) end, "Ask Visual", "v")
 
     map("<leader>ag", function() require("opencode").ask("@diff: ", { submit = true }) end, "Ask Git Diff")
 
     map("<leader>ad", function() require("opencode").ask("@diagnostics: ", { submit = true }) end, "Ask Diagnostics")
-    map("<leader>aD", function()
-      require("opencode").prompt("@diagnostics")
-      vim.cmd('wincmd l')
-    end, "Add Diagnostics")
 
+    map("<leader>al", function() require("opencode").command("session.list") end, "List Sessions")
+    map("<leader>an", function() require("opencode").command("session.new") end, "New Session")
 
-    map("<leader>an", function() require("opencode").command("session_new") end, "New Session")
-    map("<leader>aS", function() require("opencode").command("session_interrupt") end, "Interrupt Session")
-    map("<m-u>", function() require("opencode").command("messages_half_page_up") end, "Messages half page up")
-    map("<m-d>", function() require("opencode").command("messages_half_page_down") end, "Messages half page down")
+    -- NOTE: They don't seem to work for now
+    -- https://github.com/NickvanDyke/opencode.nvim/issues/70
+    --
+    -- map("<leader>aD", function()
+    --   require("opencode").prompt("@diagnostics")
+    --   vim.cmd('wincmd l')
+    -- end, "Add Diagnostics")
+    -- map("<leader>ab", function() require("opencode").prompt("@buffer") end, "Add Buffer")
+    -- map("<leader>aB", function()
+    --   require("opencode").prompt("@buffers")
+    --   vim.cmd('wincmd l')
+    -- end, "Add Open Buffers")
+    -- map("<m-u>", function() require("opencode").command("session.half.page.up") end, "Messages half page up")
+    -- map("<m-d>", function() require("opencode").command("session.half.page.down") end, "Messages half page down")
   end,
 }
