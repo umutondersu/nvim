@@ -4,11 +4,8 @@ return {
     priority = 1000,
     lazy = false,
     opts = {
-        bigfile = { enabled = true },
-        notifier = {
-            enabled = true,
-            timeout = 3000,
-        },
+        bigfile = { enabled = true, notify = false },
+        notifier = { enabled = true, top_down = false },
         quickfile = { enabled = true },
         words = { enabled = true },
         indent = { enabled = true, animate = { enabled = false } },
