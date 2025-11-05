@@ -41,6 +41,7 @@ map({ 'n', 'v' }, 'Ğ', '{', { silent = true })
 map({ 'n', 'v' }, 'Ü', '}', { silent = true })
 map({ 'n', 'v' }, '+', '$', { silent = true }) -- move to end of line
 
+-- Disable arrow keys in normal and visual mode
 map({ 'n', 'v' }, '<left>', '<Nop>')
 map({ 'n', 'v' }, '<right>', '<Nop>')
 map({ 'n', 'v' }, '<up>', '<Nop>')
