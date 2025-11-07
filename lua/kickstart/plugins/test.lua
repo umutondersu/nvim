@@ -7,7 +7,13 @@ return {
         "antoinemadec/FixCursorHold.nvim",
         "nvim-treesitter/nvim-treesitter",
         -- Adapters
-        "nvim-neotest/neotest-go",
+        {
+            "fredrikaverpil/neotest-golang",
+            version = "*",                                                              -- Optional, but recommended; track releases
+            build = function()
+                vim.system({ "go", "install", "gotest.tools/gotestsum@latest" }):wait() -- Optional, but recommended
+            end,
+        },
     },
     keys = {
         {
@@ -31,21 +37,11 @@ return {
         { "[T",         function() require("neotest").jump.next({ status = 'failed' }) end, desc = "Failed Test Forward",                    ft = ft },
     },
     config = function()
-        -- get neotest namespace (api call creates or returns namespace)
-        local neotest_ns = vim.api.nvim_create_namespace("neotest")
-        vim.diagnostic.config({
-            virtual_text = {
-                format = function(diagnostic)
-                    local message =
-                        diagnostic.message:gsub("\n", " "):gsub("\t", " "):gsub("%s+", " "):gsub("^%s+", "")
-                    return message
-                end,
-            },
-        }, neotest_ns)
         require("neotest").setup({
-            -- your neotest config here
             adapters = {
-                require("neotest-go"),
+                require("neotest-golang")({
+                    runner = "gotestsum"
+                }),
             },
         })
     end,
