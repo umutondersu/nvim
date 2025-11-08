@@ -29,17 +29,6 @@ return {
                 }
             }
         },
-        init = function()
-            vim.api.nvim_create_autocmd('FileType', {
-                pattern = ts_ft,
-                group = vim.api.nvim_create_augroup('disable-ts_ls', { clear = true }),
-                callback = function()
-                    vim.lsp.enable('ts_ls', false)
-                    -- For some reason buffer-vacuum keymap does not work in ts files unless set here
-                    vim.keymap.set('n', '<C-x>', '<cmd>BufferVacuumPinBuffer<CR>', { desc = "Pin/Unpin Buffer" })
-                end
-            })
-        end,
         keys = {
             {
                 '<leader>cc',

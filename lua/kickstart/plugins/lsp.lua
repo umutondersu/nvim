@@ -114,6 +114,10 @@ return { -- LSP Configuration & Plugins
 
 				emmet_language_server = {},
 
+				postgres_lsp = {
+					cmd = { 'postgrestools', 'lsp-proxy' },
+				},
+
 				lua_ls = {
 					settings = {
 						Lua = {
@@ -177,7 +181,10 @@ return { -- LSP Configuration & Plugins
 				if not vim.tbl_isempty(config) then
 					vim.lsp.config(server, config)
 				end
-				vim.lsp.enable(server)
+				-- Skip ts_ls since typescript-tools.nvim manages it
+				if server ~= 'ts_ls' then
+					vim.lsp.enable(server)
+				end
 			end
 		end
 
