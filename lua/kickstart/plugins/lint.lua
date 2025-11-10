@@ -21,39 +21,6 @@ return {
     local lint = require("lint")
     lint.linters_by_ft = opts.linters_by_ft
 
-    -- Fix for biomejs parser to handle newer biome output format
-    local biomejs = lint.linters.biomejs
-    if biomejs then
-      biomejs.parser = function(output)
-        local diagnostics = {}
-        local fetch_message = false
-        local lnum, col, code, message
-
-        for _, line in ipairs(vim.fn.split(output, "\n")) do
-          if fetch_message then
-            _, _, message = string.find(line, "%s!(.+)")
-            if message then
-              message = (message):gsub("^%s+!%s*", "")
-              table.insert(diagnostics, {
-                source = "biomejs",
-                lnum = tonumber(lnum) - 1,
-                col = tonumber(col),
-                message = message,
-                code = code
-              })
-              fetch_message = false
-            end
-          else
-            _, _, lnum, col, code = string.find(line, "[^:]+:(%d+):(%d+)%s([%a%/]+)")
-            if lnum then
-              fetch_message = true
-            end
-          end
-        end
-        return diagnostics
-      end
-    end
-
     local function debounce(ms, fn)
       local timer = vim.uv.new_timer()
       return function(...)
