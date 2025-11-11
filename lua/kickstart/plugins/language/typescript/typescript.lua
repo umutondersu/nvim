@@ -31,6 +31,12 @@ return {
         },
         keys = {
             {
+                '<C-x>',
+                '<cmd>BufferVacuumPinBuffer<CR>',
+                desc = 'Pin/Unpin Buffer',
+                ft = ts_ft
+            },
+            {
                 '<leader>cc',
                 function() vim.cmd('TSToolsAddMissingImports') end,
                 desc = 'Add Missing Imports',
