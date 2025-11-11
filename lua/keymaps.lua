@@ -72,7 +72,7 @@ map("n", "<M-u>", ":e!<CR>", { desc = 'Undo all unsaved writes' })
 
 -- Shortcuts for save and exit
 map('n', '<leader>w', '<cmd>:w<CR>', { desc = 'Save Buffer' })
-map('n', '<leader>x', '<cmd>wqa<CR>', { desc = 'Save and Exit' })
+map('n', '<leader>x', '<cmd>qa<CR>', { desc = 'Exit' })
 
 -- Refactor Keymaps
 map("n", "<leader>rd", function()
