@@ -9,7 +9,9 @@ return {
         -- Adapters
         {
             "fredrikaverpil/neotest-golang",
-            version = "*",                                                              -- Optional, but recommended; track releases
+            version = "*", -- Optional, but recommended; track releases
+            ft = "go",
+            enabled = vim.fn.executable 'go' == 1,
             build = function()
                 vim.system({ "go", "install", "gotest.tools/gotestsum@latest" }):wait() -- Optional, but recommended
             end,
