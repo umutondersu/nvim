@@ -219,9 +219,7 @@ return {
             "<leader>st",
             function()
                 ---@diagnostic disable-next-line: undefined-field
-                Snacks.picker.todo_comments({
-                    on_show = function() vim.cmd.stopinsert() end,
-                })
+                Snacks.picker.todo_comments()
             end,
             desc = "Todo Comments"
         },
@@ -266,7 +264,7 @@ return {
                     },
                     actions = {
                         git_discard_hunk = function(picker, item)
-                            local file = item.file
+                            local file = item.file or ''
                             local patch = item.diff
                             local tmpfile = vim.fn.tempname()
                             vim.fn.writefile(vim.split(patch, "\n"), tmpfile)
@@ -287,7 +285,7 @@ return {
                             vim.notify("Discarded hunk in: " .. vim.fn.fnamemodify(file, ":t"), vim.log.levels.WARN)
                         end,
                         git_stage_hunk = function(picker, item)
-                            local file = item.file
+                            local file = item.file or ''
                             local patch = item.diff
 
                             local tmpfile = vim.fn.tempname()
@@ -337,9 +335,6 @@ return {
             function()
                 Snacks.picker.git_status({
                     layout = 'widedefault',
-                    on_show = function()
-                        vim.cmd.stopinsert()
-                    end,
                     win = {
                         input = {
                             keys = {
@@ -350,7 +345,7 @@ return {
                     },
                     actions = {
                         git_discard = function(picker, item)
-                            local file = item.file
+                            local file = item.file or ''
                             local success = true
 
                             if item.status:match("^%?") then
