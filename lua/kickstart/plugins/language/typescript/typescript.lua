@@ -60,6 +60,12 @@ return {
                 desc = 'Remove all unused statements',
                 ft = ts_ft
             },
-        }
+        },
+    },
+    {
+        'barrett-ruth/import-cost.nvim',
+        build = 'sh install.sh npm',
+        ft = ts_ft,
+        config = true
     }
 }
