@@ -15,6 +15,7 @@ return {
       fish = { 'fish' },
       sh = { 'shellcheck' },
       ruby = { 'rubocop' },
+      markdown = { 'markdownlint' },
     }
   },
   config = function(_, opts)

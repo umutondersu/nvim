@@ -19,6 +19,7 @@ add_tool('npm', {
 	'prettier',
 	-- Linters
 	'shellcheck',
+	'markdownlint',
 	-- DAP
 	'js-debug-adapter'
 })
