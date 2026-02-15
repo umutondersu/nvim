@@ -22,12 +22,16 @@ return {
         enabled = vim.fn.executable 'deno' == 1,
         ft = 'markdown',
         config = function()
-            require('peek').setup()
+            require('peek').setup({ app = 'browser' })
+            local function openPeek()
+                require('peek').open()
+                vim.notify("Peek opened! Check your browser window.", vim.log.levels.INFO)
+            end
             vim.api.nvim_create_autocmd("FileType", {
                 pattern = "markdown",
                 callback = function()
                     vim.api.nvim_buf_create_user_command(0, "PeekOpen", function()
-                        require('peek').open()
+                        openPeek()
                     end, {})
 
                     vim.api.nvim_buf_create_user_command(0, "PeekClose", function()
@@ -38,7 +42,7 @@ return {
                         if require('peek').is_open() then
                             require('peek').close()
                         else
-                            require('peek').open()
+                            openPeek()
                         end
                     end, {})
                 end,
