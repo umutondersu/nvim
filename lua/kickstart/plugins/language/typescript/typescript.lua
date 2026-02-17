@@ -64,8 +64,11 @@ return {
     },
     {
         'barrett-ruth/import-cost.nvim',
-        build = 'sh install.sh npm',
         ft = ts_ft,
-        config = true
+        config = function()
+            vim.g.import_cost = {
+                package_manager = 'npm', -- npm, yarn, or bun
+            }
+        end
     }
 }
