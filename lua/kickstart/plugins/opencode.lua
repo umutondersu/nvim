@@ -1,5 +1,6 @@
 return {
-  "NickvanDyke/opencode.nvim",
+  "nickjvandyke/opencode.nvim",
+  version = "*", -- Latest stable release
   -- Recommended for `ask()` and `select()`.
   -- Required for `toggle()`.
   dependencies = "folke/snacks.nvim",

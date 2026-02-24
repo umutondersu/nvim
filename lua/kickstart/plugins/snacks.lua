@@ -29,10 +29,12 @@ return {
                         ["<C-s>"] = { "flash_select", mode = { "n", "i" } },
                         ["S"] = { "flash" },
                         ["s"] = { "flash_select" },
+                        ["<a-a>"] = { "opencode_send", mode = { "n", "i" } },
                     },
                 },
             },
             actions = {
+                opencode_send = function(...) return require("opencode").snacks_picker_send(...) end,
                 flash = function(picker)
                     require("flash").jump({
                         pattern = "^",
