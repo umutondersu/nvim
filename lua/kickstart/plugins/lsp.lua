@@ -114,9 +114,7 @@ return { -- LSP Configuration & Plugins
 
 				emmet_language_server = {},
 
-				postgres_lsp = {
-					cmd = { 'postgrestools', 'lsp-proxy' },
-				},
+				sqlls = {},
 
 				lua_ls = {
 					settings = {
