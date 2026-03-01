@@ -68,5 +68,23 @@ return {
                 ft = 'go'
             },
         }
-    }
+    },
+    {
+        "Yu-Leo/cmp-go-pkgs",
+        ft = "go",
+        init = function()
+            vim.api.nvim_create_autocmd({ "LspAttach" }, {
+                pattern = { "*.go" },
+                callback = function(args)
+                    require("cmp_go_pkgs").init_items(args)
+                end,
+            })
+        end
+    },
+    {
+        "samiulsami/cmp-go-deep",
+        ft = "go",
+        dependencies = "kkharji/sqlite.lua",
+    },
+
 }

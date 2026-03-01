@@ -7,7 +7,10 @@ return {
     { 'saghen/blink.compat',       version = '*', lazy = true, opts = {} },
 
     -- Sources
-    'kristijanhusak/vim-dadbod-completion',
+    -- NOTE: Installed elsewhere for lazy loading. shown here for visibility
+    -- 'kristijanhusak/vim-dadbod-completion',
+    -- 'Yu-Leo/cmp-go-pkgs',
+    -- 'samiulsami/cmp-go-deep',
     'disrupted/blink-cmp-conventional-commits',
     'ribru17/blink-cmp-spell',
     'moyiz/blink-emoji.nvim',
@@ -15,23 +18,6 @@ return {
     {
       'fang2hou/blink-copilot',
       dependencies = 'zbirenbaum/copilot.lua'
-    },
-    {
-      "Yu-Leo/cmp-go-pkgs",
-      enabled = vim.fn.executable 'go' == 1,
-      init = function()
-        vim.api.nvim_create_autocmd({ "LspAttach" }, {
-          pattern = { "*.go" },
-          callback = function(args)
-            require("cmp_go_pkgs").init_items(args)
-          end,
-        })
-      end
-    },
-    {
-      "samiulsami/cmp-go-deep",
-      enabled = vim.fn.executable 'go' == 1,
-      dependencies = "kkharji/sqlite.lua",
     },
 
     -- Snippet Engine
@@ -153,6 +139,7 @@ return {
         dadbod = {
           name = "Dadbod",
           module = "vim_dadbod_completion.blink",
+          enabled = function() return vim.tbl_contains({ 'sql', 'mysql', 'plsql' }, vim.bo.filetype) end,
         },
         git = {
           module = 'blink-cmp-git',
