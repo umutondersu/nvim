@@ -27,10 +27,8 @@ return {
       dependencies = {
         -- Snippets
         'solidjs-community/solid-snippets',
-        'rafamadriz/friendly-snippets',
       },
       config = function()
-        require('luasnip.loaders.from_vscode').lazy_load()
         require('snippets.init')
       end,
     },
