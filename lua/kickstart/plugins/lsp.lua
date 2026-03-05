@@ -159,6 +159,7 @@ return { -- LSP Configuration & Plugins
 			others = {
 				-- dartls = {},
 				fish_lsp = { command = 'fish-lsp' },
+				nil_ls = { command = 'nix' }
 			},
 		}
 

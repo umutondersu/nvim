@@ -8,11 +8,6 @@ local function add_tool(command, tools)
 	end
 end
 
-add_tool('bash', {
-	-- Linters
-	'shellcheck'
-})
-
 add_tool('npm', {
 	'biome',
 	-- Formatters
@@ -62,6 +57,11 @@ add_tool('go', {
 add_tool('gem', {
 	'rufo',
 	'rubocop'
+})
+
+add_tool('nix', {
+	--Formatters
+	'nixfmt'
 })
 
 return ensure_installed
