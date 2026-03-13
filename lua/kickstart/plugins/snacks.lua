@@ -29,7 +29,7 @@ return {
                         ["<C-s>"] = { "flash_select", mode = { "n", "i" } },
                         ["S"] = { "flash" },
                         ["s"] = { "flash_select" },
-                        ["<a-a>"] = { "opencode_send", mode = { "n", "i" } },
+                        ["<C-o>"] = { "opencode_send", mode = { "n", "i" } },
                     },
                 },
             },
