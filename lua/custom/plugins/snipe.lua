@@ -17,6 +17,16 @@ return {
             end,
             desc = 'Pin/Unpin Buffer',
             ft = 'snipe-menu'
+        },
+        {
+            '<Tab>',
+            '<Nop>',
+            ft = 'snipe-menu'
+        },
+        {
+            '<S-Tab>',
+            '<Nop>',
+            ft = 'snipe-menu'
         }
     },
     opts = {
