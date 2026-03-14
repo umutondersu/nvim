@@ -7,9 +7,32 @@ return {
   enabled = vim.fn.executable('opencode') == 1,
   event = "VeryLazy",
   config = function()
+    local opencode_cmd = 'opencode --port'
+    ---@type snacks.terminal.Opts
+    local snacks_terminal_opts = {
+      win = {
+        position = 'right',
+        width = 0.3,
+        enter = false,
+        on_win = function(win)
+          -- Set up keymaps and cleanup for an arbitrary terminal
+          require('opencode.terminal').setup(win.win)
+        end,
+      },
+    }
     ---@type opencode.Opts
     vim.g.opencode_opts = {
-      -- Your configuration, if any — see `lua/opencode/config.lua`, or "goto definition".
+      server = {
+        start = function()
+          require('snacks.terminal').open(opencode_cmd, snacks_terminal_opts)
+        end,
+        stop = function()
+          require('snacks.terminal').get(opencode_cmd, snacks_terminal_opts):close()
+        end,
+        toggle = function()
+          require('snacks.terminal').toggle(opencode_cmd, snacks_terminal_opts)
+        end,
+      },
     }
     -- Required for `opts.auto_reload`.
     vim.o.autoread = true
@@ -19,19 +42,7 @@ return {
       vim.keymap.set(mode, keys, func, { desc = desc })
     end
 
-    vim.api.nvim_create_autocmd("FileType", {
-      pattern = "opencode_ask",
-      callback = function()
-        map("<C-s>", "<CR>", "Input Enter", "i")
-      end,
-    })
-
     -- Keymaps
-    map("<leader>at", function()
-      require("opencode").toggle()
-      vim.cmd('wincmd l')
-    end, "Toggle Opencode")
-
     map("<leader>as", function() require("opencode").select() end, "Select Prompt", { "n", "x" })
     map("<leader>ae", function() require("opencode").ask("", { submit = true }) end, "Enter Prompt")
 
@@ -57,5 +68,27 @@ return {
       require("opencode").command("session.list")
       vim.cmd('wincmd l')
     end, "List Sessions")
+
+    -- Smart toggle
+    local function is_in_opencode_terminal()
+      local buf = vim.api.nvim_get_current_buf()
+      local snacks_info = vim.b[buf].snacks_terminal
+      return snacks_info ~= nil and snacks_info.cmd == opencode_cmd
+    end
+    local function toggle_opencode()
+      local closing = is_in_opencode_terminal()
+      require("opencode").toggle()
+      if closing then
+        vim.cmd('wincmd p')
+      else
+        vim.cmd('wincmd l')
+      end
+    end
+
+    map("<leader>at", toggle_opencode, "Toggle Opencode")
+    map("<leader>at", function()
+      vim.cmd('stopinsert')
+      toggle_opencode()
+    end, "Toggle Opencode", "t")
   end,
 }
