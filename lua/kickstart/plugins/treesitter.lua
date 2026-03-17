@@ -2,6 +2,7 @@ return {
   -- Highlight, edit, and navigate code
   'nvim-treesitter/nvim-treesitter',
   version = false,
+  branch = 'master',
   event = 'VeryLazy',
   build = ':TSUpdate',
   cmd = { 'TSUpdateSync', 'TSUpdate', 'TSInstall' },
