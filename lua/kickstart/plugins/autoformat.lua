@@ -38,7 +38,8 @@ return
       go = { 'gofumpt', 'goimports' },
       csharp = { 'csharpier' },
       sh = { 'shellharden' },
-      ruby = { 'rufo', 'rubocop' }
+      ruby = { 'rufo', 'rubocop' },
+      nix = { 'nixfmt' }
     }
   },
   keys = {

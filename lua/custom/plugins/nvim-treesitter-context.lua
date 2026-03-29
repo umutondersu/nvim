@@ -4,9 +4,9 @@ return {
     opts = {},
     keys = {
         {
-            'gC',
+            'gG',
             function() require('treesitter-context').go_to_context(vim.v.count1) end,
-            desc = 'Jump to context'
+            desc = 'Goto to context'
         }
     }
 }
