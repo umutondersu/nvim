@@ -18,28 +18,25 @@ Distribution Alternatives:
 
 ## Installation
 
-Requirements:
+### Requirements:
 
-Since this is for my personal use I use this configuration in conjunction with my [Pop!\_OS dotfiles]('https://github.com/umutondersu/dotfiles').
-
-My dotfiles have all the necessary requirements to work with this configuration. However If you just want to use this configuration or have a non Ubuntu-based distribution/Windows the requirements should be like below:
-
-- A nerd font
+- A [Nerd Font](https://www.nerdfonts.com/)
 - curl
-- gcc
-- ripgrep
 - unzip
 - git
-- xclip
-- fd-find
-- NodeJS v20 or higher
-- npm
+- a **C** compiler (like gcc) and [tree-sitter-cli](https://github.com/nvim-treesitter/nvim-treesitter/tree/main?tab=readme-ov-file#requirements)
+  for `nvim-treesitter`
+- [ripgrep](https://github.com/BurntSushi/ripgrep)
+  and [fd](https://github.com/sharkdp/fd) (for `snacks.picker`)
+- [NodeJS v22](https://nodejs.org/en) or higher with npm
 - A terminal that supports
   - truecolor
-  - images (optional, if not snacks.image should be disabled)
-- deno (optional for [peek.nvim](https://github.com/toppair/peek.nvim))
-- tmux (optional)
-- gh (optional for `github autocompletion` and [octo.nvim](https://github.com/pwntester/octo.nvim))
+  - images **(optional for `snacks.image`)**
+- [deno](https://deno.com/)
+  **(optional for [peek.nvim](https://github.com/toppair/peek.nvim))**
+- tmux **(optional)**
+- [gh](https://cli.github.com/) **(optional for `github autocompletion` and [octo.nvim](https://github.com/pwntester/octo.nvim))**
+- [lazygit](https://github.com/jesseduffield/lazygit) **(optional)**
 
 Neovim's configurations are located under the following paths, depending on your OS:
 
