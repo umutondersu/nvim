@@ -9,7 +9,6 @@ return {
     -- Sources
     -- NOTE: Installed elsewhere for lazy loading. shown here for visibility
     -- 'kristijanhusak/vim-dadbod-completion',
-    -- 'Yu-Leo/cmp-go-pkgs',
     -- 'samiulsami/cmp-go-deep',
     'disrupted/blink-cmp-conventional-commits',
     'ribru17/blink-cmp-spell',
@@ -97,7 +96,7 @@ return {
     },
     snippets = { preset = 'luasnip' },
     sources = {
-      default = { 'copilot', 'lsp', 'path', 'buffer', 'dadbod', 'snippets', 'lazydev', 'go_pkgs', 'git', 'conventional_commits', 'spell', 'emoji', 'go_deep' },
+      default = { 'copilot', 'lsp', 'path', 'buffer', 'dadbod', 'snippets', 'lazydev', 'git', 'conventional_commits', 'spell', 'emoji', 'go_deep' },
       providers = {
         snippets = {
           module = 'blink.cmp.sources.snippets',
@@ -187,14 +186,6 @@ return {
           score_offset = 15,        -- Tune by preference
           opts = { insert = true }, -- Insert emoji (default) or complete its name
           enabled = function() return vim.tbl_contains({ "gitcommit", "markdown", "octo" }, vim.o.filetype) end,
-        },
-        go_pkgs = {
-          name = "go_pkgs",
-          module = "blink.compat.source",
-          enabled = function()
-            return vim.bo.filetype == 'go' and vim.fn.executable 'go' == 1
-          end,
-          opts = {}
         },
         go_deep = {
           name = "go_deep",
