@@ -489,6 +489,17 @@ return {
             end,
         })
 
+        -- Override ]] and [[ for go files where ftplugin sets buffer-local mappings
+        vim.api.nvim_create_autocmd("FileType", {
+            pattern = "go",
+            callback = function(ev)
+                vim.keymap.set({ "n", "t" }, "]]", function() Snacks.words.jump(vim.v.count1) end,
+                    { buffer = ev.buf, desc = "Next Reference" })
+                vim.keymap.set({ "n", "t" }, "[[", function() Snacks.words.jump(-vim.v.count1) end,
+                    { buffer = ev.buf, desc = "Prev Reference" })
+            end,
+        })
+
         -- New command to create a snacks window for running lazydocker like lazygit
         vim.api.nvim_create_user_command("Docker", function()
             Snacks.terminal('lazydocker')
