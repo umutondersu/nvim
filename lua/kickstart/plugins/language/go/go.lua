@@ -46,6 +46,15 @@ return {
             picker = { type = 'snacks' },
             window = { type = 'vsplit' },
         },
+        init = function()
+            vim.api.nvim_create_autocmd({ 'BufRead', 'BufEnter' }, {
+                group = vim.api.nvim_create_augroup('godoc_treesitter', { clear = true }),
+                pattern = '*.go',
+                callback = function()
+                    vim.treesitter.language.register('go', 'godoc')
+                end,
+            })
+        end,
         keys = {
             {
                 '<leader>so',
