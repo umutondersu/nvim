@@ -17,6 +17,17 @@ return {
                 ft = 'go'
             },
             {
+                '<leader>cT',
+                function()
+                    local cmd = vim.fn.input(':', 'GoTagAdd ')
+                    if cmd ~= '' then
+                        vim.cmd(cmd)
+                    end
+                end,
+                desc = 'Add Custom Tags to struct',
+                ft = 'go'
+            },
+            {
                 '<leader>cc',
                 function() vim.cmd.GoCmt() end,
                 desc = 'Generate boilerplate for doc comments',
@@ -34,6 +45,12 @@ return {
                 desc = "Add tests for exported functions",
                 ft = 'go',
             },
+            {
+                '<leader>cj',
+                function() vim.cmd.GoJson() end,
+                desc = "Convert JSON to struct",
+                ft = 'go',
+            }
         },
     },
     {
