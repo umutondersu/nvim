@@ -92,7 +92,7 @@ return {
             {
                 filter = {
                     event = "notify",
-                    find = "opoencode Invalid 'end_col': out of range",
+                    find = "opencode Invalid 'end_col': out of range",
                 },
                 skip = true
             }
