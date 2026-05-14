@@ -19,6 +19,7 @@ return {
         image = { enabled = true, doc = { enabled = true, inline = false, float = true } },
         dashboard = { enabled = true },
         terminal = { enabled = true },
+        scroll = { enabled = true },
         picker = {
             matcher = { frecency = true },
             win = {
