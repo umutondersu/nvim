@@ -71,7 +71,15 @@ map('v', '>', '>gv', { desc = 'Shift Right' })
 map("n", "<M-u>", ":e!<CR>", { desc = 'Undo all unsaved writes' })
 
 -- Shortcuts for save and exit
-map('n', '<leader>w', '<cmd>:w<CR>', { desc = 'Save Buffer' })
+map('n', '<leader>w', function()
+	local buf_name = vim.api.nvim_buf_get_name(0)
+	if buf_name == '' then
+		local keys = vim.api.nvim_replace_termcodes(":" .. "w ", true, false, true)
+		vim.api.nvim_feedkeys(keys, "n", false)
+	else
+		vim.cmd('write')
+	end
+end, { desc = 'Save Buffer' })
 map('n', '<leader>x', '<cmd>qa<CR>', { desc = 'Exit' })
 
 -- Refactor Keymaps
