@@ -94,25 +94,41 @@ map("n", "<leader>rd", function()
 end, { desc = 'Delete File' })
 map("n", "<leader>rw", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gcI<Left><Left><Left><Left>]],
 	{ desc = 'Replace Word' }) -- Replace the word under the cursor
-map('v', '<leader>rv', function()
-	-- Yank the visual selection into register v
-	vim.cmd('normal! "vy')
-	local selection = vim.fn.getreg("v")
+
+local function get_visual_selection()
+	local saved_reg = vim.fn.getreg('v')
+	local saved_reg_type = vim.fn.getregtype('v')
+
+	vim.cmd('noau normal! "vy')
+	local selection = vim.fn.getreg('v')
+
+	-- Restore register v
+	vim.fn.setreg('v', saved_reg, saved_reg_type)
 
 	if selection == "" then
 		print("No text selected")
 		return
 	end
-	vim.fn.setreg("v", "")
 
 	-- Sanitize the selection
 	selection = selection:gsub("%s+$", "")
 	selection = selection:gsub("\n", "")
-	selection = vim.fn.escape(selection, '/\\.*$^~[]')
+	selection = vim.fn.escape(selection, '#\\.*$^~[]')
 
-	local cmd = string.format(':%s/%s/%s/gcI<Left><Left><Left><Left>', '%s', selection, selection)
+	return selection
+end
+map('v', '<leader>rv', function()
+	local selection = get_visual_selection()
+	-- Build and feed the command
+	local cmd = string.format(':%s#%s##gcI<Left><Left><Left><Left>', '%s', selection)
 	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(cmd, true, false, true), 'n', true)
 end, { desc = 'Replace Visual' })
+map('v', '<leader>rV', function()
+	local selection = get_visual_selection()
+	-- Build and feed the command
+	local cmd = string.format(':%s#%s#%s#gcI<Left><Left><Left><Left>', '%s', selection, selection)
+	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(cmd, true, false, true), 'n', true)
+end, { desc = 'Modify Visual' })
 
 -- Resize window using <ctrl> arrow keys with smart behavior
 map("n", "<C-Up>", function()
