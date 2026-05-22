@@ -1,4 +1,5 @@
 local ts_ft = { 'javascript', 'typescript', 'javascriptreact', 'typescriptreact' }
+
 return {
     {
         'dmmulroy/tsc.nvim',
