@@ -4,5 +4,6 @@ return {
     enabled = vim.fn.getenv("REMOTE_CONTAINERS") ~= 'true',
     build = "npm i",
     cmd = { "SwaggerPreview", "SwaggerPreviewStop", "SwaggerPreviewToggle" },
+    ft = { "yaml", "json" },
     opts = {}
 }
