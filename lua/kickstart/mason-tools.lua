@@ -11,8 +11,6 @@ end
 
 add_tool(cond.js_runtime, {
 	'biome',
-	-- Formatters
-	'prettier',
 	-- Linters
 	'shellcheck',
 	'markdownlint',
