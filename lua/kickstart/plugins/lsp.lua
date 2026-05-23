@@ -105,19 +105,19 @@ return { -- LSP Configuration & Plugins
 				-- rust_analyzer = {},
 				-- html = { filetypes = { 'html', 'twig', 'hbs'} },
 
-				bashls                = {},
+				bashls                = { cond = req.npm },
 
-				ts_ls                 = { cond = req.js_runtime },
+				ts_ls                 = { cond = req.js },
 
 				tailwindcss           = { cond = req.tailwind },
 
 				dockerls              = { cond = req.docker },
 
-				jsonls                = {},
+				jsonls                = { cond = req.npm },
 
-				emmet_language_server = {},
+				emmet_language_server = { cond = req.npm },
 
-				sqlls                 = {},
+				sqlls                 = { cond = req.npm },
 
 				lua_ls                = {
 					settings = {

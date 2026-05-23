@@ -9,7 +9,7 @@ local function add_tool(c, tools)
 	end
 end
 
-add_tool(cond.js_runtime, {
+add_tool(cond.js, {
 	'biome',
 	-- Linters
 	'shellcheck',

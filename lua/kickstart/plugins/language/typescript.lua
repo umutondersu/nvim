@@ -4,13 +4,15 @@ return {
     {
         'dmmulroy/tsc.nvim',
         ft = ts_ft,
-        opts = {
-            auto_open_qflist = false,
-            auto_start_watch_mode = vim.fn.findfile('node_modules/.bin/tsc', vim.fn.getcwd() .. ';') ~= '',
-            flags = { watch = true },
-            use_diagnostics = true,
-            enable_progress_notifications = false,
-        }
+        opts = function()
+            return {
+                auto_open_qflist = false,
+                auto_start_watch_mode = vim.fn.findfile('node_modules/.bin/tsc', vim.fn.getcwd() .. ';') ~= '',
+                flags = { watch = true },
+                use_diagnostics = true,
+                enable_progress_notifications = false,
+            }
+        end
     },
     { 'dmmulroy/ts-error-translator.nvim', ft = ts_ft },
     {

@@ -15,7 +15,9 @@ return {
     'jbyuki/one-small-step-for-vimkind', -- Neovim
     {
       "microsoft/vscode-js-debug",
-      build = "npm install --legacy-peer-deps --no-save --ignore-scripts && npx gulp vsDebugServerBundle && rm -rf out && mv dist out",
+      cond = vim.fn.executable("npm") == 1,
+      build =
+      "npm install --legacy-peer-deps --no-save --ignore-scripts && npx gulp vsDebugServerBundle && rm -rf out && mv dist out",
       version = "1.*"
     },
     {

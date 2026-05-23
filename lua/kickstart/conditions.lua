@@ -12,17 +12,18 @@ M.go         = function()
   return vim.fn.executable('go') == 1 and
       find_file('go.mod') ~= ''
 end
-M.js_runtime = function()
+M.js         = function()
   local f = find_file('package.json')
-  return f ~= ''
+  return M.npm() and f ~= ''
 end
 M.typescript = function()
-  return M.js_runtime() and find_file('tsconfig.json') ~= ''
+  return M.js() and find_file('tsconfig.json') ~= ''
 end
 M.tailwind   = function()
   local f = find_file('package.json')
-  return f ~= '' and table.concat(vim.fn.readfile(f --[[@as string]])):find('tailwind') ~= nil
+  return M.npm() and f ~= '' and table.concat(vim.fn.readfile(f --[[@as string]])):find('tailwind') ~= nil
 end
+M.npm        = function() return vim.fn.executable('npm') == 1 end
 M.java       = function() return vim.fn.executable('java') == 1 end
 M.csharp     = function() return vim.fn.executable('dotnet') == 1 end
 M.python     = function() return vim.fn.executable('python3') == 1 end

@@ -13,7 +13,7 @@ return {
       end
     end
 
-    add_linter(cond.js_runtime, {
+    add_linter(cond.js, {
       javascript      = { 'biomejs' },
       typescript      = { 'biomejs' },
       javascriptreact = { 'biomejs' },
