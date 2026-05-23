@@ -18,6 +18,11 @@ return {
 	},
 	opts = {
 		server = { override = false },
+		keymaps = {
+			smart_increment = { -- increment tailwindcss units using <C-a> and <C-x>
+				enabled = false,
+			}
+		}
 	},
 	keys = {
 		{ "<leader>ct",  function() end,                                 desc = "Tailwind",                ft = tw_ft },
