@@ -85,11 +85,14 @@ return { -- LSP Configuration & Plugins
 			end,
 		})
 
+		local req = require('kickstart.conditions')
+
 		-- Enable the following language servers
 		--  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
 		--
 		--  Add any additional override configuration in the following tables. Available keys are:
 		--	- command (string?): This is an optinal key I added. If this key is not an executable, the LSP will be ignored.
+		--  - cond (fun():boolean): If provided and returns false, the server will be skipped entirely (not installed).
 		--  - cmd (table): Override the default command used to start the server
 		--  - filetypes (table): Override the default list of associated filetypes for the server
 		--  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
@@ -102,21 +105,21 @@ return { -- LSP Configuration & Plugins
 				-- rust_analyzer = {},
 				-- html = { filetypes = { 'html', 'twig', 'hbs'} },
 
-				bashls = {},
+				bashls                = {},
 
-				ts_ls = {},
+				ts_ls                 = { cond = req.js_runtime },
 
-				tailwindcss = {},
+				tailwindcss           = { cond = req.tailwind },
 
-				dockerls = {},
+				dockerls              = { cond = req.docker },
 
-				jsonls = {},
+				jsonls                = {},
 
 				emmet_language_server = {},
 
-				sqlls = {},
+				sqlls                 = {},
 
-				lua_ls = {
+				lua_ls                = {
 					settings = {
 						Lua = {
 							hint = { enable = true },
@@ -129,12 +132,12 @@ return { -- LSP Configuration & Plugins
 					},
 				},
 
-				basedpyright = { command = 'python3' },
+				basedpyright          = { cond = req.python },
 
-				omnisharp = { command = 'dotnet' },
+				omnisharp             = { cond = req.csharp },
 
-				gopls = {
-					command = 'go',
+				gopls                 = {
+					cond = req.go,
 					settings = {
 						gopls = {
 							hints = {
@@ -150,24 +153,24 @@ return { -- LSP Configuration & Plugins
 					}
 				},
 
-				jdtls = { command = 'java' },
+				jdtls                 = { cond = req.java },
 
-				ruby_lsp = { command = 'gem' },
+				ruby_lsp              = { cond = req.gem },
 			},
 			-- This table contains config for all language servers that are *not* installed via Mason.
 			-- Structure is identical to the mason table from above.
 			others = {
 				-- dartls = {},
-				fish_lsp = { command = 'fish-lsp' },
-				nil_ls = { command = 'nix' }
+				fish_lsp = { cond = req.fish_lsp },
+				nil_ls   = { cond = req.nix },
 			},
 		}
 
 		---@param config table
 		local function skip_lsp(config)
-			local command = config.command
-			config.command = nil
-			return not (command == nil or vim.fn.executable(command) == 1)
+			local cond = config.cond
+			config.cond = nil
+			return cond ~= nil and not req.eval(cond)
 		end
 
 		-- Configure Servers

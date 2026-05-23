@@ -1,23 +1,46 @@
 return {
   "mfussenegger/nvim-lint",
   event = { "BufReadPre", "BufNewFile" },
-  opts = {
-    --NOTE: add the linters to ensure_installed with inside mason-tools.lua
-    linters_by_ft = {
-      javascript = { 'biomejs' },
-      typescript = { 'biomejs' },
+  opts = function()
+    local cond = require('kickstart.conditions')
+    local linters_by_ft = {}
+
+    local function add_linter(condi, fts)
+      if cond.eval(condi) then
+        for ft, linters in pairs(fts) do
+          linters_by_ft[ft] = linters
+        end
+      end
+    end
+
+    add_linter(cond.js_runtime, {
+      javascript      = { 'biomejs' },
+      typescript      = { 'biomejs' },
       javascriptreact = { 'biomejs' },
       typescriptreact = { 'biomejs' },
-      json = { 'biomejs' },
-      css = { 'biomejs' },
+      json            = { 'biomejs' },
+      css             = { 'biomejs' },
+      sh              = { 'shellcheck' },
+      markdown        = { 'markdownlint' },
+    })
+
+    add_linter(cond.python, {
       python = { 'flake8' },
+    })
+
+    add_linter(cond.go, {
       go = { 'golangcilint' },
-      fish = { 'fish' },
-      sh = { 'shellcheck' },
+    })
+
+    add_linter(cond.gem, {
       ruby = { 'rubocop' },
-      markdown = { 'markdownlint' },
-    }
-  },
+    })
+
+    -- fish has a built-in linter, no toolchain needed
+    linters_by_ft.fish = { 'fish' }
+
+    return { linters_by_ft = linters_by_ft }
+  end,
   config = function(_, opts)
     local lint = require("lint")
     lint.linters_by_ft = opts.linters_by_ft

@@ -6,7 +6,7 @@ return {
         ft = ts_ft,
         opts = {
             auto_open_qflist = false,
-            auto_start_watch_mode = true,
+            auto_start_watch_mode = vim.fn.findfile('node_modules/.bin/tsc', vim.fn.getcwd() .. ';') ~= '',
             flags = { watch = true },
             use_diagnostics = true,
             enable_progress_notifications = false,

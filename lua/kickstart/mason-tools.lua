@@ -1,14 +1,15 @@
 -- NOTE: be sure tools are assigned in nvim-lint, nvim-dap, and conform.nvim
+local cond = require('kickstart.conditions')
 
 local ensure_installed = {}
 
-local function add_tool(command, tools)
-	if vim.fn.executable(command) == 1 then
+local function add_tool(c, tools)
+	if cond.eval(c) then
 		vim.list_extend(ensure_installed, tools)
 	end
 end
 
-add_tool('npm', {
+add_tool(cond.js_runtime, {
 	'biome',
 	-- Formatters
 	'prettier',
@@ -19,12 +20,12 @@ add_tool('npm', {
 	'js-debug-adapter'
 })
 
-add_tool('cargo', {
+add_tool(cond.cargo, {
 	-- Formatters
 	'shellharden',
 })
 
-add_tool('python3', {
+add_tool(cond.python, {
 	-- Formatters
 	'black',
 	'isort',
@@ -34,12 +35,12 @@ add_tool('python3', {
 	'flake8'
 })
 
-add_tool('dotnet', {
+add_tool(cond.csharp, {
 	-- Formatters
 	'csharpier'
 })
 
-add_tool('go', {
+add_tool(cond.go, {
 	-- Formatters
 	'gofumpt',
 	'goimports',
@@ -54,12 +55,12 @@ add_tool('go', {
 	'impl'
 })
 
-add_tool('gem', {
+add_tool(cond.gem, {
 	'rufo',
 	'rubocop'
 })
 
-add_tool('nix', {
+add_tool(cond.nix, {
 	--Formatters
 	'nixfmt'
 })
