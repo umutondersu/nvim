@@ -85,14 +85,14 @@ return { -- LSP Configuration & Plugins
 			end,
 		})
 
-		local req = require('kickstart.conditions')
+		local cond = require('kickstart.conditions')
 
 		-- Enable the following language servers
 		--  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
 		--
 		--  Add any additional override configuration in the following tables. Available keys are:
 		--	- command (string?): This is an optinal key I added. If this key is not an executable, the LSP will be ignored.
-		--  - cond (fun():boolean): If provided and returns false, the server will be skipped entirely (not installed).
+		--  - req (fun():boolean): If provided and returns false, the server will be skipped entirely (not installed).
 		--  - cmd (table): Override the default command used to start the server
 		--  - filetypes (table): Override the default list of associated filetypes for the server
 		--  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
@@ -105,19 +105,19 @@ return { -- LSP Configuration & Plugins
 				-- rust_analyzer = {},
 				-- html = { filetypes = { 'html', 'twig', 'hbs'} },
 
-				bashls                = { cond = req.npm },
+				bashls                = { req = cond.npm },
 
-				ts_ls                 = { cond = req.js },
+				ts_ls                 = { req = cond.js },
 
-				tailwindcss           = { cond = req.tailwind },
+				tailwindcss           = { req = cond.tailwind },
 
-				dockerls              = { cond = req.docker },
+				dockerls              = { req = cond.docker },
 
-				jsonls                = { cond = req.npm },
+				jsonls                = { req = cond.npm },
 
-				emmet_language_server = { cond = req.npm },
+				emmet_language_server = { req = cond.npm },
 
-				sqlls                 = { cond = req.npm },
+				sqlls                 = { req = cond.npm },
 
 				lua_ls                = {
 					settings = {
@@ -132,12 +132,12 @@ return { -- LSP Configuration & Plugins
 					},
 				},
 
-				basedpyright          = { cond = req.python },
+				basedpyright          = { req = cond.python },
 
-				omnisharp             = { cond = req.csharp },
+				omnisharp             = { req = cond.csharp },
 
 				gopls                 = {
-					cond = req.go,
+					req = cond.go,
 					settings = {
 						gopls = {
 							hints = {
@@ -153,24 +153,24 @@ return { -- LSP Configuration & Plugins
 					}
 				},
 
-				jdtls                 = { cond = req.java },
+				jdtls                 = { req = cond.java },
 
-				ruby_lsp              = { cond = req.gem },
+				ruby_lsp              = { req = cond.gem },
 			},
 			-- This table contains config for all language servers that are *not* installed via Mason.
 			-- Structure is identical to the mason table from above.
 			others = {
 				-- dartls = {},
-				fish_lsp = { cond = req.fish_lsp },
-				nil_ls   = { cond = req.nix },
+				fish_lsp = { req = cond.fish_lsp },
+				nil_ls   = { req = cond.nix },
 			},
 		}
 
 		---@param config table
 		local function skip_lsp(config)
-			local cond = config.cond
-			config.cond = nil
-			return cond ~= nil and not req.eval(cond)
+			local req = config.req
+			config.req = nil
+			return req ~= nil and not cond.eval(req)
 		end
 
 		-- Configure Servers
