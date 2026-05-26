@@ -38,6 +38,8 @@ Distribution Alternatives:
 - [gh](https://cli.github.com/) **(optional for `github autocompletion` and [octo.nvim](https://github.com/pwntester/octo.nvim))**
 - [lazygit](https://github.com/jesseduffield/lazygit) **(optional)**
 
+**Or You can use my Neovim Flake [here](https://github.com/umutondersu/neovim-flake)**
+
 Neovim's configurations are located under the following paths, depending on your OS:
 
 | OS                   | PATH                                      |
