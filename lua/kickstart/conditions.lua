@@ -30,7 +30,6 @@ M.python     = function() return vim.fn.executable('python3') == 1 end
 M.cargo      = function() return vim.fn.executable('cargo') == 1 end
 M.gem        = function() return vim.fn.executable('gem') == 1 end
 M.nix        = function() return vim.fn.executable('nix') == 1 end
-M.fish_lsp   = function() return vim.fn.executable('fish-lsp') == 1 end
 M.docker     = function() return find_file('Dockerfile') ~= '' end
 
 --- Evaluate a condition (boolean or function)

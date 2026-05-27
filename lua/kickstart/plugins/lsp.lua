@@ -158,11 +158,11 @@ return { -- LSP Configuration & Plugins
 				ruby_lsp              = { req = cond.gem },
 			},
 			-- This table contains config for all language servers that are *not* installed via Mason.
-			-- Structure is identical to the mason table from above.
+			-- Structure is identical to the mason table from above. Apart from the custom req key
 			others = {
 				-- dartls = {},
-				fish_lsp = { req = cond.fish_lsp },
-				nil_ls   = { req = cond.nix },
+				fish_lsp = {},
+				nil_ls   = {},
 			},
 		}
 
@@ -176,17 +176,13 @@ return { -- LSP Configuration & Plugins
 		-- Configure Servers
 		for server, config in pairs(vim.tbl_extend('keep', servers.mason, servers.others)) do
 			if skip_lsp(config) then
-				for cat, _ in pairs(servers) do
-					servers[cat][server] = nil
-				end
-			else
-				if not vim.tbl_isempty(config) then
-					vim.lsp.config(server, config)
-				end
-				-- Skip ts_ls since typescript-tools.nvim manages it
-				if server ~= 'ts_ls' then
-					vim.lsp.enable(server)
-				end
+				servers.mason[server] = nil
+			elseif not vim.tbl_isempty(config) then
+				vim.lsp.config(server, config)
+			end
+			-- Skip ts_ls since typescript-tools.nvim manages it
+			if server ~= 'ts_ls' then
+				vim.lsp.enable(server)
 			end
 		end
 
