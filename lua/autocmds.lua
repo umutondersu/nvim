@@ -17,7 +17,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
   desc = "Disable New Line Comment",
 })
 
--- wrap and check for spell in text filetypes
+-- [[ Wrap and check for spell in text filetypes ]]
 vim.api.nvim_create_autocmd("FileType", {
   group = vim.api.nvim_create_augroup('wrap_spell', { clear = true }),
   pattern = { "text", "plaintex", "typst", "gitcommit", "markdown" },
@@ -27,7 +27,7 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- Fix conceallevel for json files
+-- [[ Fix conceallevel for json files ]]
 vim.api.nvim_create_autocmd({ "FileType" }, {
   group = vim.api.nvim_create_augroup('json_conceal', { clear = true }),
   pattern = { "json", "jsonc", "json5" },
@@ -35,3 +35,23 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
     vim.wo.conceallevel = 0
   end,
 })
+
+-- [[ Smart auto-hlsearch + dismiss noice search_count popup ]]
+local ns = vim.api.nvim_create_namespace('smart_hlsearch')
+vim.on_key(function(char)
+  local mode = vim.fn.mode()
+  if mode == 'n' then
+    local new_hlsearch = vim.tbl_contains({ '<CR>', 'n', 'N', '*', '#', '?', '/' }, vim.fn.keytrans(char))
+    ---@diagnostic disable-next-line: undefined-field
+    if vim.opt.hlsearch:get() ~= new_hlsearch then
+      vim.opt.hlsearch = new_hlsearch
+      if not new_hlsearch then
+        require('noice.message.router').dismiss()
+      end
+    end
+  elseif mode == 'c' then
+    if vim.fn.keytrans(char) == '<CR>' then
+      vim.opt.hlsearch = true
+    end
+  end
+end, ns)
