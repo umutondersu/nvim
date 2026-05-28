@@ -1,4 +1,4 @@
-local git_signs = require('kickstart.icons').git.signs
+local git_signs = require('kickstart.util.icons').git.signs
 return {
   'tpope/vim-rhubarb',
   {

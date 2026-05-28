@@ -61,7 +61,7 @@ return { -- LSP Configuration & Plugins
 
 				-- Fuzzy find all the symbols.
 				--  Symbols are things like variables, functions, types, etc.
-				local filter = require('kickstart.icons').kind_filter
+				local filter = require('kickstart.util.icons').kind_filter
 				map('<leader>ss',
 					function()
 						Snacks.picker.lsp_symbols({
@@ -85,7 +85,7 @@ return { -- LSP Configuration & Plugins
 			end,
 		})
 
-		local cond = require('kickstart.conditions')
+		local cond = require('kickstart.util.conditions')
 
 		-- Enable the following language servers
 		--  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
@@ -195,7 +195,7 @@ return { -- LSP Configuration & Plugins
 
 		-- Grab the list of servers and tools to install and add them to ensure_installed
 		local ensure_installed = vim.tbl_keys(servers.mason or {})
-		local tools = require('kickstart.mason-tools')
+		local tools = require('kickstart.util.mason-tools')
 		vim.list_extend(ensure_installed, tools)
 		require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 	end,

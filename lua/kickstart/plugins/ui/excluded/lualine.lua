@@ -133,7 +133,7 @@ return {
         local lualine_require = require("lualine_require")
         lualine_require.require = require
 
-        local icons = require('kickstart.icons')
+        local icons = require('kickstart.util.icons')
 
         local opts = {
             options = {

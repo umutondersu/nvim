@@ -79,26 +79,12 @@ return
   },
   init = function()
     -- [[ Toggle Autoformatting with Conform.nvim ]]
-    local function toggle_autoformatting()
-      local enabled = not vim.g.disable_autoformat
-      require("which-key").add({
-        {
-          '<leader>ft',
-          function()
-            vim.g.disable_autoformat = not vim.g.disable_autoformat
-            vim.b.disable_autoformat = vim.g.disable_autoformat
-            print("Auto Formatting is " .. (enabled and "Disabled" or "Enabled"))
-            toggle_autoformatting()
-          end,
-          desc = (enabled and 'Disable' or 'Enable') .. ' Auto Format',
-          icon = {
-            icon = enabled and '' or '',
-            color = enabled and 'green' or 'yellow'
-          }
-        }
-      })
-    end
-    -- Initialize the mapping for the first time
-    toggle_autoformatting()
+    local toggle_autoformatting = require("kickstart.util").toggle_keymap
+    toggle_autoformatting('<leader>ft', 'Auto Format', not vim.g.disable_autoformat,
+      function()
+        vim.g.disable_autoformat = not vim.g.disable_autoformat
+        vim.b.disable_autoformat = vim.g.disable_autoformat
+        print('Auto Formatting is ' .. (vim.g.disable_autoformat and "Disabled" or "Enabled"))
+      end)
   end
 }

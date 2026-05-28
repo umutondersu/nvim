@@ -1,6 +1,6 @@
 -- [[Language specific plugins]]
 local module_prefix = 'kickstart.plugins.language.'
-local cond = require('kickstart.conditions')
+local cond = require('kickstart.util.conditions')
 
 local languages = {
   { 'lua' },

@@ -53,7 +53,7 @@ vim.o.splitright = true
 vim.o.splitbelow = true
 
 -- Custom diagnostic config
-local diag_icons = require('kickstart.icons').diagnostics
+local diag_icons = require('kickstart.util.icons').diagnostics
 vim.diagnostic.config(
 	{
 		underline = false,

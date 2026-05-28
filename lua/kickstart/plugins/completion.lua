@@ -203,7 +203,7 @@ return {
     appearance = {
       use_nvim_cmp_as_default = true,
       nerd_font_variant = 'mono',
-      kind_icons = require('kickstart.icons').kind_icons
+      kind_icons = require('kickstart.util.icons').kind_icons
     },
   },
   -- allows extending the providers array elsewhere in your config

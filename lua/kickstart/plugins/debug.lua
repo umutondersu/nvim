@@ -44,7 +44,7 @@ return {
   config = function()
     local dap = require 'dap'
     local dapui = require 'dapui'
-    local icons = require 'kickstart.icons'
+    local icons = require 'kickstart.util.icons'
 
     -- Dap UI setup
     local dapui_icons = icons.dapui

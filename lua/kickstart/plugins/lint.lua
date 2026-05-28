@@ -2,9 +2,8 @@ return {
   "mfussenegger/nvim-lint",
   event = { "BufReadPre", "BufNewFile" },
   opts = function()
-    local cond = require('kickstart.conditions')
+    local cond = require('kickstart.util.conditions')
     local linters_by_ft = {}
-
     local function add_linter(condi, fts)
       if cond.eval(condi) then
         for ft, linters in pairs(fts) do
@@ -23,19 +22,15 @@ return {
       sh              = { 'shellcheck' },
       markdown        = { 'markdownlint' },
     })
-
     add_linter(cond.python, {
       python = { 'flake8' },
     })
-
     add_linter(cond.go, {
       go = { 'golangcilint' },
     })
-
     add_linter(cond.gem, {
       ruby = { 'rubocop' },
     })
-
     -- fish has a built-in linter, no toolchain needed
     linters_by_ft.fish = { 'fish' }
 
@@ -68,39 +63,29 @@ return {
     })
 
     -- [[ Toggle Linting with nvim-lint ]]
-    local function toggle_linting()
-      local enabled = not vim.g.disable_lint
-      require("which-key").add({
-        {
-          '<leader>ul',
-          function()
-            local current_linters = opts.linters_by_ft[vim.bo.filetype]
-            if vim.g.disable_lint and not current_linters then
-              vim.notify('No linters available for ' .. vim.bo.filetype, 3)
-              return
-            end
-
-            vim.g.disable_lint = not vim.g.disable_lint
-            if vim.g.disable_lint then
-              for _, linter in ipairs(current_linters) do
-                local ns = lint.get_namespace(linter)
-                vim.diagnostic.reset(ns)
-              end
-            else
-              lint.try_lint()
-            end
-            print('Linting is ' .. (vim.g.disable_lint and 'disabled' or 'enabled'))
-            toggle_linting()
-          end,
-          desc = (enabled and 'Disable' or 'Enable') .. ' Linting',
-          icon = {
-            icon = enabled and '' or '',
-            color = enabled and 'green' or 'yellow'
-          }
-        }
-      })
+    local toggle_linting = require('kickstart.util').toggle_keymap
+    local function toggle_fn()
+      local current_linters = opts.linters_by_ft[vim.bo.filetype]
+      vim.g.disable_lint = not vim.g.disable_lint
+      if vim.g.disable_lint then
+        for _, linter in ipairs(current_linters or {}) do
+          local ns = lint.get_namespace(linter)
+          vim.diagnostic.reset(ns)
+        end
+      else
+        lint.try_lint()
+      end
+      print('Linting is ' .. (vim.g.disable_lint and 'disabled' or 'enabled'))
     end
-    toggle_linting()
+    local function toggle_condition()
+      local current_linters = opts.linters_by_ft[vim.bo.filetype]
+      if not current_linters then
+        vim.notify('No linters available for ' .. vim.bo.filetype, 3)
+        return false
+      end
+      return true
+    end
+    toggle_linting('<leader>ul', 'Linting', not vim.g.disable_lint, toggle_fn, toggle_condition)
 
     -- [[ Disable linting if no linters are available ]]
     vim.api.nvim_create_autocmd('FileType', {
@@ -110,7 +95,7 @@ return {
         local current_linters = opts.linters_by_ft[e.match]
         if not current_linters then
           vim.g.disable_lint = true
-          toggle_linting()
+          toggle_linting('<leader>ul', 'Linting', false, toggle_fn, toggle_condition)
         end
       end
     })

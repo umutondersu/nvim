@@ -461,24 +461,15 @@ return {
                     callback = function(event)
                         local client = vim.lsp.get_client_by_id(event.data.client_id)
                         if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
-                            local function toggle_inlay_hints()
-                                local enabled = vim.lsp.inlay_hint.is_enabled { bufnr = event.buf }
-                                require("which-key").add({
-                                    {
-                                        '<leader>uh',
-                                        function()
-                                            vim.lsp.inlay_hint.enable(not enabled)
-                                            toggle_inlay_hints()
-                                        end,
-                                        desc = (enabled and 'Disable' or 'Enable') .. ' Inlay Hints',
-                                        icon = {
-                                            icon = enabled and '' or '',
-                                            color = enabled and 'green' or 'yellow'
-                                        }
-                                    }
-                                })
-                            end
-                            toggle_inlay_hints()
+                            local toggle_inlay_hints = require("kickstart.util").toggle_keymap
+                            toggle_inlay_hints(
+                                '<leader>uh',
+                                'Inlay Hints',
+                                vim.lsp.inlay_hint.is_enabled { bufnr = event.buf },
+                                function()
+                                    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
+                                end
+                            )
                         end
                     end
                 })

@@ -1,4 +1,4 @@
-local icons = require('kickstart.icons')
+local icons = require('kickstart.util.icons')
 return {
     'akinsho/bufferline.nvim',
     event = 'VeryLazy',

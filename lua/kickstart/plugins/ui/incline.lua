@@ -1,4 +1,4 @@
-local Kicons = require 'kickstart.icons'
+local Kicons = require 'kickstart.util.icons'
 return {
   'b0o/incline.nvim',
   event = { "BufReadPost", "BufNewFile" },

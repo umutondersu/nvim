@@ -1,5 +1,5 @@
 -- NOTE: be sure tools are assigned in nvim-lint, nvim-dap, and conform.nvim
-local cond = require('kickstart.conditions')
+local cond = require('kickstart.util.conditions')
 
 local ensure_installed = {}
 
