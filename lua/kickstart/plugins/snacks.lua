@@ -452,7 +452,7 @@ return {
                 Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
                 Snacks.toggle.diagnostics():map("<leader>ud")
                 Snacks.toggle.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
-                    :map("<leader>uc")
+                    :map("<leader>uo")
                 Snacks.toggle.animate():map("<leader>ua")
                 Snacks.toggle.line_number():map("<leader>uL")
                 -- Toggle Inlay Hints
