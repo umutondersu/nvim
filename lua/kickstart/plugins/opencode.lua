@@ -1,8 +1,6 @@
 return {
   "nickjvandyke/opencode.nvim",
   version = "*", -- Latest stable release
-  -- Recommended for `ask()` and `select()`.
-  -- Required for `toggle()`.
   dependencies = "folke/snacks.nvim",
   enabled = vim.fn.executable('opencode') == 1,
   event = "VeryLazy",
@@ -14,10 +12,6 @@ return {
         position = 'right',
         width = 0.3,
         enter = false,
-        on_win = function(win)
-          -- Set up keymaps and cleanup for an arbitrary terminal
-          require('opencode.terminal').setup(win.win)
-        end,
       },
     }
     ---@type opencode.Opts
@@ -26,69 +20,47 @@ return {
         start = function()
           require('snacks.terminal').open(opencode_cmd, snacks_terminal_opts)
         end,
-        stop = function()
-          require('snacks.terminal').get(opencode_cmd, snacks_terminal_opts):close()
-        end,
-        toggle = function()
-          require('snacks.terminal').toggle(opencode_cmd, snacks_terminal_opts)
-        end,
       },
     }
     -- Required for `opts.auto_reload`.
     vim.o.autoread = true
 
-    local map = function(keys, func, desc, mode)
-      mode = mode or 'n'
-      vim.keymap.set(mode, keys, func, { desc = desc })
-    end
+    -- Recommended/example keymaps
+    vim.keymap.set({ "n", "x" }, "<leader>aa", function() require("opencode").ask("@this: ") end,
+      { desc = "Ask" })
+    vim.keymap.set({ "n", "x" }, "<leader>ad", function() require("opencode").ask("@diagnostics: ") end,
+      { desc = "Ask Diagnostics" })
+    vim.keymap.set({ "n", "x" }, "<leader>as", function() require("opencode").select() end, { desc = "Select" })
 
-    -- Keymaps
-    map("<leader>as", function() require("opencode").select() end, "Select Prompt", { "n", "x" })
-    map("<leader>ae", function() require("opencode").ask("", { submit = true }) end, "Enter Prompt")
+    vim.keymap.set("v", "<lader>ay", function() return require("opencode").operator("@this ") end,
+      { desc = "Append range", expr = true })
+    vim.keymap.set("n", "<leader>ay", function() return require("opencode").operator("@this ") .. "_" end,
+      { desc = "Append line", expr = true })
 
-    map("<leader>aa", function() require("opencode").ask("@buffer: ", { submit = true }) end, "Ask Buffer")
-    map("<leader>aA", function() require("opencode").ask("@buffers: ", { submit = true }) end, "Ask Open Buffers")
+    vim.keymap.set("n", "<S-C-u>", function() require("opencode").command("session.half.page.up") end,
+      { desc = "Scroll OpenCode up" })
+    vim.keymap.set("n", "<S-C-d>", function() require("opencode").command("session.half.page.down") end,
+      { desc = "Scroll OpenCode down" })
 
-    map("<leader>ab", function() require("opencode").prompt("@buffer") end, "Add Buffer")
-    map("<leader>aB", function() require("opencode").prompt("@buffers") end, "Add Open Buffers")
+    -- Can also leverage toggle functionality.
+    -- Avoid <leader> here — Neovim watches for keymaps in terminal mode, so your leader key will have input delay.
+    vim.keymap.set({ 'n', 't' }, '<leader>at', function()
+      require('snacks.terminal').toggle(opencode_cmd, snacks_terminal_opts)
+    end, { desc = 'Toggle Window' })
 
-    map("<leader>ac", function() require("opencode").ask("@this: ", { submit = true }) end, "Ask Cursor Line", "n")
-    map("<leader>av", function() require("opencode").ask("@this: ", { submit = true }) end, "Ask Visual", "v")
-
-    map("<leader>ag", function() require("opencode").ask("@diff: ", { submit = true }) end, "Ask Git Diff")
-
-    map("<leader>ad", function() require("opencode").ask("@diagnostics: ", { submit = true }) end, "Ask Diagnostics")
-    map("<leader>aD", function() require("opencode").prompt("@diagnostics") end, "Add Diagnostics")
-
-    map("<m-u>", function() require("opencode").command("session.half.page.up") end, "Messages half page up")
-    map("<m-d>", function() require("opencode").command("session.half.page.down") end, "Messages half page down")
-
-    map("<leader>an", function() require("opencode").command("session.new") end, "New Session")
-    map("<leader>al", function()
-      require("opencode").command("session.list")
-      vim.cmd('wincmd l')
-    end, "List Sessions")
-
-    -- Smart toggle
-    local function is_in_opencode_terminal()
-      local buf = vim.api.nvim_get_current_buf()
-      local snacks_info = vim.b[buf].snacks_terminal
-      return snacks_info ~= nil and snacks_info.cmd == opencode_cmd
-    end
-    local function toggle_opencode()
-      local closing = is_in_opencode_terminal()
-      require("opencode").toggle()
-      if closing then
-        vim.cmd('wincmd p')
-      else
-        vim.cmd('wincmd l')
-      end
-    end
-
-    map("<leader>at", toggle_opencode, "Toggle Opencode")
-    map("<leader>at", function()
-      vim.cmd('stopinsert')
-      toggle_opencode()
-    end, "Toggle Opencode", "t")
+    -- Optionally show upon submitting prompt
+    vim.api.nvim_create_autocmd('User', {
+      pattern = { 'OpencodeEvent:tui.command.execute' },
+      callback = function(args)
+        ---@type opencode.server.Event
+        local event = args.data.event
+        if event.properties.command == 'prompt.submit' then
+          local win = require('snacks.terminal').get(opencode_cmd, { create = false })
+          if win then
+            win:show()
+          end
+        end
+      end,
+    })
   end,
 }
