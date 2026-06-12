@@ -32,7 +32,11 @@ return {
         vim.api.nvim_set_hl(0, "WinBarNC", { bg = "NONE" })
         vim.api.nvim_set_hl(0, "TreesitterContextLineNumber", { sp = "red" })
         vim.api.nvim_set_hl(0, "TreesitterContext", { bg = "None" })
-        if not vim.g.transparent then return end
+        if not vim.g.transparent then
+          vim.o.cursorline = true
+          vim.o.cursorlineopt = "both"
+          return
+        end
 
         vim.api.nvim_set_hl(0, "LspInlayHint", { bg = "none", fg = "#545C7E" })
         vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#232735", bg = "None" })
