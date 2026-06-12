@@ -27,7 +27,12 @@ return {
                 group = "Open Code",
                 mode = { 'n', 'v' },
                 icon = { icon = '', color = 'yellow' },
-            }
+            },
+            {
+                "<leader>n",
+                group = "Haunt",
+                icon = { icon = '󱙝', hl = 'DiagnosticInfo' },
+            },
         },
     },
 }
