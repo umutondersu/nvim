@@ -1,5 +1,6 @@
 return {
   'zbirenbaum/copilot.lua',
+  enabled = vim.fn.has('macunix') == 0,
   build = ':Copilot auth',
   cmd = 'Copilot',
   event = 'InsertEnter',
