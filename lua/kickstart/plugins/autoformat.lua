@@ -32,7 +32,7 @@ return
       json = { 'biome-check' },
       css = { 'biome-check' },
       html = { 'prettier' },
-      yaml = { 'prettier' },
+      yaml = { 'yamlfmt' },
       markdown = { 'prettier' },
       python = { 'isort', 'black' },
       go = { 'gofumpt', 'goimports' },

@@ -156,6 +156,8 @@ return { -- LSP Configuration & Plugins
 				jdtls                 = { req = cond.java },
 
 				ruby_lsp              = { req = cond.gem },
+
+				yamlls                = {}
 			},
 			-- This table contains config for all language servers that are *not* installed via Mason.
 			-- Structure is identical to the mason table from above. Apart from the custom req key

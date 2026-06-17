@@ -9,6 +9,8 @@ local function add_tool(c, tools)
 	end
 end
 
+table.insert(ensure_installed, 'yamlfmt')
+
 add_tool(cond.js, {
 	'biome',
 	-- Linters
