@@ -2,7 +2,7 @@ return {
   "nickjvandyke/opencode.nvim",
   version = "*", -- Latest stable release
   dependencies = "folke/snacks.nvim",
-  enabled = vim.fn.executable('opencode') == 1,
+  enabled = vim.fn.executable('opencode') == 1 and vim.fn.has('macunix') == 0,
   event = "VeryLazy",
   config = function()
     local opencode_cmd = 'opencode --port'
