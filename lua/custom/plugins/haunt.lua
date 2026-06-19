@@ -32,7 +32,7 @@ return {
             haunt_picker.show()
         end, { desc = "Show Picker" })
         require("which-key").add({
-            { "<leader>sh", function() haunt_picker.show() end, desc = "Hauntings", icon = "󱙝" },
+            { "<leader>sn", function() haunt_picker.show() end, desc = "Hauntings", icon = "󱙝" },
         })
 
         -- quickfix

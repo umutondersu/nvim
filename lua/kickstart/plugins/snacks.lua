@@ -386,9 +386,9 @@ return {
             desc = "Status"
         },
         -- Neovim
-        { "<leader>snh", function() Snacks.picker.help() end,      desc = "Help" },
+        { "<leader>sNh", function() Snacks.picker.help() end,      desc = "Help" },
         {
-            "<leader>snk",
+            "<leader>sNk",
             function()
                 Snacks.picker.keymaps({
                     layout = 'vertical',
@@ -397,7 +397,7 @@ return {
             desc = "Keymaps"
         },
         {
-            "<leader>snf",
+            "<leader>sNf",
             function()
                 Snacks.picker.files({
                     cwd = vim.fn.stdpath("config"), --[[@as string]]
@@ -406,7 +406,7 @@ return {
             desc = "Files"
         },
         {
-            "<leader>snn",
+            "<leader>sNn",
             desc = "News",
             function()
                 Snacks.win({
