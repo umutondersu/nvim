@@ -232,7 +232,13 @@ return {
             desc = "Icons"
         },
         { "<leader>sf", function() Snacks.picker.files() end,        desc = "Files" },
-        { "<leader>sD", function() Snacks.picker.diagnostics() end,  desc = "Workspace Diagnostics" },
+        {
+            "<leader>sD",
+            function()
+                Snacks.picker.diagnostics({ severity = { min = vim.diagnostic.severity.INFO } })
+            end,
+            desc = "Workspace Diagnostics"
+        },
         { "<leader>sp", function() Snacks.picker.pickers() end,      desc = "Pickers" },
         { "<leader>sr", function() Snacks.picker.resume() end,       desc = "Resume" },
         { "<leader>s.", function() Snacks.picker.recent() end,       desc = "Recent Files" },
@@ -241,7 +247,7 @@ return {
         { "<leader>sG", function() Snacks.picker.grep_buffers() end, desc = "Grep Open Buffers" },
         { "<leader>sg", function() Snacks.picker.grep() end,         desc = "Grep" },
         { "<leader>sw", function() Snacks.picker.grep_word() end,    desc = "Grep Word" },
-        { "<leader>g",  function() Snacks.picker.grep_word() end,    desc = "Grep Search",          mode = "x" },
+        { "<leader>g",  function() Snacks.picker.grep_word() end,    desc = "Grep Search",      mode = "x" },
         -- Git
         { "<leader>gx", function() Snacks.gitbrowse() end,           desc = "Browse" },
         { "<leader>gf", function() Snacks.picker.git_files() end,    desc = "Files" },
