@@ -5,8 +5,6 @@ return {
     ---@type AutoSession.Config
     opts = {
         args_allow_single_directory = false,
-        git_use_branch_name = true,               -- Include git branch name in session name, can also be a function that takes an optional path and returns the name of the branch
-        git_auto_restore_on_branch_change = true, -- Should we auto-restore the session when the git branch changes. Requires git_use_branch_name
         suppress_dirs = { '~/', '~/projects', '~/Downloads', '/' },
         save_extra_cmds = {
             function()
