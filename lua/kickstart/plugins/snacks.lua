@@ -484,6 +484,22 @@ return {
                 -- Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
                 -- Snacks.toggle.treesitter():map("<leader>uT")
                 -- Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>ub")
+
+                -- NOTE: ❓❓
+                local Placement = require("snacks.image.placement")
+                do
+                    local orig_error = Placement.error
+                    function Placement:error(...)
+                        if not self.buf or not vim.api.nvim_buf_is_valid(self.buf) then return end
+                        return orig_error(...)
+                    end
+
+                    local orig_progress = Placement.progress
+                    function Placement:progress(...)
+                        if not self.buf or not vim.api.nvim_buf_is_valid(self.buf) then return end
+                        return orig_progress(...)
+                    end
+                end
             end,
         })
 
