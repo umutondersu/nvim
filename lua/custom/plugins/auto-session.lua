@@ -5,7 +5,7 @@ return {
     ---@type AutoSession.Config
     opts = {
         args_allow_single_directory = false,
-        suppress_dirs = { '~/', '~/projects', '~/Downloads', '/' },
+        suppress_dirs = { '~/', '~/projects', '~/Downloads', '/', '~/repos' },
         save_extra_cmds = {
             function()
                 local commands = {}
