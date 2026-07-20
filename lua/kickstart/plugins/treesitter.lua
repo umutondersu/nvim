@@ -5,9 +5,10 @@ return {
         branch = "main",
         build = ":TSUpdate",
         config = function()
-            -- ensure basic parser are installed
+            -- ensure basic parsers are installed
+            -- ADDED: 'yaml' and 'helm' to the installation list
             local parsers = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim',
-                'vimdoc', 'regex' }
+                'vimdoc', 'regex', 'yaml', 'helm' }
             require('nvim-treesitter').install(parsers)
 
             ---@param buf integer
@@ -22,6 +23,28 @@ return {
             end
 
             local available_parsers = require('nvim-treesitter').get_available()
+
+            -- ADDED: Safely detect templated files to prevent curly braces from breaking the YAML parser
+            vim.filetype.add({
+                extension = {
+                    yaml = function(_, bufnr)
+                        -- Check the top 100 lines for template brackets
+                        local lines = vim.api.nvim_buf_get_lines(bufnr, 0, 100, false)
+                        for _, line in ipairs(lines) do
+                            if line:match("{{.*}}") then return "helm" end
+                        end
+                        return "yaml"
+                    end,
+                    yml = function(_, bufnr)
+                        local lines = vim.api.nvim_buf_get_lines(bufnr, 0, 100, false)
+                        for _, line in ipairs(lines) do
+                            if line:match("{{.*}}") then return "helm" end
+                        end
+                        return "yaml"
+                    end,
+                }
+            })
+
             vim.api.nvim_create_autocmd('FileType', {
                 group = vim.api.nvim_create_augroup('treesitter-attach', { clear = true }),
                 callback = function(args)
