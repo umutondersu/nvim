@@ -82,6 +82,26 @@ map('n', '<leader>w', function()
 end, { desc = 'Save Buffer' })
 map('n', '<leader>x', '<cmd>qa<CR>', { desc = 'Exit' })
 
+-- Copy path of current buffer
+map('n', '<leader>cy', function()
+	local path = vim.fn.expand('%:.')
+	if path == '' then
+		vim.notify('No file name', vim.log.levels.WARN)
+		return
+	end
+	vim.fn.setreg('+', path)
+	vim.notify(string.format('Copied %s', path), vim.log.levels.INFO)
+end, { desc = 'Yank Relative Path' })
+map('n', '<leader>cY', function()
+	local path = vim.fn.expand('%:p')
+	if path == '' then
+		vim.notify('No file name', vim.log.levels.WARN)
+		return
+	end
+	vim.fn.setreg('+', path)
+	vim.notify(string.format('Copied %s', path), vim.log.levels.INFO)
+end, { desc = 'Yank Absolute Path' })
+
 -- Refactor Keymaps
 map("n", "<leader>rd", function()
 	local filepath = vim.fn.expand('%')
