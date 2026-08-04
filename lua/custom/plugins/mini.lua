@@ -92,6 +92,7 @@ return {
         opts = {}
     },
     { 'nvim-mini/mini.icons', version = false, opts = {} },
+    { 'nvim-mini/mini.misc',  version = false, event = 'VeryLazy', opts = {} },
     -- ... and there is more!
     --  Check out: https://github.com/nvim-mini/mini.nvim
 }
