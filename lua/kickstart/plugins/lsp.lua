@@ -189,9 +189,15 @@ return { -- LSP Configuration & Plugins
 		end
 
 		-- add workspace-diagnostics to all LSPs
+		-- exclude image/binary filetypes to avoid snacks.nvim image plugin crashing
+		-- when workspace-diagnostics loads buffers without a window context
+		local image_filetypes = { "jpg", "jpeg", "png", "gif", "webp", "bmp", "svg", "ico", "tiff" }
 		vim.lsp.config('*', {
 			on_attach = function(client, bufnr)
-				require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
+				local ft = vim.bo[bufnr].filetype
+				if not vim.tbl_contains(image_filetypes, ft) then
+					require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
+				end
 			end
 		})
 
