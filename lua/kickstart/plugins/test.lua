@@ -20,24 +20,24 @@ return {
     },
     keys = {
         {
-            "<leader>to",
+            "<leader>tO",
             function()
                 require("neotest").output.open({ auto_close = true })
             end,
             desc = "Show Test Output",
             ft = ft
         },
-        { "<leader>tr", function() require("neotest").run.run() end,                        desc = "Run the Nearest test",                   ft = ft },
-        { "<leader>tf", function() require("neotest").run.run(vim.fn.expand("%")) end,      desc = "Run the current File",                   ft = ft },
-        { "<leader>td", function() require("neotest").run.run(vim.fn.getcwd()) end,         desc = "Run all tests in the current Directory", ft = ft },
-        { "<leader>tO", function() require("neotest").output_panel.toggle() end,            desc = "Toggle Output Panel",                    ft = ft },
-        { "<leader>ts", function() require("neotest").summary.toggle() end,                 desc = "Toggle Summary",                         ft = ft },
-        { "<leader>tw", function() require("neotest").watch.toggle() end,                   desc = "Toggle Watch",                           ft = ft },
-        { "<leader>tW", function() require("neotest").watch.toggle(vim.fn.expand("%")) end, desc = "Toggle Watch on file",                   ft = ft },
-        { "]t",         function() require("neotest").jump.next({ status = 'failed' }) end, desc = "Failed Test Forward",                    ft = ft },
-        { "[t",         function() require("neotest").jump.prev({ status = 'failed' }) end, desc = "Failed Test Backward",                   ft = ft },
-        { "]T",         function() require("neotest").jump.prev({ status = 'failed' }) end, desc = "Failed Test Backward",                   ft = ft },
-        { "[T",         function() require("neotest").jump.next({ status = 'failed' }) end, desc = "Failed Test Forward",                    ft = ft },
+        { "<leader>tt", function() require("neotest").run.run() end,                        desc = "Run Nearest test",     ft = ft },
+        { "<leader>tf", function() require("neotest").run.run(vim.fn.expand("%")) end,      desc = "Run  File",            ft = ft },
+        { "<leader>td", function() require("neotest").run.run(vim.fn.getcwd()) end,         desc = "Run Directory",        ft = ft },
+        { "<leader>to", function() require("neotest").output_panel.toggle() end,            desc = "Toggle Output Panel",  ft = ft },
+        { "<leader>ts", function() require("neotest").summary.toggle() end,                 desc = "Toggle Summary",       ft = ft },
+        { "<leader>tw", function() require("neotest").watch.toggle() end,                   desc = "Toggle Watch",         ft = ft },
+        { "<leader>tW", function() require("neotest").watch.toggle(vim.fn.expand("%")) end, desc = "Toggle Watch on file", ft = ft },
+        { "]t",         function() require("neotest").jump.next({ status = 'failed' }) end, desc = "Failed Test Forward",  ft = ft },
+        { "[t",         function() require("neotest").jump.prev({ status = 'failed' }) end, desc = "Failed Test Backward", ft = ft },
+        { "]T",         function() require("neotest").jump.prev({ status = 'failed' }) end, desc = "Failed Test Backward", ft = ft },
+        { "[T",         function() require("neotest").jump.next({ status = 'failed' }) end, desc = "Failed Test Forward",  ft = ft },
     },
     config = function()
         -- Wrap neotest-golang to exclude Ginkgo test files (those importing onsi/ginkgo)
