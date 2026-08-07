@@ -25,6 +25,7 @@ return
     end,
     --NOTE: add the formatters to ensure_installed in mason-tools.lua
     formatters_by_ft = {
+      lua = { 'stylua' },
       javascript = { 'biome-check', 'biome-organize-imports' },
       typescript = { 'biome-check', 'biome-organize-imports' },
       javascriptreact = { 'biome-check', 'biome-organize-imports' },
