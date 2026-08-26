@@ -102,8 +102,9 @@ return { -- LSP Configuration & Plugins
 			-- Feel free to add/remove any LSPs here that you want to install via Mason. They will automatically be installed and setup.
 			mason = {
 				-- clangd = {},
-				-- rust_analyzer = {},
 				-- html = { filetypes = { 'html', 'twig', 'hbs'} },
+
+				rust_analyzer         = { req = cond.cargo },
 
 				bashls                = { req = cond.npm },
 

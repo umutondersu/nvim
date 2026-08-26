@@ -20,7 +20,7 @@ add_tool(cond.js, {
 	'js-debug-adapter'
 })
 
-add_tool(cond.cargo, {
+add_tool(cond.has_cargo, {
 	-- Formatters
 	'shellharden',
 })

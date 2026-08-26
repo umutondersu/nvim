@@ -29,7 +29,11 @@ M.tailwind   = function()
 end
 
 M.cargo      = function()
-  return vim.fn.executable('cargo') == 1 and find_file('Cargo.toml') ~= ''
+  return M.has_cargo() and find_file('Cargo.toml') ~= ''
+end
+
+M.has_cargo  = function()
+  return vim.fn.executable('cargo') == 1
 end
 
 M.gem        = function()
