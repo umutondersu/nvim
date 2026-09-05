@@ -14,10 +14,6 @@ return {
     'ribru17/blink-cmp-spell',
     'moyiz/blink-emoji.nvim',
     'Kaiser-Yang/blink-cmp-git',
-    {
-      'fang2hou/blink-copilot',
-      dependencies = 'zbirenbaum/copilot.lua'
-    },
 
     -- Snippet Engine
     {
@@ -96,7 +92,7 @@ return {
     },
     snippets = { preset = 'luasnip' },
     sources = {
-      default = { 'copilot', 'lsp', 'path', 'buffer', 'dadbod', 'snippets', 'lazydev', 'git', 'conventional_commits', 'spell', 'emoji', 'go_deep' },
+      default = { 'lsp', 'path', 'buffer', 'dadbod', 'snippets', 'lazydev', 'git', 'conventional_commits', 'spell', 'emoji', 'go_deep' },
       providers = {
         snippets = {
           module = 'blink.cmp.sources.snippets',
@@ -117,16 +113,6 @@ return {
             end
             return result
           end,
-        },
-        copilot = {
-          name = "copilot",
-          module = "blink-copilot",
-          async = true,
-          score_offset = -4,
-          opts = {
-            max_completions = 3,
-            max_attempts = 4,
-          }
         },
         lazydev = {
           name = "LazyDev",
