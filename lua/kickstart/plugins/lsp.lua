@@ -22,6 +22,16 @@ return { -- LSP Configuration & Plugins
 		vim.api.nvim_create_autocmd('LspAttach', {
 			group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
 			callback = function(event)
+				-- Detach LSP clients from non-file buffers (fugitive, diffview, etc.)
+				-- so servers like gopls don't receive URIs they cannot parse.
+				local bufname = vim.api.nvim_buf_get_name(event.buf)
+				if bufname == '' or bufname:match('^fugitive://') or bufname:match('^diffview://') then
+					vim.schedule(function()
+						vim.lsp.buf_detach_client(event.buf, event.data.client_id)
+					end)
+					return
+				end
+
 				local map = function(keys, func, desc, mode, lsp)
 					mode = mode or 'n'
 					lsp = lsp == nil and true or lsp
