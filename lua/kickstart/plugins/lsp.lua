@@ -168,6 +168,8 @@ return { -- LSP Configuration & Plugins
 
 				ruby_lsp              = { req = cond.gem },
 
+				tofu_ls               = { req = cond.tofu },
+
 				helm_ls               = {}
 			},
 			-- This table contains config for all language servers that are *not* installed via Mason.

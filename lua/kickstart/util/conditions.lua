@@ -67,6 +67,10 @@ M.nix        = function()
   return not is_mac and vim.fn.executable('nix') == 1
 end
 
+M.tofu       = function()
+  return vim.fn.executable('tofu') == 1
+end
+
 M.npm        = function() return vim.fn.executable('npm') == 1 end
 M.csharp     = function() return vim.fn.executable('dotnet') == 1 end
 M.docker     = function() return find_file('Dockerfile') ~= '' end
