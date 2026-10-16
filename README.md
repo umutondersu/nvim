@@ -35,7 +35,6 @@ Distribution Alternatives:
 - [deno](https://deno.com/)
   **(optional for [peek.nvim](https://github.com/toppair/peek.nvim))**
 - tmux **(optional)**
-- [gh](https://cli.github.com/) **(optional for `github autocompletion` and [octo.nvim](https://github.com/pwntester/octo.nvim))**
 - [lazygit](https://github.com/jesseduffield/lazygit) **(optional)**
 
 **Or You can use my Neovim Flake [here](https://github.com/umutondersu/neovim-flake)**

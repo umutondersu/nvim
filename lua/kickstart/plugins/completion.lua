@@ -13,7 +13,6 @@ return {
     'disrupted/blink-cmp-conventional-commits',
     'ribru17/blink-cmp-spell',
     'moyiz/blink-emoji.nvim',
-    'Kaiser-Yang/blink-cmp-git',
 
     -- Snippet Engine
     {
@@ -92,7 +91,7 @@ return {
     },
     snippets = { preset = 'luasnip' },
     sources = {
-      default = { 'lsp', 'path', 'buffer', 'dadbod', 'snippets', 'lazydev', 'git', 'conventional_commits', 'spell', 'emoji', 'go_deep' },
+      default = { 'lsp', 'path', 'buffer', 'dadbod', 'snippets', 'lazydev', 'conventional_commits', 'spell', 'emoji', 'go_deep' },
       providers = {
         snippets = {
           module = 'blink.cmp.sources.snippets',
@@ -123,15 +122,6 @@ return {
           name = "Dadbod",
           module = "vim_dadbod_completion.blink",
           enabled = function() return vim.tbl_contains({ 'sql', 'mysql', 'plsql' }, vim.bo.filetype) end,
-        },
-        git = {
-          module = 'blink-cmp-git',
-          name = 'Git',
-          async = true,
-          enabled = function()
-            return vim.tbl_contains({ 'octo', 'gitcommit', 'markdown' }, vim.bo.filetype) and vim.fn.executable 'gh' == 1
-          end,
-          opts = { commit = { triggers = { ';' } } },
         },
         conventional_commits = {
           name = 'Conventional Commits',
